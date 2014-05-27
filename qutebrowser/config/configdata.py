@@ -181,6 +181,12 @@ DATA = OrderedDict([
          "Whether to start a search when something else than a URL is "
          "entered."),
 
+        ('search-regex',
+         SettingValue(types.SearchRegex(), r'(^|\s+)!(\w+)($$|\s+),2'),
+         "A regex to get the search engine name and a group index, separated "
+         "by a comma. Note text that needs to be preserved needs to be in "
+         "groups."),
+
         ('auto-save-config',
          SettingValue(types.Bool(), 'true'),
          "Whether to save the config automatically on quit."),

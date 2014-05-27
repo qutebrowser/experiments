@@ -658,6 +658,37 @@ class HintMode(BaseType):
                                ('letter', "Use the chars in hints -> chars."))
 
 
+class SearchRegex(BaseType):
+
+    """A regular expression and group index.
+
+    Attributes:
+        flags: The regex flags to use.
+        inttype: The integer checking type for group.
+    """
+
+    def __init__(self, flags=0):
+        self.flags = flags
+        self.inttype = Int(minval=0)
+
+    def validate(self, value):
+        spl = value.split(',')
+        if len(spl) != 2:
+            raise ValidationError(value, "must be regex,group!")
+        regex, group = spl
+        try:
+            re.compile(regex, self.flags)
+        except RegexError as e:
+            raise ValidationError(value, "must be a valid regex - " + str(e))
+        self.inttype.validate(group)
+
+    def transform(self, value):
+        rstr, gstr = value.split(',')
+        regex = re.compile(rstr, self.flags)
+        group = int(gstr)
+        return regex, group
+
+
 class Proxy(BaseType):
 
     """A proxy URL or special value."""

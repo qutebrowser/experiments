@@ -44,16 +44,15 @@ def _get_search_url(txt):
         SearchEngineError if there is no template or no search term was found.
     """
     logger.debug("Finding search engine for '{}'".format(txt))
-    r = re.compile(r'(^|\s+)!(\w+)($|\s+)')
+    r, group = config.get('general', 'search-regex')
     m = r.search(txt)
     if m:
-        engine = m.group(2)
+        engine = m.group(group)
         try:
             template = config.get('searchengines', engine)
         except config.NoOptionError:
-            raise SearchEngineError("Search engine {} not found!".format(
-                engine))
-        term = r.sub('', txt)
+            template = config.get('searchengines', 'DEFAULT')
+        term = ''.join(m.groups()[:group-1] + m.groups()[group:])
         logger.debug("engine {}, term '{}'".format(engine, term))
     else:
         template = config.get('searchengines', 'DEFAULT')
