@@ -31,11 +31,12 @@ class SettingValue:
     Attributes:
         typ: A BaseType subclass instance.
         value: (readonly property) The currently valid, most important value.
+        advanced: Whether to hide the config by default.
         _values: An OrderedDict with the values on different layers, with the
                  most significant layer first.
     """
 
-    def __init__(self, typ, default=None):
+    def __init__(self, typ, default=None, advanced=False):
         """Constructor.
 
         Args:
@@ -43,6 +44,7 @@ class SettingValue:
             default: Raw value to set.
         """
         self.typ = typ
+        self.advanced = advanced
         self._values = collections.OrderedDict.fromkeys(
             ['temp', 'conf', 'default'])
         self._values['default'] = default

@@ -23,6 +23,7 @@ import re
 import shlex
 import codecs
 import os.path
+import collections
 import sre_constants
 
 from PyQt5.QtCore import QUrl

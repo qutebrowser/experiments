@@ -168,11 +168,11 @@ SECTION_DESC = {
 DATA = collections.OrderedDict([
     ('general', sect.KeyValue(
         ('ignore-case',
-         SettingValue(typ.IgnoreCase(), 'smart'),
+         SettingValue(typ.IgnoreCase(), 'smart', advanced=True),
          "Whether to find text on a page case-insensitively."),
 
         ('wrap-search',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to wrap finding text to the top when arriving at the end."),
 
         ('startpage',
@@ -180,12 +180,12 @@ DATA = collections.OrderedDict([
          "The default page(s) to open at the start, separated by commas."),
 
         ('auto-search',
-         SettingValue(typ.AutoSearch(), 'naive'),
+         SettingValue(typ.AutoSearch(), 'naive', advanced=True),
          "Whether to start a search when something else than a URL is "
          "entered."),
 
         ('auto-save-config',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to save the config automatically on quit."),
 
         ('editor',
@@ -195,7 +195,7 @@ DATA = collections.OrderedDict([
          "you can use `\"` or `'` to quote arguments."),
 
         ('editor-encoding',
-         SettingValue(typ.Encoding(), 'utf-8'),
+         SettingValue(typ.Encoding(), 'utf-8', advanced=True),
          "Encoding to use for editor."),
 
         ('private-browsing',
@@ -210,12 +210,12 @@ DATA = collections.OrderedDict([
          "_Inspect_ entry to the context menu."),
 
         ('print-element-backgrounds',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether the background color and images are also drawn when the "
          "page is printed."),
 
         ('xss-auditing',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether load requests should be monitored for cross-site scripting "
          "attempts.\n\n"
          "Suspicious scripts will be blocked and reported in the inspector's "
@@ -223,70 +223,74 @@ DATA = collections.OrderedDict([
          "performance."),
 
         ('site-specific-quirks',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Enable workarounds for broken sites."),
 
         ('default-encoding',
-         SettingValue(typ.String(none_ok=True), ''),
+         SettingValue(typ.String(none_ok=True), '', advanced=True),
          "Default encoding to use for websites.\n\n"
          "The encoding must be a string describing an encoding such as "
          '_utf-8_, _iso-8859-1_, etc. If left empty a default value will be '
          "used."),
+
+        ('show-advanced',
+         SettingValue(typ.Bool(), 'true'),
+         "Whether to show advanced options."),
     )),
 
     ('ui', sect.KeyValue(
         ('zoom-levels',
          SettingValue(typ.PercList(minval=0),
                       '25%,33%,50%,67%,75%,90%,100%,110%,125%,150%,175%,200%,'
-                      '250%,300%,400%,500%'),
+                      '250%,300%,400%,500%', advanced=True),
          "The available zoom levels, separated by commas."),
 
         ('default-zoom',
-         SettingValue(typ.ZoomPerc(), '100%'),
+         SettingValue(typ.ZoomPerc(), '100%', advanced=True),
          "The default zoom level."),
 
         ('message-timeout',
-         SettingValue(typ.Int(), '2000'),
+         SettingValue(typ.Int(), '2000', advanced=True),
          "Time (in ms) to show messages in the statusbar for."),
 
         ('confirm-quit',
-         SettingValue(typ.ConfirmQuit(), 'never'),
+         SettingValue(typ.ConfirmQuit(), 'never', advanced=True),
          "Whether to confirm quitting the application."),
 
         ('display-statusbar-messages',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to display javascript statusbar messages."),
 
         ('zoom-text-only',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether the zoom factor on a frame applies only to the text or to "
          "all content."),
 
         ('frame-flattening',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to  expand each subframe to its contents.\n\n"
          "This will flatten all the frames to become one scrollable page."),
 
         ('user-stylesheet',
-         SettingValue(typ.WebSettingsFile(), ''),
+         SettingValue(typ.WebSettingsFile(), '', advanced=True),
          "User stylesheet to use."),
 
         ('css-media-type',
-         SettingValue(typ.String(none_ok=True), ''),
+         SettingValue(typ.String(none_ok=True), '', advanced=True),
          "Set the CSS media type."),
     )),
 
     ('network', sect.KeyValue(
         ('do-not-track',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Value to send in the `DNT` header."),
 
         ('accept-language',
-         SettingValue(typ.String(none_ok=True), 'en-US,en'),
+         SettingValue(typ.String(none_ok=True), 'en-US,en', advanced=True),
          "Value to send in the `accept-language` header."),
 
         ('user-agent',
-         SettingValue(typ.String(none_ok=True), ''),
+         SettingValue(typ.String(none_ok=True), '', advanced=True),
          "User agent to send. Empty to send the default."),
 
         ('proxy',
@@ -300,61 +304,63 @@ DATA = collections.OrderedDict([
          "Whether to validate SSL handshakes."),
 
         ('dns-prefetch',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to try to pre-fetch DNS entries to speed up browsing."),
     )),
 
     ('completion', sect.KeyValue(
         ('show',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to show the autocompletion window."),
 
         ('height',
-         SettingValue(typ.PercOrInt(minperc=0, maxperc=100, minint=1), '50%'),
+         SettingValue(typ.PercOrInt(minperc=0, maxperc=100, minint=1), '50%',
+                      advanced=True),
          "The height of the completion, in px or as percentage of the "
          "window."),
 
         ('history-length',
-         SettingValue(typ.Int(minval=-1), '100'),
+         SettingValue(typ.Int(minval=-1), '100', advanced=True),
          "How many commands to save in the history.\n\n"
          "0: no history / -1: unlimited"),
 
         ('quick-complete',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to move on to the next part when there's only one possible "
          "completion left."),
 
         ('shrink',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to shrink the completion to be smaller than the configured "
          "size if there are no scrollbars."),
     )),
 
     ('input', sect.KeyValue(
         ('timeout',
-         SettingValue(typ.Int(minval=0, maxval=MAXVALS['int']), '500'),
+         SettingValue(typ.Int(minval=0, maxval=MAXVALS['int']), '500',
+                      advanced=True),
          "Timeout for ambiguous keybindings."),
 
         ('insert-mode-on-plugins',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to switch to insert mode when clicking flash and other "
          "plugins."),
 
         ('auto-leave-insert-mode',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to leave insert mode if a non-editable element is clicked."),
 
         ('auto-insert-mode',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to automatically enter insert mode if an editable element "
          "is focused after page load."),
 
         ('forward-unbound-keys',
-         SettingValue(typ.ForwardUnboundKeys(), 'auto'),
+         SettingValue(typ.ForwardUnboundKeys(), 'auto', advanced=True),
          "Whether to forward unbound keys to the webview in normal mode."),
 
         ('spatial-navigation',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Enables or disables the Spatial Navigation feature\n\n"
          "Spatial navigation consists in the ability to navigate between "
          "focusable elements in a Web page, such as hyperlinks and form "
@@ -364,41 +370,41 @@ DATA = collections.OrderedDict([
          "right and which element he probably wants."),
 
         ('links-included-in-focus-chain',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether hyperlinks should be included in the keyboard focus chain."),
     )),
 
     ('tabs', sect.KeyValue(
         ('background-tabs',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether to open new tabs (middleclick/ctrl+click) in background."),
 
         ('select-on-remove',
-         SettingValue(typ.SelectOnRemove(), 'right'),
+         SettingValue(typ.SelectOnRemove(), 'right', advanced=True),
          "Which tab to select when the focused tab is removed."),
 
         ('new-tab-position',
-         SettingValue(typ.NewTabPosition(), 'right'),
+         SettingValue(typ.NewTabPosition(), 'right', advanced=True),
          "How new tabs are positioned."),
 
         ('new-tab-position-explicit',
-         SettingValue(typ.NewTabPosition(), 'last'),
+         SettingValue(typ.NewTabPosition(), 'last', advanced=True),
          "How new tabs opened explicitely are positioned."),
 
         ('last-close',
-         SettingValue(typ.LastClose(), 'ignore'),
+         SettingValue(typ.LastClose(), 'ignore', advanced=True),
          "Behaviour when the last tab is closed."),
 
         ('wrap',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to wrap when changing tabs."),
 
         ('movable',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether tabs should be movable."),
 
         ('close-mouse-button',
-         SettingValue(typ.CloseButton(), 'middle'),
+         SettingValue(typ.CloseButton(), 'middle', advanced=True),
          "On which mouse button to close tabs."),
 
         ('position',
@@ -406,7 +412,7 @@ DATA = collections.OrderedDict([
          "The position of the tab bar."),
 
         ('show-favicons',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to show favicons in the tab bar."),
 
         ('width',
@@ -415,11 +421,11 @@ DATA = collections.OrderedDict([
          "of the window."),
 
         ('indicator-width',
-         SettingValue(typ.Int(minval=0), '3'),
+         SettingValue(typ.Int(minval=0), '3', advanced=True),
          "Width of the progress indicator (0 to disable)."),
 
         ('indicator-space',
-         SettingValue(typ.Int(minval=0), '3'),
+         SettingValue(typ.Int(minval=0), '3', advanced=True),
          "Spacing between tab edge and indicator."),
     )),
 
@@ -431,7 +437,8 @@ DATA = collections.OrderedDict([
 
         ('maximum-pages-in-cache',
          SettingValue(
-             typ.Int(none_ok=True, minval=0, maxval=MAXVALS['int']), ''),
+             typ.Int(none_ok=True, minval=0, maxval=MAXVALS['int']), '',
+             advanced=True),
          "The maximum number of pages to hold in the memory page cache.\n\n"
          "The Page Cache allows for a nicer user experience when navigating "
          "forth or back to pages in the forward/back history, by pausing and "
@@ -441,7 +448,8 @@ DATA = collections.OrderedDict([
 
         ('object-cache-capacities',
          SettingValue(
-             typ.WebKitBytesList(length=3, maxsize=MAXVALS['int']), ''),
+             typ.WebKitBytesList(length=3, maxsize=MAXVALS['int']), '',
+             advanced=True),
          "The capacities for the memory cache for dead objects such as "
          "stylesheets or scripts. Syntax: cacheMinDeadCapacity, cacheMaxDead, "
          "totalCapacity.\n\n"
@@ -454,19 +462,21 @@ DATA = collections.OrderedDict([
          "that the cache should consume *overall*."),
 
         ('offline-storage-default-quota',
-         SettingValue(typ.WebKitBytes(maxsize=MAXVALS['int64']), ''),
+         SettingValue(typ.WebKitBytes(maxsize=MAXVALS['int64']), '',
+                      advanced=True),
          "Default quota for new offline storage databases."),
 
         ('offline-web-application-cache-quota',
-         SettingValue(typ.WebKitBytes(maxsize=MAXVALS['int64']), ''),
+         SettingValue(typ.WebKitBytes(maxsize=MAXVALS['int64']), '',
+                      advanced=True),
          "Quota for the offline web application cache."),
 
         ('offline-storage-database',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether support for the HTML 5 offline storage feature is enabled."),
 
         ('offline-web-application-storage',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether support for the HTML 5 web application cache feature is "
          "enabled.\n\n"
          "An application cache acts like an HTTP cache in some sense. For "
@@ -477,13 +487,13 @@ DATA = collections.OrderedDict([
          "http://dev.w3.org/html5/spec/Overview.html#appcache"),
 
         ('local-storage',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether support for the HTML 5 local storage feature is enabled."),
     )),
 
     ('permissions', sect.KeyValue(
         ('allow-images',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether images are automatically loaded in web pages."),
 
         ('allow-javascript',
@@ -502,24 +512,24 @@ DATA = collections.OrderedDict([
         # "not supported"),
 
         ('javascript-can-open-windows',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether JavaScript programs can open new windows."),
 
         ('javascript-can-close-windows',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether JavaScript programs can close windows."),
 
         ('javascript-can-access-clipboard',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether JavaScript programs can read or write to the clipboard."),
 
         ('local-content-can-access-remote-urls',
-         SettingValue(typ.Bool(), 'false'),
+         SettingValue(typ.Bool(), 'false', advanced=True),
          "Whether locally loaded documents are allowed to access remote "
          "urls."),
 
         ('local-content-can-access-file-urls',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether locally loaded documents are allowed to access other local "
          "urls."),
 
@@ -534,11 +544,11 @@ DATA = collections.OrderedDict([
 
     ('hints', sect.KeyValue(
         ('border',
-         SettingValue(typ.String(), '1px solid #E3BE23'),
+         SettingValue(typ.String(), '1px solid #E3BE23', advanced=True),
          "CSS border value for hints."),
 
         ('opacity',
-         SettingValue(typ.Float(minval=0.0, maxval=1.0), '0.7'),
+         SettingValue(typ.Float(minval=0.0, maxval=1.0), '0.7', advanced=True),
          "Opacity for hints."),
 
         ('mode',
@@ -550,18 +560,19 @@ DATA = collections.OrderedDict([
          "Chars used for hint strings."),
 
         ('auto-follow',
-         SettingValue(typ.Bool(), 'true'),
+         SettingValue(typ.Bool(), 'true', advanced=True),
          "Whether to auto-follow a hint if there's only one left."),
 
         ('next-regexes',
          SettingValue(typ.RegexList(flags=re.IGNORECASE),
-                      r'\bnext\b,\bmore\b,\bnewer\b,\b[>→≫]\b,\b(>>|»)\b'),
+                      r'\bnext\b,\bmore\b,\bnewer\b,\b[>→≫]\b,\b(>>|»)\b',
+                      advanced=True),
          "A comma-separated list of regexes to use for 'next' links."),
 
         ('prev-regexes',
          SettingValue(typ.RegexList(flags=re.IGNORECASE),
                       r'\bprev(ious)?\b,\bback\b,\bolder\b,\b[<←≪]\b,'
-                      r'\b(<<|«)\b'),
+                      r'\b(<<|«)\b', advanced=True),
          "A comma-separated list of regexes to use for 'prev' links."),
     )),
 
@@ -919,6 +930,8 @@ DATA = collections.OrderedDict([
         ('downloads.bg.system',
          SettingValue(typ.ColorSystem(), 'rgb'),
          "Color gradient interpolation system for downloads."),
+
+        advanced=True
     )),
 
     ('fonts', sect.KeyValue(
@@ -996,5 +1009,7 @@ DATA = collections.OrderedDict([
          SettingValue(
              typ.Int(none_ok=True, minval=1, maxval=MAXVALS['int']), ''),
          "The default font size for fixed-pitch text."),
+
+        advanced=True
     )),
 ])

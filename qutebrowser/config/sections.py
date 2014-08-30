@@ -99,11 +99,12 @@ class KeyValue(Section):
     set of keys.
     """
 
-    def __init__(self, *defaults):
+    def __init__(self, *defaults, advanced=False):
         """Constructor.
 
         Args:
             *defaults: A (key, value, description) list of defaults.
+            advanced: Set all values to advanced.
         """
         super().__init__()
         if not defaults:
@@ -111,6 +112,8 @@ class KeyValue(Section):
         self.values = collections.OrderedDict()
         for (k, v, desc) in defaults:
             assert k not in self.values, k
+            if advanced:
+                v.advanced = True
             self.values[k] = v
             self.descriptions[k] = desc
 
