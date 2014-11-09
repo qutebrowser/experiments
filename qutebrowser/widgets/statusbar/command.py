@@ -87,11 +87,12 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         else:
             return ''
 
-    def split(self, keep=False):
+    def split(self, keep=False, placeholder=False):
         """Get the text split up in parts.
 
         Args:
             keep: Whether to keep special chars and whitespace.
+            placeholder: Whether to generate output suitable for .format(...)
         """
         text = self.text()[len(self.prefix()):]
         if not text:
@@ -104,7 +105,7 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
             return [text]
         runner = runners.CommandRunner(self._win_id)
         parts = runner.parse(text, fallback=True, alias_no_args=False,
-                             keep=keep)
+                             keep=keep, placeholder=placeholder)
         if self._empty_item_idx is not None:
             log.completion.debug("Empty element queued at {}, "
                                  "inserting.".format(self._empty_item_idx))
@@ -211,10 +212,10 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
                        including a trailing space and we shouldn't continue
                        completing the current item.
         """
-        parts = self.split(keep=True)
+        parts = self.split(placeholder=True)
         log.completion.debug("changing part {} to '{}'".format(
             self._cursor_part, newtext))
-        parts[self._cursor_part] = newtext
+        parts[self._cursor_part] = parts[self._cursor_part].format(newtext)
         # We want to place the cursor directly after the part we just changed.
         cursor_str = self.prefix() + ' '.join(parts[:self._cursor_part + 1])
         if immediate:

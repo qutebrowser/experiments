@@ -40,6 +40,7 @@ class ShellLexer:
         self.escape = '\\'
         self.escapedquotes = '"'
         self.keep = False
+        self.placeholder = False
 
     def reset(self):
         self.quoted = False
@@ -54,9 +55,11 @@ class ShellLexer:
             log.shlexer.vdebug("in state {!r} I see character: {!r}".format(
                 self.state, nextchar))
             if self.state == ' ':
-                if self.keep:
+                if self.keep and not self.placeholder:
                     self.token += nextchar
                 if nextchar in self.whitespace:
+                    if self.placeholder:
+                        self.token += nextchar
                     log.shlexer.vdebug("I see whitespace in whitespace state")
                     if self.token or self.quoted:
                         yield self.token
@@ -65,23 +68,30 @@ class ShellLexer:
                     self.escapedstate = 'a'
                     self.state = nextchar
                 elif nextchar in self.quotes:
+                    if self.placeholder:
+                        self.token += nextchar
                     self.state = nextchar
                 else:
-                    self.token = nextchar
+                    if self.placeholder:
+                        self.token = '{}'
+                    else:
+                        self.token = nextchar
                     self.state = 'a'
             elif self.state in self.quotes:
                 self.quoted = True
                 if nextchar == self.state:
+                    if self.placeholder:
+                        self.token += '{}'
                     if self.keep:
                         self.token += nextchar
                     self.state = 'a'
                 elif (nextchar in self.escape and
                         self.state in self.escapedquotes):
-                    if self.keep:
+                    if self.keep and not self.placeholder:
                         self.token += nextchar
                     self.escapedstate = self.state
                     self.state = nextchar
-                else:
+                elif not self.placeholder:
                     self.token += nextchar
             elif self.state in self.escape:
                 # In posix shells, only the quote itself or the escape
@@ -90,7 +100,8 @@ class ShellLexer:
                         nextchar != self.state and
                         nextchar != self.escapedstate and not self.keep):
                     self.token += self.state
-                self.token += nextchar
+                if not self.placeholder:
+                    self.token += nextchar
                 self.state = self.escapedstate
             elif self.state == 'a':
                 if nextchar in self.whitespace:
@@ -106,11 +117,11 @@ class ShellLexer:
                         self.token += nextchar
                     self.state = nextchar
                 elif nextchar in self.escape:
-                    if self.keep:
+                    if self.keep and not self.placeholder:
                         self.token += nextchar
                     self.escapedstate = 'a'
                     self.state = nextchar
-                else:
+                elif not self.placeholder:
                     self.token += nextchar
         if self.state in self.escape and not self.keep:
             self.token += self.state
@@ -118,14 +129,19 @@ class ShellLexer:
             yield self.token
 
 
-def split(s, keep=False):
+def split(s, keep=False, placeholder=False):
     """Split a string via ShellLexer.
 
     Args:
         keep: Whether to keep are special chars in the split output.
+        placeholder: Whether to generate placeholder strings.
     """
     lexer = ShellLexer(s)
-    lexer.keep = keep
+    if placeholder:
+        lexer.placeholder = True
+        lexer.keep = True
+    else:
+        lexer.keep = keep
     tokens = list(lexer)
     if not tokens:
         return []

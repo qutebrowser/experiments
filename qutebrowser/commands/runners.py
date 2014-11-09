@@ -191,7 +191,7 @@ class CommandRunner(QObject):
         return new_cmd
 
     def parse(self, text, aliases=True, fallback=False, alias_no_args=True,
-              keep=False):
+              keep=False, placeholder=False):
         """Split the commandline text into command and arguments.
 
         Args:
@@ -201,6 +201,7 @@ class CommandRunner(QObject):
                       unknown.
             alias_no_args: Whether to apply an alias if there are no arguments.
             keep: Whether to keep special chars and whitespace
+            placeholder: Whether to generate output suitable for .format(...)
 
         Return:
             A split string commandline, e.g ['open', 'www.google.com']
@@ -219,11 +220,11 @@ class CommandRunner(QObject):
             if fallback:
                 # FIXME test this
                 cmdstr, sep, argstr = text.partition(' ')
-                return [cmdstr, sep] + argstr.split(' ')
+                return [cmdstr, sep] + ['{}' for e in argstr.split(' ')]
             else:
                 raise cmdexc.NoSuchCommandError(
                     '{}: no such command'.format(cmdstr))
-        self._split_args(argstr, keep)
+        self._split_args(argstr, keep, placeholder)
         retargs = self._args[:]
         if keep and retargs:
             return [cmdstr, sep + retargs[0]] + retargs[1:]
@@ -232,12 +233,13 @@ class CommandRunner(QObject):
         else:
             return [cmdstr] + retargs
 
-    def _split_args(self, argstr, keep):
+    def _split_args(self, argstr, keep, placeholder):
         """Split the arguments from an arg string.
 
         Args:
             argstr: An argument string.
             keep: Whether to keep special chars and whitespace
+            placeholder: Whether to generate output suitable for .format(...)
 
         Return:
             A list containing the splitted strings.
@@ -245,7 +247,8 @@ class CommandRunner(QObject):
         if not argstr:
             self._args = []
         elif self._cmd.split:
-            self._args = split.split(argstr, keep=keep)
+            self._args = split.split(argstr, keep=keep,
+                                     placeholder=placeholder)
         else:
             # If split=False, we still want to split the flags, but not
             # everything after that.
@@ -261,7 +264,7 @@ class CommandRunner(QObject):
             split_args = argstr.split()
             for i, arg in enumerate(split_args):
                 if not arg.startswith('-'):
-                    self._args = argstr.split(maxsplit=i)
+                    self._args = ['{}' for e in argstr.split(maxsplit=i)]
                     break
             else:
                 # If there are only flags, we got it right on the first try
