@@ -341,7 +341,8 @@ class BrowserPage(QWebPage):
             QWebPage.Notifications: ('content', 'notifications'),
             QWebPage.Geolocation: ('content', 'geolocation'),
         }
-        config_val = config.get(*options[feature])
+        section, option = options[feature]
+        config_val = config.get(section, option)
         if config_val == 'ask':
             bridge = objreg.get('message-bridge', scope='window',
                                 window=self._win_id)
