@@ -27,6 +27,7 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtWebKit
 from PyQt5 import QtPrintSupport
 from PyQt5 import QtCore
+from PyQt5 import QtGui
 
 # Support for QDate, QDateTime and QTime.
 import datetime
