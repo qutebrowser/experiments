@@ -133,10 +133,10 @@ except ImportError:
     QtWebEngineWidgets = None
 
 
-@pytest.mark.skipif(QT_VERSION_STR.startswith('5.7') and
-                    QtWebEngineWidgets is not None and
-                    sys.platform == "linux",
-                    reason="Segfaults when run with QtWebEngine tests on Linux")
+#@pytest.mark.skipif(QT_VERSION_STR.startswith('5.7') and
+#                    QtWebEngineWidgets is not None and
+#                    sys.platform == "linux",
+#                    reason="Segfaults when run with QtWebEngine tests on Linux")
 def test_fetch():
     test_str = """
         function FindProxyForURL(domain, host) {

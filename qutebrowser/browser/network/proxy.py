@@ -19,11 +19,15 @@
 
 """Handling of proxies."""
 
+import sys
+import functools
+import subprocess
 
+from PyQt5.QtCore import QUrl
 from PyQt5.QtNetwork import QNetworkProxy, QNetworkProxyFactory
 
 from qutebrowser.config import config, configtypes
-from qutebrowser.utils import objreg
+from qutebrowser.utils import objreg, log, urlutils
 from qutebrowser.browser.network import pac
 
 
@@ -32,6 +36,46 @@ def init():
     proxy_factory = ProxyFactory()
     objreg.register('proxy-factory', proxy_factory)
     QNetworkProxyFactory.setApplicationProxyFactory(proxy_factory)
+
+
+@functools.lru_cache()
+def _system_proxy_subprocess(url):
+    if sys.platform != 'linux':
+        return []
+
+    url_string = url.toString(QUrl.FullyEncoded | QUrl.RemovePassword)
+    try:
+        proxy_urls = subprocess.check_output(['proxy', url_string])
+    except subprocess.CalledProcessError as e:
+        log.network.exception("Failed to call proxy subprocess: {}".format(e))
+        return []
+
+    try:
+        proxy_urls = proxy_urls.decode('utf-8').strip().split()
+    except UnicodeDecodeError as e:
+        log.network.exception("Failed to decode proxies: {}".format(e))
+        return []
+
+    log.network.debug("Proxy URLs: {!r}".format(proxy_urls))
+    if not proxy_urls:
+        return []
+
+    proxies = []
+    for proxy_url in proxy_urls:
+        try:
+            proxies.append(urlutils.proxy_from_url(QUrl(proxy_url)))
+        except (urlutils.InvalidUrlError, urlutils.InvalidProxyTypeError) as e:
+            log.network.error("Failed to parse proxy URL {}".format(proxy_url))
+
+    return proxies
+
+
+def _system_proxy(query):
+    proxies = _system_proxy_subprocess(query.url())
+    if not proxies:
+        raise Exception
+        proxies = QNetworkProxyFactory.systemProxyForQuery(query)
+    return proxies
 
 
 class ProxyFactory(QNetworkProxyFactory):
@@ -61,7 +105,7 @@ class ProxyFactory(QNetworkProxyFactory):
         """
         proxy = config.get('network', 'proxy')
         if proxy is configtypes.SYSTEM_PROXY:
-            proxies = QNetworkProxyFactory.systemProxyForQuery(query)
+            proxies = _system_proxy(query)
         elif isinstance(proxy, pac.PACFetcher):
             proxies = proxy.resolve(query)
         else:

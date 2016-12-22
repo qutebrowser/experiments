@@ -28,6 +28,7 @@ import warnings
 import pytest
 import hypothesis
 from PyQt5.QtCore import PYQT_VERSION
+from PyQt5.QtNetwork import QNetworkProxy, QNetworkProxyFactory
 
 pytest.register_assert_rewrite('helpers')
 
@@ -36,6 +37,7 @@ from helpers.logfail import fail_on_logging
 from helpers.messagemock import message_mock
 from helpers.fixtures import *  # pylint: disable=wildcard-import
 from qutebrowser.utils import qtutils
+from qutebrowser.browser.network import proxy
 
 
 # Set hypothesis settings
@@ -155,7 +157,10 @@ def pytest_ignore_collect(path):
 @pytest.fixture(scope='session')
 def qapp(qapp):
     """Change the name of the QApplication instance."""
+    global proxy_factory
     qapp.setApplicationName('qute_test')
+    proxy_factory = proxy.ProxyFactory()
+    QNetworkProxyFactory.setApplicationProxyFactory(proxy_factory)
     return qapp
 
 
