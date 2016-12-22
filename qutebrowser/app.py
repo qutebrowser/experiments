@@ -47,6 +47,7 @@ from qutebrowser.commands import cmdutils, runners, cmdexc
 from qutebrowser.config import style, config, websettings, configexc
 from qutebrowser.browser import (urlmarks, adblock, history, browsertab,
                                  downloads)
+from qutebrowser.browser.network import proxy
 from qutebrowser.browser.webkit import cookies, cache
 from qutebrowser.browser.webkit.network import networkmanager
 from qutebrowser.keyinput import macros
@@ -382,6 +383,9 @@ def _init_modules(args, crash_handler):
     save_manager = savemanager.SaveManager(qApp)
     objreg.register('save-manager', save_manager)
     save_manager.add_saveable('version', _save_version)
+
+    log.init.debug("Initializing proxy...")
+    proxy.init()
 
     log.init.debug("Initializing network...")
     networkmanager.init()

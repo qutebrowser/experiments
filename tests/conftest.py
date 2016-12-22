@@ -157,10 +157,7 @@ def pytest_ignore_collect(path):
 @pytest.fixture(scope='session')
 def qapp(qapp):
     """Change the name of the QApplication instance."""
-    global proxy_factory
     qapp.setApplicationName('qute_test')
-    proxy_factory = proxy.ProxyFactory()
-    QNetworkProxyFactory.setApplicationProxyFactory(proxy_factory)
     return qapp
 
 
