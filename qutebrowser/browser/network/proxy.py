@@ -19,6 +19,7 @@
 
 """Handling of proxies."""
 
+import time
 import sys
 import functools
 import subprocess
@@ -38,49 +39,100 @@ def init():
     QNetworkProxyFactory.setApplicationProxyFactory(proxy_factory)
 
 
-@functools.lru_cache()
-def _system_proxy_subprocess(url):
-    if sys.platform != 'linux':
-        return []
+class ProxyError(Exception):
 
-    url_string = url.toString(QUrl.FullyEncoded | QUrl.RemovePassword)
-    try:
-        proxy_urls = subprocess.check_output(['proxy', url_string])
-    except subprocess.CalledProcessError as e:
-        log.network.exception("Failed to call proxy subprocess: {}".format(e))
-        return []
+    """Exception raised when the proxy process exited."""
 
-    try:
-        proxy_urls = proxy_urls.decode('utf-8').strip().split()
-    except UnicodeDecodeError as e:
-        log.network.exception("Failed to decode proxies: {}".format(e))
-        return []
+    pass
 
-    log.network.debug("Proxy URLs: {!r}".format(proxy_urls))
-    if not proxy_urls:
-        return []
 
-    proxies = []
-    for proxy_url in proxy_urls:
+class ProxyProcess:
+
+    """Wrapper over a 'proxy' subprocess.
+
+    Attributes:
+        _proc: The subprocess.Popen instance
+        error: An error message if an error occurred, or None.
+    """
+
+    def __init__(self):
         try:
-            proxies.append(urlutils.proxy_from_url(QUrl(proxy_url)))
-        except (urlutils.InvalidUrlError, urlutils.InvalidProxyTypeError) as e:
-            log.network.error("Failed to parse proxy URL {}".format(proxy_url))
+            self._proc = subprocess.Popen(['proxy'], stdout=subprocess.PIPE,
+                                          stderr=subprocess.PIPE ,
+                                          stdin=subprocess.PIPE)
+        except subprocess.CalledProcessError as e:
+            raise ProxyError("Failed to start proxy subprocess: {}".format(e))
+        self._check_running()
+        self.error = None
+        print(self._proc.pid)
 
-    return proxies
+    def _check_running(self):
+        """Make sure the proxy subprocess is still running."""
+        status = self._proc.poll()
+        if status is not None:
+            raise ProxyError("proxy process exited with status {}".format(status))
 
+    @functools.lru_cache()
+    def _get_proxies(self, url):
+        time.sleep(1)
+        url_string = bytes(url.toEncoded(QUrl.RemovePassword)) + b'\n'
+        self._proc.stdin.write(url_string)
+        self._proc.stdin.flush()
+        try:
+            proxy_urls = self._proc.stdout.readline().decode('utf-8')
+        except UnicodeDecodeError as e:
+            raise ProxyError("Failed to decode output: {}".format(e))
 
-def _system_proxy(query):
-    proxies = _system_proxy_subprocess(query.url())
-    if not proxies:
-        raise Exception
-        proxies = QNetworkProxyFactory.systemProxyForQuery(query)
-    return proxies
+        print(proxy_urls)
+
+        proxy_urls = proxy_urls.strip().split()
+        log.network.debug("Proxy URLs: {!r}".format(proxy_urls))
+        if not proxy_urls:
+            raise ProxyError("No proxies returned!")
+
+        proxies = []
+        for proxy_url in proxy_urls:
+            try:
+                proxies.append(urlutils.proxy_from_url(QUrl(proxy_url)))
+            except (urlutils.InvalidUrlError, urlutils.InvalidProxyTypeError) as e:
+                log.network.error("Failed to parse proxy URL {}".format(proxy_url))
+
+        if not proxy_urls:
+            raise ProxyError("No valid proxies returned!")
+
+        return proxies
+
+    def get_proxies(self, url):
+        """Get the proxies to be used for the given URL."""
+        self.error = None
+        try:
+            return self._get_proxies(url)
+        except ProxyError as e:
+            self.error = e
+            # .invalid is guaranteed to be inaccessible in RFC 6761.
+            # Port 9 is for DISCARD protocol -- DISCARD servers act like
+            # /dev/null.
+            # Later NetworkManager.createRequest will detect this and display
+            # an error message.
+            error_host = "pac-resolve-error.qutebrowser.invalid"
+            return QNetworkProxy(QNetworkProxy.HttpProxy, error_host, 9)
 
 
 class ProxyFactory(QNetworkProxyFactory):
 
     """Factory for proxies to be used by qutebrowser."""
+
+    def __init__(self):
+        super().__init__()
+        if sys.platform == 'linux':
+            self._proxy_process = ProxyProcess()
+        else:
+            self._proxy_process = None
+
+    def _system_proxy(self, query):
+        if self._proxy_process is None:
+            return QNetworkProxyFactory.systemProxyForQuery(query)
+        return self._proxy_process.get_proxies(query.url())
 
     def get_error(self):
         """Check if proxy can't be resolved.
@@ -91,6 +143,8 @@ class ProxyFactory(QNetworkProxyFactory):
         proxy = config.get('network', 'proxy')
         if isinstance(proxy, pac.PACFetcher):
             return proxy.fetch_error()
+        elif self._proxy_process is not None:
+            return self._proxy_process.error
         else:
             return None
 
@@ -105,7 +159,7 @@ class ProxyFactory(QNetworkProxyFactory):
         """
         proxy = config.get('network', 'proxy')
         if proxy is configtypes.SYSTEM_PROXY:
-            proxies = _system_proxy(query)
+            proxies = self._system_proxy(query)
         elif isinstance(proxy, pac.PACFetcher):
             proxies = proxy.resolve(query)
         else:
