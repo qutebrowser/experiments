@@ -22,6 +22,13 @@ Changed
 
 - Scrolling with the scrollwheel while holding shift now scrolls sideways
 
+v0.9.2 (unreleased)
+-------------------
+
+- Various fixes for Qt 5.8:
+  - Crash when closing a window
+  - Crash when quitting
+  - Mouse-related features (insert mode on click, etc.) not working
 
 v0.9.1
 ------
