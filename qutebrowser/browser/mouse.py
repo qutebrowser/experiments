@@ -21,11 +21,12 @@
 
 
 from qutebrowser.config import config
-from qutebrowser.utils import message, log, usertypes
+from qutebrowser.utils import message, log, usertypes, debug
 from qutebrowser.keyinput import modeman
 
 
 from PyQt5.QtCore import QObject, QEvent, Qt, QTimer
+from PyQt5.QtGui import QMouseEvent
 
 
 class ChildEventFilter(QObject):
@@ -202,6 +203,9 @@ class MouseEventFilter(QObject):
     def eventFilter(self, obj, event):
         """Filter events going to a QWeb(Engine)View."""
         evtype = event.type()
+        if isinstance(event, QMouseEvent):
+            log.mouse.debug("{} for {}, proxy {}".format(event, obj, self._tab.event_target()))
+            log.mouse.debug("type {}, pos {}, button {}, buttons {}, modifiers {}".format(event.type(), event.pos(), event.button(), hex(int(event.buttons())), hex(int(event.modifiers()))))
         if evtype not in self._handlers:
             return False
         if obj is not self._tab.event_target():

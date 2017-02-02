@@ -598,7 +598,7 @@ class AbstractTab(QWidget):
             raise AssertionError("Can't re-use an event which was already "
                                  "posted!")
         recipient = self.event_target()
-        evt.posted = True
+        log.misc.debug("Sending {} to {}".format(evt, recipient))
         QApplication.postEvent(recipient, evt)
 
     @pyqtSlot(QUrl)

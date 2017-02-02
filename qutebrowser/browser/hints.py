@@ -27,7 +27,8 @@ import html
 from string import ascii_lowercase
 
 from PyQt5.QtCore import pyqtSlot, QObject, Qt, QUrl
-from PyQt5.QtWidgets import QLabel
+from PyQt5.QtGui import QPainter
+from PyQt5.QtWidgets import QLabel, QWidget, QSizePolicy
 
 from qutebrowser.config import config, style
 from qutebrowser.keyinput import modeman, modeparsers
@@ -129,6 +130,26 @@ class HintLabel(QLabel):
         """Clean up this element and hide it."""
         self.hide()
         self.deleteLater()
+
+
+class PixelWidget(QWidget):
+
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+    def sizeHint(self):
+        return QSize(2, 2)
+
+    def paintEvent(self, _ev):
+        painter = QPainter()
+        painter.begin(self)
+        painter.setPen(Qt.red)
+        painter.drawPoint(0, 0)
+        painter.drawPoint(0, 1)
+        painter.drawPoint(1, 1)
+        painter.drawPoint(1, 1)
+        painter.end()
 
 
 class HintContext:
@@ -581,6 +602,9 @@ class HintManager(QObject):
 
         for elem, string in zip(elems, strings):
             label = HintLabel(elem, self._context)
+            #pw = PixelWidget(self._context.tab)
+            #pw.move(elem._mouse_pos())
+            #pw.show()
             label.update_text('', string)
             self._context.all_labels.append(label)
             self._context.labels[string] = label
