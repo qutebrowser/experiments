@@ -22,10 +22,10 @@
 import os
 import os.path
 
+import ruamel.yaml
 import sip
 from PyQt5.QtCore import QUrl, QObject, QPoint, QTimer
 from PyQt5.QtWidgets import QApplication
-import yaml
 
 from qutebrowser.utils import (standarddir, objreg, qtutils, log, message,
                                utils)
@@ -291,7 +291,7 @@ class SessionManager(QObject):
         try:
             with qtutils.savefile_open(path) as f:
                 utils.yaml_dump(data, f)
-        except (OSError, UnicodeEncodeError, yaml.YAMLError) as e:
+        except (OSError, UnicodeEncodeError, ruamel.yaml.YAMLError) as e:
             raise SessionError(e)
 
         if load_next_time:
@@ -376,7 +376,7 @@ class SessionManager(QObject):
         try:
             with open(path, encoding='utf-8') as f:
                 data = utils.yaml_load(f)
-        except (OSError, UnicodeDecodeError, yaml.YAMLError) as e:
+        except (OSError, UnicodeDecodeError, ruamel.yaml.YAMLError) as e:
             raise SessionError(e)
 
         log.sessions.debug("Loading session {} from {}...".format(name, path))

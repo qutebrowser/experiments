@@ -131,6 +131,15 @@ def partial_compare(val1, val2, *, indent=0):
     if val2 is Ellipsis:
         print_i("Ignoring ellipsis comparison", indent, error=True)
         return PartialCompareOutcome()
+    elif isinstance(val1, dict) and isinstance(val2, dict):
+        # Handle ruamel.yaml's CommentedMap
+        pass
+    elif isinstance(val1, list) and isinstance(val2, list):
+        # Handle ruamel.yaml's CommentedSeq
+        pass
+    elif isinstance(val1, float) and isinstance(val2, float):
+        # Handle ruamel.yaml's ScalarFloat
+        pass
     elif type(val1) != type(val2):  # pylint: disable=unidiomatic-typecheck
         outcome = PartialCompareOutcome(
             "Different types ({}, {}) -> False".format(type(val1).__name__,

@@ -20,13 +20,12 @@
 
 import textwrap
 
-import yaml
 import pytest
 
 # To run cmdutils.register decorators
 from qutebrowser import app  # pylint: disable=unused-import
 from qutebrowser.config import configdata, configtypes
-from qutebrowser.utils import usertypes
+from qutebrowser.utils import usertypes, utils
 
 
 def test_init(config_stub):
@@ -118,7 +117,7 @@ class TestParseYamlType:
 
     def _yaml(self, s):
         """Get the type from parsed YAML data."""
-        return yaml.load(textwrap.dedent(s))['type']
+        return utils.yaml_load(textwrap.dedent(s))['type']
 
     def test_simple(self):
         """Test type which is only a name."""
@@ -205,7 +204,7 @@ class TestParseYamlBackend:
 
     def _yaml(self, s):
         """Get the type from parsed YAML data."""
-        return yaml.load(textwrap.dedent(s))['backend']
+        return utils.yaml_load(textwrap.dedent(s))['backend']
 
     @pytest.mark.parametrize('backend, expected', [
         ('QtWebKit', [usertypes.Backend.QtWebKit]),

@@ -1,7 +1,7 @@
 Jinja2
 Pygments
 pyPEG2
-PyYAML
+ruamel.yaml
 colorama
 cssutils
 attrs

@@ -255,12 +255,9 @@ def check_libraries():
                          windows="Install from http://www.lfd.uci.edu/"
                                  "~gohlke/pythonlibs/#pygments or via pip.",
                          pip="pygments"),
-        'yaml':
-            _missing_str("PyYAML",
-                         windows="Use the installers at "
-                                 "http://pyyaml.org/download/pyyaml/ (py3.4) "
-                                 "or Install via pip.",
-                         pip="PyYAML"),
+        'ruamel.yaml':
+            _missing_str("ruamel.yaml",
+                         pip="ruamel.yaml"),
         'attr':
             _missing_str("attrs",
                          pip="attrs"),

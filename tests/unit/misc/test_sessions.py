@@ -22,7 +22,7 @@
 import logging
 
 import pytest
-import yaml
+import ruamel.yaml
 from PyQt5.QtCore import QUrl, QPoint, QByteArray, QObject
 QWebView = pytest.importorskip('PyQt5.QtWebKitWidgets').QWebView
 
@@ -238,9 +238,9 @@ class TestSave:
 
     @pytest.mark.parametrize('exception', [
         OSError('foo'), UnicodeEncodeError('ascii', '', 0, 2, 'foo'),
-        yaml.YAMLError('foo')])
+        ruamel.yaml.YAMLError('foo')])
     def test_fake_exception(self, mocker, sess_man, tmpdir, exception):
-        mocker.patch('qutebrowser.misc.sessions.yaml.dump',
+        mocker.patch('qutebrowser.misc.sessions.utils.yaml_dump',
                      side_effect=exception)
 
         with pytest.raises(sessions.SessionError, match=str(exception)):

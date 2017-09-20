@@ -31,7 +31,7 @@ import contextlib
 import itertools
 import json
 
-import yaml
+import ruamel.yaml
 import pytest
 from PyQt5.QtCore import pyqtSignal, QUrl
 
@@ -683,7 +683,7 @@ class QuteProc(testprocess.Process):
                 data = f.read()
 
         self._log('\nCurrent session data:\n' + data)
-        return yaml.load(data)
+        return utils.yaml_load(data)
 
     def get_content(self, plain=True):
         """Get the contents of the current page."""
@@ -735,7 +735,7 @@ class QuteProc(testprocess.Process):
         """
         __tracebackhide__ = lambda e: e.errisinstance(pytest.fail.Exception)
         # Translate ... to ellipsis in YAML.
-        loader = yaml.SafeLoader(expected)
+        loader = ruamel.yaml.SafeLoader(expected)
         loader.add_constructor('!ellipsis', lambda loader, node: ...)
         loader.add_implicit_resolver('!ellipsis', re.compile(r'\.\.\.'), None)
 

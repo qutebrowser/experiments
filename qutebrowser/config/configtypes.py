@@ -54,7 +54,7 @@ import operator
 import json
 
 import attr
-import yaml
+import ruamel.yaml
 from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QTabWidget, QTabBar
@@ -432,7 +432,7 @@ class List(BaseType):
 
         try:
             yaml_val = utils.yaml_load(value)
-        except yaml.YAMLError as e:
+        except ruamel.yaml.YAMLError as e:
             raise configexc.ValidationError(value, str(e))
 
         # For the values, we actually want to call to_py, as we did parse them
@@ -1122,7 +1122,7 @@ class Dict(BaseType):
 
         try:
             yaml_val = utils.yaml_load(value)
-        except yaml.YAMLError as e:
+        except ruamel.yaml.YAMLError as e:
             raise configexc.ValidationError(value, str(e))
 
         # For the values, we actually want to call to_py, as we did parse them

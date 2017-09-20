@@ -26,7 +26,7 @@ import traceback
 import configparser
 import contextlib
 
-import yaml
+import ruamel.yaml
 from PyQt5.QtCore import QSettings
 
 import qutebrowser
@@ -114,7 +114,7 @@ class YamlConfig:
         except OSError as e:
             desc = configexc.ConfigErrorDesc("While reading", e)
             raise configexc.ConfigFileErrors('autoconfig.yml', [desc])
-        except yaml.YAMLError as e:
+        except ruamel.yaml.YAMLError as e:
             desc = configexc.ConfigErrorDesc("While parsing", e)
             raise configexc.ConfigFileErrors('autoconfig.yml', [desc])
 

@@ -23,10 +23,11 @@ import sys
 import os
 import os.path
 
-import yaml
 import astroid
 from pylint import interfaces, checkers
 from pylint.checkers import utils
+
+from qutebrowser.utils import utils
 
 
 OPTIONS = None
@@ -68,4 +69,4 @@ def register(linter):
     global OPTIONS
     yaml_file = os.path.join('qutebrowser', 'config', 'configdata.yml')
     with open(yaml_file, 'r', encoding='utf-8') as f:
-        OPTIONS = list(yaml.load(f))
+        OPTIONS = list(utils.yaml_load(f))

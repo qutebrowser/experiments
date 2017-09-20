@@ -36,11 +36,7 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QKeySequence, QColor, QClipboard, QDesktopServices
 from PyQt5.QtWidgets import QApplication
 import pkg_resources
-import yaml
-try:
-    from yaml import CSafeLoader as YamlLoader, CSafeDumper as YamlDumper
-except ImportError:  # pragma: no cover
-    from yaml import SafeLoader as YamlLoader, SafeDumper as YamlDumper
+import ruamel.yaml
 
 import qutebrowser
 from qutebrowser.utils import qtutils, log, debug
@@ -867,7 +863,14 @@ def expand_windows_drive(path):
 
 def yaml_load(f):
     """Wrapper over yaml.load using the C loader if possible."""
-    return yaml.load(f, Loader=YamlLoader)
+    if ruamel.yaml.version_info < (0, 15):
+        try:
+            from ruamel.yaml import CSafeLoader as YamlLoader
+        except ImportError:  # pragma: no cover
+            from ruamel.yaml import SafeLoader as YamlLoader
+        return ruamel.yaml.load(f, Loader=YamlLoader)
+    else:
+        return ruamel.yaml.YAML().load(f)
 
 
 def yaml_dump(data, f=None):
@@ -875,9 +878,28 @@ def yaml_dump(data, f=None):
 
     Also returns a str instead of bytes.
     """
-    yaml_data = yaml.dump(data, f, Dumper=YamlDumper, default_flow_style=False,
-                          encoding='utf-8', allow_unicode=True)
-    if yaml_data is None:
-        return None
+    if ruamel.yaml.version_info < (0, 15):
+        try:
+            from ruamel.yaml import CSafeDumper as YamlDumper
+        except ImportError:  # pragma: no cover
+            from ruamel.yaml import SafeDumper as YamlDumper
+        yaml_data = ruamel.yaml.dump(
+            data, f, Dumper=YamlDumper, default_flow_style=False,
+            encoding='utf-8', allow_unicode=True)
+
+        if yaml_data is None:
+            return None
+        else:
+            return yaml_data.decode('utf-8')
     else:
-        return yaml_data.decode('utf-8')
+        yml = ruamel.yaml.YAML()
+        yml.default_flow_style = False
+        yml.encoding = 'utf-8'
+        yml.allow_unicode = True
+        if f is None:
+            sio = io.StringIO()
+            yaml_data = yml.dump(data, sio)
+            return sio.getvalue()
+        else:
+            yml.dump(data, f)
+            return None

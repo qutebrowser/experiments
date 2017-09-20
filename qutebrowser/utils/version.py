@@ -196,7 +196,7 @@ def _module_versions():
         ('pypeg2', ['__version__']),
         ('jinja2', ['__version__']),
         ('pygments', ['__version__']),
-        ('yaml', ['__version__']),
+        ('ruamel.yaml', ['__version__']),
         ('cssutils', ['__version__']),
         ('attr', ['__version__']),
         ('PyQt5.QtWebEngineWidgets', []),
