@@ -56,7 +56,7 @@ class WebEngineView(QWebEngineView):
             # Set a PseudoLayout as a WORKAROUND for
             # https://bugreports.qt.io/browse/QTBUG-68224
             # and other related issues.
-            sip.delete(self.layout())
+            shiboken2.delete(self.layout())
             self._layout = miscwidgets.PseudoLayout(self)
 
     def render_widget(self):
