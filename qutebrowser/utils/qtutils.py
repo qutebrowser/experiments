@@ -33,8 +33,9 @@ import contextlib
 
 import pkg_resources
 from PySide2.QtCore import (qVersion, QEventLoop, QDataStream, QByteArray,
-                          QIODevice, QSaveFile, QT_VERSION_STR,
-                          PYQT_VERSION_STR)
+                            QIODevice, QSaveFile)
+from PySide2.QtCore import __version__ as QT_VERSION_STR
+from PySide2 import __version__ as PYQT_VERSION_STR
 try:
     from PySide2.QtWebKit import qWebKitVersion
 except ImportError:  # pragma: no cover
