@@ -216,7 +216,7 @@ ClickTarget = enum.Enum('ClickTarget', ['normal', 'tab', 'tab_bg', 'window',
 
 
 # Key input modes
-KeyMode = enum.Enum('KeyMode', ['normal', 'hint', 'command', 'yesno', 'prompt',
+KeyMode = enum.IntEnum('KeyMode', ['normal', 'hint', 'command', 'yesno', 'prompt',
                                 'insert', 'passthrough', 'caret', 'set_mark',
                                 'jump_mark', 'record_macro', 'run_macro'])
 
@@ -245,7 +245,7 @@ JsWorld = enum.Enum('JsWorld', ['main', 'application', 'user', 'jseval'])
 JsLogLevel = enum.Enum('JsLogLevel', ['unknown', 'info', 'warning', 'error'])
 
 
-MessageLevel = enum.Enum('MessageLevel', ['error', 'warning', 'info'])
+MessageLevel = enum.IntEnum('MessageLevel', ['error', 'warning', 'info'])
 
 
 class Question(QObject):

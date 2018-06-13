@@ -192,10 +192,10 @@ class GlobalMessageBridge(QObject):
         mode_left: Emitted when a keymode was left in any window.
     """
 
-    show_message = Signal(usertypes.MessageLevel, str, bool)
-    prompt_done = Signal(usertypes.KeyMode)
+    show_message = Signal(int, str, bool)
+    prompt_done = Signal(int)
     ask_question = Signal(usertypes.Question, bool)
-    mode_left = Signal(usertypes.KeyMode)
+    mode_left = Signal(int)
     clear_messages = Signal()
 
     def __init__(self, parent=None):
