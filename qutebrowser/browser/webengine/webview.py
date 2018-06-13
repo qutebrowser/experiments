@@ -20,7 +20,7 @@
 """The main browser widget for QtWebEngine."""
 
 from PySide2 import shiboken2
-from PySide2.QtCore import Signal, Slot, QUrl, PYQT_VERSION
+from PySide2.QtCore import Signal, Slot, QUrl
 from PySide2.QtGui import QPalette
 from PySide2.QtQuickWidgets import QQuickWidget
 from PySide2.QtWebEngineWidgets import (QWebEngineView, QWebEnginePage,
@@ -225,22 +225,18 @@ class WebEnginePage(QWebEnginePage):
         except shared.CallSuper:
             return super().javaScriptConfirm(url, js_msg)
 
-    if PYQT_VERSION > 0x050700:
-        # WORKAROUND
-        # Can't override javaScriptPrompt with older PyQt versions
-        # https://www.riverbankcomputing.com/pipermail/pyqt/2016-November/038293.html
-        def javaScriptPrompt(self, url, js_msg, default):
-            """Override javaScriptPrompt to use qutebrowser prompts."""
-            escape_msg = qtutils.version_check('5.11', compiled=False)
-            if self._is_shutting_down:
-                return (False, "")
-            try:
-                return shared.javascript_prompt(url, js_msg, default,
-                                                abort_on=[self.loadStarted,
-                                                          self.shutting_down],
-                                                escape_msg=escape_msg)
-            except shared.CallSuper:
-                return super().javaScriptPrompt(url, js_msg, default)
+    def javaScriptPrompt(self, url, js_msg, default):
+        """Override javaScriptPrompt to use qutebrowser prompts."""
+        escape_msg = qtutils.version_check('5.11', compiled=False)
+        if self._is_shutting_down:
+            return (False, "")
+        try:
+            return shared.javascript_prompt(url, js_msg, default,
+                                            abort_on=[self.loadStarted,
+                                                        self.shutting_down],
+                                            escape_msg=escape_msg)
+        except shared.CallSuper:
+            return super().javaScriptPrompt(url, js_msg, default)
 
     def javaScriptAlert(self, url, js_msg):
         """Override javaScriptAlert to use qutebrowser prompts."""
