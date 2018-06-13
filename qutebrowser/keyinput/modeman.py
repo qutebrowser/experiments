@@ -137,8 +137,8 @@ class ModeManager(QObject):
                  arg3: The window ID of this mode manager.
     """
 
-    entered = Signal(usertypes.KeyMode, int)
-    left = Signal(usertypes.KeyMode, usertypes.KeyMode, int)
+    entered = Signal(int, int)
+    left = Signal(int, int, int)
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)

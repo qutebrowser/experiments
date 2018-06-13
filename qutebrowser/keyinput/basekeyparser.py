@@ -64,7 +64,7 @@ class BaseKeyParser(QObject):
     """
 
     keystring_updated = Signal(str)
-    request_leave = Signal(usertypes.KeyMode, str, bool)
+    request_leave = Signal(int, str, bool)
     do_log = True
     passthrough = False
 

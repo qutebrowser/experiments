@@ -81,7 +81,7 @@ class UnsupportedOperationError(WebTabError):
     """Raised when an operation is not supported with the given backend."""
 
 
-TerminationStatus = enum.Enum('TerminationStatus', [
+TerminationStatus = enum.IntEnum('TerminationStatus', [
     'normal',
     'abnormal',  # non-zero exit status
     'crashed',   # e.g. segfault
@@ -709,7 +709,7 @@ class AbstractTab(QWidget):
     contents_size_changed = Signal(QSizeF)
     add_history_item = Signal(QUrl, QUrl, str)  # url, requested url, title
     fullscreen_requested = Signal(bool)
-    renderer_process_terminated = Signal(TerminationStatus, int)
+    renderer_process_terminated = Signal(int, int)
     predicted_navigation = Signal(QUrl)
 
     def __init__(self, *, win_id, mode_manager, private, parent=None):
