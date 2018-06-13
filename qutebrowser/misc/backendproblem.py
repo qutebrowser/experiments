@@ -172,6 +172,7 @@ def _nvidia_shader_workaround():
 
 
 def _handle_nouveau_graphics():
+    return  # FIXME
     assert objects.backend == usertypes.Backend.QtWebEngine, objects.backend
 
     if os.environ.get('QUTE_SKIP_NOUVEAU_CHECK'):
