@@ -20,7 +20,7 @@
 """Handling of HTTP cookies."""
 
 from PySide2.QtNetwork import QNetworkCookie, QNetworkCookieJar
-from PySide2.QtCore import pyqtSignal, QDateTime
+from PySide2.QtCore import Signal, QDateTime
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils, standarddir, objreg
@@ -35,7 +35,7 @@ class RAMCookieJar(QNetworkCookieJar):
         changed: Emitted when the cookie store was changed.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __repr__(self):
         return utils.get_repr(self, count=len(self.allCookies()))

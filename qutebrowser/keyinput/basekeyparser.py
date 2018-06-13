@@ -21,7 +21,7 @@
 
 import string
 
-from PySide2.QtCore import pyqtSignal, QObject
+from PySide2.QtCore import Signal, QObject
 from PySide2.QtGui import QKeySequence
 
 from qutebrowser.config import config
@@ -63,8 +63,8 @@ class BaseKeyParser(QObject):
                        arg 2: Ignore the request if we're not in that mode
     """
 
-    keystring_updated = pyqtSignal(str)
-    request_leave = pyqtSignal(usertypes.KeyMode, str, bool)
+    keystring_updated = Signal(str)
+    request_leave = Signal(usertypes.KeyMode, str, bool)
     do_log = True
     passthrough = False
 

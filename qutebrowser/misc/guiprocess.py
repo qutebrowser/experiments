@@ -22,7 +22,7 @@
 import locale
 import shlex
 
-from PySide2.QtCore import (pyqtSlot, pyqtSignal, QObject, QProcess,
+from PySide2.QtCore import (Slot, Signal, QObject, QProcess,
                           QProcessEnvironment)
 
 from qutebrowser.utils import message, log
@@ -59,9 +59,9 @@ class GUIProcess(QObject):
         error/finished/started signals proxied from QProcess.
     """
 
-    error = pyqtSignal(QProcess.ProcessError)
-    finished = pyqtSignal(int, QProcess.ExitStatus)
-    started = pyqtSignal()
+    error = Signal(QProcess.ProcessError)
+    finished = Signal(int, QProcess.ExitStatus)
+    started = Signal()
 
     def __init__(self, what, *, verbose=False, additional_env=None,
                  parent=None):
@@ -86,13 +86,13 @@ class GUIProcess(QObject):
                 procenv.insert(k, v)
             self._proc.setProcessEnvironment(procenv)
 
-    @pyqtSlot(QProcess.ProcessError)
+    @Slot(QProcess.ProcessError)
     def on_error(self, error):
         """Show a message if there was an error while spawning."""
         msg = ERROR_STRINGS[error]
         message.error("Error while spawning {}: {}".format(self._what, msg))
 
-    @pyqtSlot(int, QProcess.ExitStatus)
+    @Slot(int, QProcess.ExitStatus)
     def on_finished(self, code, status):
         """Show a message when the process finished."""
         self._started = False
@@ -137,7 +137,7 @@ class GUIProcess(QObject):
                                                          stdout, stderr)
         return spawn_string
 
-    @pyqtSlot()
+    @Slot()
     def on_started(self):
         """Called when the process started successfully."""
         log.procs.debug("Process started.")

@@ -21,7 +21,7 @@
 
 import enum
 
-from PySide2.QtCore import pyqtSlot, pyqtProperty, Qt, QUrl
+from PySide2.QtCore import Slot, pyqtProperty, Qt, QUrl
 
 from qutebrowser.mainwindow.statusbar import textbase
 from qutebrowser.config import config
@@ -113,7 +113,7 @@ class UrlText(textbase.TextBase):
             self._urltype = UrlType.normal
         config.set_register_stylesheet(self, update=False)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_load_status_changed(self, status_str):
         """Slot for load_status_changed. Sets URL color accordingly.
 
@@ -130,7 +130,7 @@ class UrlText(textbase.TextBase):
             self._normal_url_type = UrlType.normal
         self._update_url()
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def set_url(self, url):
         """Setter to be used as a Qt slot.
 
@@ -146,7 +146,7 @@ class UrlText(textbase.TextBase):
         self._normal_url_type = UrlType.normal
         self._update_url()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def set_hover_url(self, link):
         """Setter to be used as a Qt slot.
 

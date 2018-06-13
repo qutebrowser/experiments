@@ -23,7 +23,7 @@ import functools
 import urllib.request
 import urllib.parse
 
-from PySide2.QtCore import pyqtSignal, QObject, QTimer
+from PySide2.QtCore import Signal, QObject, QTimer
 from PySide2.QtNetwork import (QNetworkAccessManager, QNetworkRequest,
                              QNetworkReply)
 
@@ -60,8 +60,8 @@ class HTTPClient(QObject):
                arg: The error message, as string.
     """
 
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
+    success = Signal(str)
+    error = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)

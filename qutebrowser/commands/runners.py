@@ -23,7 +23,7 @@ import traceback
 import re
 
 import attr
-from PySide2.QtCore import pyqtSlot, QUrl, QObject
+from PySide2.QtCore import Slot, QUrl, QObject
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdexc, cmdutils
@@ -317,8 +317,8 @@ class CommandRunner(QObject):
             macro_recorder = objreg.get('macro-recorder')
             macro_recorder.record_command(text, count)
 
-    @pyqtSlot(str, int)
-    @pyqtSlot(str)
+    @Slot(str, int)
+    @Slot(str)
     def run_safely(self, text, count=None):
         """Run a command and display exceptions in the statusbar."""
         try:

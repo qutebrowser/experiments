@@ -29,7 +29,7 @@ import enum
 from string import ascii_lowercase
 
 import attr
-from PySide2.QtCore import pyqtSlot, QObject, Qt, QUrl
+from PySide2.QtCore import Slot, QObject, Qt, QUrl
 from PySide2.QtWidgets import QLabel
 
 from qutebrowser.config import config
@@ -115,7 +115,7 @@ class HintLabel(QLabel):
             match_color, matched, unmatched))
         self.adjustSize()
 
-    @pyqtSlot()
+    @Slot()
     def _move_to_elem(self):
         """Reposition the label to its element."""
         if not self.elem.has_frame():
@@ -956,7 +956,7 @@ class HintManager(QObject):
         else:
             self._fire(keystring)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_left(self, mode):
         """Stop hinting when hinting mode was left."""
         if mode != usertypes.KeyMode.hint or self._context is None:

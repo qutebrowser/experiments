@@ -28,7 +28,7 @@ from unittest import mock
 
 import attr
 import pytest
-from PySide2.QtCore import pyqtSignal, QObject
+from PySide2.QtCore import Signal, QObject
 from PySide2.QtNetwork import QLocalServer, QLocalSocket, QAbstractSocket
 from PySide2.QtTest import QSignalSpy
 
@@ -98,8 +98,8 @@ class FakeSocket(QObject):
         _connect_successful: The value returned for waitForConnected().
     """
 
-    readyRead = pyqtSignal()
-    disconnected = pyqtSignal()
+    readyRead = Signal()
+    disconnected = Signal()
 
     def __init__(self, *, error=QLocalSocket.UnknownSocketError, state=None,
                  data=None, connect_successful=True, parent=None):

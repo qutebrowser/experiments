@@ -28,7 +28,7 @@ import collections.abc
 import enum
 
 import attr
-from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
+from PySide2.QtCore import Signal, Slot, QObject, QTimer
 
 from qutebrowser.utils import log, qtutils, utils
 
@@ -285,12 +285,12 @@ class Question(QObject):
         completed: Emitted when the question was completed in any way.
     """
 
-    answered = pyqtSignal(object)
-    cancelled = pyqtSignal()
-    aborted = pyqtSignal()
-    answered_yes = pyqtSignal()
-    answered_no = pyqtSignal()
-    completed = pyqtSignal()
+    answered = Signal(object)
+    cancelled = Signal()
+    aborted = Signal()
+    answered_yes = Signal()
+    answered_no = Signal()
+    completed = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -319,7 +319,7 @@ class Question(QObject):
             raise TypeError("Mode {} is no PromptMode member!".format(val))
         self._mode = val
 
-    @pyqtSlot()
+    @Slot()
     def done(self):
         """Must be called when the question was answered completely."""
         self.answered.emit(self.answer)
@@ -330,13 +330,13 @@ class Question(QObject):
                 self.answered_no.emit()
         self.completed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def cancel(self):
         """Cancel the question (resulting from user-input)."""
         self.cancelled.emit()
         self.completed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def abort(self):
         """Abort the question."""
         if self.is_aborted:

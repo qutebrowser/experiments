@@ -180,7 +180,7 @@ def signal_name(sig):
     """Get a cleaned up name of a signal.
 
     Args:
-        sig: The pyqtSignal
+        sig: The Signal
 
     Return:
         The cleaned up signal name.
@@ -205,7 +205,7 @@ def dbg_signal(sig, args):
     """Get a string representation of a signal for debugging.
 
     Args:
-        sig: A pyqtSignal.
+        sig: A Signal.
         args: The arguments as list of strings.
 
     Return:

@@ -24,7 +24,7 @@
 
 import traceback
 
-from PySide2.QtCore import pyqtSignal, QObject
+from PySide2.QtCore import Signal, QObject
 
 from qutebrowser.utils import usertypes, log, utils
 
@@ -192,11 +192,11 @@ class GlobalMessageBridge(QObject):
         mode_left: Emitted when a keymode was left in any window.
     """
 
-    show_message = pyqtSignal(usertypes.MessageLevel, str, bool)
-    prompt_done = pyqtSignal(usertypes.KeyMode)
-    ask_question = pyqtSignal(usertypes.Question, bool)
-    mode_left = pyqtSignal(usertypes.KeyMode)
-    clear_messages = pyqtSignal()
+    show_message = Signal(usertypes.MessageLevel, str, bool)
+    prompt_done = Signal(usertypes.KeyMode)
+    ask_question = Signal(usertypes.Question, bool)
+    mode_left = Signal(usertypes.KeyMode)
+    clear_messages = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -247,8 +247,8 @@ class MessageBridge(QObject):
                             arg: The expected text.
     """
 
-    s_set_text = pyqtSignal(str)
-    s_maybe_reset_text = pyqtSignal(str)
+    s_set_text = Signal(str)
+    s_maybe_reset_text = Signal(str)
 
     def __repr__(self):
         return utils.get_repr(self)

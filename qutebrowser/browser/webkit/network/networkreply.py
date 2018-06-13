@@ -27,7 +27,7 @@
 """Special network replies.."""
 
 from PySide2.QtNetwork import QNetworkReply, QNetworkRequest
-from PySide2.QtCore import pyqtSlot, QIODevice, QByteArray, QTimer
+from PySide2.QtCore import Slot, QIODevice, QByteArray, QTimer
 
 
 class FixedDataNetworkReply(QNetworkReply):
@@ -64,7 +64,7 @@ class FixedDataNetworkReply(QNetworkReply):
         QTimer.singleShot(0, lambda: self.readyRead.emit())
         QTimer.singleShot(0, lambda: self.finished.emit())
 
-    @pyqtSlot()
+    @Slot()
     def abort(self):
         """Abort the operation."""
         pass

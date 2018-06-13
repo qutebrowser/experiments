@@ -25,7 +25,7 @@ import time
 import textwrap
 
 import pytest
-from PySide2.QtCore import pyqtSignal, Qt, QEvent, QObject
+from PySide2.QtCore import Signal, Qt, QEvent, QObject
 from PySide2.QtWidgets import QStyle, QFrame
 
 from qutebrowser.utils import debug
@@ -47,8 +47,8 @@ def test_log_events(qapp, caplog):
 
 class SignalObject(QObject):
 
-    signal1 = pyqtSignal()
-    signal2 = pyqtSignal(str, str)
+    signal1 = Signal()
+    signal2 = Signal(str, str)
 
     def __repr__(self):
         """This is not a nice thing to do, but it makes our tests easier."""

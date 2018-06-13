@@ -23,7 +23,7 @@ import os
 import os.path
 import tempfile
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, QSocketNotifier
+from PySide2.QtCore import Signal, Slot, QObject, QSocketNotifier
 
 from qutebrowser.utils import message, log, objreg, standarddir, utils
 from qutebrowser.commands import runners
@@ -45,7 +45,7 @@ class _QtFIFOReader(QObject):
         got_line: Emitted when a whole line arrived.
     """
 
-    got_line = pyqtSignal(str)
+    got_line = Signal(str)
 
     def __init__(self, filepath, parent=None):
         super().__init__(parent)
@@ -61,7 +61,7 @@ class _QtFIFOReader(QObject):
         self._notifier = QSocketNotifier(fd, QSocketNotifier.Read, self)
         self._notifier.activated.connect(self.read_line)
 
-    @pyqtSlot()
+    @Slot()
     def read_line(self):
         """(Try to) read a line from the FIFO."""
         log.procs.debug("QSocketNotifier triggered!")
@@ -105,8 +105,8 @@ class _BaseUserscriptRunner(QObject):
         finished: Emitted when the userscript finished running.
     """
 
-    got_cmd = pyqtSignal(str)
-    finished = pyqtSignal()
+    got_cmd = Signal(str)
+    finished = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -203,7 +203,7 @@ class _BaseUserscriptRunner(QObject):
         """
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_finished(self):
         """Called when the process has finished.
 
@@ -211,7 +211,7 @@ class _BaseUserscriptRunner(QObject):
         """
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_error(self):
         """Called when the process encountered an error.
 
@@ -256,11 +256,11 @@ class _POSIXUserscriptRunner(_BaseUserscriptRunner):
         self._reader = _QtFIFOReader(self._filepath)
         self._reader.got_line.connect(self.got_cmd)
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_finished(self):
         self._cleanup()
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_error(self):
         self._cleanup()
 
@@ -307,11 +307,11 @@ class _WindowsUserscriptRunner(_BaseUserscriptRunner):
         super()._cleanup()
         self.finished.emit()
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_error(self):
         self._cleanup()
 
-    @pyqtSlot()
+    @Slot()
     def on_proc_finished(self):
         """Read back the commands when the process finished."""
         self._cleanup()

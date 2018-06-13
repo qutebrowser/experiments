@@ -29,7 +29,7 @@ import configparser
 import contextlib
 
 import yaml
-from PySide2.QtCore import pyqtSignal, QObject, QSettings
+from PySide2.QtCore import Signal, QObject, QSettings
 
 import qutebrowser
 from qutebrowser.config import configexc, config, configdata, configutils
@@ -82,7 +82,7 @@ class YamlConfig(QObject):
     """
 
     VERSION = 2
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)

@@ -21,7 +21,7 @@
 
 import enum
 
-from PySide2.QtCore import pyqtSlot
+from PySide2.QtCore import Slot
 
 from qutebrowser.mainwindow.statusbar import textbase
 from qutebrowser.utils import log
@@ -63,7 +63,7 @@ class Text(textbase.TextBase):
             raise ValueError("Invalid value {} for which!".format(which))
         self.update_text()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def maybe_reset_text(self, text):
         """Clear a normal text if it still matches an expected text."""
         if self._normaltext == text:

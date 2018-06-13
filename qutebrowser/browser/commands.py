@@ -26,7 +26,7 @@ import functools
 import typing
 
 from PySide2.QtWidgets import QApplication, QTabBar, QDialog
-from PySide2.QtCore import pyqtSlot, Qt, QUrl, QEvent, QUrlQuery
+from PySide2.QtCore import Slot, Qt, QUrl, QEvent, QUrlQuery
 from PySide2.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 
 from qutebrowser.commands import userscripts, cmdexc, cmdutils, runners
@@ -1229,7 +1229,7 @@ class CommandDispatcher:
         log.procs.debug("Executing {} with args {}, userscript={}".format(
             cmd, args, userscript))
 
-        @pyqtSlot()
+        @Slot()
         def _on_proc_finished():
             if output:
                 tb = objreg.get('tabbed-browser', scope='window',

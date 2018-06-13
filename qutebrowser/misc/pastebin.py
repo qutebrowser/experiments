@@ -21,7 +21,7 @@
 
 import urllib.parse
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, QUrl
+from PySide2.QtCore import Signal, Slot, QObject, QUrl
 
 
 class PastebinClient(QObject):
@@ -43,8 +43,8 @@ class PastebinClient(QObject):
 
     API_URL = 'https://crashes.qutebrowser.org/api/'
     MISC_API_URL = 'https://paste.the-compiler.org/api/'
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
+    success = Signal(str)
+    error = Signal(str)
 
     def __init__(self, client, parent=None, api_url=API_URL):
         """Constructor.
@@ -84,7 +84,7 @@ class PastebinClient(QObject):
         url = QUrl(urllib.parse.urljoin(self._api_url, 'create'))
         self._client.post(url, data)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_client_success(self, data):
         """Process the data and finish when the client finished.
 

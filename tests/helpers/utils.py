@@ -27,7 +27,7 @@ import contextlib
 
 import pytest
 
-from PySide2.QtCore import QObject, pyqtSignal
+from PySide2.QtCore import QObject, Signal
 
 from qutebrowser.utils import qtutils
 
@@ -188,7 +188,7 @@ class CallbackChecker(QObject):
 
     """Check if a value provided by a callback is the expected one."""
 
-    got_result = pyqtSignal(object)
+    got_result = Signal(object)
     UNSET = object()
 
     def __init__(self, qtbot, parent=None):

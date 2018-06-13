@@ -28,7 +28,7 @@ import glob
 import textwrap
 
 import attr
-from PySide2.QtCore import pyqtSignal, QObject, QUrl
+from PySide2.QtCore import Signal, QObject, QUrl
 
 from qutebrowser.utils import (log, standarddir, jinja, objreg, utils,
                                javascript, urlmatch, version, usertypes)
@@ -198,7 +198,7 @@ class GreasemonkeyManager(QObject):
             considered obsolete.
     """
 
-    scripts_reloaded = pyqtSignal()
+    scripts_reloaded = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)

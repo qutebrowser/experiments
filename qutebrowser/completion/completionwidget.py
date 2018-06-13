@@ -24,7 +24,7 @@ subclasses to provide completions.
 """
 
 from PySide2.QtWidgets import QTreeView, QSizePolicy, QStyleFactory
-from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QItemSelectionModel, QSize
+from PySide2.QtCore import Slot, Signal, Qt, QItemSelectionModel, QSize
 
 from qutebrowser.config import config
 from qutebrowser.completion import completiondelegate
@@ -102,8 +102,8 @@ class CompletionView(QTreeView):
         }
     """
 
-    update_geometry = pyqtSignal()
-    selection_changed = pyqtSignal(str)
+    update_geometry = Signal()
+    selection_changed = Signal(str)
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
@@ -139,7 +139,7 @@ class CompletionView(QTreeView):
     def __repr__(self):
         return utils.get_repr(self)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option):
         if option in ['completion.height', 'completion.shrink']:
             self.update_geometry.emit()
@@ -334,7 +334,7 @@ class CompletionView(QTreeView):
         if config.val.completion.shrink:
             self.update_geometry.emit()
 
-    @pyqtSlot()
+    @Slot()
     def on_clear_completion_selection(self):
         """Clear the selection model when an item is activated."""
         self.hide()

@@ -19,7 +19,7 @@
 
 """Misc. widgets used at different places."""
 
-from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QSize, QTimer
+from PySide2.QtCore import Slot, Signal, Qt, QSize, QTimer
 from PySide2.QtWidgets import (QLineEdit, QWidget, QHBoxLayout, QLabel,
                              QStyleOption, QStyle, QLayout, QApplication)
 from PySide2.QtGui import QValidator, QPainter
@@ -82,12 +82,12 @@ class CommandLineEdit(QLineEdit):
     def __repr__(self):
         return utils.get_repr(self, text=self.text())
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_text_edited(self, _text):
         """Slot for textEdited. Stop history browsing."""
         self.history.stop()
 
-    @pyqtSlot(int, int)
+    @Slot(int, int)
     def __on_cursor_position_changed(self, _old, new):
         """Prevent the cursor moving to the prompt.
 
@@ -155,7 +155,7 @@ class DetailFold(QWidget):
                  arg 0: bool, if the contents are currently visible.
     """
 
-    toggled = pyqtSignal(bool)
+    toggled = Signal(bool)
 
     def __init__(self, text, parent=None):
         super().__init__(parent)
@@ -339,7 +339,7 @@ class FullscreenNotification(QLabel):
         """Hide the widget after the given timeout."""
         QTimer.singleShot(timeout, self._on_timeout)
 
-    @pyqtSlot()
+    @Slot()
     def _on_timeout(self):
         """Hide and delete the widget."""
         self.hide()

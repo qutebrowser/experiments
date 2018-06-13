@@ -20,7 +20,7 @@
 """The main browser widget for QtWebEngine."""
 
 import sip
-from PySide2.QtCore import pyqtSignal, pyqtSlot, QUrl, PYQT_VERSION
+from PySide2.QtCore import Signal, Slot, QUrl, PYQT_VERSION
 from PySide2.QtGui import QPalette
 from PySide2.QtQuickWidgets import QQuickWidget
 from PySide2.QtWebEngineWidgets import (QWebEngineView, QWebEnginePage,
@@ -156,9 +156,9 @@ class WebEnginePage(QWebEnginePage):
         navigation_request: Emitted on acceptNavigationRequest.
     """
 
-    certificate_error = pyqtSignal()
-    shutting_down = pyqtSignal()
-    navigation_request = pyqtSignal(usertypes.NavigationRequest)
+    certificate_error = Signal()
+    shutting_down = Signal()
+    navigation_request = Signal(usertypes.NavigationRequest)
 
     def __init__(self, *, theme_color, profile, parent=None):
         super().__init__(profile, parent)
@@ -289,7 +289,7 @@ class WebEnginePage(QWebEnginePage):
         self.navigation_request.emit(navigation)
         return navigation.accepted
 
-    @pyqtSlot('QUrl')
+    @Slot('QUrl')
     def _inject_userjs(self, url):
         """Inject userscripts registered for `url` into the current page."""
         if qtutils.version_check('5.8'):

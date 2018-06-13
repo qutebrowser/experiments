@@ -22,7 +22,7 @@
 import sys
 import code
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt
+from PySide2.QtCore import Signal, Slot, Qt
 from PySide2.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QApplication
 from PySide2.QtGui import QTextCursor
 
@@ -42,7 +42,7 @@ class ConsoleLineEdit(miscwidgets.CommandLineEdit):
         execute: Emitted when a commandline should be executed.
     """
 
-    execute = pyqtSignal(str)
+    execute = Signal(str)
 
     def __init__(self, _namespace, parent):
         """Constructor.
@@ -56,7 +56,7 @@ class ConsoleLineEdit(miscwidgets.CommandLineEdit):
         self._history = cmdhistory.History(parent=self)
         self.returnPressed.connect(self.on_return_pressed)
 
-    @pyqtSlot()
+    @Slot()
     def on_return_pressed(self):
         """Execute the line of code which was entered."""
         self._history.stop()
@@ -189,7 +189,7 @@ class ConsoleWidget(QWidget):
         """Write a line of text (without added newline) to the output."""
         self._output.append_text(line)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def push(self, line):
         """Push a line to the interpreter."""
         self._buffer.append(line)

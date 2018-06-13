@@ -25,7 +25,7 @@ import shutil
 import functools
 
 import attr
-from PySide2.QtCore import pyqtSlot, pyqtSignal, QTimer
+from PySide2.QtCore import Slot, Signal, QTimer
 from PySide2.QtNetwork import QNetworkRequest, QNetworkReply
 
 from qutebrowser.config import config
@@ -81,7 +81,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
     """
 
     _MAX_REDIRECTS = 10
-    adopt_download = pyqtSignal(object)  # DownloadItem
+    adopt_download = Signal(object)  # DownloadItem
 
     def __init__(self, reply, manager):
         """Constructor.
@@ -172,7 +172,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
             self.fileobj.close()
         self.cancelled.emit()
 
-    @pyqtSlot()
+    @Slot()
     def retry(self):
         """Retry a failed download."""
         assert self.done
@@ -266,7 +266,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
         log.downloads.debug("Download {} finished".format(self.basename))
         self.data_changed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def _on_reply_finished(self):
         """Clean up when the download was finished.
 
@@ -287,7 +287,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
             # clean up.
             self._finish_download()
 
-    @pyqtSlot()
+    @Slot()
     def _on_ready_read(self):
         """Read available data and save file when ready to read."""
         if self.fileobj is None or self._reply is None:
@@ -302,14 +302,14 @@ class DownloadItem(downloads.AbstractDownloadItem):
         except OSError as e:
             self._die(e.strerror)
 
-    @pyqtSlot('QNetworkReply::NetworkError')
+    @Slot('QNetworkReply::NetworkError')
     def _on_reply_error(self, code):
         """Handle QNetworkReply errors."""
         if code == QNetworkReply.OperationCanceledError:
             return
         self._die(self._reply.errorString())
 
-    @pyqtSlot()
+    @Slot()
     def _on_read_timer_timeout(self):
         """Read some bytes from the QNetworkReply periodically."""
         if not self._reply.isOpen():
@@ -318,7 +318,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
         if data is not None:
             self._buffer.write(data)
 
-    @pyqtSlot()
+    @Slot()
     def _on_meta_data_changed(self):
         """Update the download's metadata."""
         if self._reply is None:
@@ -388,7 +388,7 @@ class DownloadManager(downloads.AbstractDownloadManager):
             win_id=None, tab_id=None,
             private=config.val.content.private_browsing, parent=self)
 
-    @pyqtSlot('QUrl')
+    @Slot('QUrl')
     def get(self, url, *, user_agent=None, **kwargs):
         """Start a download with a link URL.
 
@@ -492,7 +492,7 @@ class DownloadManager(downloads.AbstractDownloadManager):
         reply = qnam.get(request)
         return self.fetch(reply, **kwargs)
 
-    @pyqtSlot('QNetworkReply')
+    @Slot('QNetworkReply')
     def fetch(self, reply, *, target=None, auto_remove=False,
               suggested_filename=None, prompt_download_directory=None):
         """Download a QNetworkReply to disk.

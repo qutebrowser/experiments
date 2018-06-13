@@ -23,7 +23,7 @@ import copy
 import contextlib
 import functools
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject
+from PySide2.QtCore import Signal, Slot, QObject
 
 from qutebrowser.config import configdata, configexc, configutils
 from qutebrowser.utils import utils, log, jinja
@@ -245,7 +245,7 @@ class Config(QObject):
     """
 
     MUTABLE_TYPES = (dict, list)
-    changed = pyqtSignal(str)
+    changed = Signal(str)
 
     def __init__(self, yaml_config, parent=None):
         super().__init__(parent)
@@ -600,7 +600,7 @@ class StyleSheetObserver(QObject):
         """
         return _render_stylesheet(self._stylesheet)
 
-    @pyqtSlot()
+    @Slot()
     def _update_stylesheet(self):
         """Update the stylesheet for obj."""
         self._obj.setStyleSheet(self._get_stylesheet())

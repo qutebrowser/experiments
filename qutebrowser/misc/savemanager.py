@@ -22,7 +22,7 @@
 import os.path
 import collections
 
-from PySide2.QtCore import pyqtSlot, QObject, QTimer
+from PySide2.QtCore import Slot, QObject, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdutils
@@ -169,7 +169,7 @@ class SaveManager(QObject):
         for saveable in self.saveables:
             self.save(saveable, *args, **kwargs)
 
-    @pyqtSlot()
+    @Slot()
     def autosave(self):
         """Slot used when the configs are auto-saved."""
         for (key, saveable) in self.saveables.items():

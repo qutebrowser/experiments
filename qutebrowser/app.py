@@ -50,8 +50,8 @@ import tokenize
 
 from PySide2.QtWidgets import QApplication, QWidget
 from PySide2.QtGui import QDesktopServices, QPixmap, QIcon, QWindow
-from PySide2.QtCore import (pyqtSlot, qInstallMessageHandler, QTimer, QUrl,
-                          QObject, QEvent, pyqtSignal, Qt)
+from PySide2.QtCore import (Slot, qInstallMessageHandler, QTimer, QUrl,
+                          QObject, QEvent, Signal, Qt)
 try:
     import hunter
 except ImportError:
@@ -808,7 +808,7 @@ class Application(QApplication):
         _last_focus_object: The last focused object's repr.
     """
 
-    new_window = pyqtSignal(mainwindow.MainWindow)
+    new_window = Signal(mainwindow.MainWindow)
 
     def __init__(self, args):
         """Constructor.
@@ -832,7 +832,7 @@ class Application(QApplication):
         self.focusObjectChanged.connect(self.on_focus_object_changed)
         self.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
 
-    @pyqtSlot(QObject)
+    @Slot(QObject)
     def on_focus_object_changed(self, obj):
         """Log when the focus object changed."""
         output = repr(obj)

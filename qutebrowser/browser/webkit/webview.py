@@ -19,7 +19,7 @@
 
 """The main browser widgets."""
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt, QUrl
+from PySide2.QtCore import Signal, Slot, Qt, QUrl
 from PySide2.QtGui import QPalette
 from PySide2.QtWidgets import QStyleFactory
 from PySide2.QtWebKit import QWebSettings
@@ -50,8 +50,8 @@ class WebView(QWebView):
         shutting_down: Emitted when the view is shutting down.
     """
 
-    scroll_pos_changed = pyqtSignal(int, int)
-    shutting_down = pyqtSignal()
+    scroll_pos_changed = Signal(int, int)
+    shutting_down = Signal()
 
     def __init__(self, *, win_id, tab_id, tab, private, parent=None):
         super().__init__(parent)
@@ -130,7 +130,7 @@ class WebView(QWebView):
         """
         self.load(url)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_entered(self, mode):
         """Ignore attempts to focus the widget if in any status-input mode.
 
@@ -143,7 +143,7 @@ class WebView(QWebView):
                               "entered.".format(mode))
             self.setFocusPolicy(Qt.NoFocus)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_left(self, mode):
         """Restore focus policy if status-input modes were left.
 

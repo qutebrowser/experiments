@@ -22,7 +22,7 @@
 import functools
 
 import sip
-from PySide2.QtCore import pyqtSlot, QSize, Qt, QTimer
+from PySide2.QtCore import Slot, QSize, Qt, QTimer
 from PySide2.QtWidgets import QListView, QSizePolicy, QMenu, QStyleFactory
 
 from qutebrowser.browser import downloads
@@ -102,7 +102,7 @@ class DownloadView(QListView):
             count = model.rowCount()
         return utils.get_repr(self, count=count)
 
-    @pyqtSlot('QModelIndex')
+    @Slot('QModelIndex')
     def on_clicked(self, index):
         """Handle clicking of an item.
 
@@ -144,7 +144,7 @@ class DownloadView(QListView):
             actions.append(("Remove all finished", model.download_clear))
         return actions
 
-    @pyqtSlot('QPoint')
+    @Slot('QPoint')
     def show_context_menu(self, point):
         """Show the context menu."""
         index = self.indexAt(point)

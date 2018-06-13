@@ -23,7 +23,7 @@ import os
 import os.path
 import contextlib
 
-from PySide2.QtCore import pyqtSlot, pyqtSignal, QObject
+from PySide2.QtCore import Slot, Signal, QObject
 
 from qutebrowser.utils import log, utils, qtutils
 from qutebrowser.config import config
@@ -43,7 +43,7 @@ class BaseLineParser(QObject):
         changed: Emitted when the history was changed.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, configdir, fname, *, binary=False, parent=None):
         """Constructor.
@@ -217,7 +217,7 @@ class LimitLineParser(LineParser):
                               configdir=self._configdir, fname=self._fname,
                               limit=self._limit, binary=self._binary)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _cleanup_file(self, option):
         """Delete the file if the limit was changed to 0."""
         assert self._configfile is not None

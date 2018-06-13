@@ -26,7 +26,7 @@ import time
 import attr
 import pytest
 import pytestqt.plugin
-from PySide2.QtCore import (pyqtSlot, pyqtSignal, QProcess, QObject,
+from PySide2.QtCore import (Slot, Signal, QProcess, QObject,
                           QElapsedTimer, QProcessEnvironment)
 from PySide2.QtTest import QSignalSpy
 
@@ -136,8 +136,8 @@ class Process(QObject):
         new_data: Emitted when a new line was parsed.
     """
 
-    ready = pyqtSignal()
-    new_data = pyqtSignal(object)
+    ready = Signal()
+    new_data = Signal(object)
     KEYS = ['data']
 
     def __init__(self, request, parent=None):
@@ -200,7 +200,7 @@ class Process(QObject):
         blocker.connect(signal)
         return blocker
 
-    @pyqtSlot()
+    @Slot()
     def read_log(self):
         """Read the log from the process' stdout."""
         if not hasattr(self, 'proc'):

@@ -22,7 +22,7 @@
 import functools
 
 import attr
-from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
+from PySide2.QtCore import Slot, Signal, Qt, QObject, QEvent
 from PySide2.QtWidgets import QApplication
 
 from qutebrowser.keyinput import modeparsers
@@ -137,8 +137,8 @@ class ModeManager(QObject):
                  arg3: The window ID of this mode manager.
     """
 
-    entered = pyqtSignal(usertypes.KeyMode, int)
-    left = pyqtSignal(usertypes.KeyMode, usertypes.KeyMode, int)
+    entered = Signal(usertypes.KeyMode, int)
+    left = Signal(usertypes.KeyMode, usertypes.KeyMode, int)
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
@@ -276,7 +276,7 @@ class ModeManager(QObject):
 
         self.enter(m, 'command')
 
-    @pyqtSlot(usertypes.KeyMode, str, bool)
+    @Slot(usertypes.KeyMode, str, bool)
     def leave(self, mode, reason=None, maybe=False):
         """Leave a key mode.
 

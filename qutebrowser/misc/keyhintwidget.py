@@ -29,7 +29,7 @@ import fnmatch
 import re
 
 from PySide2.QtWidgets import QLabel, QSizePolicy
-from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt
+from PySide2.QtCore import Slot, Signal, Qt
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils, usertypes
@@ -61,7 +61,7 @@ class KeyHintView(QLabel):
             {% endif %}
         }
     """
-    update_geometry = pyqtSignal()
+    update_geometry = Signal()
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
@@ -81,7 +81,7 @@ class KeyHintView(QLabel):
         self.update_geometry.emit()
         super().showEvent(e)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def update_keyhint(self, modename, prefix):
         """Show hints for the given prefix (or hide if prefix is empty).
 

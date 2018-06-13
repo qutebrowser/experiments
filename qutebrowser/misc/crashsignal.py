@@ -34,7 +34,7 @@ except ImportError:
     pass
 
 import attr
-from PySide2.QtCore import (pyqtSlot, qInstallMessageHandler, QObject,
+from PySide2.QtCore import (Slot, qInstallMessageHandler, QObject,
                           QSocketNotifier, QTimer, QUrl)
 from PySide2.QtWidgets import QApplication
 
@@ -344,7 +344,7 @@ class SignalHandler(QObject):
         self._timer.stop()
         self._activated = False
 
-    @pyqtSlot()
+    @Slot()
     def handle_signal_wakeup(self):
         """Handle a newly arrived signal.
 

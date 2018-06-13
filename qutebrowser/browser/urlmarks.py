@@ -31,7 +31,7 @@ import html
 import functools
 import collections
 
-from PySide2.QtCore import pyqtSignal, QUrl, QObject
+from PySide2.QtCore import Signal, QUrl, QObject
 
 from qutebrowser.utils import (message, usertypes, qtutils, urlutils,
                                standarddir, objreg, log)
@@ -79,7 +79,7 @@ class UrlMarkManager(QObject):
         changed: Emitted when anything changed.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, parent=None):
         """Initialize and read quickmarks."""

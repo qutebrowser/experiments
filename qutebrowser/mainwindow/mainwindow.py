@@ -24,7 +24,7 @@ import base64
 import itertools
 import functools
 
-from PySide2.QtCore import pyqtSlot, QRect, QPoint, QTimer, Qt
+from PySide2.QtCore import Slot, QRect, QPoint, QTimer, Qt
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QApplication, QSizePolicy
 
 from qutebrowser.commands import runners, cmdutils
@@ -336,7 +336,7 @@ class MainWindow(QWidget):
     def __repr__(self):
         return utils.get_repr(self)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option):
         """Resize the completion if related config options changed."""
         if option == 'statusbar.padding':
@@ -507,7 +507,7 @@ class MainWindow(QWidget):
         if refresh_window:
             self.show()
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def _on_fullscreen_requested(self, on):
         if not config.val.content.windowed_fullscreen:
             if on:
@@ -516,7 +516,7 @@ class MainWindow(QWidget):
                 self.setWindowState(self.windowState() & ~Qt.WindowFullScreen)
 
     @cmdutils.register(instance='main-window', scope='window')
-    @pyqtSlot()
+    @Slot()
     def close(self):
         """Close the current window.
 

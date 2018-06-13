@@ -19,7 +19,7 @@
 
 """The progress bar in the statusbar."""
 
-from PySide2.QtCore import pyqtSlot, QSize
+from PySide2.QtCore import Slot, QSize
 from PySide2.QtWidgets import QProgressBar, QSizePolicy
 
 from qutebrowser.config import config
@@ -54,7 +54,7 @@ class Progress(QProgressBar):
     def __repr__(self):
         return utils.get_repr(self, value=self.value())
 
-    @pyqtSlot()
+    @Slot()
     def on_load_started(self):
         """Clear old error and show progress, used as slot to loadStarted."""
         self.setValue(0)

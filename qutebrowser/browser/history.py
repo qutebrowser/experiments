@@ -23,7 +23,7 @@ import os
 import time
 import contextlib
 
-from PySide2.QtCore import pyqtSlot, QUrl, QTimer, pyqtSignal
+from PySide2.QtCore import Slot, QUrl, QTimer, Signal
 
 from qutebrowser.commands import cmdutils, cmdexc
 from qutebrowser.utils import (utils, objreg, log, usertypes, message,
@@ -53,9 +53,9 @@ class WebHistory(sql.SqlTable):
     """The global history of visited pages."""
 
     # All web history cleared
-    history_cleared = pyqtSignal()
+    history_cleared = Signal()
     # one url cleared
-    url_cleared = pyqtSignal(QUrl)
+    url_cleared = Signal(QUrl)
 
     def __init__(self, parent=None):
         super().__init__("History", ['url', 'title', 'atime', 'redirect'],
@@ -176,7 +176,7 @@ class WebHistory(sql.SqlTable):
         self.completion.delete('url', self._format_completion_url(qurl))
         self.url_cleared.emit(qurl)
 
-    @pyqtSlot(QUrl, QUrl, str)
+    @Slot(QUrl, QUrl, str)
     def add_from_tab(self, url, requested_url, title):
         """Add a new history entry as slot, called from a BrowserTab."""
         if any(url.scheme() in ('data', 'view-source') or

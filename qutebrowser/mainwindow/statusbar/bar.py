@@ -21,7 +21,7 @@
 
 import enum
 import attr
-from PySide2.QtCore import pyqtSignal, pyqtSlot, pyqtProperty, Qt, QSize, QTimer
+from PySide2.QtCore import Signal, Slot, pyqtProperty, Qt, QSize, QTimer
 from PySide2.QtWidgets import QWidget, QHBoxLayout, QStackedLayout, QSizePolicy
 
 from qutebrowser.browser import browsertab
@@ -142,8 +142,8 @@ class StatusBar(QWidget):
                arg: The new position.
     """
 
-    resized = pyqtSignal('QRect')
-    moved = pyqtSignal('QPoint')
+    resized = Signal('QRect')
+    moved = Signal('QPoint')
     _severity = None
     _color_flags = []
 
@@ -196,7 +196,7 @@ class StatusBar(QWidget):
     def __repr__(self):
         return utils.get_repr(self)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option):
         if option == 'statusbar.hide':
             self.maybe_hide()
@@ -245,7 +245,7 @@ class StatusBar(QWidget):
                 if tab:
                     self.prog.on_tab_changed(tab)
 
-    @pyqtSlot()
+    @Slot()
     def maybe_hide(self):
         """Hide the statusbar if it's configured to do so."""
         tab = self._current_tab()
@@ -321,12 +321,12 @@ class StatusBar(QWidget):
         self._stack.setCurrentWidget(self.txt)
         self.maybe_hide()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def set_text(self, val):
         """Set a normal (persistent) text in the status bar."""
         self.txt.set_text(self.txt.Text.normal, val)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_entered(self, mode):
         """Mark certain modes in the commandline."""
         keyparsers = objreg.get('keyparsers', scope='window',
@@ -341,7 +341,7 @@ class StatusBar(QWidget):
                     usertypes.KeyMode.passthrough]:
             self.set_mode_active(mode, True)
 
-    @pyqtSlot(usertypes.KeyMode, usertypes.KeyMode)
+    @Slot(usertypes.KeyMode, usertypes.KeyMode)
     def on_mode_left(self, old_mode, new_mode):
         """Clear marked mode."""
         keyparsers = objreg.get('keyparsers', scope='window',
@@ -359,7 +359,7 @@ class StatusBar(QWidget):
                         usertypes.KeyMode.passthrough]:
             self.set_mode_active(old_mode, False)
 
-    @pyqtSlot(browsertab.AbstractTab)
+    @Slot(browsertab.AbstractTab)
     def on_tab_changed(self, tab):
         """Notify sub-widgets when the tab has been changed."""
         self.url.on_tab_changed(tab)
@@ -369,7 +369,7 @@ class StatusBar(QWidget):
         self.maybe_hide()
         assert tab.private == self._color_flags.private
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def on_caret_selection_toggled(self, selection):
         """Update the statusbar when entering/leaving caret selection mode."""
         log.statusbar.debug("Setting caret selection {}".format(selection))

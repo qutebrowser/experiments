@@ -20,7 +20,7 @@
 """Completer attached to a CompletionView."""
 
 import attr
-from PySide2.QtCore import pyqtSlot, QObject, QTimer
+from PySide2.QtCore import Slot, QObject, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdutils, runners
@@ -156,7 +156,7 @@ class Completer(QObject):
 
         raise utils.Unreachable("Not all parts consumed: {}".format(parts))
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_selection_changed(self, text):
         """Change the completed part if a new item was selected.
 
@@ -189,7 +189,7 @@ class Completer(QObject):
         else:
             self._change_completed_part(text, before, after)
 
-    @pyqtSlot()
+    @Slot()
     def schedule_completion_update(self):
         """Schedule updating/enabling completion.
 
@@ -217,7 +217,7 @@ class Completer(QObject):
         self._last_cursor_pos = self._cmd.cursorPosition()
         self._last_text = self._cmd.text()
 
-    @pyqtSlot()
+    @Slot()
     def _update_completion(self):
         """Check if completions are available and activate them."""
         completion = self.parent()

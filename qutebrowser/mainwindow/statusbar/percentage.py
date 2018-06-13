@@ -19,7 +19,7 @@
 
 """Scroll percentage displayed in the statusbar."""
 
-from PySide2.QtCore import pyqtSlot
+from PySide2.QtCore import Slot
 
 from qutebrowser.mainwindow.statusbar import textbase
 
@@ -34,7 +34,7 @@ class Percentage(textbase.TextBase):
         self.set_perc(0, 0)
         self.raw = False
 
-    @pyqtSlot(int, int)
+    @Slot(int, int)
     def set_perc(self, x, y):  # pylint: disable=unused-argument
         """Setter to be used as a Qt slot.
 

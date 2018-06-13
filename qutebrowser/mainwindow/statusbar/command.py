@@ -21,7 +21,7 @@
 
 import functools
 
-from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt, QSize
+from PySide2.QtCore import Signal, Slot, Qt, QSize
 from PySide2.QtWidgets import QSizePolicy
 
 from qutebrowser.keyinput import modeman, modeparsers
@@ -50,12 +50,12 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         hide_cmd: Emitted when command input can be hidden.
     """
 
-    got_cmd = pyqtSignal([str], [str, int])
-    clear_completion_selection = pyqtSignal()
-    hide_completion = pyqtSignal()
-    update_completion = pyqtSignal()
-    show_cmd = pyqtSignal()
-    hide_cmd = pyqtSignal()
+    got_cmd = Signal([str], [str, int])
+    clear_completion_selection = Signal()
+    hide_completion = Signal()
+    update_completion = Signal()
+    show_cmd = Signal()
+    hide_cmd = Signal()
 
     def __init__(self, *, win_id, private, parent=None):
         misc.CommandLineEdit.__init__(self, parent=parent)
@@ -218,7 +218,7 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         ed.file_updated.connect(callback)
         ed.edit(self.text())
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_left(self, mode):
         """Clear up when command mode was left.
 
@@ -275,7 +275,7 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         width = self.fontMetrics().width(text)
         return QSize(width, height)
 
-    @pyqtSlot()
+    @Slot()
     def _incremental_search(self):
         if not config.val.search.incremental:
             return

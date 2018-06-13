@@ -20,7 +20,7 @@
 """Showing messages above the statusbar."""
 
 
-from PySide2.QtCore import pyqtSlot, pyqtSignal, QTimer, Qt, QSize
+from PySide2.QtCore import Slot, Signal, QTimer, Qt, QSize
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 from qutebrowser.config import config
@@ -73,7 +73,7 @@ class MessageView(QWidget):
 
     """Widget which stacks error/warning/info messages."""
 
-    update_geometry = pyqtSignal()
+    update_geometry = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -103,7 +103,7 @@ class MessageView(QWidget):
             interval *= min(5, len(self._messages))
             self._clear_timer.setInterval(interval)
 
-    @pyqtSlot()
+    @Slot()
     def clear_messages(self):
         """Hide and delete all messages."""
         for widget in self._messages:
@@ -115,7 +115,7 @@ class MessageView(QWidget):
         self.hide()
         self._clear_timer.stop()
 
-    @pyqtSlot(usertypes.MessageLevel, str, bool)
+    @Slot(usertypes.MessageLevel, str, bool)
     def show_message(self, level, text, replace=False):
         """Show the given message with the given MessageLevel."""
         if text == self._last_text:

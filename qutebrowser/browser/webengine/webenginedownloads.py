@@ -24,7 +24,7 @@ import os.path
 import urllib
 import functools
 
-from PySide2.QtCore import pyqtSlot, Qt
+from PySide2.QtCore import Slot, Qt
 from PySide2.QtWebEngineWidgets import QWebEngineDownloadItem
 
 from qutebrowser.browser import downloads
@@ -54,7 +54,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
         return (self._qt_item.savePageFormat() !=
                 QWebEngineDownloadItem.UnknownSaveFormat)
 
-    @pyqtSlot(QWebEngineDownloadItem.DownloadState)
+    @Slot(QWebEngineDownloadItem.DownloadState)
     def _on_state_changed(self, state):
         state_name = debug.qenum_key(QWebEngineDownloadItem, state)
         log.downloads.debug("State for {!r} changed to {}".format(
@@ -208,7 +208,7 @@ class DownloadManager(downloads.AbstractDownloadManager):
         profile.downloadRequested.connect(self.handle_download,
                                           Qt.DirectConnection)
 
-    @pyqtSlot(QWebEngineDownloadItem)
+    @Slot(QWebEngineDownloadItem)
     def handle_download(self, qt_item):
         """Start a download coming from a QWebEngineProfile."""
         suggested_filename = _get_suggested_filename(qt_item.path())

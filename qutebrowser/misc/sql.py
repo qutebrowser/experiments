@@ -21,7 +21,7 @@
 
 import collections
 
-from PySide2.QtCore import QObject, pyqtSignal
+from PySide2.QtCore import QObject, Signal
 from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlError
 
 from qutebrowser.utils import log, debug
@@ -197,7 +197,7 @@ class SqlTable(QObject):
         changed: Emitted when the table is modified.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, name, fields, constraints=None, parent=None):
         """Create a new table in the sql database.

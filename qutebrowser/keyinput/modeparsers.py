@@ -26,7 +26,7 @@ Module attributes:
 import traceback
 import enum
 
-from PySide2.QtCore import pyqtSlot, Qt
+from PySide2.QtCore import Slot, Qt
 from PySide2.QtGui import QKeySequence
 
 from qutebrowser.commands import runners, cmdexc
@@ -115,7 +115,7 @@ class NormalKeyParser(CommandKeyParser):
             self._inhibited_timer.timeout.connect(self._clear_inhibited)
             self._inhibited_timer.start()
 
-    @pyqtSlot()
+    @Slot()
     def _clear_partial_match(self):
         """Clear a partial keystring after a timeout."""
         self._debug_log("Clearing partial keystring {}".format(
@@ -123,13 +123,13 @@ class NormalKeyParser(CommandKeyParser):
         self._sequence = keyutils.KeySequence()
         self.keystring_updated.emit(str(self._sequence))
 
-    @pyqtSlot()
+    @Slot()
     def _clear_inhibited(self):
         """Reset inhibition state after a timeout."""
         self._debug_log("Releasing inhibition state of normal mode.")
         self._inhibited = False
 
-    @pyqtSlot()
+    @Slot()
     def _stop_timers(self):
         super()._stop_timers()
         self._partial_timer.stop()
@@ -296,7 +296,7 @@ class HintKeyParser(CommandKeyParser):
         if not preserve_filter:
             self._filtertext = ''
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_keystring_updated(self, keystr):
         """Update hintmanager when the keystring was updated."""
         hintmanager = objreg.get('hintmanager', scope='tab',
