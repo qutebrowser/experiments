@@ -133,9 +133,9 @@ def init_faulthandler(fileobj=sys.__stderr__):
 def check_pyqt_core():
     """Check if PyQt core is installed."""
     try:
-        import PyQt5.QtCore  # pylint: disable=unused-variable
+        import PySide2.QtCore  # pylint: disable=unused-variable
     except ImportError as e:
-        text = _missing_str('PyQt5')
+        text = _missing_str('PySide2')
         text = text.replace('<b>', '')
         text = text.replace('</b>', '')
         text = text.replace('<br />', '\n')
@@ -230,9 +230,9 @@ def check_libraries():
         'pygments': _missing_str("pygments"),
         'yaml': _missing_str("PyYAML"),
         'attr': _missing_str("attrs"),
-        'PyQt5.QtQml': _missing_str("PyQt5.QtQml"),
-        'PyQt5.QtSql': _missing_str("PyQt5.QtSql"),
-        'PyQt5.QtOpenGL': _missing_str("PyQt5.QtOpenGL"),
+        'PySide2.QtQml': _missing_str("PySide2.QtQml"),
+        'PySide2.QtSql': _missing_str("PySide2.QtSql"),
+        'PySide2.QtOpenGL': _missing_str("PySide2.QtOpenGL"),
     }
     _check_modules(modules)
 
