@@ -33,11 +33,12 @@ import getpass
 
 import attr
 import pkg_resources
-from PySide2.QtCore import PYQT_VERSION_STR, QLibraryInfo
+from PySide2.QtCore import QLibraryInfo
 from PySide2.QtNetwork import QSslSocket
 from PySide2.QtGui import (QOpenGLContext, QOpenGLVersionProfile,
                          QOffscreenSurface)
 from PySide2.QtWidgets import QApplication
+from PySide2 import __version__ as PYQT_VERSION_STR
 
 try:
     from PySide2.QtWebKit import qWebKitVersion
