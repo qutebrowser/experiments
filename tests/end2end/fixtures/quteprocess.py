@@ -33,7 +33,7 @@ import json
 
 import yaml
 import pytest
-from PyQt5.QtCore import pyqtSignal, QUrl, qVersion
+from PySide2.QtCore import pyqtSignal, QUrl, qVersion
 
 from qutebrowser.misc import ipc
 from qutebrowser.utils import log, utils, javascript, qtutils

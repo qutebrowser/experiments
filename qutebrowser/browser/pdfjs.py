@@ -22,7 +22,7 @@
 
 import os
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.utils import utils, javascript
 

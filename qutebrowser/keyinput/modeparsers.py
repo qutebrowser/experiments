@@ -26,8 +26,8 @@ Module attributes:
 import traceback
 import enum
 
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QKeySequence
+from PySide2.QtCore import pyqtSlot, Qt
+from PySide2.QtGui import QKeySequence
 
 from qutebrowser.commands import runners, cmdexc
 from qutebrowser.config import config

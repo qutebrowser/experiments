@@ -26,12 +26,12 @@ import re
 import html as html_utils
 
 import sip
-from PyQt5.QtCore import (pyqtSignal, pyqtSlot, Qt, QEvent, QPoint, QPointF,
+from PySide2.QtCore import (pyqtSignal, pyqtSlot, Qt, QEvent, QPoint, QPointF,
                           QUrl, QTimer, QObject, qVersion)
-from PyQt5.QtGui import QKeyEvent, QIcon
-from PyQt5.QtNetwork import QAuthenticator
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineScript
+from PySide2.QtGui import QKeyEvent, QIcon
+from PySide2.QtNetwork import QAuthenticator
+from PySide2.QtWidgets import QApplication
+from PySide2.QtWebEngineWidgets import QWebEnginePage, QWebEngineScript
 
 from qutebrowser.config import configdata, config
 from qutebrowser.browser import browsertab, mouse, shared

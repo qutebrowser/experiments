@@ -25,7 +25,7 @@ import signal
 import time
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.misc import utilcmds
 from qutebrowser.commands import cmdexc

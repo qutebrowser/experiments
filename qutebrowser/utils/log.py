@@ -31,7 +31,7 @@ import warnings
 import json
 import inspect
 
-from PyQt5 import QtCore
+from PySide2 import QtCore
 # Optional imports
 try:
     import colorama

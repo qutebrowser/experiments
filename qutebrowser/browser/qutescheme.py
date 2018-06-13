@@ -34,7 +34,7 @@ import collections
 
 import pkg_resources
 import sip
-from PyQt5.QtCore import QUrlQuery, QUrl
+from PySide2.QtCore import QUrlQuery, QUrl
 
 import qutebrowser
 from qutebrowser.config import config, configdata, configexc, configdiff

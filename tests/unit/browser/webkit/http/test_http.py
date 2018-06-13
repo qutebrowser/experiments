@@ -24,7 +24,7 @@ test_content_disposition.py file.
 """
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.browser.webkit import http
 

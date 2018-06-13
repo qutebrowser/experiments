@@ -23,7 +23,7 @@ import os
 import html
 import netrc
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.config import config
 from qutebrowser.utils import usertypes, message, log, objreg, jinja, utils

@@ -27,8 +27,8 @@ Module attributes:
 import enum
 import collections.abc
 
-from PyQt5.QtCore import QUrl, Qt, QEvent, QTimer
-from PyQt5.QtGui import QMouseEvent
+from PySide2.QtCore import QUrl, Qt, QEvent, QTimer
+from PySide2.QtGui import QMouseEvent
 
 from qutebrowser.config import config
 from qutebrowser.keyinput import modeman

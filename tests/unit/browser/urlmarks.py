@@ -20,7 +20,7 @@
 """Tests for the global page history."""
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.browser import urlmarks
 

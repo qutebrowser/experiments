@@ -36,7 +36,7 @@ import string
 import pytest
 import hypothesis
 import hypothesis.strategies as hst
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.utils import urlmatch
 

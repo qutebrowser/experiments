@@ -20,10 +20,10 @@
 """The main browser widget for QtWebEngine."""
 
 import sip
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QUrl, PYQT_VERSION
-from PyQt5.QtGui import QPalette
-from PyQt5.QtQuickWidgets import QQuickWidget
-from PyQt5.QtWebEngineWidgets import (QWebEngineView, QWebEnginePage,
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QUrl, PYQT_VERSION
+from PySide2.QtGui import QPalette
+from PySide2.QtQuickWidgets import QQuickWidget
+from PySide2.QtWebEngineWidgets import (QWebEngineView, QWebEnginePage,
                                       QWebEngineScript)
 
 from qutebrowser.browser import shared

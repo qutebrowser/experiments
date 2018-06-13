@@ -28,7 +28,7 @@ import warnings
 import attr
 import pytest
 import _pytest.logging
-from PyQt5 import QtCore
+from PySide2 import QtCore
 
 from qutebrowser.utils import log
 from qutebrowser.misc import utilcmds

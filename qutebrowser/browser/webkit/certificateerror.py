@@ -20,7 +20,7 @@
 """Wrapper over a QSslError."""
 
 
-from PyQt5.QtNetwork import QSslError
+from PySide2.QtNetwork import QSslError
 
 from qutebrowser.utils import usertypes, utils, debug
 

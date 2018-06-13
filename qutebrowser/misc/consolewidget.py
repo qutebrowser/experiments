@@ -22,9 +22,9 @@
 import sys
 import code
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt
-from PyQt5.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QApplication
-from PyQt5.QtGui import QTextCursor
+from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt
+from PySide2.QtWidgets import QTextEdit, QWidget, QVBoxLayout, QApplication
+from PySide2.QtGui import QTextCursor
 
 from qutebrowser.config import config
 from qutebrowser.misc import cmdhistory, miscwidgets

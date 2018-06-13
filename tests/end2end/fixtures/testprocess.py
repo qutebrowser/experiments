@@ -26,9 +26,9 @@ import time
 import attr
 import pytest
 import pytestqt.plugin
-from PyQt5.QtCore import (pyqtSlot, pyqtSignal, QProcess, QObject,
+from PySide2.QtCore import (pyqtSlot, pyqtSignal, QProcess, QObject,
                           QElapsedTimer, QProcessEnvironment)
-from PyQt5.QtTest import QSignalSpy
+from PySide2.QtTest import QSignalSpy
 
 from helpers import utils
 

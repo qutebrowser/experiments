@@ -22,7 +22,7 @@
 import os.path
 import sys
 
-from PyQt5.QtWidgets import QMessageBox
+from PySide2.QtWidgets import QMessageBox
 
 from qutebrowser.config import (config, configdata, configfiles, configtypes,
                                 configexc, configcommands)

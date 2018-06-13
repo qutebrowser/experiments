@@ -23,7 +23,7 @@ import traceback
 import re
 
 import attr
-from PyQt5.QtCore import pyqtSlot, QUrl, QObject
+from PySide2.QtCore import pyqtSlot, QUrl, QObject
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdexc, cmdutils

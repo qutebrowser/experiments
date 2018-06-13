@@ -30,7 +30,7 @@ import tempfile
 import enum
 
 import sip
-from PyQt5.QtCore import (pyqtSlot, pyqtSignal, Qt, QObject, QModelIndex,
+from PySide2.QtCore import (pyqtSlot, pyqtSignal, Qt, QObject, QModelIndex,
                           QTimer, QAbstractListModel, QUrl)
 
 from qutebrowser.commands import cmdexc, cmdutils

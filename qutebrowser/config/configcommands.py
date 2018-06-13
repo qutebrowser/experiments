@@ -22,7 +22,7 @@
 import os.path
 import contextlib
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.commands import cmdexc, cmdutils
 from qutebrowser.completion.models import configmodel

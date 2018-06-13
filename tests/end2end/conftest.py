@@ -30,7 +30,7 @@ import pstats
 import operator
 
 import pytest
-from PyQt5.QtCore import PYQT_VERSION
+from PySide2.QtCore import PYQT_VERSION
 
 pytest.register_assert_rewrite('end2end.fixtures')
 

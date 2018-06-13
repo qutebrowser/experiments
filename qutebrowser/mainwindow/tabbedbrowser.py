@@ -22,9 +22,9 @@
 import functools
 
 import attr
-from PyQt5.QtWidgets import QSizePolicy, QWidget
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QTimer, QUrl
-from PyQt5.QtGui import QIcon
+from PySide2.QtWidgets import QSizePolicy, QWidget
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QTimer, QUrl
+from PySide2.QtGui import QIcon
 
 from qutebrowser.config import config
 from qutebrowser.keyinput import modeman

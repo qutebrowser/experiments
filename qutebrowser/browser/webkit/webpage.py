@@ -23,12 +23,12 @@ import html
 import functools
 
 import sip
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QUrl, QPoint
-from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtNetwork import QNetworkReply, QNetworkRequest
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtPrintSupport import QPrintDialog
-from PyQt5.QtWebKitWidgets import QWebPage, QWebFrame
+from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QUrl, QPoint
+from PySide2.QtGui import QDesktopServices
+from PySide2.QtNetwork import QNetworkReply, QNetworkRequest
+from PySide2.QtWidgets import QFileDialog
+from PySide2.QtPrintSupport import QPrintDialog
+from PySide2.QtWebKitWidgets import QWebPage, QWebFrame
 
 from qutebrowser.config import config
 from qutebrowser.browser import pdfjs, shared

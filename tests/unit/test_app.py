@@ -19,7 +19,7 @@
 
 """Tests for the qutebrowser.app module."""
 
-from PyQt5.QtCore import QBuffer
+from PySide2.QtCore import QBuffer
 
 from qutebrowser import app
 

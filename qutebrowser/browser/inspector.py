@@ -22,7 +22,7 @@
 import base64
 import binascii
 
-from PyQt5.QtWidgets import QWidget
+from PySide2.QtWidgets import QWidget
 
 from qutebrowser.config import configfiles
 from qutebrowser.utils import log, usertypes

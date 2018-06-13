@@ -26,7 +26,7 @@ import itertools
 
 import attr
 import pytest
-from PyQt5.QtCore import QRect, QPoint, QUrl
+from PySide2.QtCore import QRect, QPoint, QUrl
 QWebElement = pytest.importorskip('PyQt5.QtWebKit').QWebElement
 
 from qutebrowser.browser import webelem, browsertab

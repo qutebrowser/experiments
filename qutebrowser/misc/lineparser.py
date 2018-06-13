@@ -23,7 +23,7 @@ import os
 import os.path
 import contextlib
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
+from PySide2.QtCore import pyqtSlot, pyqtSignal, QObject
 
 from qutebrowser.utils import log, utils, qtutils
 from qutebrowser.config import config

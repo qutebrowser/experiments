@@ -28,7 +28,7 @@ import collections.abc
 import enum
 
 import attr
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, QTimer
 
 from qutebrowser.utils import log, qtutils, utils
 

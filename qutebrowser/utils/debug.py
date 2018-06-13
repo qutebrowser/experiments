@@ -25,8 +25,8 @@ import logging
 import functools
 import datetime
 
-from PyQt5.QtCore import Qt, QEvent, QMetaMethod, QObject
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import Qt, QEvent, QMetaMethod, QObject
+from PySide2.QtWidgets import QApplication
 
 from qutebrowser.utils import log, utils, qtutils, objreg
 

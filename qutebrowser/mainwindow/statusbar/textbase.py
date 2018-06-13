@@ -19,9 +19,9 @@
 
 """Base text widgets for statusbar."""
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QLabel, QSizePolicy
-from PyQt5.QtGui import QPainter
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QLabel, QSizePolicy
+from PySide2.QtGui import QPainter
 
 from qutebrowser.utils import qtutils, utils
 

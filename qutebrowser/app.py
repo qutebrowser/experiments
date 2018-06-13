@@ -48,9 +48,9 @@ import atexit
 import datetime
 import tokenize
 
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QDesktopServices, QPixmap, QIcon, QWindow
-from PyQt5.QtCore import (pyqtSlot, qInstallMessageHandler, QTimer, QUrl,
+from PySide2.QtWidgets import QApplication, QWidget
+from PySide2.QtGui import QDesktopServices, QPixmap, QIcon, QWindow
+from PySide2.QtCore import (pyqtSlot, qInstallMessageHandler, QTimer, QUrl,
                           QObject, QEvent, pyqtSignal, Qt)
 try:
     import hunter

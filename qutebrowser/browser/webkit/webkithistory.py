@@ -21,7 +21,7 @@
 
 import functools
 
-from PyQt5.QtWebKit import QWebHistoryInterface
+from PySide2.QtWebKit import QWebHistoryInterface
 
 from qutebrowser.utils import debug
 

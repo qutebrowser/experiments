@@ -20,7 +20,7 @@
 """Handling of proxies."""
 
 
-from PyQt5.QtNetwork import QNetworkProxy, QNetworkProxyFactory
+from PySide2.QtNetwork import QNetworkProxy, QNetworkProxyFactory
 
 from qutebrowser.config import config, configtypes
 from qutebrowser.utils import objreg

@@ -22,7 +22,7 @@
 
 import os.path
 
-from PyQt5.QtNetwork import QNetworkRequest
+from PySide2.QtNetwork import QNetworkRequest
 
 from qutebrowser.utils import log
 from qutebrowser.browser.webkit import rfc6266

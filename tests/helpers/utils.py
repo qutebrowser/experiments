@@ -27,7 +27,7 @@ import contextlib
 
 import pytest
 
-from PyQt5.QtCore import QObject, pyqtSignal
+from PySide2.QtCore import QObject, pyqtSignal
 
 from qutebrowser.utils import qtutils
 

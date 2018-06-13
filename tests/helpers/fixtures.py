@@ -35,9 +35,9 @@ import types
 import attr
 import pytest
 import py.path  # pylint: disable=no-name-in-module
-from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
-from PyQt5.QtNetwork import QNetworkCookieJar
+from PySide2.QtCore import QSize, Qt
+from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
+from PySide2.QtNetwork import QNetworkCookieJar
 
 import helpers.stubs as stubsmod
 import helpers.utils
@@ -353,7 +353,7 @@ def unicode_encode_err():
 @pytest.fixture(scope='session')
 def qnam(qapp):
     """Session-wide QNetworkAccessManager."""
-    from PyQt5.QtNetwork import QNetworkAccessManager
+    from PySide2.QtNetwork import QNetworkAccessManager
     nam = QNetworkAccessManager()
     nam.setNetworkAccessible(QNetworkAccessManager.NotAccessible)
     return nam

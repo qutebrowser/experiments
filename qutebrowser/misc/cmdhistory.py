@@ -19,7 +19,7 @@
 
 """Command history for the status bar."""
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
+from PySide2.QtCore import pyqtSlot, pyqtSignal, QObject
 
 from qutebrowser.utils import usertypes, log, standarddir, objreg
 from qutebrowser.misc import lineparser

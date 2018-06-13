@@ -22,8 +22,8 @@
 import itertools
 
 import attr
-from PyQt5.QtCore import Qt, QEvent
-from PyQt5.QtGui import QKeySequence, QKeyEvent
+from PySide2.QtCore import Qt, QEvent
+from PySide2.QtGui import QKeySequence, QKeyEvent
 
 from qutebrowser.utils import utils
 

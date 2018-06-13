@@ -22,7 +22,7 @@
 import os.path
 import collections
 
-from PyQt5.QtCore import pyqtSlot, QObject, QTimer
+from PySide2.QtCore import pyqtSlot, QObject, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdutils

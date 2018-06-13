@@ -23,7 +23,7 @@ import textwrap
 
 import pytest
 import py.path  # pylint: disable=no-name-in-module
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.browser import greasemonkey
 

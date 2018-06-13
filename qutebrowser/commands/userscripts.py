@@ -23,7 +23,7 @@ import os
 import os.path
 import tempfile
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QSocketNotifier
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, QSocketNotifier
 
 from qutebrowser.utils import message, log, objreg, standarddir, utils
 from qutebrowser.commands import runners

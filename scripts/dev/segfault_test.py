@@ -35,9 +35,9 @@ from scripts import utils
 SCRIPT = """
 import sys
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWebKitWidgets import QWebView
+from PySide2.QtCore import QUrl
+from PySide2.QtWidgets import QApplication
+from PySide2.QtWebKitWidgets import QWebView
 
 def on_load_finished(ok):
     if ok:

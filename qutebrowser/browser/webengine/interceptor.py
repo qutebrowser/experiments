@@ -19,7 +19,7 @@
 
 """A request interceptor taking care of adblocking and custom headers."""
 
-from PyQt5.QtWebEngineCore import (QWebEngineUrlRequestInterceptor,
+from PySide2.QtWebEngineCore import (QWebEngineUrlRequestInterceptor,
                                    QWebEngineUrlRequestInfo)
 
 from qutebrowser.config import config

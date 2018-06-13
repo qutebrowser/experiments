@@ -20,7 +20,7 @@
 """Utilities related to QWebHistory."""
 
 
-from PyQt5.QtCore import QByteArray, QDataStream, QIODevice, QUrl
+from PySide2.QtCore import QByteArray, QDataStream, QIODevice, QUrl
 
 from qutebrowser.utils import qtutils
 

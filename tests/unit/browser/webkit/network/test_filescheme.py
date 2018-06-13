@@ -22,8 +22,8 @@ import os
 import attr
 import pytest
 import bs4
-from PyQt5.QtCore import QUrl
-from PyQt5.QtNetwork import QNetworkRequest
+from PySide2.QtCore import QUrl
+from PySide2.QtNetwork import QNetworkRequest
 
 from qutebrowser.browser.webkit.network import filescheme
 from qutebrowser.utils import urlutils, utils

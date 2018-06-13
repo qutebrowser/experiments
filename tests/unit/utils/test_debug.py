@@ -25,8 +25,8 @@ import time
 import textwrap
 
 import pytest
-from PyQt5.QtCore import pyqtSignal, Qt, QEvent, QObject
-from PyQt5.QtWidgets import QStyle, QFrame
+from PySide2.QtCore import pyqtSignal, Qt, QEvent, QObject
+from PySide2.QtWidgets import QStyle, QFrame
 
 from qutebrowser.utils import debug
 

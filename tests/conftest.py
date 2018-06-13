@@ -28,7 +28,7 @@ import warnings
 import sip
 import pytest
 import hypothesis
-from PyQt5.QtCore import qVersion, PYQT_VERSION
+from PySide2.QtCore import qVersion, PYQT_VERSION
 
 pytest.register_assert_rewrite('helpers')
 

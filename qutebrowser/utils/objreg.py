@@ -23,7 +23,7 @@
 import collections
 import functools
 
-from PyQt5.QtCore import QObject, QTimer
+from PySide2.QtCore import QObject, QTimer
 
 from qutebrowser.utils import log
 

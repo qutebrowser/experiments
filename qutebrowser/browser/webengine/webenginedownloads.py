@@ -24,8 +24,8 @@ import os.path
 import urllib
 import functools
 
-from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtWebEngineWidgets import QWebEngineDownloadItem
+from PySide2.QtCore import pyqtSlot, Qt
+from PySide2.QtWebEngineWidgets import QWebEngineDownloadItem
 
 from qutebrowser.browser import downloads
 from qutebrowser.utils import debug, usertypes, message, log, qtutils

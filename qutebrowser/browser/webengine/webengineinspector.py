@@ -21,8 +21,8 @@
 
 import os
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings
+from PySide2.QtCore import QUrl
+from PySide2.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings
 
 from qutebrowser.browser import inspector
 

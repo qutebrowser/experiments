@@ -19,8 +19,8 @@
 
 """Handling of HTTP cookies."""
 
-from PyQt5.QtNetwork import QNetworkCookie, QNetworkCookieJar
-from PyQt5.QtCore import pyqtSignal, QDateTime
+from PySide2.QtNetwork import QNetworkCookie, QNetworkCookieJar
+from PySide2.QtCore import pyqtSignal, QDateTime
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils, standarddir, objreg

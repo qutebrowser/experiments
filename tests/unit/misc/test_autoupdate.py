@@ -20,7 +20,7 @@
 """Tests for qutebrowser.misc.autoupdate."""
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.misc import autoupdate, httpclient
 

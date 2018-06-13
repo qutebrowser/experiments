@@ -25,7 +25,7 @@ import os.path
 import pytest
 import jinja2
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 import helpers.utils
 from qutebrowser.utils import utils

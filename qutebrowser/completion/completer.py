@@ -20,7 +20,7 @@
 """Completer attached to a CompletionView."""
 
 import attr
-from PyQt5.QtCore import pyqtSlot, QObject, QTimer
+from PySide2.QtCore import pyqtSlot, QObject, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.commands import cmdutils, runners

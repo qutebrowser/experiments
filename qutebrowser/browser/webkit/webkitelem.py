@@ -19,8 +19,8 @@
 
 """QtWebKit specific part of the web element API."""
 
-from PyQt5.QtCore import QRect
-from PyQt5.QtWebKit import QWebElement, QWebSettings
+from PySide2.QtCore import QRect
+from PySide2.QtWebKit import QWebElement, QWebSettings
 
 from qutebrowser.config import config
 from qutebrowser.utils import log, utils, javascript

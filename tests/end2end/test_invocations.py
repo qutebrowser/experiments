@@ -26,7 +26,7 @@ import logging
 import re
 
 import pytest
-from PyQt5.QtCore import QProcess, qVersion
+from PySide2.QtCore import QProcess, qVersion
 
 from helpers import utils
 

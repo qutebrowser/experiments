@@ -24,7 +24,7 @@ import unittest.mock
 import textwrap
 
 import pytest
-from PyQt5.QtCore import QSettings
+from PySide2.QtCore import QSettings
 
 from qutebrowser.config import (config, configfiles, configexc, configdata,
                                 configtypes)

@@ -19,7 +19,7 @@
 
 """TabIndex displayed in the statusbar."""
 
-from PyQt5.QtCore import pyqtSlot
+from PySide2.QtCore import pyqtSlot
 
 from qutebrowser.mainwindow.statusbar import textbase
 

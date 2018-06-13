@@ -31,7 +31,7 @@ import html
 import functools
 import collections
 
-from PyQt5.QtCore import pyqtSignal, QUrl, QObject
+from PySide2.QtCore import pyqtSignal, QUrl, QObject
 
 from qutebrowser.utils import (message, usertypes, qtutils, urlutils,
                                standarddir, objreg, log)

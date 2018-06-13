@@ -29,7 +29,7 @@ import configparser
 import contextlib
 
 import yaml
-from PyQt5.QtCore import pyqtSignal, QObject, QSettings
+from PySide2.QtCore import pyqtSignal, QObject, QSettings
 
 import qutebrowser
 from qutebrowser.config import configexc, config, configdata, configutils

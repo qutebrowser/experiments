@@ -22,8 +22,8 @@
 import functools
 
 import attr
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
+from PySide2.QtWidgets import QApplication
 
 from qutebrowser.keyinput import modeparsers
 from qutebrowser.config import config

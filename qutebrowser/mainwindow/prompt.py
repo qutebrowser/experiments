@@ -25,9 +25,9 @@ import collections
 
 import attr
 import sip
-from PyQt5.QtCore import (pyqtSlot, pyqtSignal, Qt, QTimer, QDir, QModelIndex,
+from PySide2.QtCore import (pyqtSlot, pyqtSignal, Qt, QTimer, QDir, QModelIndex,
                           QItemSelectionModel, QObject, QEventLoop)
-from PyQt5.QtWidgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
+from PySide2.QtWidgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
                              QLabel, QFileSystemModel, QTreeView, QSizePolicy,
                              QSpacerItem)
 

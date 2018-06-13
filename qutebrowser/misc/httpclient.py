@@ -23,8 +23,8 @@ import functools
 import urllib.request
 import urllib.parse
 
-from PyQt5.QtCore import pyqtSignal, QObject, QTimer
-from PyQt5.QtNetwork import (QNetworkAccessManager, QNetworkRequest,
+from PySide2.QtCore import pyqtSignal, QObject, QTimer
+from PySide2.QtNetwork import (QNetworkAccessManager, QNetworkRequest,
                              QNetworkReply)
 
 

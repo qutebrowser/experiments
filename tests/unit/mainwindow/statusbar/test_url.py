@@ -22,7 +22,7 @@
 
 import pytest
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.utils import usertypes, urlutils
 from qutebrowser.mainwindow.statusbar import url

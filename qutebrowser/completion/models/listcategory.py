@@ -21,8 +21,8 @@
 
 import re
 
-from PyQt5.QtCore import Qt, QSortFilterProxyModel, QRegExp
-from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PySide2.QtCore import Qt, QSortFilterProxyModel, QRegExp
+from PySide2.QtGui import QStandardItem, QStandardItemModel
 
 from qutebrowser.utils import qtutils
 

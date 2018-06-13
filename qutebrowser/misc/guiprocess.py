@@ -22,7 +22,7 @@
 import locale
 import shlex
 
-from PyQt5.QtCore import (pyqtSlot, pyqtSignal, QObject, QProcess,
+from PySide2.QtCore import (pyqtSlot, pyqtSignal, QObject, QProcess,
                           QProcessEnvironment)
 
 from qutebrowser.utils import message, log

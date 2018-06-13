@@ -33,19 +33,19 @@ import getpass
 
 import attr
 import pkg_resources
-from PyQt5.QtCore import PYQT_VERSION_STR, QLibraryInfo
-from PyQt5.QtNetwork import QSslSocket
-from PyQt5.QtGui import (QOpenGLContext, QOpenGLVersionProfile,
+from PySide2.QtCore import PYQT_VERSION_STR, QLibraryInfo
+from PySide2.QtNetwork import QSslSocket
+from PySide2.QtGui import (QOpenGLContext, QOpenGLVersionProfile,
                          QOffscreenSurface)
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 
 try:
-    from PyQt5.QtWebKit import qWebKitVersion
+    from PySide2.QtWebKit import qWebKitVersion
 except ImportError:  # pragma: no cover
     qWebKitVersion = None
 
 try:
-    from PyQt5.QtWebEngineWidgets import QWebEngineProfile
+    from PySide2.QtWebEngineWidgets import QWebEngineProfile
 except ImportError:  # pragma: no cover
     QWebEngineProfile = None
 

@@ -22,7 +22,7 @@
 import logging
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.browser import history
 from qutebrowser.utils import objreg, urlutils, usertypes
@@ -246,7 +246,7 @@ def cleanup_init():
         hist.setParent(None)
         objreg.delete('web-history')
     try:
-        from PyQt5.QtWebKit import QWebHistoryInterface
+        from PySide2.QtWebKit import QWebHistoryInterface
         QWebHistoryInterface.setDefaultInterface(None)
     except ImportError:
         pass
@@ -266,7 +266,7 @@ def test_init(backend, qapp, tmpdir, monkeypatch, cleanup_init):
     assert hist.parent() is qapp
 
     try:
-        from PyQt5.QtWebKit import QWebHistoryInterface
+        from PySide2.QtWebKit import QWebHistoryInterface
     except ImportError:
         QWebHistoryInterface = None
 

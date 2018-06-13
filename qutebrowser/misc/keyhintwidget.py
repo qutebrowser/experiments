@@ -28,8 +28,8 @@ import html
 import fnmatch
 import re
 
-from PyQt5.QtWidgets import QLabel, QSizePolicy
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt
+from PySide2.QtWidgets import QLabel, QSizePolicy
+from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils, usertypes

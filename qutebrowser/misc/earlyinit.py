@@ -78,8 +78,8 @@ def _die(message, exception=None):
         message: The message to display.
         exception: The exception object if we're handling an exception.
     """
-    from PyQt5.QtWidgets import QApplication, QMessageBox
-    from PyQt5.QtCore import Qt
+    from PySide2.QtWidgets import QApplication, QMessageBox
+    from PySide2.QtCore import Qt
     if (('--debug' in sys.argv or '--no-err-windows' in sys.argv) and
             exception is not None):
         print(file=sys.stderr)
@@ -155,10 +155,10 @@ def check_pyqt_core():
 def qt_version(qversion=None, qt_version_str=None):
     """Get a Qt version string based on the runtime/compiled versions."""
     if qversion is None:
-        from PyQt5.QtCore import qVersion
+        from PySide2.QtCore import qVersion
         qversion = qVersion()
     if qt_version_str is None:
-        from PyQt5.QtCore import QT_VERSION_STR
+        from PySide2.QtCore import QT_VERSION_STR
         qt_version_str = QT_VERSION_STR
 
     if qversion != qt_version_str:
@@ -169,7 +169,7 @@ def qt_version(qversion=None, qt_version_str=None):
 
 def check_qt_version():
     """Check if the Qt version is recent enough."""
-    from PyQt5.QtCore import (qVersion, QT_VERSION, PYQT_VERSION,
+    from PySide2.QtCore import (qVersion, QT_VERSION, PYQT_VERSION,
                               PYQT_VERSION_STR)
     from pkg_resources import parse_version
     from qutebrowser.utils import log
@@ -189,7 +189,7 @@ def check_ssl_support():
     """Check if SSL support is available."""
     # pylint: disable=unused-variable
     try:
-        from PyQt5.QtNetwork import QSslSocket
+        from PySide2.QtNetwork import QSslSocket
     except ImportError:
         _die("Fatal error: Your Qt is built without SSL support.")
 
@@ -243,7 +243,7 @@ def configure_pyqt():
     Doing this means we can't use the interactive shell anymore (which we don't
     anyways), but we can use pdb instead.
     """
-    from PyQt5.QtCore import pyqtRemoveInputHook
+    from PySide2.QtCore import pyqtRemoveInputHook
     pyqtRemoveInputHook()
 
     import sip

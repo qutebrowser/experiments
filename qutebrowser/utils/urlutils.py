@@ -26,8 +26,8 @@ import ipaddress
 import posixpath
 import urllib.parse
 
-from PyQt5.QtCore import QUrl, QUrlQuery
-from PyQt5.QtNetwork import QHostInfo, QHostAddress, QNetworkProxy
+from PySide2.QtCore import QUrl, QUrlQuery
+from PySide2.QtNetwork import QHostInfo, QHostAddress, QNetworkProxy
 
 from qutebrowser.config import config
 from qutebrowser.utils import log, qtutils, message, utils

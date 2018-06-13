@@ -25,8 +25,8 @@ import itertools
 import urllib
 
 import sip
-from PyQt5.QtCore import QUrl, QObject, QPoint, QTimer
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import QUrl, QObject, QPoint, QTimer
+from PySide2.QtWidgets import QApplication
 import yaml
 
 from qutebrowser.utils import (standarddir, objreg, qtutils, log, message,

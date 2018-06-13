@@ -24,7 +24,7 @@
 
 import traceback
 
-from PyQt5.QtCore import pyqtSignal, QObject
+from PySide2.QtCore import pyqtSignal, QObject
 
 from qutebrowser.utils import usertypes, log, utils
 

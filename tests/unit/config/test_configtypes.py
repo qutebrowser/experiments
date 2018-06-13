@@ -30,9 +30,9 @@ import attr
 import pytest
 import hypothesis
 from hypothesis import strategies
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtNetwork import QNetworkProxy
+from PySide2.QtCore import QUrl
+from PySide2.QtGui import QColor, QFont
+from PySide2.QtNetwork import QNetworkProxy
 
 from qutebrowser.config import configtypes, configexc
 from qutebrowser.utils import debug, utils, qtutils

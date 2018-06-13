@@ -55,9 +55,9 @@ import json
 
 import attr
 import yaml
-from PyQt5.QtCore import QUrl, Qt
-from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtWidgets import QTabWidget, QTabBar
+from PySide2.QtCore import QUrl, Qt
+from PySide2.QtGui import QColor, QFont
+from PySide2.QtWidgets import QTabWidget, QTabBar
 
 from qutebrowser.commands import cmdutils
 from qutebrowser.config import configexc

@@ -27,7 +27,7 @@ from http import HTTPStatus
 
 import attr
 import pytest
-from PyQt5.QtCore import pyqtSignal, QUrl
+from PySide2.QtCore import pyqtSignal, QUrl
 
 from end2end.fixtures import testprocess
 

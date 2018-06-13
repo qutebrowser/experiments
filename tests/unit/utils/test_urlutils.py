@@ -23,8 +23,8 @@ import os.path
 import logging
 
 import attr
-from PyQt5.QtCore import QUrl
-from PyQt5.QtNetwork import QNetworkProxy
+from PySide2.QtCore import QUrl
+from PySide2.QtNetwork import QNetworkProxy
 import pytest
 
 from qutebrowser.commands import cmdexc

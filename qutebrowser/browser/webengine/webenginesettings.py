@@ -26,8 +26,8 @@ Module attributes:
 
 import os
 
-from PyQt5.QtGui import QFont
-from PyQt5.QtWebEngineWidgets import (QWebEngineSettings, QWebEngineProfile,
+from PySide2.QtGui import QFont
+from PySide2.QtWebEngineWidgets import (QWebEngineSettings, QWebEngineProfile,
                                       QWebEnginePage)
 
 from qutebrowser.browser.webengine import spell

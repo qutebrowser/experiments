@@ -23,9 +23,9 @@ import collections
 import html
 
 import attr
-from PyQt5.QtCore import (pyqtSlot, pyqtSignal, QCoreApplication, QUrl,
+from PySide2.QtCore import (pyqtSlot, pyqtSignal, QCoreApplication, QUrl,
                           QByteArray)
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QSslSocket
+from PySide2.QtNetwork import QNetworkAccessManager, QNetworkReply, QSslSocket
 
 from qutebrowser.config import config
 from qutebrowser.utils import (message, log, usertypes, utils, objreg,

@@ -29,8 +29,8 @@ import enum
 from string import ascii_lowercase
 
 import attr
-from PyQt5.QtCore import pyqtSlot, QObject, Qt, QUrl
-from PyQt5.QtWidgets import QLabel
+from PySide2.QtCore import pyqtSlot, QObject, Qt, QUrl
+from PySide2.QtWidgets import QLabel
 
 from qutebrowser.config import config
 from qutebrowser.keyinput import modeman, modeparsers

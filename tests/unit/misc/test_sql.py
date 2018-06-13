@@ -21,7 +21,7 @@
 
 import pytest
 
-from PyQt5.QtSql import QSqlError
+from PySide2.QtSql import QSqlError
 
 from qutebrowser.misc import sql
 

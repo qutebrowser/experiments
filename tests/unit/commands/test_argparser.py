@@ -23,7 +23,7 @@ import inspect
 import enum
 
 import pytest
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.commands import argparser, cmdexc
 

@@ -28,7 +28,7 @@ import glob
 import textwrap
 
 import attr
-from PyQt5.QtCore import pyqtSignal, QObject, QUrl
+from PySide2.QtCore import pyqtSignal, QObject, QUrl
 
 from qutebrowser.utils import (log, standarddir, jinja, objreg, utils,
                                javascript, urlmatch, version, usertypes)

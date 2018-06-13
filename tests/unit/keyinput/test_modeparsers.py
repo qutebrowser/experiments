@@ -21,8 +21,8 @@
 
 from unittest import mock
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QKeySequence
+from PySide2.QtCore import Qt
+from PySide2.QtGui import QKeySequence
 
 import pytest
 

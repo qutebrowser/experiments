@@ -24,7 +24,7 @@ import os
 import os.path
 import logging
 
-from PyQt5.QtCore import QProcess
+from PySide2.QtCore import QProcess
 import pytest
 
 from qutebrowser.misc import editor as editormod

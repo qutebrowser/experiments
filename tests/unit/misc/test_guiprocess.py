@@ -22,7 +22,7 @@
 import logging
 
 import pytest
-from PyQt5.QtCore import QProcess, QIODevice
+from PySide2.QtCore import QProcess, QIODevice
 
 from qutebrowser.misc import guiprocess
 from qutebrowser.utils import usertypes

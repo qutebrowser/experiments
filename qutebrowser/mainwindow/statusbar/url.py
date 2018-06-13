@@ -21,7 +21,7 @@
 
 import enum
 
-from PyQt5.QtCore import pyqtSlot, pyqtProperty, Qt, QUrl
+from PySide2.QtCore import pyqtSlot, pyqtProperty, Qt, QUrl
 
 from qutebrowser.mainwindow.statusbar import textbase
 from qutebrowser.config import config

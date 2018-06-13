@@ -20,7 +20,7 @@
 """Tests for webelement.tabhistory."""
 
 import attr
-from PyQt5.QtCore import QUrl, QPoint
+from PySide2.QtCore import QUrl, QPoint
 import pytest
 
 tabhistory = pytest.importorskip('qutebrowser.browser.webkit.tabhistory')

@@ -19,11 +19,11 @@
 
 """The main browser widgets."""
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QUrl
-from PyQt5.QtGui import QPalette
-from PyQt5.QtWidgets import QStyleFactory
-from PyQt5.QtWebKit import QWebSettings
-from PyQt5.QtWebKitWidgets import QWebView, QWebPage
+from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt, QUrl
+from PySide2.QtGui import QPalette
+from PySide2.QtWidgets import QStyleFactory
+from PySide2.QtWebKit import QWebSettings
+from PySide2.QtWebKitWidgets import QWebView, QWebPage
 
 from qutebrowser.config import config
 from qutebrowser.keyinput import modeman

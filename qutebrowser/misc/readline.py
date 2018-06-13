@@ -19,7 +19,7 @@
 
 """Bridge to provide readline-like shortcuts for QLineEdits."""
 
-from PyQt5.QtWidgets import QApplication, QLineEdit
+from PySide2.QtWidgets import QApplication, QLineEdit
 
 from qutebrowser.commands import cmdutils
 from qutebrowser.utils import usertypes as typ

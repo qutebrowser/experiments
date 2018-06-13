@@ -22,7 +22,7 @@
 import re
 import inspect
 
-from PyQt5.QtWidgets import QLineEdit, QApplication
+from PySide2.QtWidgets import QLineEdit, QApplication
 import pytest
 
 from qutebrowser.misc import readline

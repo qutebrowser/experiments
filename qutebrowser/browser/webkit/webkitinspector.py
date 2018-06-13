@@ -19,8 +19,8 @@
 
 """Customized QWebInspector for QtWebKit."""
 
-from PyQt5.QtWebKit import QWebSettings
-from PyQt5.QtWebKitWidgets import QWebInspector
+from PySide2.QtWebKit import QWebSettings
+from PySide2.QtWebKitWidgets import QWebInspector
 
 from qutebrowser.browser import inspector
 

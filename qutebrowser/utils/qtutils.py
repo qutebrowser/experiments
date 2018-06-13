@@ -32,11 +32,11 @@ import operator
 import contextlib
 
 import pkg_resources
-from PyQt5.QtCore import (qVersion, QEventLoop, QDataStream, QByteArray,
+from PySide2.QtCore import (qVersion, QEventLoop, QDataStream, QByteArray,
                           QIODevice, QSaveFile, QT_VERSION_STR,
                           PYQT_VERSION_STR)
 try:
-    from PyQt5.QtWebKit import qWebKitVersion
+    from PySide2.QtWebKit import qWebKitVersion
 except ImportError:  # pragma: no cover
     qWebKitVersion = None
 

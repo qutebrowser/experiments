@@ -25,8 +25,8 @@ import shutil
 import functools
 
 import attr
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QTimer
-from PyQt5.QtNetwork import QNetworkRequest, QNetworkReply
+from PySide2.QtCore import pyqtSlot, pyqtSignal, QTimer
+from PySide2.QtNetwork import QNetworkRequest, QNetworkReply
 
 from qutebrowser.config import config
 from qutebrowser.utils import message, usertypes, log, urlutils, utils

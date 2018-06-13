@@ -30,8 +30,8 @@ import datetime
 import enum
 
 import pkg_resources
-from PyQt5.QtCore import pyqtSlot, Qt, QSize
-from PyQt5.QtWidgets import (QDialog, QLabel, QTextEdit, QPushButton,
+from PySide2.QtCore import pyqtSlot, Qt, QSize
+from PySide2.QtWidgets import (QDialog, QLabel, QTextEdit, QPushButton,
                              QVBoxLayout, QHBoxLayout, QCheckBox,
                              QDialogButtonBox, QApplication, QMessageBox)
 

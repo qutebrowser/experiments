@@ -22,8 +22,8 @@ import types
 import unittest.mock
 
 import pytest
-from PyQt5.QtCore import QObject, QUrl
-from PyQt5.QtGui import QColor
+from PySide2.QtCore import QObject, QUrl
+from PySide2.QtGui import QColor
 
 from qutebrowser.config import config, configdata, configexc, configutils
 from qutebrowser.utils import usertypes, urlmatch

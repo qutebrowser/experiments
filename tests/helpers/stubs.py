@@ -26,11 +26,11 @@ import contextlib
 import shutil
 
 import attr
-from PyQt5.QtCore import pyqtSignal, QPoint, QProcess, QObject, QUrl
-from PyQt5.QtGui import QIcon
-from PyQt5.QtNetwork import (QNetworkRequest, QAbstractNetworkCache,
+from PySide2.QtCore import pyqtSignal, QPoint, QProcess, QObject, QUrl
+from PySide2.QtGui import QIcon
+from PySide2.QtNetwork import (QNetworkRequest, QAbstractNetworkCache,
                              QNetworkCacheMetaData)
-from PyQt5.QtWidgets import QCommonStyle, QLineEdit, QWidget, QTabBar
+from PySide2.QtWidgets import QCommonStyle, QLineEdit, QWidget, QTabBar
 
 from qutebrowser.browser import browsertab, downloads
 from qutebrowser.utils import usertypes

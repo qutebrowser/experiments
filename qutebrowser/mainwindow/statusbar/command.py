@@ -21,8 +21,8 @@
 
 import functools
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QSize
-from PyQt5.QtWidgets import QSizePolicy
+from PySide2.QtCore import pyqtSignal, pyqtSlot, Qt, QSize
+from PySide2.QtWidgets import QSizePolicy
 
 from qutebrowser.keyinput import modeman, modeparsers
 from qutebrowser.commands import cmdexc, cmdutils

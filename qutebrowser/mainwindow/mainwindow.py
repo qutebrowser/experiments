@@ -24,8 +24,8 @@ import base64
 import itertools
 import functools
 
-from PyQt5.QtCore import pyqtSlot, QRect, QPoint, QTimer, Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QSizePolicy
+from PySide2.QtCore import pyqtSlot, QRect, QPoint, QTimer, Qt
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QApplication, QSizePolicy
 
 from qutebrowser.commands import runners, cmdutils
 from qutebrowser.config import config, configfiles

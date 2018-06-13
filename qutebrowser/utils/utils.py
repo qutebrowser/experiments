@@ -34,9 +34,9 @@ import socket
 import shlex
 import glob
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QColor, QClipboard, QDesktopServices
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import QUrl
+from PySide2.QtGui import QColor, QClipboard, QDesktopServices
+from PySide2.QtWidgets import QApplication
 import pkg_resources
 import yaml
 try:

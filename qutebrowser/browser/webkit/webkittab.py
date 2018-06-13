@@ -24,12 +24,12 @@ import functools
 import xml.etree.ElementTree
 
 import sip
-from PyQt5.QtCore import (pyqtSlot, Qt, QEvent, QUrl, QPoint, QTimer, QSizeF,
+from PySide2.QtCore import (pyqtSlot, Qt, QEvent, QUrl, QPoint, QTimer, QSizeF,
                           QSize)
-from PyQt5.QtGui import QKeyEvent, QIcon
-from PyQt5.QtWebKitWidgets import QWebPage, QWebFrame
-from PyQt5.QtWebKit import QWebSettings
-from PyQt5.QtPrintSupport import QPrinter
+from PySide2.QtGui import QKeyEvent, QIcon
+from PySide2.QtWebKitWidgets import QWebPage, QWebFrame
+from PySide2.QtWebKit import QWebSettings
+from PySide2.QtPrintSupport import QPrinter
 
 from qutebrowser.browser import browsertab, shared
 from qutebrowser.browser.webkit import (webview, tabhistory, webkitelem,

@@ -21,7 +21,7 @@ import json
 import os
 import time
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 import pytest
 
 from qutebrowser.browser import history, qutescheme

@@ -24,9 +24,9 @@ import itertools
 
 import sip
 import attr
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QUrl, QObject, QSizeF, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget, QApplication
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QUrl, QObject, QSizeF, Qt
+from PySide2.QtGui import QIcon
+from PySide2.QtWidgets import QWidget, QApplication
 
 import pygments
 import pygments.lexers

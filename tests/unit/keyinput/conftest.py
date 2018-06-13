@@ -21,8 +21,8 @@
 
 import pytest
 
-from PyQt5.QtCore import QEvent, Qt
-from PyQt5.QtGui import QKeyEvent
+from PySide2.QtCore import QEvent, Qt
+from PySide2.QtGui import QKeyEvent
 
 from qutebrowser.keyinput import keyutils
 

@@ -28,9 +28,9 @@ from unittest import mock
 
 import attr
 import pytest
-from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtNetwork import QLocalServer, QLocalSocket, QAbstractSocket
-from PyQt5.QtTest import QSignalSpy
+from PySide2.QtCore import pyqtSignal, QObject
+from PySide2.QtNetwork import QLocalServer, QLocalSocket, QAbstractSocket
+from PySide2.QtTest import QSignalSpy
 
 import qutebrowser
 from qutebrowser.misc import ipc

@@ -22,7 +22,7 @@
 import logging
 import os
 
-from PyQt5.QtCore import QLibraryInfo
+from PySide2.QtCore import QLibraryInfo
 from qutebrowser.browser.webengine import spell
 from qutebrowser.utils import usertypes
 

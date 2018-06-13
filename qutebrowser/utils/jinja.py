@@ -26,7 +26,7 @@ import mimetypes
 import html
 
 import jinja2
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.utils import utils, urlutils, log
 

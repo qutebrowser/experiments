@@ -21,8 +21,8 @@
 
 import sys
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMessageBox
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QMessageBox
 
 from qutebrowser.utils import objreg
 

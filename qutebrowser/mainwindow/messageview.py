@@ -20,8 +20,8 @@
 """Showing messages above the statusbar."""
 
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QTimer, Qt, QSize
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
+from PySide2.QtCore import pyqtSlot, pyqtSignal, QTimer, Qt, QSize
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 from qutebrowser.config import config
 from qutebrowser.utils import usertypes

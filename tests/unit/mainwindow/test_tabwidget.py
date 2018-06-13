@@ -21,7 +21,7 @@
 
 import pytest
 
-from PyQt5.QtGui import QIcon, QPixmap
+from PySide2.QtGui import QIcon, QPixmap
 
 from qutebrowser.mainwindow import tabwidget, tabbedbrowser
 from qutebrowser.utils import usertypes

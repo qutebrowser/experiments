@@ -23,7 +23,7 @@ import copy
 import contextlib
 import functools
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject
 
 from qutebrowser.config import configdata, configexc, configutils
 from qutebrowser.utils import utils, log, jinja

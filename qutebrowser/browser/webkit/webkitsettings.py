@@ -26,8 +26,8 @@ Module attributes:
 
 import os.path
 
-from PyQt5.QtGui import QFont
-from PyQt5.QtWebKit import QWebSettings
+from PySide2.QtGui import QFont
+from PySide2.QtWebKit import QWebSettings
 
 from qutebrowser.config import config, websettings
 from qutebrowser.config.websettings import AttributeInfo as Attr

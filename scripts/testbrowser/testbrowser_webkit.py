@@ -23,10 +23,10 @@
 import sys
 import argparse
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWebKit import QWebSettings
-from PyQt5.QtWebKitWidgets import QWebView
+from PySide2.QtCore import QUrl
+from PySide2.QtWidgets import QApplication
+from PySide2.QtWebKit import QWebSettings
+from PySide2.QtWebKitWidgets import QWebView
 
 
 def parse_args():

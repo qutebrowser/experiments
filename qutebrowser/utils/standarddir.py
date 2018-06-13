@@ -26,8 +26,8 @@ import shutil
 import contextlib
 import enum
 
-from PyQt5.QtCore import QStandardPaths
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtCore import QStandardPaths
+from PySide2.QtWidgets import QApplication
 
 from qutebrowser.utils import log, debug, message, utils
 

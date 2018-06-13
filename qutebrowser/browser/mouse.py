@@ -19,7 +19,7 @@
 
 """Mouse handling for a browser tab."""
 
-from PyQt5.QtCore import QObject, QEvent, Qt, QTimer
+from PySide2.QtCore import QObject, QEvent, Qt, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.utils import message, log, usertypes, qtutils

@@ -30,8 +30,8 @@ import re
 import shlex
 
 import attr
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QColor, QClipboard
+from PySide2.QtCore import QUrl
+from PySide2.QtGui import QColor, QClipboard
 import pytest
 
 import qutebrowser

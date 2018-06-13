@@ -22,10 +22,10 @@
 
 """QtWebEngine specific part of the web element API."""
 
-from PyQt5.QtCore import QRect, Qt, QPoint, QEventLoop
-from PyQt5.QtGui import QMouseEvent
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWebEngineWidgets import QWebEngineSettings
+from PySide2.QtCore import QRect, Qt, QPoint, QEventLoop
+from PySide2.QtGui import QMouseEvent
+from PySide2.QtWidgets import QApplication
+from PySide2.QtWebEngineWidgets import QWebEngineSettings
 
 from qutebrowser.utils import log, javascript, urlutils
 from qutebrowser.browser import webelem

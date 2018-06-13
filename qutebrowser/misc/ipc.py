@@ -26,8 +26,8 @@ import getpass
 import binascii
 import hashlib
 
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, Qt
-from PyQt5.QtNetwork import QLocalSocket, QLocalServer, QAbstractSocket
+from PySide2.QtCore import pyqtSignal, pyqtSlot, QObject, Qt
+from PySide2.QtNetwork import QLocalSocket, QLocalServer, QAbstractSocket
 
 import qutebrowser
 from qutebrowser.utils import log, usertypes, error, standarddir, utils

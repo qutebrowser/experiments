@@ -21,8 +21,8 @@
 
 import string
 
-from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtGui import QKeySequence
+from PySide2.QtCore import pyqtSignal, QObject
+from PySide2.QtGui import QKeySequence
 
 from qutebrowser.config import config
 from qutebrowser.utils import usertypes, log, utils

@@ -25,9 +25,9 @@ import shlex
 import functools
 import typing
 
-from PyQt5.QtWidgets import QApplication, QTabBar, QDialog
-from PyQt5.QtCore import pyqtSlot, Qt, QUrl, QEvent, QUrlQuery
-from PyQt5.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
+from PySide2.QtWidgets import QApplication, QTabBar, QDialog
+from PySide2.QtCore import pyqtSlot, Qt, QUrl, QEvent, QUrlQuery
+from PySide2.QtPrintSupport import QPrintDialog, QPrintPreviewDialog
 
 from qutebrowser.commands import userscripts, cmdexc, cmdutils, runners
 from qutebrowser.config import config, configdata

@@ -23,7 +23,7 @@
 Use python3 -m scripts.keytester to launch it.
 """
 
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QHBoxLayout
+from PySide2.QtWidgets import QApplication, QWidget, QLabel, QHBoxLayout
 
 from qutebrowser.keyinput import keyutils
 

@@ -23,7 +23,7 @@ import glob
 import os
 import re
 
-from PyQt5.QtCore import QLibraryInfo
+from PySide2.QtCore import QLibraryInfo
 from qutebrowser.utils import log, message
 
 dict_version_re = re.compile(r".+-(?P<version>[0-9]+-[0-9]+?)\.bdic")

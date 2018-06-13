@@ -28,10 +28,10 @@ import ctypes.util
 import enum
 
 import attr
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QApplication, QDialog, QPushButton, QHBoxLayout,
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import (QApplication, QDialog, QPushButton, QHBoxLayout,
                              QVBoxLayout, QLabel, QMessageBox)
-from PyQt5.QtNetwork import QSslSocket
+from PySide2.QtNetwork import QSslSocket
 
 from qutebrowser.config import config
 from qutebrowser.utils import usertypes, objreg, version, qtutils, log, utils
@@ -267,8 +267,8 @@ def _try_import_backends():
     results = BackendImports()
 
     try:
-        from PyQt5 import QtWebKit
-        from PyQt5 import QtWebKitWidgets
+        from PySide2 import QtWebKit
+        from PySide2 import QtWebKitWidgets
     except ImportError as e:
         results.webkit_available = False
         results.webkit_error = str(e)
@@ -280,7 +280,7 @@ def _try_import_backends():
             results.webkit_error = "Unsupported legacy QtWebKit found"
 
     try:
-        from PyQt5 import QtWebEngineWidgets
+        from PySide2 import QtWebEngineWidgets
     except ImportError as e:
         results.webengine_available = False
         results.webengine_error = str(e)

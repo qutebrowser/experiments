@@ -30,9 +30,9 @@ except ImportError:
     hunter = None
 
 import sip
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 # so it's available for :debug-pyeval
-from PyQt5.QtWidgets import QApplication  # pylint: disable=unused-import
+from PySide2.QtWidgets import QApplication  # pylint: disable=unused-import
 
 from qutebrowser.browser import qutescheme
 from qutebrowser.utils import log, objreg, usertypes, message, debug, utils
@@ -175,7 +175,7 @@ def debug_cache_stats():
 
     history_info = None
     try:
-        from PyQt5.QtWebKit import QWebHistoryInterface
+        from PySide2.QtWebKit import QWebHistoryInterface
         interface = QWebHistoryInterface.defaultInterface()
         if interface is not None:
             history_info = interface.historyContains.cache_info()

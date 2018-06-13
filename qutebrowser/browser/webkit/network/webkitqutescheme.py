@@ -21,7 +21,7 @@
 
 import mimetypes
 
-from PyQt5.QtNetwork import QNetworkReply
+from PySide2.QtNetwork import QNetworkReply
 
 from qutebrowser.browser import pdfjs, qutescheme
 from qutebrowser.browser.webkit.network import networkreply

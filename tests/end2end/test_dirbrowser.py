@@ -25,7 +25,7 @@ import attr
 import pytest
 import bs4
 
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 from qutebrowser.utils import urlutils
 
 

@@ -19,7 +19,7 @@
 
 """Bridge from QWeb(Engine)Settings to our own settings."""
 
-from PyQt5.QtGui import QFont
+from PySide2.QtGui import QFont
 
 from qutebrowser.config import config, configutils
 from qutebrowser.utils import log, usertypes, urlmatch, qtutils

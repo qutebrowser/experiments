@@ -34,7 +34,7 @@ import email.message
 import quopri
 
 import attr
-from PyQt5.QtCore import QUrl
+from PySide2.QtCore import QUrl
 
 from qutebrowser.browser import downloads
 from qutebrowser.browser.webkit import webkitelem

@@ -34,7 +34,7 @@ except ImportError:
     test_file = None
 
 import pytest
-from PyQt5.QtCore import (QDataStream, QPoint, QUrl, QByteArray, QIODevice,
+from PySide2.QtCore import (QDataStream, QPoint, QUrl, QByteArray, QIODevice,
                           QTimer, QBuffer, QFile, QProcess, QFileDevice)
 
 from qutebrowser.utils import qtutils, utils

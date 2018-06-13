@@ -19,10 +19,10 @@
 
 """Misc. widgets used at different places."""
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QSize, QTimer
-from PyQt5.QtWidgets import (QLineEdit, QWidget, QHBoxLayout, QLabel,
+from PySide2.QtCore import pyqtSlot, pyqtSignal, Qt, QSize, QTimer
+from PySide2.QtWidgets import (QLineEdit, QWidget, QHBoxLayout, QLabel,
                              QStyleOption, QStyle, QLayout, QApplication)
-from PyQt5.QtGui import QValidator, QPainter
+from PySide2.QtGui import QValidator, QPainter
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils

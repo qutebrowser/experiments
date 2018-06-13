@@ -22,11 +22,11 @@
 import sys
 import functools
 
-from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
-from PyQt5.QtNetwork import (QNetworkProxy, QNetworkRequest, QHostInfo,
+from PySide2.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
+from PySide2.QtNetwork import (QNetworkProxy, QNetworkRequest, QHostInfo,
                              QNetworkReply, QNetworkAccessManager,
                              QHostAddress)
-from PyQt5.QtQml import QJSEngine, QJSValue
+from PySide2.QtQml import QJSEngine, QJSValue
 
 from qutebrowser.utils import log, utils, qtutils
 

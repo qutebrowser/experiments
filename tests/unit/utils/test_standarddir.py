@@ -29,7 +29,7 @@ import logging
 import subprocess
 
 import attr
-from PyQt5.QtCore import QStandardPaths
+from PySide2.QtCore import QStandardPaths
 import pytest
 
 from qutebrowser.utils import standarddir, utils
@@ -547,7 +547,7 @@ def test_no_qapplication(qapp, tmpdir):
         import json
         sys.path = sys.argv[1:]  # make sure we have the same python path
 
-        from PyQt5.QtWidgets import QApplication
+        from PySide2.QtWidgets import QApplication
         from qutebrowser.utils import standarddir
 
         assert QApplication.instance() is None
