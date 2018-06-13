@@ -21,7 +21,7 @@
 
 import enum
 
-from PySide2.QtCore import Slot, pyqtProperty, Qt, QUrl
+from PySide2.QtCore import Slot, Property, Qt, QUrl
 
 from qutebrowser.mainwindow.statusbar import textbase
 from qutebrowser.config import config
@@ -48,7 +48,7 @@ class UrlText(textbase.TextBase):
                   Accessed via the urltype property.
 
                   For some reason we need to have this as class attribute so
-                  pyqtProperty works correctly.
+                  Property works correctly.
     """
 
     _urltype = None
@@ -88,7 +88,7 @@ class UrlText(textbase.TextBase):
         self._normal_url = None
         self._normal_url_type = UrlType.normal
 
-    @pyqtProperty(str)
+    @Property(str)
     def urltype(self):
         """Getter for self.urltype, so it can be used as Qt property.
 
