@@ -158,7 +158,7 @@ def qt_version(qversion=None, qt_version_str=None):
         from PySide2.QtCore import qVersion
         qversion = qVersion()
     if qt_version_str is None:
-        from PySide2.QtCore import QT_VERSION_STR
+        from PySide2.QtCore import __version__ as QT_VERSION_STR
         qt_version_str = QT_VERSION_STR
 
     if qversion != qt_version_str:
@@ -169,6 +169,7 @@ def qt_version(qversion=None, qt_version_str=None):
 
 def check_qt_version():
     """Check if the Qt version is recent enough."""
+    return # FIXME
     from PySide2.QtCore import (qVersion, QT_VERSION, PYQT_VERSION,
                               PYQT_VERSION_STR)
     from pkg_resources import parse_version
@@ -243,6 +244,7 @@ def configure_pyqt():
     Doing this means we can't use the interactive shell anymore (which we don't
     anyways), but we can use pdb instead.
     """
+    return  # FIXME
     from PySide2.QtCore import pyqtRemoveInputHook
     pyqtRemoveInputHook()
 
