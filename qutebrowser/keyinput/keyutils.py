@@ -409,7 +409,7 @@ class KeySequence:
         return self._sequences != other._sequences
 
     def __hash__(self):
-        return hash(tuple(self._sequences))
+        return hash(tuple(seq.toString() for seq in self._sequences))
 
     def __len__(self):
         return sum(len(seq) for seq in self._sequences)
