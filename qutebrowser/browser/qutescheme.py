@@ -33,7 +33,6 @@ import urllib
 import collections
 
 import pkg_resources
-import sip
 from PySide2.QtCore import QUrlQuery, QUrl
 
 import qutebrowser

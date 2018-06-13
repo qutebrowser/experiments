@@ -29,7 +29,7 @@ import pathlib
 import tempfile
 import enum
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import (Slot, Signal, Qt, QObject, QModelIndex,
                           QTimer, QAbstractListModel, QUrl)
 
@@ -843,7 +843,7 @@ class AbstractDownloadManager(QObject):
     @Slot(AbstractDownloadItem)
     def _remove_item(self, download):
         """Remove a given download."""
-        if sip.isdeleted(self):
+        if not shiboken2.isValid(self):
             # https://github.com/qutebrowser/qutebrowser/issues/1242
             return
         try:

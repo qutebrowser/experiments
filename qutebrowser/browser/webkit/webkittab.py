@@ -23,7 +23,7 @@ import re
 import functools
 import xml.etree.ElementTree
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import (Slot, Qt, QEvent, QUrl, QPoint, QTimer, QSizeF,
                           QSize)
 from PySide2.QtGui import QKeyEvent, QIcon
@@ -766,7 +766,7 @@ class WebKitTab(browsertab.AbstractTab):
     @Slot()
     def _on_webkit_icon_changed(self):
         """Emit iconChanged with a QIcon like QWebEngineView does."""
-        if sip.isdeleted(self._widget):
+        if not shiboken2.isValid(self._widget):
             log.webview.debug("Got _on_webkit_icon_changed for deleted view!")
             return
         self.icon_changed.emit(self._widget.icon())

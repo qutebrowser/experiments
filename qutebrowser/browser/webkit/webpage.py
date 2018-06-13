@@ -22,7 +22,7 @@
 import html
 import functools
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import Slot, Signal, Qt, QUrl, QPoint
 from PySide2.QtGui import QDesktopServices
 from PySide2.QtNetwork import QNetworkReply, QNetworkRequest
@@ -302,7 +302,7 @@ class BrowserPage(QWebPage):
         Args:
             frame: The QWebFrame to inject the user scripts into.
         """
-        if sip.isdeleted(frame):
+        if not shiboken2.isValid(frame):
             log.greasemonkey.debug("_inject_userjs called for deleted frame!")
             return
 

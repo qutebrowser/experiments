@@ -25,7 +25,7 @@ import os
 import sys
 import warnings
 
-import sip
+from PySide2 import shiboken2
 import pytest
 import hypothesis
 from PySide2.QtCore import qVersion, PYQT_VERSION

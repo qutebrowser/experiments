@@ -248,7 +248,7 @@ def configure_pyqt():
     from PySide2.QtCore import pyqtRemoveInputHook
     pyqtRemoveInputHook()
 
-    import sip
+    from PySide2 import shiboken2
     try:
         # Added in sip 4.19.4
         sip.enableoverflowchecking(True)

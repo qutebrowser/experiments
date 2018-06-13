@@ -19,7 +19,7 @@
 
 """The main browser widget for QtWebEngine."""
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import Signal, Slot, QUrl, PYQT_VERSION
 from PySide2.QtGui import QPalette
 from PySide2.QtQuickWidgets import QQuickWidget

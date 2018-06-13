@@ -125,7 +125,7 @@ class FakeMainWindow(QObject):
 
     A fake MainWindow which provides a saveGeometry method.
 
-    Needs to be a QObject so sip.isdeleted works.
+    Needs to be a QObject so not shiboken2.isValid works.
     """
 
     def __init__(self, geometry, win_id, parent=None):

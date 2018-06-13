@@ -29,7 +29,7 @@ try:
 except ImportError:
     hunter = None
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import QUrl
 # so it's available for :debug-pyeval
 from PySide2.QtWidgets import QApplication  # pylint: disable=unused-import
@@ -355,7 +355,7 @@ def window_only(current_win_id):
     for win_id, window in objreg.window_registry.items():
 
         # We could be in the middle of destroying a window here
-        if sip.isdeleted(window):
+        if not shiboken2.isValid(window):
             continue
 
         if win_id != current_win_id:

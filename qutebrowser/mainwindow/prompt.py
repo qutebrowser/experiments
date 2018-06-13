@@ -24,7 +24,7 @@ import html
 import collections
 
 import attr
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import (Slot, Signal, Qt, QTimer, QDir, QModelIndex,
                           QItemSelectionModel, QObject, QEventLoop)
 from PySide2.QtWidgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
@@ -117,7 +117,7 @@ class PromptQueue(QObject):
         log.prompt.debug("Popping from queue {}".format(self._queue))
         if self._queue:
             question = self._queue.popleft()
-            if not sip.isdeleted(question):
+            if not not shiboken2.isValid(question):
                 # the question could already be deleted, e.g. by a cancelled
                 # download. See
                 # https://github.com/qutebrowser/qutebrowser/issues/415

@@ -22,7 +22,7 @@
 import enum
 import itertools
 
-import sip
+from PySide2 import shiboken2
 import attr
 from PySide2.QtCore import Signal, Slot, QUrl, QObject, QSizeF, Qt
 from PySide2.QtGui import QIcon
@@ -859,7 +859,7 @@ class AbstractTab(QWidget):
 
     @Slot(bool)
     def _on_load_finished(self, ok):
-        if sip.isdeleted(self._widget):
+        if not shiboken2.isValid(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3498
             return
 
@@ -986,4 +986,4 @@ class AbstractTab(QWidget):
         return utils.get_repr(self, tab_id=self.tab_id, url=url)
 
     def is_deleted(self):
-        return sip.isdeleted(self._widget)
+        return not shiboken2.isValid(self._widget)

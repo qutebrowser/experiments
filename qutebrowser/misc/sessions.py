@@ -24,7 +24,7 @@ import os.path
 import itertools
 import urllib
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import QUrl, QObject, QPoint, QTimer
 from PySide2.QtWidgets import QApplication
 import yaml
@@ -231,7 +231,7 @@ class SessionManager(QObject):
                                      window=win_id)
 
             # We could be in the middle of destroying a window here
-            if sip.isdeleted(main_window):
+            if not shiboken2.isValid(main_window):
                 continue
 
             if tabbed_browser.private and not with_private:

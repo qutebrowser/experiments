@@ -25,7 +25,7 @@ import sys
 import re
 import html as html_utils
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import (Signal, Slot, Qt, QEvent, QPoint, QPointF,
                           QUrl, QTimer, QObject, qVersion)
 from PySide2.QtGui import QKeyEvent, QIcon
@@ -964,7 +964,7 @@ class WebEngineTab(browsertab.AbstractTab):
 
     @Slot()
     def _restore_zoom(self):
-        if sip.isdeleted(self._widget):
+        if not shiboken2.isValid(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3498
             return
         if self._saved_zoom is None:

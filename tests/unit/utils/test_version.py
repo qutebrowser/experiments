@@ -659,7 +659,7 @@ class TestModuleVersions:
         The aim of this test is to fail if that gets missing in some future
         version of sip.
         """
-        import sip
+        from PySide2 import shiboken2
         assert isinstance(sip.SIP_VERSION_STR, str)
 
 

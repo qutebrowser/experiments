@@ -21,7 +21,7 @@
 
 import functools
 
-import sip
+from PySide2 import shiboken2
 from PySide2.QtCore import Slot, QSize, Qt, QTimer
 from PySide2.QtWidgets import QListView, QSizePolicy, QMenu, QStyleFactory
 
@@ -44,7 +44,7 @@ def update_geometry(obj):
     """
     def _update_geometry():
         """Actually update the geometry if the object still exists."""
-        if sip.isdeleted(obj):
+        if not shiboken2.isValid(obj):
             return
         obj.updateGeometry()
 
