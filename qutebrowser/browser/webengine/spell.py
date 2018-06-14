@@ -84,22 +84,27 @@ class Installer:
 
     """Download and install dictionaries asynchronously."""
 
-    def __init__(self, profile, completed, codes):
+    def __init__(self):
         self.api_url = 'https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries.git/+/master/'
         self._download_manager = objreg.get('qtnetwork-download-manager')
         self._in_progress = []
-        self._profile = profile
-        self._completed = completed
+        self._completed = []
+        self._profile = None
 
-        if not codes:
-            return self.load_dictionaries()
+    def install(self, available, missing, profile=None):
+        self._profile = profile
+        self._completed += available
+
+        if not missing:
+            self.load_dictionaries()
+            return
 
         if not os.path.isdir(dictionary_dir()):
             msg = '{} does not exist, creating the directory'
             log.config.debug(msg.format(dictionary_dir()))
             os.makedirs(dictionary_dir())
 
-        for code in codes:
+        for code in missing:
             for language in self.available_langs():
                 if language.code == code:
                     self.install_language(language)
@@ -171,7 +176,7 @@ class Installer:
 
     def load_dictionaries(self):
         """Load installed dictionaries into current profile."""
-        if not self._in_progress:
+        if not self._in_progress and self._profile is not None:
             self._profile.setSpellCheckLanguages(self._completed)
             self._profile.setSpellCheckEnabled(bool(self._completed))
 
@@ -252,4 +257,5 @@ def init(profile, install=True):
             available.append(code)
         else:
             missing.append(code)
-    Installer(profile, available, missing)
+    installer = Installer()
+    installer.install(available, missing, profile)
