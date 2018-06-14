@@ -36,6 +36,7 @@ import attr
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir))
 from qutebrowser.browser.webengine import spell
 from qutebrowser.config import configdata
+from qutebrowser.utils import standarddir
 
 
 API_URL = 'https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries.git/+/master/'
@@ -48,47 +49,6 @@ class InvalidLanguageError(Exception):
     def __init__(self, invalid_langs):
         msg = 'invalid languages: {}'.format(', '.join(invalid_langs))
         super().__init__(msg)
-
-
-@attr.s
-class Language:
-
-    """Dictionary language specs."""
-
-    code = attr.ib()
-    name = attr.ib()
-    remote_filename = attr.ib()
-    local_filename = attr.ib(default=None)
-    _file_extension = attr.ib('bdic', init=False)
-
-    def __attrs_post_init__(self):
-        if self.local_filename is None:
-            self.local_filename = spell.local_filename(self.code)
-
-    @property
-    def remote_path(self):
-        """Resolve the filename with extension the remote dictionary."""
-        return '.'.join([self.remote_filename, self._file_extension])
-
-    @property
-    def local_path(self):
-        """Resolve the filename with extension the local dictionary."""
-        if self.local_filename is None:
-            return None
-        return '.'.join([self.local_filename, self._file_extension])
-
-    @property
-    def remote_version(self):
-        """Resolve the version of the local dictionary."""
-        return spell.version(self.remote_path)
-
-    @property
-    def local_version(self):
-        """Resolve the version of the local dictionary."""
-        local_path = self.local_path
-        if local_path is None:
-            return None
-        return spell.version(local_path)
 
 
 def get_argparser():
@@ -138,18 +98,6 @@ def valid_languages():
     return option.typ.valtype.valid_values.descriptions
 
 
-def parse_entry(entry):
-    """Parse an entry from the remote API."""
-    dict_re = re.compile(r"""
-        (?P<filename>(?P<code>[a-z]{2}(-[A-Z]{2})?).*)\.bdic
-    """, re.VERBOSE)
-    match = dict_re.fullmatch(entry['name'])
-    if match is not None:
-        return match.group('code'), match.group('filename')
-    else:
-        return None
-
-
 def language_list_from_api():
     """Return a JSON with a list of available languages from Google API."""
     listurl = API_URL + '?format=JSON'
@@ -159,15 +107,8 @@ def language_list_from_api():
     #      https://github.com/google/gitiles/issues/82
     json_content = response.read()[5:]
     entries = json.loads(json_content.decode('utf-8'))['entries']
-    parsed_entries = [parse_entry(entry) for entry in entries]
+    parsed_entries = [spell.parse_entry(entry) for entry in entries]
     return [entry for entry in parsed_entries if entry is not None]
-
-
-def latest_yet(code2file, code, filename):
-    """Determine whether the latest version so far."""
-    if code not in code2file:
-        return True
-    return spell.version(code2file[code]) < spell.version(filename)
 
 
 def available_languages():
@@ -176,10 +117,10 @@ def available_languages():
     api_list = language_list_from_api()
     code2file = {}
     for code, filename in api_list:
-        if latest_yet(code2file, code, filename):
+        if spell.latest_yet(code2file, code, filename):
             code2file[code] = filename
     return [
-        Language(code, name, code2file[code])
+        spell.Language(code, name, code2file[code])
         for code, name in lang_map.items()
         if code in code2file
     ]
@@ -257,6 +198,8 @@ def remove_old(languages):
 def main():
     if configdata.DATA is None:
         configdata.init()
+    standarddir.init(None)
+
     parser = get_argparser()
     argv = sys.argv[1:]
     args = parser.parse_args(argv)
