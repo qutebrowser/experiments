@@ -142,14 +142,11 @@ class GUIProcess(QObject):
         if self.verbose:
             message.info('Executing: ' + fake_cmdline)
 
-    def start(self, cmd, args, mode=None):
+    def start(self, cmd, args):
         """Convenience wrapper around QProcess::start."""
         log.procs.debug("Starting process.")
         self._pre_start(cmd, args)
-        if mode is None:
-            self._proc.start(cmd, args)
-        else:
-            self._proc.start(cmd, args, mode)
+        self._proc.start(cmd, args)
         self._proc.closeWriteChannel()
 
     def start_detached(self, cmd, args, cwd=None):
