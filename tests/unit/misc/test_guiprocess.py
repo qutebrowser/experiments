@@ -104,12 +104,20 @@ def test_start_env(monkeypatch, qtbot, py_proc):
     assert 'QUTEBROWSER_TEST_2' in data
 
 
-def test_start_detached(fake_proc):
+@pytest.mark.parametrize('static', [True, False])
+def test_start_detached(fake_proc, static):
     """Test starting a detached process."""
     argv = ['foo', 'bar']
-    fake_proc._proc.startDetached.return_value = (True, 0)
+    if static:
+        expected_call = argv
+        fake_proc._proc.startDetached.side_effect = [
+            TypeError, (True, 0)]
+    else:
+        expected_call = []
+        fake_proc._proc.startDetached.return_value = (True, 0)
+
     fake_proc.start_detached(*argv)
-    fake_proc._proc.startDetached.assert_called_with(*list(argv) + [None])
+    fake_proc._proc.startDetached.assert_called_with(*expected_call)
 
 
 def test_start_detached_error(fake_proc, message_mock, caplog):

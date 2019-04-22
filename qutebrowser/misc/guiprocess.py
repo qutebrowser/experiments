@@ -135,8 +135,12 @@ class GUIProcess(QObject):
         """Prepare starting of a QProcess."""
         if self._started:
             raise ValueError("Trying to start a running QProcess!")
+
         self.cmd = cmd
         self.args = args
+        self._proc.setProgram(cmd)
+        self._proc.setArguments(args)
+
         fake_cmdline = ' '.join(shlex.quote(e) for e in [cmd] + list(args))
         log.procs.debug("Executing: {}".format(fake_cmdline))
         if self.verbose:
@@ -146,21 +150,32 @@ class GUIProcess(QObject):
         """Convenience wrapper around QProcess::start."""
         log.procs.debug("Starting process.")
         self._pre_start(cmd, args)
-        self._proc.start(cmd, args)
+        self._proc.start()
         self._proc.closeWriteChannel()
 
     def start_detached(self, cmd, args):
         """Convenience wrapper around QProcess::startDetached."""
         log.procs.debug("Starting detached.")
         self._pre_start(cmd, args)
-        ok, _pid = self._proc.startDetached(cmd, args)
+
+        try:
+            # Qt >= 5.10, non-static overload
+            ok, _pid = self._proc.startDetached()
+            static = False
+        except TypeError:
+            ok, _pid = self._proc.startDetached(cmd, args)
+            static = True
 
         if ok:
             log.procs.debug("Process started.")
             self._started = True
         else:
-            message.error("Error while spawning {}: {}".format(
-                self._what, self._proc.errorString()))
+            if static:
+                msg = "Error while spawning {}".format(self._what)
+            else:
+                msg = "Error while spawning {}: {}".format(
+                    self._what, self._proc.errorString())
+            message.error(msg)
 
     def exit_status(self):
         return self._proc.exitStatus()
