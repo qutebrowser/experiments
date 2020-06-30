@@ -2,7 +2,9 @@ name: Recompile requirements
 
 on:
   schedule:
-    - cron: '05 10 * * *'
+    - cron: '10 10 * * *'
+  issues:
+  issue_comment:
 
 jobs:
   update:
