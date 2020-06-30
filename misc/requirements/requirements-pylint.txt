@@ -12,7 +12,7 @@ jwcrypto==0.7
 lazy-object-proxy==1.5.0
 mccabe==0.6.1
 pycparser==2.20
-pylint==2.4.4  # rq.filter: < 2.5
+pylint==2.5.3  # rq.filter: < 2.5
 python-dateutil==2.8.1
 ./scripts/dev/pylint_checkers
 requests==2.24.0
