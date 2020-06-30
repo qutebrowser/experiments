@@ -24,5 +24,5 @@ jobs:
           token: ${{ secrets.QUTEBROWSER_BOT_TOKEN }}
           commit-message: Update dependencies
           title: Update dependencies
-          body: ""
+          body: I'm a bot, bleep, bloop.
           branch: update-dependencies
