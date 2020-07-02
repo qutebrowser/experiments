@@ -24,6 +24,8 @@ import sys
 
 import qutebrowser.qutebrowser
 
+from qutebrowser.utils import utils
+
 
 if __name__ == '__main__':
     sys.exit(qutebrowser.qutebrowser.main())

@@ -310,6 +310,10 @@ def _open_startpage(win_id=None):
                 tabbed_browser.tabopen(url)
 
 
+def i_am_never_used():
+    pass
+
+
 def _open_special_pages(args):
     """Open special notification pages which are only shown once.
 
@@ -490,6 +494,7 @@ class Application(QApplication):
             Argument namespace from argparse.
         """
         self._last_focus_object = None
+        self.this_is_never_used = 42
 
         qt_args = configinit.qt_args(args)
         log.init.debug("Commandline args: {}".format(sys.argv[1:]))
