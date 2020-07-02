@@ -75,8 +75,9 @@ from qutebrowser.misc import utilcmds
 q_app = typing.cast(QApplication, None)
 
 
-def run(args):
+def run(args, unused):
     """Initialize everything and run the application."""
+    print(oaisfjasfoj)
     if args.temp_basedir:
         args.basedir = tempfile.mkdtemp(prefix='qutebrowser-basedir-')
 
@@ -103,7 +104,7 @@ def run(args):
     crashsignal.init(q_app=q_app, args=args, quitter=quitter.instance)
 
     try:
-        server = ipc.send_or_listen(args)
+        server  = ipc.send_or_listen(args)
     except ipc.Error:
         # ipc.send_or_listen already displays the error message for us.
         # We didn't really initialize much so far, so we just quit hard.
