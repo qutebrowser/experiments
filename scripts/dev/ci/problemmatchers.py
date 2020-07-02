@@ -72,7 +72,9 @@ MATCHERS = {
                 "regexp": r"^([^:]+):(\d+):(\d+): ([A-Z]\d{3}) (.*)$",
                 "file": 1,
                 "line": 2,
-                "message": 3,
+                "column": 3,
+                "code": 4,
+                "message": 5,
             }
         ]
     },
