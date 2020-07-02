@@ -32,8 +32,9 @@ if [[ -n $DOCKER ]]; then
 elif [[ $testenv == eslint ]]; then
     # Can't run this via tox as we can't easily install tox in the javascript
     # travis env
-    cd qutebrowser/javascript || exit 1
-    eslint --color --report-unused-disable-directives .
+    # cd qutebrowser/javascript || exit 1
+    # eslint --color --report-unused-disable-directives .
+    eslint -c qutebrowser/javascript/.eslintrc.yaml --ignore-path qutebrowser/javascript/.eslintignore qutebrowser/javascript
 elif [[ $testenv == shellcheck ]]; then
     script_list=$(mktemp)
     find scripts/dev/ -name '*.sh' > "$script_list"
