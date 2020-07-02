@@ -50,6 +50,7 @@ jobs:
         QUTE_BDD_WEBENGINE: "${{ matrix.image != 'archlinux-webkit' }}"
         DOCKER: "${{ matrix.image }}"
         CI: true
+        PY_FORCE_COLOR: 1
       options: --privileged --tty
     steps:
       - uses: actions/checkout@v2
