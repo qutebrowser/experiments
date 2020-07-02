@@ -721,7 +721,7 @@ window._qutebrowser.caret = (function() {
      * The actual caret element, an absolute-positioned flashing line.
      * @type {Element}
      */
-    CaretBrowsing.caretElement = undefined;
+    CaretBrowsing.caretElement = undefined
 
     /**
      * The x-position of the caret, in absolute pixels.
