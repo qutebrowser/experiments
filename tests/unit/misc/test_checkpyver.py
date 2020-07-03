@@ -63,7 +63,9 @@ def test_patched_no_errwindow(capfd, monkeypatch):
     monkeypatch.setattr(checkpyver.sys, 'hexversion', 0x03040000)
     monkeypatch.setattr(checkpyver.sys, 'exit', lambda status: None)
     checkpyver.check_python_version()
+
     stdout, stderr = capfd.readouterr()
+    stderr = stderr.rstrip()
     assert not stdout
     assert re.fullmatch(TEXT, stderr), stderr
 
