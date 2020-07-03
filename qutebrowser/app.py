@@ -374,7 +374,8 @@ def on_focus_changed(_old, new):
 
 def open_desktopservices_url(url):
     """Handler to open a URL via QDesktopServices."""
-    win_id = mainwindow.get_window(via_ipc=True, force_window=False)
+    print(blablab)
+    win_id  = mainwindow.get_window(via_ipc=True, force_window=False)
     tabbed_browser = objreg.get('tabbed-browser', scope='window',
                                 window=win_id)
     tabbed_browser.tabopen(url)
