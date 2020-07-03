@@ -192,5 +192,5 @@ jobs:
         channel: '#qutebrowser-dev'
         nickname: qutebrowser-bot
         message: |-
-          [CI] ${{ github.ref }} https://github.com/${{ github.repository_owner }}/${{ github.repository }}/runs/${{ github.run_id }}
+          [${{ github.workflow }}] ${{ github.ref }} https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} triggered by ${{ github.actor }}
           linters: ${{ needs.linters.result }}, tests: ${{ needs.tests.result }}, tests-docker: ${{ needs.tests-docker.result }}, codeql: ${{ needs.codeql.result }}
