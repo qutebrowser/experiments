@@ -77,6 +77,7 @@ q_app = typing.cast(QApplication, None)
 
 def run(args):
     """Initialize everything and run the application."""
+    raise Exception
     if args.temp_basedir:
         args.basedir = tempfile.mkdtemp(prefix='qutebrowser-basedir-')
 
