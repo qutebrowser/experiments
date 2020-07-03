@@ -63,8 +63,6 @@ jobs:
         DOCKER: "${{ matrix.image }}"
         CI: true
         PYTEST_ADDOPTS: "--color=yes"
-      volumes:
-        - "${{ runner.temp }}:${{ runner.temp }}"
       options: --privileged --tty
     steps:
       - uses: actions/checkout@v2
