@@ -63,6 +63,9 @@ jobs:
         DOCKER: "${{ matrix.image }}"
         CI: true
         PYTEST_ADDOPTS: "--color=yes"
+      volumes:
+        # Hardcoded because we can't use ${{ runner.temp }} here apparently.
+        - /home/runner/work/_temp/:/home/runner/work/_temp/
       options: --privileged --tty
     steps:
       - uses: actions/checkout@v2
