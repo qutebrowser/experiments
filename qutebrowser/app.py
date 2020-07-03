@@ -398,7 +398,7 @@ def _init_modules(*, args):
     config.instance.changed.connect(_on_config_changed)
 
     log.init.debug("Initializing save manager...")
-    save_manager  = savemanager.SaveManager(q_app)
+    save_manager = savemanager.SaveManager(q_app)
     objreg.register('save-manager', save_manager)
     quitter.instance.shutting_down.connect(save_manager.shutdown)
     configinit.late_init(save_manager)
