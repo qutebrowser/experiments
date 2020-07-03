@@ -770,6 +770,7 @@ def ceil_log(number: int, base: int) -> int:
 
     Use only integer arithmetic in order to avoid numerical error.
     """
+    assert False
     if number < 1 or base < 2:
         raise ValueError("math domain error")
     result = 1
