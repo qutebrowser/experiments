@@ -28,8 +28,6 @@ jobs:
             .tox
             ~/.cache/pip
           key: "${{ matrix.testenv }}-${{ hashFiles('misc/requirements/requirements-*.txt') }}-${{ hashFiles('requirements.txt') }}"
-      - name: Debug cache
-        run: "[[ -d .tox ]] && ls -R .tox || true"
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
@@ -42,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: "bash scripts/dev/ci/install.sh ${{ matrix.testenv }}"
       - name: "Run ${{ matrix.testenv }}"
-        run: "tox -v -e ${{ matrix.testenv}} -- ${{ matrix.args }}"
+        run: "tox -e ${{ matrix.testenv}} -- ${{ matrix.args }}"
 
   tests-docker:
     runs-on: ubuntu-20.04
