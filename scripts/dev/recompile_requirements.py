@@ -152,7 +152,7 @@ def read_comments(fobj):
         'ignore': [],
         'add': [],
         'replace': {},
-        'pre': False,
+        'pre': True,
     }
     for line in fobj:
         if line.startswith('#@'):
@@ -181,7 +181,7 @@ def read_comments(fobj):
             elif command == 'add':
                 comments['add'].append(args)
             elif command == 'pre':
-                comments['pre'] = True
+                comments['pre'] = args not in ['false', 'no']
     return comments
 
 
