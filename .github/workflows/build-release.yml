@@ -1,0 +1,32 @@
+name: Build release
+on:
+  repository_dispatch:
+    types: [build-release]
+
+jobs:
+  build-release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-20.04
+          - os: [self-hosted, macos-10.13]
+          - os: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install asciidoc
+        if: "startsWith(matrix.os, 'ubuntu-')"
+        run: |
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends asciidoc
+      - name: Install requirements
+        run: pip install -r requirements.txt -r misc/requirements/requirements-pyqt.txt
+      - name: Build release
+        run: python scripts/dev/build_release.py
+      # TODO: Add --upload
