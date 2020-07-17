@@ -1,0 +1,28 @@
+name: Create release
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1.1.2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          tag_name: "${{ github.ref }}"
+          release_name: "${{ github.ref }}"
+          # TODO: Extract/add changelog here
+          body: |
+            Check the [changelog](https://github.com/qutebrowser/qutebrowser/blob/master/doc/changelog.asciidoc) for changes in this release.
+      - name: Dispatch release build
+        uses: peter-evans/repository-dispatch@v1.1.1
+        with:
+          token: "${{ secrets.QUTEBROWSER_BOT_TOKEN }}"
+          event-type: build-release
+          client-payload: '{"ref": "${{ github.ref }}"}'
