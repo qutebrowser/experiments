@@ -19,17 +19,17 @@ jobs:
       matrix:
         include:
           - testenv: pylint
-          - testenv: flake8
+          # - testenv: flake8
           - testenv: mypy
-          - testenv: docs
-          - testenv: vulture
-          - testenv: misc
-          - testenv: pyroma
-          - testenv: check-manifest
-          - testenv: eslint
-          - testenv: shellcheck
-            args: "-f gcc"  # For problem matchers
-          - testenv: yamllint
+          # - testenv: docs
+          # - testenv: vulture
+          # - testenv: misc
+          # - testenv: pyroma
+          # - testenv: check-manifest
+          # - testenv: eslint
+          # - testenv: shellcheck
+          #   args: "-f gcc"  # For problem matchers
+          # - testenv: yamllint
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -63,6 +63,12 @@ jobs:
             python -m pip install -U -r misc/requirements/requirements-tox.txt
       - name: "Run ${{ matrix.testenv }}"
         run: "tox -e ${{ matrix.testenv}} -- ${{ matrix.args }}"
+      - name: Debug
+        if: always()
+        run: |
+            pwd
+            ls /home/runner/work/experiments/experiments/qutebrowser/browser/downloads.py
+            ls qutebrowser/browser/downloads.py
 
   tests-docker:
     if: false
