@@ -157,7 +157,7 @@ jobs:
         with:
           python-version: "${{ matrix.python }}"
       - name: Set up development Python
-        uses: deadsnakes/action@v1.0.0
+        uses: deadsnakes/action@v2.0.0
         if: "endsWith(matrix.python, '-dev')"
         with:
           python-version: "${{ matrix.python }}"
