@@ -19,6 +19,8 @@
 
 """Code to show a diff of the legacy config format."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import difflib
 import os.path

@@ -19,6 +19,8 @@
 
 """The tab widget used for TabbedBrowser from browser.py."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import functools
 import contextlib

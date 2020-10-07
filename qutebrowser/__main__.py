@@ -20,6 +20,8 @@
 
 """Simple launcher for qutebrowser."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 
 import qutebrowser.qutebrowser

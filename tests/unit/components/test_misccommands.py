@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.components.misccommands."""
 
+from __future__ import generator_stop, annotations
+
 import signal
 import contextlib
 import time

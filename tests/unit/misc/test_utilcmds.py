@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.misc.utilcmds."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 from PyQt5.QtCore import QUrl
 

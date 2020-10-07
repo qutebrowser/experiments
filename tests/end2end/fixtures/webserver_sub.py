@@ -26,6 +26,8 @@ for qutebrowser's needs. Note that it probably doesn't handle e.g. multiple
 parameters or headers with the same name properly.
 """
 
+from __future__ import generator_stop, annotations
+
 import sys
 import json
 import time

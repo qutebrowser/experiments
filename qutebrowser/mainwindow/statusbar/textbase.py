@@ -19,6 +19,8 @@
 
 """Base text widgets for statusbar."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel, QSizePolicy
 from PyQt5.QtGui import QPainter

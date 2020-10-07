@@ -19,5 +19,7 @@
 
 """Utilities related to Qt classes."""
 
+from __future__ import generator_stop, annotations
+
 # pylint: disable=unused-import
 from qutebrowser.utils.qtutils import ensure_valid

@@ -19,6 +19,8 @@
 
 """Parser for line-based files like histories."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import contextlib

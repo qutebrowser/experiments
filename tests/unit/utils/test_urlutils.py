@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.urlutils."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import logging
 import urllib.parse

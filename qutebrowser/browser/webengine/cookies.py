@@ -19,6 +19,8 @@
 
 """Filter for QtWebEngine cookies."""
 
+from __future__ import generator_stop, annotations
+
 from qutebrowser.config import config
 from qutebrowser.utils import utils, qtutils, log
 from qutebrowser.misc import objects

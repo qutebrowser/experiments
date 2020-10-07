@@ -19,6 +19,8 @@
 
 """Hypothesis tests for qutebrowser.misc.split."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 import hypothesis
 from hypothesis import strategies

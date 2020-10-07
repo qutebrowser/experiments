@@ -20,6 +20,8 @@
 
 """Tests for the custom TabWidget/TabBar."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 
 import pytest

@@ -19,6 +19,8 @@
 
 """Various utilities shared between webpage/webview subclasses."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import html
 import netrc

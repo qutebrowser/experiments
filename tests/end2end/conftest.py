@@ -21,6 +21,8 @@
 
 """Things needed for end2end testing."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import os
 import os.path

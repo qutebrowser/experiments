@@ -19,6 +19,8 @@
 
 """argparse.ArgumentParser subclass to parse qutebrowser commands."""
 
+from __future__ import generator_stop, annotations
+
 import argparse
 
 from PyQt5.QtCore import QUrl

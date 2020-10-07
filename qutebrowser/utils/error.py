@@ -19,6 +19,8 @@
 
 """Tools related to error printing/displaying."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtWidgets import QMessageBox
 
 from qutebrowser.utils import log, utils

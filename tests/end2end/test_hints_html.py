@@ -19,6 +19,8 @@
 
 """Test hints based on html files with special comments."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import textwrap

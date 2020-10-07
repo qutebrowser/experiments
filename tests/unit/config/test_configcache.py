@@ -23,6 +23,8 @@
 
 """Tests for qutebrowser.config.configcache."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.config import config

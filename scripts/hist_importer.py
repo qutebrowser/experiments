@@ -22,6 +22,8 @@
 
 """Tool to import browser history from other browsers."""
 
+from __future__ import generator_stop, annotations
+
 
 import argparse
 import sqlite3

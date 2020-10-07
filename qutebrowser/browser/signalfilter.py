@@ -19,6 +19,8 @@
 
 """A filter for signals which either filters or passes them."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 
 from PyQt5.QtCore import QObject

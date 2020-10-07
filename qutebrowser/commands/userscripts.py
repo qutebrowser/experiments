@@ -19,6 +19,8 @@
 
 """Functions to execute a userscript."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import tempfile

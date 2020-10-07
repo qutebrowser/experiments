@@ -19,6 +19,8 @@
 
 """Functions related to ad blocking."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import functools
 import posixpath

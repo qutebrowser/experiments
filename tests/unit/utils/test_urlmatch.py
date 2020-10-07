@@ -28,6 +28,8 @@ Currently not tested:
 - Any other features we don't need, such as .GetAsString() or set operations.
 """
 
+from __future__ import generator_stop, annotations
+
 import sys
 import string
 

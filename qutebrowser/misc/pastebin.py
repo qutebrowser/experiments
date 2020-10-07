@@ -19,6 +19,8 @@
 
 """Client for the pastebin."""
 
+from __future__ import generator_stop, annotations
+
 import urllib.parse
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QUrl

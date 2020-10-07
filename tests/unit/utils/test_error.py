@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.utils.error."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 
 import pytest

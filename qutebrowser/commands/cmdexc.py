@@ -22,6 +22,8 @@
 Defined here to avoid circular dependency hell.
 """
 
+from __future__ import generator_stop, annotations
+
 
 class Error(Exception):
 

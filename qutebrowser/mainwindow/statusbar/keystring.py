@@ -19,6 +19,8 @@
 
 """Keychain string displayed in the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import pyqtSlot
 
 from qutebrowser.mainwindow.statusbar import textbase

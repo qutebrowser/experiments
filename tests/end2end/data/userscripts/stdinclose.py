@@ -20,6 +20,8 @@
 
 """A userscript to check if the stdin gets closed."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import os
 sys.stdin.read()

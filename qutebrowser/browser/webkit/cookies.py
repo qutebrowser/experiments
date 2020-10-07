@@ -19,6 +19,8 @@
 
 """Handling of HTTP cookies."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtNetwork import QNetworkCookie, QNetworkCookieJar

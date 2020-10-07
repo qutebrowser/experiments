@@ -20,6 +20,8 @@
 
 """Test TabIndex widget."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.mainwindow.statusbar.tabindex import TabIndex

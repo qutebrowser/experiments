@@ -20,6 +20,8 @@
 
 """Check if docs changed and output an error if so."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import subprocess
 import os

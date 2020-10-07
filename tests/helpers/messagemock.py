@@ -19,6 +19,8 @@
 
 """pytest helper to monkeypatch the message module."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 
 import attr

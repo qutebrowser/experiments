@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.debug."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 import re
 import time

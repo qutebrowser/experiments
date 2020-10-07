@@ -19,6 +19,8 @@
 
 """A keyboard-driven, vim-like browser based on PyQt5."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 
 __author__ = "Florian Bruhin"

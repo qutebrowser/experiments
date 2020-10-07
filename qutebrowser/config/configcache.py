@@ -20,6 +20,8 @@
 
 """Implementation of a basic config cache."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from qutebrowser.config import config

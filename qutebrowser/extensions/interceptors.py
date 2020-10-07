@@ -19,6 +19,8 @@
 
 """Infrastructure for intercepting requests."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import enum
 

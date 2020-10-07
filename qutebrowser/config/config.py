@@ -19,6 +19,8 @@
 
 """Configuration storage and config-related utilities."""
 
+from __future__ import generator_stop, annotations
+
 import copy
 import contextlib
 import functools

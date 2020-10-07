@@ -19,6 +19,8 @@
 
 """QWebHistory serializer for QtWebEngine."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import QByteArray, QDataStream, QIODevice, QUrl
 
 from qutebrowser.utils import qtutils

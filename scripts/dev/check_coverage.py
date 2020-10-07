@@ -20,6 +20,8 @@
 
 """Enforce perfect coverage on some files."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

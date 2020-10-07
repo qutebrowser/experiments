@@ -19,6 +19,8 @@
 
 """Management of sessions - saved tabs/windows."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import itertools

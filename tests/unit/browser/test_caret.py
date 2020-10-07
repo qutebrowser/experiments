@@ -19,6 +19,8 @@
 
 """Tests for caret browsing mode."""
 
+from __future__ import generator_stop, annotations
+
 import textwrap
 
 import pytest

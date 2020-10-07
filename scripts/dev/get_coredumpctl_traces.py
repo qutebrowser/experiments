@@ -20,6 +20,8 @@
 
 """Get qutebrowser crash information and stacktraces from coredumpctl."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

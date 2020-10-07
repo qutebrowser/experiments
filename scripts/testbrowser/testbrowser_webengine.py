@@ -20,6 +20,8 @@
 
 """Very simple browser for testing purposes."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import argparse
 

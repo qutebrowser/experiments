@@ -19,6 +19,8 @@
 
 """Download manager."""
 
+from __future__ import generator_stop, annotations
+
 import io
 import os.path
 import shutil

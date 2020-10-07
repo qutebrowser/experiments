@@ -19,6 +19,8 @@
 
 """HTTP network cache."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import os.path
 

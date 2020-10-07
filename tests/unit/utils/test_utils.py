@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.utils."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import enum
 import os.path

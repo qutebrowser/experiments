@@ -19,6 +19,8 @@
 
 """Make sure open() has an encoding set."""
 
+from __future__ import generator_stop, annotations
+
 import astroid
 from pylint import interfaces, checkers
 from pylint.checkers import utils

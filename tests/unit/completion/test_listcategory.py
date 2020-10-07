@@ -19,6 +19,8 @@
 
 """Tests for CompletionFilterModel."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.completion.models import listcategory

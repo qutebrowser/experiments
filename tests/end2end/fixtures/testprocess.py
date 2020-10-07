@@ -19,6 +19,8 @@
 
 """Base class for a subprocess run for tests."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import os
 import time

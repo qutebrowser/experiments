@@ -42,6 +42,8 @@ Config types can do different conversations:
   This also validates whether the object is actually correct (type/value).
 """
 
+from __future__ import generator_stop, annotations
+
 import re
 import html
 import codecs

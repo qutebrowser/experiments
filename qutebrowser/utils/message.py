@@ -22,6 +22,8 @@
 
 """Message singleton so we don't have to define unneeded signals."""
 
+from __future__ import generator_stop, annotations
+
 import traceback
 import typing
 

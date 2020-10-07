@@ -19,6 +19,8 @@
 
 """Various commands."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import signal
 import functools

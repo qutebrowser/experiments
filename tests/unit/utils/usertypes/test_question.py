@@ -19,6 +19,8 @@
 
 """Tests for usertypes.Question."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.utils import usertypes

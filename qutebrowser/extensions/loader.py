@@ -19,6 +19,8 @@
 
 """Loader for qutebrowser extensions."""
 
+from __future__ import generator_stop, annotations
+
 import pkgutil
 import types
 import typing

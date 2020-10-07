@@ -24,6 +24,8 @@
 See https://pytest.org/latest/fixture.html
 """
 
+from __future__ import generator_stop, annotations
+
 
 import sys
 import tempfile

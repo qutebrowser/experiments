@@ -37,6 +37,8 @@ After all initialization is done, the qt_mainloop() function is called, which
 blocks and spins the Qt mainloop.
 """
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import functools

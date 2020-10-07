@@ -23,6 +23,8 @@ Because many modules depend on this command, this needs to have as few
 dependencies as possible to avoid cyclic dependencies.
 """
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 

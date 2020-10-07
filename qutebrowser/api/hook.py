@@ -21,6 +21,8 @@
 
 """Hooks for extensions."""
 
+from __future__ import generator_stop, annotations
+
 import importlib
 import typing
 

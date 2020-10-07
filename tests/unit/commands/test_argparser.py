@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.commands.argparser."""
 
+from __future__ import generator_stop, annotations
+
 import inspect
 import enum
 

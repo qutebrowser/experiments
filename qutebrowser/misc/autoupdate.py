@@ -19,6 +19,8 @@
 
 """Classes related to auto-updating and getting the latest version."""
 
+from __future__ import generator_stop, annotations
+
 import json
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, QObject, QUrl

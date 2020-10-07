@@ -19,6 +19,8 @@
 
 """Test interceptor.py for webengine."""
 
+from __future__ import generator_stop, annotations
+
 
 import pytest
 

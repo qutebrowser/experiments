@@ -19,6 +19,8 @@
 
 """Simple history which gets written to disk."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import time
 import contextlib

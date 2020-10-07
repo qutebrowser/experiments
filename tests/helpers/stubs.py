@@ -21,6 +21,8 @@
 
 """Fake objects/stubs."""
 
+from __future__ import generator_stop, annotations
+
 from unittest import mock
 import contextlib
 import shutil

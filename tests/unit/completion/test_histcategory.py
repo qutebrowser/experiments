@@ -19,6 +19,8 @@
 
 """Test the web history completion category."""
 
+from __future__ import generator_stop, annotations
+
 import datetime
 import logging
 

@@ -19,6 +19,8 @@
 
 """Utility functions for completion models."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from qutebrowser.utils import usertypes

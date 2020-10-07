@@ -20,6 +20,8 @@
 
 """Test the built-in directory browser."""
 
+from __future__ import generator_stop, annotations
+
 import os
 
 import attr

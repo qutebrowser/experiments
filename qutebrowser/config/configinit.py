@@ -19,6 +19,8 @@
 
 """Initialization of the configuration."""
 
+from __future__ import generator_stop, annotations
+
 import argparse
 import os.path
 import sys

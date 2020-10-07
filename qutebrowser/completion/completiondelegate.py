@@ -22,6 +22,8 @@
 We use this to be able to highlight parts of the text.
 """
 
+from __future__ import generator_stop, annotations
+
 import re
 import html
 

@@ -20,6 +20,8 @@
 
 """Tests for qutebrowser.utils.qtutils."""
 
+from __future__ import generator_stop, annotations
+
 import io
 import os
 import os.path

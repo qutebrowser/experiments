@@ -19,6 +19,8 @@
 
 """Test testprocess.Process."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import time
 import contextlib

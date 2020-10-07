@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.misc.lineparser."""
 
+from __future__ import generator_stop, annotations
+
 import pathlib
 from unittest import mock
 

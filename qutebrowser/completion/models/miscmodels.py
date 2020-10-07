@@ -19,6 +19,8 @@
 
 """Functions that return miscellaneous completion models."""
 
+from __future__ import generator_stop, annotations
+
 import datetime
 import typing
 

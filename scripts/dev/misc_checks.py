@@ -20,6 +20,8 @@
 
 """Various small code checkers."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import re

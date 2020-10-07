@@ -19,6 +19,8 @@
 
 """Debugging console."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import code
 import typing

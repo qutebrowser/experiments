@@ -19,6 +19,8 @@
 
 """Test Backforward widget."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.mainwindow.statusbar import backforward

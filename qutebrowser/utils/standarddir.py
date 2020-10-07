@@ -19,6 +19,8 @@
 
 """Utilities to get and initialize data/config paths."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

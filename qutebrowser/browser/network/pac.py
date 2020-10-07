@@ -19,6 +19,8 @@
 
 """Evaluation of PAC scripts."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import functools
 import typing

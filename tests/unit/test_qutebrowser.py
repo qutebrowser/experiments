@@ -22,6 +22,8 @@
 (Mainly commandline flag parsing)
 """
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser import qutebrowser

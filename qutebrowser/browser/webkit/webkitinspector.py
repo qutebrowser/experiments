@@ -19,6 +19,8 @@
 
 """Customized QWebInspector for QtWebKit."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtWebKit import QWebSettings
 from PyQt5.QtWebKitWidgets import QWebInspector, QWebPage
 from PyQt5.QtWidgets import QWidget

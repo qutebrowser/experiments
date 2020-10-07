@@ -19,6 +19,8 @@
 
 """Fixtures to run qutebrowser in a QProcess and communicate."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import re

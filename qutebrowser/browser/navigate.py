@@ -19,6 +19,8 @@
 
 """Implementation of :navigate."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import posixpath
 import typing

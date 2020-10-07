@@ -19,6 +19,8 @@
 
 """Utilities to show various version information."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import sys
 import glob

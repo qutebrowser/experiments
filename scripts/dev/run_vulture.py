@@ -20,6 +20,8 @@
 
 """Run vulture on the source files and filter out false-positives."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import os
 import re

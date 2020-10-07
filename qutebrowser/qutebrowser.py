@@ -33,6 +33,8 @@ qutebrowser's initialization process roughly looks like this:
   See the docstring of app.py for details.
 """
 
+from __future__ import generator_stop, annotations
+
 import sys
 import json
 

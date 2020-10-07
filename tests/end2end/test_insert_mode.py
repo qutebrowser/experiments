@@ -19,6 +19,8 @@
 
 """Test insert mode settings on html files."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 

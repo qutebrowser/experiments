@@ -21,6 +21,8 @@
 
 """Update all third-party-modules."""
 
+from __future__ import generator_stop, annotations
+
 import argparse
 import urllib.request
 import urllib.error

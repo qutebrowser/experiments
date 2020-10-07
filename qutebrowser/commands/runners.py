@@ -19,6 +19,8 @@
 
 """Module containing command managers (SearchRunner and CommandRunner)."""
 
+from __future__ import generator_stop, annotations
+
 import traceback
 import re
 import typing

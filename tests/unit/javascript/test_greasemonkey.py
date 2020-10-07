@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.browser.greasemonkey."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 import textwrap
 

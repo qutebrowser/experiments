@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.commands.runners."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.misc import objects

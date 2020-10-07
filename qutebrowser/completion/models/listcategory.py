@@ -19,6 +19,8 @@
 
 """Completion category that uses a list of tuples as a data source."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import typing
 

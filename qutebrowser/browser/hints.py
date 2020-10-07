@@ -19,6 +19,8 @@
 
 """A HintManager to draw hints over links."""
 
+from __future__ import generator_stop, annotations
+
 import collections
 import typing
 import functools

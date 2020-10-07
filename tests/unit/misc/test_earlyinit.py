@@ -19,6 +19,8 @@
 
 """Test qutebrowser.misc.earlyinit."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 
 import pytest

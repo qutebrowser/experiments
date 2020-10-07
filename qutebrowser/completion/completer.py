@@ -19,6 +19,8 @@
 
 """Completer attached to a CompletionView."""
 
+from __future__ import generator_stop, annotations
+
 import attr
 from PyQt5.QtCore import pyqtSlot, QObject, QTimer
 

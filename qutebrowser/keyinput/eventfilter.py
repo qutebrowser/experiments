@@ -19,6 +19,8 @@
 
 """Global Qt event filter which dispatches key events."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import pyqtSlot, QObject, QEvent

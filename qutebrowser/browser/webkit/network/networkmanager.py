@@ -19,6 +19,8 @@
 
 """Our own QNetworkAccessManager."""
 
+from __future__ import generator_stop, annotations
+
 import collections
 import html
 import typing

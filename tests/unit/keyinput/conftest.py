@@ -19,6 +19,8 @@
 
 """pytest fixtures for tests.keyinput."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 

@@ -19,6 +19,8 @@
 
 """Generic web element related code."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import collections.abc
 

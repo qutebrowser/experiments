@@ -24,6 +24,8 @@ Module attributes:
                 constants.
 """
 
+from __future__ import generator_stop, annotations
+
 import os
 import operator
 import typing

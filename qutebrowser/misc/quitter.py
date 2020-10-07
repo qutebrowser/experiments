@@ -19,6 +19,8 @@
 
 """Helpers related to quitting qutebrowser cleanly."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

@@ -20,6 +20,8 @@
 
 """Script to regenerate requirements files in misc/requirements."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import sys
 import os.path

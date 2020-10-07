@@ -21,6 +21,8 @@
 
 """Tests for qutebrowser.api.cmdutils."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import logging
 import types

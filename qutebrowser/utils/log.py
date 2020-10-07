@@ -19,6 +19,8 @@
 
 """Loggers and utilities related to logging."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import html as pyhtml

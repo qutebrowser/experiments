@@ -19,6 +19,8 @@
 
 """Test the quteproc fixture used for tests."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 import datetime
 import json

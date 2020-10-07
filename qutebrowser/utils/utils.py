@@ -19,6 +19,8 @@
 
 """Other utilities which don't fit anywhere else."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import io

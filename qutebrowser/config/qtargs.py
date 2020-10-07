@@ -19,6 +19,8 @@
 
 """Get arguments to pass to Qt."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import typing

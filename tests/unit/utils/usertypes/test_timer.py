@@ -19,6 +19,8 @@
 
 """Tests for Timer."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 from PyQt5.QtCore import QObject
 

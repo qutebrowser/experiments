@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.config.configfiles."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import unittest.mock

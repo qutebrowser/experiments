@@ -20,6 +20,8 @@
 
 """Tests for misc.cmdhistory.History."""
 
+from __future__ import generator_stop, annotations
+
 import unittest.mock
 
 import pytest

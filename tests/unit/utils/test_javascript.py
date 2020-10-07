@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.javascript."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 import hypothesis
 import hypothesis.strategies

@@ -22,6 +22,8 @@
 
 """Data used by test_keyutils.py to test all keys."""
 
+from __future__ import generator_stop, annotations
+
 
 import attr
 from PyQt5.QtCore import Qt

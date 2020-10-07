@@ -21,5 +21,7 @@
 
 """This is only here so we can install those plugins in tox.ini easily."""
 
+from __future__ import generator_stop, annotations
+
 from setuptools import setup
 setup(name='qute_pylint', packages=['qute_pylint'])

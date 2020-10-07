@@ -19,6 +19,8 @@
 
 """Utilities used for the documentation and built-in help."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import sys
 import inspect

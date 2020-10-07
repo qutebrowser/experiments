@@ -19,6 +19,8 @@
 
 """Misc. widgets used at different places."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, Qt, QSize, QTimer

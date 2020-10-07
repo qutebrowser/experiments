@@ -19,6 +19,8 @@
 
 """Tests for the qutebrowser.app module."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import QBuffer
 
 from qutebrowser import app

@@ -27,6 +27,8 @@ Module attributes:
     MAX_WORLD_ID: The highest world ID allowed in this version of QtWebEngine.
 """
 
+from __future__ import generator_stop, annotations
+
 
 import io
 import operator

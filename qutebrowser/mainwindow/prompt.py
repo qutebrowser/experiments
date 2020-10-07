@@ -19,6 +19,8 @@
 
 """Showing prompts above the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import html
 import collections

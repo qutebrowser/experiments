@@ -19,6 +19,8 @@
 
 """QtWebKit specific part of the web element API."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import QRect, Qt

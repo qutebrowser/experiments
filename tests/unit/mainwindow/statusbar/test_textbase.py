@@ -19,6 +19,8 @@
 
 
 """Test TextBase widget."""
+
+from __future__ import generator_stop, annotations
 from PyQt5.QtCore import Qt
 import pytest
 

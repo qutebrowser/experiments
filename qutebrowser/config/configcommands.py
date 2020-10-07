@@ -19,6 +19,8 @@
 
 """Commands related to the configuration."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import os.path
 import contextlib

@@ -19,6 +19,8 @@
 
 """Logging handling for the tests."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 
 import pytest

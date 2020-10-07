@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.config.configexc."""
 
+from __future__ import generator_stop, annotations
+
 import textwrap
 
 import pytest

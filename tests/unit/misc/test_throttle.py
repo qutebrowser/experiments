@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.misc.throttle."""
 
+from __future__ import generator_stop, annotations
+
 from unittest import mock
 
 import sip

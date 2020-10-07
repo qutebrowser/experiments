@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.misc.msgbox."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from PyQt5.QtCore import Qt

@@ -24,6 +24,8 @@
 Use: python -m scripts.dictcli [-h] {list,update,remove-old,install} ...
 """
 
+from __future__ import generator_stop, annotations
+
 import argparse
 import base64
 import json

@@ -25,6 +25,8 @@ https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md
 https://github.com/actions/toolkit/blob/master/docs/commands.md#problem-matchers
 """
 
+from __future__ import generator_stop, annotations
+
 import sys
 import pathlib
 import json

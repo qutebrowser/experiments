@@ -19,6 +19,8 @@
 
 """An HTTP client based on QNetworkAccessManager."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import functools
 import urllib.parse

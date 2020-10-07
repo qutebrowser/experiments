@@ -19,6 +19,8 @@
 
 """Command dispatcher for TabbedBrowser."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import shlex
 import functools

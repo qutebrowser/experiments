@@ -48,6 +48,8 @@ Possible values:
   values, e.g., ``typing.Union[str, int]``.
 """
 
+from __future__ import generator_stop, annotations
+
 
 import inspect
 import typing

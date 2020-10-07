@@ -19,6 +19,8 @@
 
 """Customized QWebInspector for QtWebEngine."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import pathlib
 

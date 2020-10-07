@@ -19,6 +19,8 @@
 
 """Tests for browser.signalfilter."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 
 import attr

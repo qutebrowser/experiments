@@ -19,6 +19,8 @@
 
 """Tests for the global page history."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 
 import pytest

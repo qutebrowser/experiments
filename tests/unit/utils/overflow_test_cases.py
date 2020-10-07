@@ -28,6 +28,8 @@ Module attributes:
     BAD_VALUES: A dict of types mapped to a list of bad values.
 """
 
+from __future__ import generator_stop, annotations
+
 INT32_MIN = -(2 ** 31)
 INT32_MAX = 2 ** 31 - 1
 INT64_MIN = -(2 ** 63)

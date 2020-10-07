@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.config.configdata."""
 
+from __future__ import generator_stop, annotations
+
 import textwrap
 
 import yaml

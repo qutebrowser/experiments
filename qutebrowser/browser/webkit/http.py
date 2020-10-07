@@ -19,6 +19,8 @@
 
 """Parsing functions for various HTTP headers."""
 
+from __future__ import generator_stop, annotations
+
 
 import os.path
 

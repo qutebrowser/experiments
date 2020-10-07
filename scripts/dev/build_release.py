@@ -20,6 +20,8 @@
 
 """Build a new release."""
 
+from __future__ import generator_stop, annotations
+
 
 import os
 import os.path

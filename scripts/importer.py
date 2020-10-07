@@ -26,6 +26,8 @@ Currently importing bookmarks from Netscape Bookmark files and Mozilla
 profiles is supported.
 """
 
+from __future__ import generator_stop, annotations
+
 
 import argparse
 import sqlite3

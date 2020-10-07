@@ -21,6 +21,8 @@
 
 """The qutebrowser test suite conftest file."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import warnings

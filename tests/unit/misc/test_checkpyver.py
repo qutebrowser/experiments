@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.misc.checkpyver."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import sys
 import subprocess

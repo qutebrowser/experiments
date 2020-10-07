@@ -19,6 +19,8 @@
 
 """Handling of Qt qss stylesheets."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 from typing import Optional, FrozenSet
 

@@ -19,6 +19,8 @@
 
 """Event handling for a browser tab."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import QObject, QEvent, Qt, QTimer
 
 from qutebrowser.config import config

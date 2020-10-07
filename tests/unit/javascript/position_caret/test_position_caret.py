@@ -19,6 +19,8 @@
 
 """Tests for position_caret.js."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 QWebSettings = pytest.importorskip("PyQt5.QtWebKit").QWebSettings

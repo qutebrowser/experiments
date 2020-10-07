@@ -24,6 +24,8 @@ Module attributes:
 DATA: A dict of Option objects after init() has been called.
 """
 
+from __future__ import generator_stop, annotations
+
 import typing
 from typing import Optional
 import functools

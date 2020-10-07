@@ -20,6 +20,8 @@
 
 """Generate Qt resources based on source files."""
 
+from __future__ import generator_stop, annotations
+
 import subprocess
 
 with open('qutebrowser/resources.py', 'w', encoding='utf-8') as f:

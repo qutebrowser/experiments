@@ -19,6 +19,8 @@
 
 """QtWebEngine specific code for downloads."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import os.path
 import urllib

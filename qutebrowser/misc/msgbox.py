@@ -19,6 +19,8 @@
 
 """Convenience functions to show message boxes."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 
 from PyQt5.QtCore import Qt

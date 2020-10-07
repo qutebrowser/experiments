@@ -19,6 +19,8 @@
 
 """Functions that return config-related completion models."""
 
+from __future__ import generator_stop, annotations
+
 from qutebrowser.config import configdata, configexc
 from qutebrowser.completion.models import completionmodel, listcategory, util
 from qutebrowser.commands import runners, cmdexc

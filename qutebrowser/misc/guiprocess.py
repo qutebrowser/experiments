@@ -19,6 +19,8 @@
 
 """A QProcess which shows notifications in the GUI."""
 
+from __future__ import generator_stop, annotations
+
 import locale
 import shlex
 

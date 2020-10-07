@@ -19,6 +19,8 @@
 
 """Tests for BaseKeyParser."""
 
+from __future__ import generator_stop, annotations
+
 from unittest import mock
 
 from PyQt5.QtCore import Qt, PYQT_VERSION

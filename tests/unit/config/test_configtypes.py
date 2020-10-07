@@ -18,6 +18,8 @@
 
 """Tests for qutebrowser.config.configtypes."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import json
 import math

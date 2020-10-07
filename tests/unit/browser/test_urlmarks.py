@@ -19,6 +19,8 @@
 
 """Tests for bookmarks/quickmarks."""
 
+from __future__ import generator_stop, annotations
+
 import unittest.mock
 
 import pytest

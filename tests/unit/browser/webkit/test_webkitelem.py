@@ -19,6 +19,8 @@
 
 """Tests for the webelement utils."""
 
+from __future__ import generator_stop, annotations
+
 from unittest import mock
 import collections.abc
 import operator

@@ -19,5 +19,7 @@
 
 """Utilities to display messages above the status bar."""
 
+from __future__ import generator_stop, annotations
+
 # pylint: disable=unused-import
 from qutebrowser.utils.message import error, warning, info

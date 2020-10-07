@@ -20,6 +20,8 @@
 
 """Profile qutebrowser."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import cProfile
 import os.path

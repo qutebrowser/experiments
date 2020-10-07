@@ -29,6 +29,8 @@ https://chromium.googlesource.com/chromium/src/+/757854e199e159523e7789de5cb2f6b
 (February 4 2020, newest commit as per July 1st 2020)
 """
 
+from __future__ import generator_stop, annotations
+
 import ipaddress
 import fnmatch
 import typing

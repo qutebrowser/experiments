@@ -19,6 +19,8 @@
 
 """Handling of proxies."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import QUrl, pyqtSlot
 from PyQt5.QtNetwork import QNetworkProxy, QNetworkProxyFactory
 

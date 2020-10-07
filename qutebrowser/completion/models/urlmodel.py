@@ -19,6 +19,8 @@
 
 """Function to return the url completion model for the `open` command."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 if typing.TYPE_CHECKING:

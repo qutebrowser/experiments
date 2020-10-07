@@ -19,6 +19,8 @@
 
 """The dialog which gets shown when qutebrowser crashes."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import os
 import sys

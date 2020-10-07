@@ -19,6 +19,8 @@
 
 """Various global objects."""
 
+from __future__ import generator_stop, annotations
+
 # NOTE: We need to be careful with imports here, as this is imported from
 # earlyinit.
 

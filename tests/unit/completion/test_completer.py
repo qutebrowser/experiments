@@ -19,6 +19,8 @@
 
 """Tests for the Completer Object."""
 
+from __future__ import generator_stop, annotations
+
 import unittest.mock
 
 import pytest

@@ -19,6 +19,8 @@
 
 """Configuration files residing on disk."""
 
+from __future__ import generator_stop, annotations
+
 import pathlib
 import types
 import os.path

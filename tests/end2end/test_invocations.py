@@ -19,6 +19,8 @@
 
 """Test starting qutebrowser with special arguments/environments."""
 
+from __future__ import generator_stop, annotations
+
 import subprocess
 import socket
 import sys

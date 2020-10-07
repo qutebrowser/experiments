@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.misc.split."""
 
+from __future__ import generator_stop, annotations
+
 import attr
 import pytest
 

@@ -19,6 +19,8 @@
 
 """Provides access to an in-memory sqlite database."""
 
+from __future__ import generator_stop, annotations
+
 import collections
 
 from PyQt5.QtCore import QObject, pyqtSignal

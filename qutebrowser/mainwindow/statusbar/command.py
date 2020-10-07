@@ -19,6 +19,8 @@
 
 """The commandline in the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QSize
 from PyQt5.QtGui import QKeyEvent

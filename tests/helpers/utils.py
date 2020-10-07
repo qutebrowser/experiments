@@ -19,6 +19,8 @@
 
 """Various utilities used inside tests."""
 
+from __future__ import generator_stop, annotations
+
 import io
 import re
 import gzip

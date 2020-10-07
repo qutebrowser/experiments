@@ -19,6 +19,8 @@
 
 """Launcher for an external editor."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import tempfile
 

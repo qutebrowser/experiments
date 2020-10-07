@@ -23,6 +23,8 @@
 
 """Handler functions for file:... pages."""
 
+from __future__ import generator_stop, annotations
+
 import os
 
 from qutebrowser.browser.webkit.network import networkreply

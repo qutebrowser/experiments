@@ -19,6 +19,8 @@
 
 """URL displayed in the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 import enum
 
 from PyQt5.QtCore import (pyqtSlot, pyqtProperty,  # type: ignore[attr-defined]

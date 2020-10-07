@@ -23,6 +23,8 @@ Defines a CompletionView which uses CompletionFiterModel and CompletionModel
 subclasses to provide completions.
 """
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtWidgets import QTreeView, QSizePolicy, QStyleFactory, QWidget

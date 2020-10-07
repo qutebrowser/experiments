@@ -19,6 +19,8 @@
 
 """Access to the qutebrowser configuration."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import QUrl

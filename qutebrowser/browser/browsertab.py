@@ -19,6 +19,8 @@
 
 """Base class for a wrapper over QWebView/QWebEngineView."""
 
+from __future__ import generator_stop, annotations
+
 import enum
 import itertools
 import functools

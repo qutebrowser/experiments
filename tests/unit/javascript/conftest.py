@@ -19,6 +19,8 @@
 
 """pytest conftest file for javascript tests."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 

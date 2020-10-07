@@ -20,6 +20,8 @@
 
 """Build updated PyQt wheels."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import subprocess
 import argparse

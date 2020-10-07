@@ -26,6 +26,8 @@
 
 """Special network replies.."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtNetwork import QNetworkReply, QNetworkRequest
 from PyQt5.QtCore import pyqtSlot, QIODevice, QByteArray, QTimer
 

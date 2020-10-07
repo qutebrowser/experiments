@@ -20,6 +20,8 @@
 
 """Generate asciidoc source for qutebrowser based on docstrings."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

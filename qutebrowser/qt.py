@@ -19,6 +19,8 @@
 
 """Wrappers around Qt/PyQt code."""
 
+from __future__ import generator_stop, annotations
+
 # pylint: disable=unused-import
 # PyQt 5.11 comes with a bundled sip,
 # for older PyQt versions it's a separate module.

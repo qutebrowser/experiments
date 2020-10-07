@@ -19,6 +19,8 @@
 
 """Test the SQL API."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from PyQt5.QtSql import QSqlError

@@ -19,6 +19,8 @@
 
 """Our own fork of shlex.split with some added and removed features."""
 
+from __future__ import generator_stop, annotations
+
 import re
 
 from qutebrowser.utils import log, utils

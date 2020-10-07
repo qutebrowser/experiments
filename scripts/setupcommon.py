@@ -20,6 +20,8 @@
 
 """Data used by setup.py and the PyInstaller qutebrowser.spec."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import os
 import os.path

@@ -19,6 +19,8 @@
 
 """The main browser widgets."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import pyqtSignal, Qt, QUrl
 from PyQt5.QtWidgets import QStyleFactory
 from PyQt5.QtWebKit import QWebSettings

@@ -19,6 +19,8 @@
 
 """The main tabbed browser widget."""
 
+from __future__ import generator_stop, annotations
+
 import collections
 import functools
 import weakref

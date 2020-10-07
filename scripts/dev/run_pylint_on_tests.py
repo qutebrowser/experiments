@@ -24,6 +24,8 @@ This is needed because pylint can't check a folder which isn't a package:
 https://bitbucket.org/logilab/pylint/issue/512/
 """
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

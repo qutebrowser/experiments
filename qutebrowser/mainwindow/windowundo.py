@@ -19,6 +19,8 @@
 
 """Code for :undo --window."""
 
+from __future__ import generator_stop, annotations
+
 import collections
 import typing
 

@@ -19,6 +19,8 @@
 
 """A single tab."""
 
+from __future__ import generator_stop, annotations
+
 # pylint: disable=unused-import
 from qutebrowser.browser.browsertab import WebTabError, AbstractTab as Tab
 from qutebrowser.browser.inspector import (Position as InspectorPosition,

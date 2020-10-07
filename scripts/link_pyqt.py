@@ -20,6 +20,8 @@
 
 """Symlink PyQt into a given virtualenv."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import argparse

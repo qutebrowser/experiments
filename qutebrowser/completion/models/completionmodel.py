@@ -19,6 +19,8 @@
 
 """A model that proxies access to one or more completion categories."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import Qt, QModelIndex, QAbstractItemModel

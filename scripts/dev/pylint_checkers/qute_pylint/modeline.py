@@ -18,6 +18,8 @@
 
 """Checker for vim modelines in files."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import contextlib
 

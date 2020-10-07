@@ -25,6 +25,8 @@ OrderedDict. This is because we read them from a file at start and write them
 to a file on shutdown, so it makes sense to keep them as strings here.
 """
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import html

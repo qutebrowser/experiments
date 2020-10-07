@@ -19,6 +19,8 @@
 
 """Bridge to provide readline-like shortcuts for QLineEdits."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtWidgets import QApplication, QLineEdit

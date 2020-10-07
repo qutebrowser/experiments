@@ -19,6 +19,8 @@
 
 """Dialogs shown when there was a problem with a backend choice."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 import functools

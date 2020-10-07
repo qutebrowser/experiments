@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.misc.crashdialog."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import pytest
 from qutebrowser.misc import crashdialog

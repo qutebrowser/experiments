@@ -19,6 +19,8 @@
 
 """Bridge from QWeb(Engine)Settings to our own settings."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import typing
 import argparse

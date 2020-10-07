@@ -19,6 +19,8 @@
 
 """Saving things to disk periodically."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import collections
 import typing

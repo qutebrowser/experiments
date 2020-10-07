@@ -19,6 +19,8 @@
 
 """Wrapper over a QWebEngineView."""
 
+from __future__ import generator_stop, annotations
+
 import math
 import functools
 import re

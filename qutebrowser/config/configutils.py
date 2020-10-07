@@ -20,6 +20,8 @@
 
 """Utilities and data structures used by various config code."""
 
+from __future__ import generator_stop, annotations
+
 
 import typing
 import collections

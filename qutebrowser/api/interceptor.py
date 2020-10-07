@@ -19,6 +19,8 @@
 
 """APIs related to intercepting/blocking requests."""
 
+from __future__ import generator_stop, annotations
+
 from qutebrowser.extensions import interceptors
 # pylint: disable=unused-import
 from qutebrowser.extensions.interceptors import Request

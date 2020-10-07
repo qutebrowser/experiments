@@ -19,6 +19,8 @@
 
 """A throttle for throttling function calls."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import time
 

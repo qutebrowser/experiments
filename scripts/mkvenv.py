@@ -21,6 +21,8 @@
 
 """Create a local virtualenv with a PyQt install."""
 
+from __future__ import generator_stop, annotations
+
 import argparse
 import pathlib
 import sys

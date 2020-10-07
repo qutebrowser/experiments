@@ -19,6 +19,8 @@
 
 """Utilities related to QWebHistory."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import QByteArray, QDataStream, QIODevice, QUrl

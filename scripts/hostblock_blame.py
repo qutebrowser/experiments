@@ -20,6 +20,8 @@
 
 """Check by which hostblock list a host was blocked."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import io
 import os

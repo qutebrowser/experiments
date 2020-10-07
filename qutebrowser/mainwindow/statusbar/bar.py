@@ -19,6 +19,8 @@
 
 """The main statusbar widget."""
 
+from __future__ import generator_stop, annotations
+
 import enum
 import attr
 from PyQt5.QtCore import (pyqtSignal, pyqtSlot,  # type: ignore[attr-defined]

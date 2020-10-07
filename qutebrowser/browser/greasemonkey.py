@@ -19,6 +19,8 @@
 
 """Load, parse and make available Greasemonkey scripts."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import os
 import json

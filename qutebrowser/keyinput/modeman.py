@@ -19,6 +19,8 @@
 
 """Mode manager singleton which handles the current keyboard mode."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 from typing import Mapping, Callable, MutableMapping, Union, Set, cast
 

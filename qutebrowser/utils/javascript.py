@@ -19,6 +19,8 @@
 
 """Utilities related to javascript interaction."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 _InnerJsArgType = typing.Union[None, str, bool, int, float]

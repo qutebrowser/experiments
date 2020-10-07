@@ -19,6 +19,8 @@
 
 """A request interceptor taking care of adblocking and custom headers."""
 
+from __future__ import generator_stop, annotations
+
 import attr
 
 from PyQt5.QtCore import QUrl, QByteArray

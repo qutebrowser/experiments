@@ -19,6 +19,8 @@
 
 """pyPEG parsing for the RFC 6266 (Content-Disposition) header."""
 
+from __future__ import generator_stop, annotations
+
 import urllib.parse
 import string
 import re

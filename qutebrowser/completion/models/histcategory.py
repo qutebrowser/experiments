@@ -19,6 +19,8 @@
 
 """A completion category that queries the SQL history store."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtSql import QSqlQueryModel

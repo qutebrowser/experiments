@@ -19,6 +19,8 @@
 
 """Various meta-tests for conftest.py."""
 
+from __future__ import generator_stop, annotations
+
 
 import os
 import sys

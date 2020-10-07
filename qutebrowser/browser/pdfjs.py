@@ -20,6 +20,8 @@
 
 """pdf.js integration for qutebrowser."""
 
+from __future__ import generator_stop, annotations
+
 import os
 
 from PyQt5.QtCore import QUrl, QUrlQuery

@@ -19,6 +19,8 @@
 
 """The global object registry and related utility functions."""
 
+from __future__ import generator_stop, annotations
+
 
 import collections
 import functools

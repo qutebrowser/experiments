@@ -19,6 +19,8 @@
 
 """The ListView to display downloads in."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 import typing
 

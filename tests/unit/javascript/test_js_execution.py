@@ -19,6 +19,8 @@
 
 """Check how Qt behaves when trying to execute JS."""
 
+from __future__ import generator_stop, annotations
+
 
 import pytest
 

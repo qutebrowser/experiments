@@ -19,6 +19,8 @@
 
 """The progress bar in the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import pyqtSlot, QSize
 from PyQt5.QtWidgets import QProgressBar, QSizePolicy
 

@@ -24,6 +24,8 @@ Module attributes:
     _HANDLERS: The handlers registered via decorators.
 """
 
+from __future__ import generator_stop, annotations
+
 import html
 import json
 import os

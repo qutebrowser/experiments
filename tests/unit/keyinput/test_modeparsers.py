@@ -19,6 +19,8 @@
 
 """Tests for mode parsers."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QKeySequence
 

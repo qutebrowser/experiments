@@ -19,6 +19,8 @@
 
 """Tests for the LogFailHandler test helper."""
 
+from __future__ import generator_stop, annotations
+
 
 import logging
 

@@ -22,6 +22,8 @@
 This script gets called as a QProcess from end2end/conftest.py.
 """
 
+from __future__ import generator_stop, annotations
+
 import ssl
 import sys
 import logging

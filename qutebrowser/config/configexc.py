@@ -19,6 +19,8 @@
 
 """Exceptions related to config parsing."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 import attr
 

@@ -23,6 +23,8 @@
 Use python3 -m scripts.keytester to launch it.
 """
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtWidgets import QApplication
 
 from qutebrowser.misc import miscwidgets

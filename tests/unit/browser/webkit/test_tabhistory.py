@@ -19,6 +19,8 @@
 
 """Tests for webelement.tabhistory."""
 
+from __future__ import generator_stop, annotations
+
 import attr
 from PyQt5.QtCore import QUrl, QPoint
 import pytest

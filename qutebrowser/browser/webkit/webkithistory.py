@@ -19,6 +19,8 @@
 
 """QtWebKit specific part of history."""
 
+from __future__ import generator_stop, annotations
+
 import functools
 
 from PyQt5.QtWebKit import QWebHistoryInterface

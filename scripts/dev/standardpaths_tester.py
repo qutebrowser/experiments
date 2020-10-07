@@ -20,6 +20,8 @@
 
 """Show various QStandardPath paths."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import sys
 

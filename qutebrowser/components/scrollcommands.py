@@ -19,6 +19,8 @@
 
 """Scrolling-related commands."""
 
+from __future__ import generator_stop, annotations
+
 from qutebrowser.api import cmdutils, apitypes
 
 

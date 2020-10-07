@@ -19,6 +19,8 @@
 
 """Utils regarding URL handling."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import base64
 import os.path

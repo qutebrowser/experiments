@@ -19,6 +19,8 @@
 
 """Base class for vim-like key sequence parser."""
 
+from __future__ import generator_stop, annotations
+
 import string
 import types
 import typing

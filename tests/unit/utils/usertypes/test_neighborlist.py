@@ -19,6 +19,8 @@
 
 """Tests for the NeighborList class."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.utils import usertypes

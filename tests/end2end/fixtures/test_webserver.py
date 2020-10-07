@@ -19,6 +19,8 @@
 
 """Test the server webserver used for tests."""
 
+from __future__ import generator_stop, annotations
+
 import json
 import urllib.request
 import urllib.error

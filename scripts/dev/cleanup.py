@@ -20,6 +20,8 @@
 
 """Script to clean up the mess made by Python/setuptools/PyInstaller."""
 
+from __future__ import generator_stop, annotations
+
 import os
 import os.path
 import sys

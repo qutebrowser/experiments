@@ -19,6 +19,8 @@
 
 """The main window of qutebrowser."""
 
+from __future__ import generator_stop, annotations
+
 import binascii
 import base64
 import itertools

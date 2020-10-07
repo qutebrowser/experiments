@@ -23,6 +23,8 @@ Note that tests for parse_content_disposition are in their own
 test_content_disposition.py file.
 """
 
+from __future__ import generator_stop, annotations
+
 import pytest
 from PyQt5.QtCore import QUrl
 

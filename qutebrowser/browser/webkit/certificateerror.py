@@ -19,6 +19,8 @@
 
 """Wrapper over a QSslError."""
 
+from __future__ import generator_stop, annotations
+
 
 from PyQt5.QtNetwork import QSslError
 

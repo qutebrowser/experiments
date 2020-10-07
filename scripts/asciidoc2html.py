@@ -20,6 +20,8 @@
 
 """Generate the html documentation based on the asciidoc files."""
 
+from __future__ import generator_stop, annotations
+
 from typing import List, Optional
 import re
 import os

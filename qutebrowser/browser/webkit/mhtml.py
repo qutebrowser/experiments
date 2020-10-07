@@ -20,6 +20,8 @@
 
 """Utils for writing an MHTML file."""
 
+from __future__ import generator_stop, annotations
+
 import html
 import functools
 import io

@@ -23,6 +23,8 @@ Module attributes:
     STARTCHARS: Possible chars for starting a commandline input.
 """
 
+from __future__ import generator_stop, annotations
+
 import typing
 import traceback
 import enum

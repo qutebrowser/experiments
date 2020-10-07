@@ -24,6 +24,8 @@ with each possible completion of that keystring and the corresponding command.
 It is intended to help discoverability of keybindings.
 """
 
+from __future__ import generator_stop, annotations
+
 import html
 import fnmatch
 import re

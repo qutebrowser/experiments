@@ -19,6 +19,8 @@
 
 """Contains the Command class, a skeleton for a command."""
 
+from __future__ import generator_stop, annotations
+
 import inspect
 import collections
 import traceback

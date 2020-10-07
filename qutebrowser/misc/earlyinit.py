@@ -22,6 +22,8 @@
 At this point we can be sure we have all python 3.5 features available.
 """
 
+from __future__ import generator_stop, annotations
+
 try:
     # Importing hunter to register its atexit handler early so it gets called
     # late.

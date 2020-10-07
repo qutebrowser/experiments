@@ -19,6 +19,8 @@
 
 """Wrapper over our (QtWebKit) WebView."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import functools
 import xml.etree.ElementTree

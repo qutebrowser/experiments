@@ -19,6 +19,8 @@
 
 """Custom astroid checker for config calls."""
 
+from __future__ import generator_stop, annotations
+
 import sys
 import pathlib
 

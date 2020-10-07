@@ -20,6 +20,8 @@
 
 """Keyboard macro system."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from qutebrowser.commands import runners

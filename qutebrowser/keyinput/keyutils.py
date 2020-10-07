@@ -31,6 +31,8 @@ Because of that, _assert_plain_key() and _assert_plain_modifier() make sure we
 handle what we actually think we do.
 """
 
+from __future__ import generator_stop, annotations
+
 import itertools
 import typing
 

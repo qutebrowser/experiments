@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.log."""
 
+from __future__ import generator_stop, annotations
+
 import logging
 import argparse
 import itertools

@@ -19,6 +19,8 @@
 
 """The main browser widgets."""
 
+from __future__ import generator_stop, annotations
+
 import html
 import functools
 import typing

@@ -20,6 +20,8 @@
 
 """Generate file_version_info.txt for Pyinstaller use with Windows builds."""
 
+from __future__ import generator_stop, annotations
+
 import os.path
 import sys
 

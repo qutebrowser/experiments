@@ -20,6 +20,8 @@
 
 """APIs related to downloading files."""
 
+from __future__ import generator_stop, annotations
+
 
 import io
 

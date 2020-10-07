@@ -19,6 +19,8 @@
 
 """Shared QtWebKit/QtWebEngine code for downloads."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import sys
 import html

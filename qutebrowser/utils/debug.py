@@ -19,6 +19,8 @@
 
 """Utilities used for debugging."""
 
+from __future__ import generator_stop, annotations
+
 import re
 import inspect
 import logging

@@ -20,6 +20,8 @@
 
 """Test Percentage widget."""
 
+from __future__ import generator_stop, annotations
+
 import pytest
 
 from qutebrowser.mainwindow.statusbar.percentage import Percentage

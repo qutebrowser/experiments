@@ -19,6 +19,8 @@
 
 """Tests for misc.userscripts.qute-lastpass."""
 
+from __future__ import generator_stop, annotations
+
 import json
 from types import SimpleNamespace
 from unittest.mock import ANY, call

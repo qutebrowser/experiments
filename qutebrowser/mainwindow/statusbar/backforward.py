@@ -19,6 +19,8 @@
 
 """Navigation (back/forward) indicator displayed in the statusbar."""
 
+from __future__ import generator_stop, annotations
+
 from qutebrowser.mainwindow.statusbar import textbase
 
 

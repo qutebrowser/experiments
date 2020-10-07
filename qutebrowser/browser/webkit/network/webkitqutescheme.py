@@ -19,6 +19,8 @@
 
 """QtWebKit specific qute://* handlers and glue code."""
 
+from __future__ import generator_stop, annotations
+
 from PyQt5.QtCore import QUrl
 from PyQt5.QtNetwork import QNetworkReply, QNetworkAccessManager
 

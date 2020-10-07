@@ -19,6 +19,8 @@
 
 """Command history for the status bar."""
 
+from __future__ import generator_stop, annotations
+
 import typing
 
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject

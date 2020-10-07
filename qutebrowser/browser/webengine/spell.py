@@ -20,6 +20,8 @@
 
 """Installing and configuring spell-checking for QtWebEngine."""
 
+from __future__ import generator_stop, annotations
+
 import glob
 import os
 import os.path

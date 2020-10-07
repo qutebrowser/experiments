@@ -19,6 +19,8 @@
 
 """Tests for qutebrowser.utils.version."""
 
+from __future__ import generator_stop, annotations
+
 import io
 import sys
 import collections

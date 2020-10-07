@@ -19,6 +19,8 @@
 
 """Custom useful data types."""
 
+from __future__ import generator_stop, annotations
+
 import operator
 import enum
 import typing

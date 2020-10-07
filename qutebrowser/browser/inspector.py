@@ -19,6 +19,8 @@
 
 """Base class for a QtWebKit/QtWebEngine web inspector."""
 
+from __future__ import generator_stop, annotations
+
 import base64
 import binascii
 import typing

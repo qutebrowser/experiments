@@ -19,6 +19,8 @@
 
 """Misc. utility commands exposed to the user."""
 
+from __future__ import generator_stop, annotations
+
 # QApplication and objects are imported so they're usable in :debug-pyeval
 
 import functools

@@ -19,6 +19,8 @@
 
 """Tests for the BindingTrie."""
 
+from __future__ import generator_stop, annotations
+
 import string
 import itertools
 import textwrap
