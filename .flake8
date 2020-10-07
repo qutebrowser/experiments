@@ -38,6 +38,11 @@ exclude = .*,__pycache__,resources.py
 # D413: Missing blank line after last section (not in pep257?)
 # A003: Builtin name for class attribute (needed for overridden methods)
 # W504: line break after binary operator
+# FI..: Ignored future imports: division, absolute_import, with_statement,
+#       print_function, unicode_literals, nested_scopes, generators
+#       enabled:
+#         generator_stop (added in 3.5, mandatory in 3.7)
+#         annotations    (added in 3.7, mandatory in 3.10)
 ignore =
     B001,B008,B305,
     E128,E226,E265,E501,E402,E266,E722,E731,
@@ -46,8 +51,10 @@ ignore =
     P101,P102,P103,
     D102,D103,D106,D107,D104,D105,D209,D211,D401,D402,D403,D412,D413,
     A003,
-    W504
-min-version = 3.5.0
+    W504,
+    FI10,FI11,FI12,FI13,FI14,FI16,FI17,FI55,FI58
+# For flake8-future-imports
+require-code = True
 max-complexity = 12
 per-file-ignores =
     qutebrowser/api/hook.py : N801
