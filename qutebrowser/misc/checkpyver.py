@@ -22,8 +22,6 @@
 This should import and run fine with both python2 and python3.
 """
 
-from __future__ import generator_stop, annotations
-
 import sys
 
 try:
