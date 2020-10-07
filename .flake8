@@ -47,7 +47,7 @@ ignore =
     D102,D103,D106,D107,D104,D105,D209,D211,D401,D402,D403,D412,D413,
     A003,
     W504
-min-version = 3.4.0
+min-version = 3.5.0
 max-complexity = 12
 per-file-ignores =
     qutebrowser/api/hook.py : N801
