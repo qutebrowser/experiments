@@ -1525,19 +1525,32 @@ class WebEngineTab(browsertab.AbstractTab):
         log.network.debug("Certificate error: {}".format(error))
         log.network.debug("First party URL: {}".format(first_party_url))
 
-        if error.is_overridable():
-            error.ignore = shared.ignore_certificate_error(
+        if not error.is_overridable():
+            log.network.error(f"Non-overridable certificate error: {error}")
+        elif error.can_defer():
+            ignore = shared.ignore_certificate_error(
+                request_url=url,
+                first_party_url=first_party_url,
+                error=error,
+                abort_on=[self.abort_questions],
+                ignore_cb=error.ignore,
+                reject_cb=error.reject,
+            )
+            if ignore is None:
+                error.defer()
+                log.network.debug("Deferring certificate error")
+            else:
+                error.ignored = ignore
+        else:
+            error.ignored = shared.ignore_certificate_error(
                 request_url=url,
                 first_party_url=first_party_url,
                 error=error,
                 abort_on=[self.abort_questions],
             )
-        else:
-            log.network.error("Non-overridable certificate error: "
-                              "{}".format(error))
 
-        log.network.debug("ignore {}, URL {}, requested {}".format(
-            error.ignore, url, self.url(requested=True)))
+        log.network.debug("ignored {}, URL {}, requested {}".format(
+            error.ignored, url, self.url(requested=True)))
 
         # WORKAROUND for https://codereview.qt-project.org/c/qt/qtwebengine/+/270556
         show_non_overr_cert_error = (

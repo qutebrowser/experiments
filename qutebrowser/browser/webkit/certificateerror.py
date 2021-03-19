@@ -53,6 +53,18 @@ class CertificateErrorWrapper(usertypes.AbstractCertificateErrorWrapper):
     def is_overridable(self) -> bool:
         return True
 
+    def can_defer(self) -> bool:
+        return False
+
+    def defer(self) -> None:
+        raise AssertionError
+
+    def ignore(self) -> None:
+        raise AssertionError
+
+    def reject(self) -> None:
+        raise AssertionError
+
     def html(self):
         if len(self._errors) == 1:
             return super().html()

@@ -161,7 +161,9 @@ def ignore_certificate_error(
         first_party_url: QUrl,
         error: usertypes.AbstractCertificateErrorWrapper,
         abort_on: Iterable[pyqtBoundSignal],
-) -> bool:
+        ignore_cb: Callable[[], None] = None,
+        reject_cb: Callable[[], None] = None,
+) -> Optional[bool]:
     """Display a certificate error question.
 
     Args:
@@ -169,6 +171,8 @@ def ignore_certificate_error(
         first_party_url: The URL of the page we're visiting. Might be an invalid QUrl.
         error: A single error.
         abort_on: Signals aborting a question.
+        ignore_cb/reject_cb: If given, None is returned, the question is asked async,
+            and those callbacks are called instead.
 
     Return:
         True if the error should be ignored, False otherwise.
@@ -210,10 +214,32 @@ def ignore_certificate_error(
             error=error,
         )
 
+        title = "Certificate error - continue?"
         urlstr = request_url.toString(QUrl.RemovePassword | QUrl.FullyEncoded)
-        ignore = message.ask(title="Certificate error - continue?", text=msg,
-                             mode=usertypes.PromptMode.yesno, default=False,
-                             abort_on=abort_on, url=urlstr)
+
+        # Handle async operation
+        if ignore_cb is not None:
+            assert reject_cb is not None
+            message.confirm_async(
+                title=title,
+                text=msg,
+                default=False,
+                abort_on=abort_on,
+                url=urlstr,
+                yes_action=ignore_cb,
+                no_action=reject_cb,
+                cancel_action=reject_cb,
+            )
+            return None
+
+        ignore = message.ask(
+            title=title,
+            text=msg,
+            mode=usertypes.PromptMode.yesno,
+            default=False,
+            abort_on=abort_on,
+            url=urlstr,
+        )
         if ignore is None:
             # prompt aborted
             ignore = False

@@ -283,6 +283,8 @@ class NetworkManager(QNetworkAccessManager):
             error=errors,
             abort_on=abort_on,
         )
+        assert ignore is not None
+
         if ignore:
             reply.ignoreSslErrors()
             if host_tpl is not None:

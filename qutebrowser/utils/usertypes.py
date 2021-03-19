@@ -493,6 +493,18 @@ class AbstractCertificateErrorWrapper:
     def is_overridable(self) -> bool:
         raise NotImplementedError
 
+    def can_defer(self) -> bool:
+        raise NotImplementedError
+
+    def defer(self) -> None:
+        raise NotImplementedError
+
+    def ignore(self) -> None:
+        raise NotImplementedError
+
+    def reject(self) -> None:
+        raise NotImplementedError
+
     def html(self) -> str:
         return f'<p>{html.escape(str(self))}</p>'
 

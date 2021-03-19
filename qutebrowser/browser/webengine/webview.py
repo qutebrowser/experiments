@@ -163,9 +163,12 @@ class WebEnginePage(QWebEnginePage):
 
     def certificateError(self, error):
         """Handle certificate errors coming from Qt."""
-        error = certificateerror.CertificateErrorWrapper(error)
-        self.certificate_error.emit(error)
-        return error.ignore
+        wrapper = certificateerror.CertificateErrorWrapper(error)
+        self.certificate_error.emit(wrapper)
+        if wrapper.ignored is None:
+            assert error.deferred()
+            return True
+        return wrapper.ignored
 
     def javaScriptConfirm(self, url, js_msg):
         """Override javaScriptConfirm to use qutebrowser prompts."""

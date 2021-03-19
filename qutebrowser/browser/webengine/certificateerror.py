@@ -22,7 +22,7 @@
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWebEngineWidgets import QWebEngineCertificateError
 
-from qutebrowser.utils import usertypes, utils, debug
+from qutebrowser.utils import usertypes, utils, debug, log
 
 
 class CertificateErrorWrapper(usertypes.AbstractCertificateErrorWrapper):
@@ -31,7 +31,7 @@ class CertificateErrorWrapper(usertypes.AbstractCertificateErrorWrapper):
 
     def __init__(self, error: QWebEngineCertificateError) -> None:
         self._error = error
-        self.ignore = False
+        self.ignored = None
 
     def __str__(self) -> str:
         return self._error.errorDescription()
@@ -47,3 +47,23 @@ class CertificateErrorWrapper(usertypes.AbstractCertificateErrorWrapper):
 
     def is_overridable(self) -> bool:
         return self._error.isOverridable()
+
+    def can_defer(self) -> bool:
+        # Qt 5.14+
+        return hasattr(self._error, 'defer')
+
+    def defer(self) -> None:
+        log.network.debug("Deferring certificate error response")
+        assert self.is_overridable()
+        self._error.defer()
+        assert self._error.deferred()
+
+    def ignore(self) -> None:
+        log.network.debug("Deferred ignore")
+        self.ignored = True
+        self._error.ignoreCertificateError()
+
+    def reject(self) -> None:
+        log.network.debug("Deferred reject")
+        self.ignored = False
+        self._error.rejectCertificateError()
