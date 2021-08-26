@@ -22,7 +22,7 @@
 import os
 from typing import Iterable, Optional, MutableMapping, Any, Callable
 
-from PyQt5.QtWidgets import QApplication, QLineEdit
+from PyQt6.QtWidgets import QApplication, QLineEdit
 
 from qutebrowser.api import cmdutils
 

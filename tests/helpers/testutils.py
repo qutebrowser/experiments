@@ -31,7 +31,7 @@ import importlib.machinery
 
 import pytest
 
-from PyQt5.QtGui import QColor
+from PyQt6.QtGui import QColor
 
 from qutebrowser.utils import qtutils, log, utils, version
 
