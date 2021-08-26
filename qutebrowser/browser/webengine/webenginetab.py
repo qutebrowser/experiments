@@ -46,10 +46,10 @@ from qutebrowser.misc import objects, miscwidgets
 
 # Mapping worlds from usertypes.JsWorld to QWebEngineScript world IDs.
 _JS_WORLD_MAP = {
-    usertypes.JsWorld.main: QWebEngineScript.ScriptWorldId.MainWorld,
-    usertypes.JsWorld.application: QWebEngineScript.ScriptWorldId.ApplicationWorld,
-    usertypes.JsWorld.user: QWebEngineScript.ScriptWorldId.UserWorld,
-    usertypes.JsWorld.jseval: QWebEngineScript.ScriptWorldId.UserWorld + 1,
+    usertypes.JsWorld.main: 1,
+    usertypes.JsWorld.application: 2,
+    usertypes.JsWorld.user: 3,
+    usertypes.JsWorld.jseval: 4,
 }
 
 
@@ -199,7 +199,8 @@ class WebEngineSearch(browsertab.AbstractSearch):
         self._wrap_handler = _WebEngineSearchWrapHandler()
 
     def _empty_flags(self):
-        return QWebEnginePage.FindFlags(0)  # type: ignore[call-overload]
+        return 0
+        #return QWebEnginePage.FindFlag()  # type: ignore[call-overload]
 
     def _args_to_flags(self, reverse, ignore_case):
         flags = self._empty_flags()
@@ -1022,7 +1023,7 @@ class _Quirk:
     filename: str
     injection_point: QWebEngineScript.InjectionPoint = (
         QWebEngineScript.InjectionPoint.DocumentCreation)
-    world: QWebEngineScript.ScriptWorldId = QWebEngineScript.ScriptWorldId.MainWorld
+    world: int = 1
     predicate: bool = True
     name: Optional[str] = None
 
@@ -1061,7 +1062,7 @@ class _WebEngineScripts(QObject):
         self._tab.run_js_async(code)
 
     def _inject_js(self, name, js_code, *,
-                   world=QWebEngineScript.ScriptWorldId.ApplicationWorld,
+                   world=2,
                    injection_point=QWebEngineScript.InjectionPoint.DocumentCreation,
                    subframes=False):
         """Inject the given script to run early on a page load."""
@@ -1201,7 +1202,7 @@ class _WebEngineScripts(QObject):
             _Quirk(
                 'whatsapp_web',
                 injection_point=QWebEngineScript.InjectionPoint.DocumentReady,
-                world=QWebEngineScript.ScriptWorldId.ApplicationWorld,
+                world=1,
             ),
             _Quirk('discord'),
             _Quirk(
@@ -1361,7 +1362,7 @@ class WebEngineTab(browsertab.AbstractTab):
     def run_js_async(self, code, callback=None, *, world=None):
         world_id_type = Union[QWebEngineScript.ScriptWorldId, int]
         if world is None:
-            world_id: world_id_type = QWebEngineScript.ScriptWorldId.ApplicationWorld
+            world_id: world_id_type = 1
         elif isinstance(world, int):
             world_id = world
             if not 0 <= world_id <= qtutils.MAX_WORLD_ID:
