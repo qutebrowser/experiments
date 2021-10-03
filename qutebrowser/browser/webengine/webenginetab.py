@@ -199,8 +199,8 @@ class WebEngineSearch(browsertab.AbstractSearch):
         self._wrap_handler = _WebEngineSearchWrapHandler()
 
     def _empty_flags(self):
-        return 0
-        #return QWebEnginePage.FindFlag()  # type: ignore[call-overload]
+        #return 0
+        return QWebEnginePage.FindFlag(0)  # type: ignore[call-overload]
 
     def _args_to_flags(self, reverse, ignore_case):
         flags = self._empty_flags()
@@ -239,7 +239,7 @@ class WebEngineSearch(browsertab.AbstractSearch):
             found_text = 'found' if found else "didn't find"
             if flags:
                 flag_text = 'with flags {}'.format(debug.qflags_key(
-                    QWebEnginePage, flags, klass=QWebEnginePage.FindFlag))
+                    QWebEnginePage, flags.value, klass=QWebEnginePage.FindFlag))
             else:
                 flag_text = ''
             log.webview.debug(' '.join([caller, found_text, text, flag_text])
@@ -247,7 +247,7 @@ class WebEngineSearch(browsertab.AbstractSearch):
 
             if callback is not None:
                 callback(found)
-            self.finished.emit(found)
+            self.finished.emit(found.numberOfMatches() > 0)
 
         self._widget.page().findText(text, flags, wrapped_callback)
 
