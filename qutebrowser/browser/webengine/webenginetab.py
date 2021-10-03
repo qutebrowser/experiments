@@ -876,6 +876,7 @@ class _WebEnginePermissions(QObject):
 
     _options = {
         0: 'content.notifications.enabled',
+        QWebEnginePage.Feature.Notifications: 'content.notifications.enabled',
         QWebEnginePage.Feature.Geolocation: 'content.geolocation',
         QWebEnginePage.Feature.MediaAudioCapture: 'content.media.audio_capture',
         QWebEnginePage.Feature.MediaVideoCapture: 'content.media.video_capture',
@@ -887,6 +888,7 @@ class _WebEnginePermissions(QObject):
 
     _messages = {
         0: 'show notifications',
+        QWebEnginePage.Feature.Notifications: 'show notifications',
         QWebEnginePage.Feature.Geolocation: 'access your location',
         QWebEnginePage.Feature.MediaAudioCapture: 'record audio',
         QWebEnginePage.Feature.MediaVideoCapture: 'record video',
@@ -1077,7 +1079,7 @@ class _WebEngineScripts(QObject):
     def _remove_js(self, name):
         """Remove an early QWebEngineScript."""
         scripts = self._widget.page().scripts()
-        for s in scripts.find(f'_qute_{name}'):
+        for script in scripts.find(f'_qute_{name}'):
             scripts.remove(script)
 
     def init(self):
