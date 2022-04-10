@@ -199,7 +199,7 @@ class WebEngineSearch(browsertab.AbstractSearch):
         self._wrap_handler = _WebEngineSearchWrapHandler()
 
     def _empty_flags(self):
-        return QWebEnginePage.FindFlags(0)  # type: ignore[call-overload]
+        return QWebEnginePage.FindFlag(0)  # type: ignore[call-overload]
 
     def _args_to_flags(self, reverse, ignore_case):
         flags = self._empty_flags()

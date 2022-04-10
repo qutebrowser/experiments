@@ -53,7 +53,7 @@ _MODIFIER_MAP = {
 
 _NIL_KEY = Qt.Key(0)
 
-_ModifierType = Union[Qt.KeyboardModifier, Qt.KeyboardModifiers]
+_ModifierType = Qt.KeyboardModifier
 
 
 _SPECIAL_NAMES = {
@@ -458,7 +458,7 @@ class KeySequence:
             assert self
         self._validate()
 
-    def _convert_key(self, key: Union[int, Qt.KeyboardModifiers]) -> int:
+    def _convert_key(self, key: Union[int, Qt.KeyboardModifier]) -> int:
         """Convert a single key for QKeySequence."""
         assert isinstance(key, (int, Qt.KeyboardModifiers)), key
         return int(key)
