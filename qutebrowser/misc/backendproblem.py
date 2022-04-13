@@ -278,7 +278,7 @@ class _BackendProblemChecker:
                 results.webkit_error = "Unsupported legacy QtWebKit found"
 
         try:
-            from qutebrowser.qt import webengine, webenginewidgets
+            from qutebrowser.qt import webenginecore, webenginewidgets
         except (ImportError, ValueError) as e:
             results.webengine_error = str(e)
 
