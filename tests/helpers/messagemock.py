@@ -23,7 +23,7 @@ import logging
 import dataclasses
 
 import pytest
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
+from qutebrowser.qt.core import pyqtSlot, pyqtSignal, QObject
 
 from qutebrowser.utils import usertypes, message
 

@@ -22,8 +22,8 @@
 import unittest.mock
 
 import pytest
-from PyQt5.QtCore import QObject
-from PyQt5.QtGui import QStandardItemModel
+from qutebrowser.qt.core import QObject
+from qutebrowser.qt.gui import QStandardItemModel
 
 from qutebrowser.completion import completer
 from qutebrowser.commands import command
