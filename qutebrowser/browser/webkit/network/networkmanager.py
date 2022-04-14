@@ -24,7 +24,7 @@ import html
 import dataclasses
 from typing import TYPE_CHECKING, Dict, MutableMapping, Optional, Set
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, QUrl, QByteArray
+from qutebrowser.qt.core import Slot, Signal, QUrl, QByteArray
 from qutebrowser.qt.network import (QNetworkAccessManager, QNetworkReply, QSslConfiguration,
                              QNetworkProxy)
 
@@ -154,7 +154,7 @@ class NetworkManager(QNetworkAccessManager):
         shutting_down: Emitted when the QNAM is shutting down.
     """
 
-    shutting_down = pyqtSignal()
+    shutting_down = Signal()
 
     def __init__(self, *, win_id, tab_id, private, parent=None):
         log.init.debug("Initializing NetworkManager")
@@ -242,7 +242,7 @@ class NetworkManager(QNetworkAccessManager):
         self.setNetworkAccessible(QNetworkAccessManager.NetworkAccessibility.NotAccessible)
         self.shutting_down.emit()
 
-    # No @pyqtSlot here, see
+    # No @Slot here, see
     # https://github.com/qutebrowser/qutebrowser/issues/2213
     def on_ssl_errors(self, reply, qt_errors):  # noqa: C901 pragma: no mccabe
         """Decide if SSL errors should be ignored or not.
@@ -299,7 +299,7 @@ class NetworkManager(QNetworkAccessManager):
         self._accepted_ssl_errors.clear()
         self._rejected_ssl_errors.clear()
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def clear_rejected_ssl_errors(self, url):
         """Clear the rejected SSL errors on a reload.
 
@@ -311,7 +311,7 @@ class NetworkManager(QNetworkAccessManager):
         except KeyError:
             pass
 
-    @pyqtSlot('QNetworkReply*', 'QAuthenticator*')
+    @Slot('QNetworkReply*', 'QAuthenticator*')
     def on_authentication_required(self, reply, authenticator):
         """Called when a website needs authentication."""
         url = reply.url()
@@ -329,7 +329,7 @@ class NetworkManager(QNetworkAccessManager):
             shared.authentication_required(url, authenticator,
                                            abort_on=abort_on)
 
-    @pyqtSlot('QNetworkProxy', 'QAuthenticator*')
+    @Slot('QNetworkProxy', 'QAuthenticator*')
     def on_proxy_authentication_required(self, proxy, authenticator):
         """Called when a proxy needs authentication."""
         proxy_id = ProxyId(proxy.type(), proxy.hostName(), proxy.port())
@@ -350,7 +350,7 @@ class NetworkManager(QNetworkAccessManager):
                 authenticator.setPassword(answer.password)
                 _proxy_auth_cache[proxy_id] = answer
 
-    @pyqtSlot()
+    @Slot()
     def on_adopted_download_destroyed(self):
         """Check if we can clean up if an adopted download was destroyed.
 
@@ -363,7 +363,7 @@ class NetworkManager(QNetworkAccessManager):
         if self.adopted_downloads == 0:
             self.deleteLater()
 
-    @pyqtSlot(object)  # DownloadItem
+    @Slot(object)  # DownloadItem
     def adopt_download(self, download):
         """Adopt a new DownloadItem."""
         self.adopted_downloads += 1

@@ -26,7 +26,7 @@
 import traceback
 from typing import Any, Callable, Iterable, List, Tuple, Union, Optional
 
-from qutebrowser.qt.core import pyqtSignal, pyqtBoundSignal, QObject
+from qutebrowser.qt.core import Signal, pyqtBoundSignal, QObject
 
 from qutebrowser.utils import usertypes, log
 
@@ -210,11 +210,11 @@ class GlobalMessageBridge(QObject):
         mode_left: Emitted when a keymode was left in any window.
     """
 
-    show_message = pyqtSignal(usertypes.MessageLevel, str, str)
-    prompt_done = pyqtSignal(usertypes.KeyMode)
-    ask_question = pyqtSignal(usertypes.Question, bool)
-    mode_left = pyqtSignal(usertypes.KeyMode)
-    clear_messages = pyqtSignal()
+    show_message = Signal(usertypes.MessageLevel, str, str)
+    prompt_done = Signal(usertypes.KeyMode)
+    ask_question = Signal(usertypes.Question, bool)
+    mode_left = Signal(usertypes.KeyMode)
+    clear_messages = Signal()
 
     def __init__(self, parent: QObject = None) -> None:
         super().__init__(parent)

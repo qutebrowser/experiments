@@ -27,7 +27,7 @@
 """Special network replies.."""
 
 from qutebrowser.qt.network import QNetworkReply, QNetworkRequest
-from qutebrowser.qt.core import pyqtSlot, QIODevice, QByteArray, QTimer
+from qutebrowser.qt.core import Slot, QIODevice, QByteArray, QTimer
 
 
 class FixedDataNetworkReply(QNetworkReply):
@@ -69,7 +69,7 @@ class FixedDataNetworkReply(QNetworkReply):
             0,
             lambda: self.finished.emit())  # type: ignore[attr-defined]
 
-    @pyqtSlot()
+    @Slot()
     def abort(self):
         """Abort the operation."""
 

@@ -24,7 +24,7 @@ import types
 import dataclasses
 from typing import Mapping, MutableMapping, Optional, Sequence
 
-from qutebrowser.qt.core import pyqtSignal, QObject, Qt
+from qutebrowser.qt.core import Signal, QObject, Qt
 from qutebrowser.qt.gui import QKeySequence, QKeyEvent
 
 from qutebrowser.config import config
@@ -176,8 +176,8 @@ class BaseKeyParser(QObject):
                        arg 2: Ignore the request if we're not in that mode
     """
 
-    keystring_updated = pyqtSignal(str)
-    request_leave = pyqtSignal(usertypes.KeyMode, str, bool)
+    keystring_updated = Signal(str)
+    request_leave = Signal(usertypes.KeyMode, str, bool)
 
     def __init__(self, *, mode: usertypes.KeyMode,
                  win_id: int,

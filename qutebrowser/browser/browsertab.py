@@ -26,7 +26,7 @@ import dataclasses
 from typing import (cast, TYPE_CHECKING, Any, Callable, Iterable, List, Optional,
                     Sequence, Set, Type, Union)
 
-from qutebrowser.qt.core import (pyqtSignal, pyqtSlot, QUrl, QObject, QSizeF, Qt,
+from qutebrowser.qt.core import (Signal, Slot, QUrl, QObject, QSizeF, Qt,
                           QEvent, QPoint, QRect)
 from qutebrowser.qt.gui import QKeyEvent, QIcon, QPixmap
 from qutebrowser.qt.widgets import QWidget, QApplication, QDialog
@@ -299,9 +299,9 @@ class AbstractSearch(QObject):
 
     #: Signal emitted when a search was finished
     #: (True if the text was found, False otherwise)
-    finished = pyqtSignal(bool)
+    finished = Signal(bool)
     #: Signal emitted when an existing search was cleared.
-    cleared = pyqtSignal()
+    cleared = Signal()
 
     _Callback = Callable[[bool], None]
 
@@ -379,7 +379,7 @@ class AbstractZoom(QObject):
         config.instance.changed.connect(self._on_config_changed)
         self._zoom_factor = float(config.val.zoom.default) / 100
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option: str) -> None:
         if option in ['zoom.levels', 'zoom.default']:
             if not self._default_zoom_changed:
@@ -457,9 +457,9 @@ class AbstractCaret(QObject):
     """Attribute ``caret`` of AbstractTab for caret browsing."""
 
     #: Signal emitted when the selection was toggled.
-    selection_toggled = pyqtSignal(SelectionState)
+    selection_toggled = Signal(SelectionState)
     #: Emitted when a ``follow_selection`` action is done.
-    follow_selected_done = pyqtSignal()
+    follow_selected_done = Signal()
 
     def __init__(self,
                  tab: 'AbstractTab',
@@ -551,10 +551,10 @@ class AbstractScroller(QObject):
     """Attribute ``scroller`` of AbstractTab to manage scroll position."""
 
     #: Signal emitted when the scroll position changed (int, int)
-    perc_changed = pyqtSignal(int, int)
+    perc_changed = Signal(int, int)
     #: Signal emitted before the user requested a jump.
     #: Used to set the special ' mark so the user can return.
-    before_jump_requested = pyqtSignal()
+    before_jump_requested = Signal()
 
     def __init__(self, tab: 'AbstractTab', parent: QWidget = None):
         super().__init__(parent)
@@ -563,7 +563,7 @@ class AbstractScroller(QObject):
         if 'log-scroll-pos' in objects.debug_flags:
             self.perc_changed.connect(self._log_scroll_pos_change)
 
-    @pyqtSlot()
+    @Slot()
     def _log_scroll_pos_change(self) -> None:
         log.webview.vdebug(  # type: ignore[attr-defined]
             "Scroll position changed to {}".format(self.pos_px()))
@@ -767,8 +767,8 @@ class AbstractAudio(QObject):
 
     """Handling of audio/muting for this tab."""
 
-    muted_changed = pyqtSignal(bool)
-    recently_audible_changed = pyqtSignal(bool)
+    muted_changed = Signal(bool)
+    recently_audible_changed = Signal(bool)
 
     def __init__(self, tab: 'AbstractTab', parent: QWidget = None) -> None:
         super().__init__(parent)
@@ -898,44 +898,44 @@ class AbstractTab(QWidget):
     """An adapter for QWebView/QWebEngineView representing a single tab."""
 
     #: Signal emitted when a website requests to close this tab.
-    window_close_requested = pyqtSignal()
+    window_close_requested = Signal()
     #: Signal emitted when a link is hovered (the hover text)
-    link_hovered = pyqtSignal(str)
+    link_hovered = Signal(str)
     #: Signal emitted when a page started loading
-    load_started = pyqtSignal()
+    load_started = Signal()
     #: Signal emitted when a page is loading (progress percentage)
-    load_progress = pyqtSignal(int)
+    load_progress = Signal(int)
     #: Signal emitted when a page finished loading (success as bool)
-    load_finished = pyqtSignal(bool)
+    load_finished = Signal(bool)
     #: Signal emitted when a page's favicon changed (icon as QIcon)
-    icon_changed = pyqtSignal(QIcon)
+    icon_changed = Signal(QIcon)
     #: Signal emitted when a page's title changed (new title as str)
-    title_changed = pyqtSignal(str)
+    title_changed = Signal(str)
     #: Signal emitted when this tab was pinned/unpinned (new pinned state as bool)
-    pinned_changed = pyqtSignal(bool)
+    pinned_changed = Signal(bool)
     #: Signal emitted when a new tab should be opened (url as QUrl)
-    new_tab_requested = pyqtSignal(QUrl)
+    new_tab_requested = Signal(QUrl)
     #: Signal emitted when a page's URL changed (url as QUrl)
-    url_changed = pyqtSignal(QUrl)
+    url_changed = Signal(QUrl)
     #: Signal emitted when a tab's content size changed
     #: (new size as QSizeF)
-    contents_size_changed = pyqtSignal(QSizeF)
+    contents_size_changed = Signal(QSizeF)
     #: Signal emitted when a page requested full-screen (bool)
-    fullscreen_requested = pyqtSignal(bool)
+    fullscreen_requested = Signal(bool)
     #: Signal emitted before load starts (URL as QUrl)
-    before_load_started = pyqtSignal(QUrl)
+    before_load_started = Signal(QUrl)
 
     # Signal emitted when a page's load status changed
     # (argument: usertypes.LoadStatus)
-    load_status_changed = pyqtSignal(usertypes.LoadStatus)
+    load_status_changed = Signal(usertypes.LoadStatus)
     # Signal emitted before shutting down
-    shutting_down = pyqtSignal()
+    shutting_down = Signal()
     # Signal emitted when a history item should be added
-    history_item_triggered = pyqtSignal(QUrl, QUrl, str)
+    history_item_triggered = Signal(QUrl, QUrl, str)
     # Signal emitted when the underlying renderer process terminated.
     # arg 0: A TerminationStatus member.
     # arg 1: The exit code.
-    renderer_process_terminated = pyqtSignal(TerminationStatus, int)
+    renderer_process_terminated = Signal(TerminationStatus, int)
 
     # Hosts for which a certificate error happened. Shared between all tabs.
     #
@@ -1034,7 +1034,7 @@ class AbstractTab(QWidget):
         """Test if navigation is allowed on the current tab."""
         return self.data.pinned and config.val.tabs.pinned.frozen
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def _on_before_load_started(self, url: QUrl) -> None:
         """Adjust the title if we are going to visit a URL soon."""
         qtutils.ensure_valid(url)
@@ -1042,21 +1042,21 @@ class AbstractTab(QWidget):
         log.webview.debug("Going to start loading: {}".format(url_string))
         self.title_changed.emit(url_string)
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def _on_url_changed(self, url: QUrl) -> None:
         """Update title when URL has changed and no title is available."""
         if url.isValid() and not self.title():
             self.title_changed.emit(url.toDisplayString())
         self.url_changed.emit(url)
 
-    @pyqtSlot()
+    @Slot()
     def _on_load_started(self) -> None:
         self._progress = 0
         self.data.viewing_source = False
         self._set_load_status(usertypes.LoadStatus.loading)
         self.load_started.emit()
 
-    @pyqtSlot(usertypes.NavigationRequest)
+    @Slot(usertypes.NavigationRequest)
     def _on_navigation_request(
             self,
             navigation: usertypes.NavigationRequest
@@ -1084,7 +1084,7 @@ class AbstractTab(QWidget):
                                   navigation.url.errorString()))
             navigation.accepted = False
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def _on_load_finished(self, ok: bool) -> None:
         assert self._widget is not None
         if sip.isdeleted(self._widget):
@@ -1121,12 +1121,12 @@ class AbstractTab(QWidget):
 
         self._set_load_status(loadstatus)
 
-    @pyqtSlot()
+    @Slot()
     def _on_history_trigger(self) -> None:
         """Emit history_item_triggered based on backend-specific signal."""
         raise NotImplementedError
 
-    @pyqtSlot(int)
+    @Slot(int)
     def _on_load_progress(self, perc: int) -> None:
         self._progress = perc
         self.load_progress.emit(perc)

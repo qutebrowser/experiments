@@ -21,7 +21,7 @@
 
 from typing import Optional
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, Qt, QSize, QTimer
+from qutebrowser.qt.core import Slot, Signal, Qt, QSize, QTimer
 from qutebrowser.qt.widgets import (QLineEdit, QWidget, QHBoxLayout, QLabel,
                              QStyleOption, QStyle, QLayout, QApplication,
                              QSplitter)
@@ -90,12 +90,12 @@ class CommandLineEdit(QLineEdit):
     def __repr__(self):
         return utils.get_repr(self, text=self.text())
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_text_edited(self, _text):
         """Slot for textEdited. Stop history browsing."""
         self.history.stop()
 
-    @pyqtSlot(int, int)
+    @Slot(int, int)
     def __on_cursor_position_changed(self, _old, new):
         """Prevent the cursor moving to the prompt.
 
@@ -156,7 +156,7 @@ class DetailFold(QWidget):
                  arg 0: bool, if the contents are currently visible.
     """
 
-    toggled = pyqtSignal(bool)
+    toggled = Signal(bool)
 
     def __init__(self, text, parent=None):
         super().__init__(parent)
@@ -316,7 +316,7 @@ class FullscreenNotification(QLabel):
         """Hide the widget after the given timeout."""
         QTimer.singleShot(timeout, self._on_timeout)
 
-    @pyqtSlot()
+    @Slot()
     def _on_timeout(self):
         """Hide and delete the widget."""
         self.hide()
@@ -469,7 +469,7 @@ class InspectorSplitter(QSplitter):
             # Case 3 above
             pass
 
-    @pyqtSlot()
+    @Slot()
     def _on_splitter_moved(self) -> None:
         assert self._inspector_idx is not None
         sizes = self.sizes()

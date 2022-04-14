@@ -28,7 +28,7 @@ import dataclasses
 from http import HTTPStatus
 
 import pytest
-from qutebrowser.qt.core import pyqtSignal, QUrl
+from qutebrowser.qt.core import Signal, QUrl
 
 from end2end.fixtures import testprocess
 
@@ -135,7 +135,7 @@ class WebserverProcess(testprocess.Process):
         new_request: Emitted when there's a new request received.
     """
 
-    new_request = pyqtSignal(Request)
+    new_request = Signal(Request)
     Request = Request  # So it can be used from the fixture easily.
     ExpectedRequest = ExpectedRequest
 

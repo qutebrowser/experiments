@@ -22,7 +22,7 @@
 import functools
 from typing import Optional, FrozenSet
 
-from qutebrowser.qt.core import pyqtSlot, QObject
+from qutebrowser.qt.core import Slot, QObject
 
 from qutebrowser.config import config
 from qutebrowser.misc import debugcachestats
@@ -99,7 +99,7 @@ class _StyleSheetObserver(QObject):
         """
         return _render_stylesheet(self._stylesheet)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _maybe_update_stylesheet(self, option: str) -> None:
         """Update the stylesheet for obj if the option changed affects it."""
         assert self._options is not None

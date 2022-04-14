@@ -23,7 +23,7 @@
 
 import io
 
-from qutebrowser.qt.core import QObject, pyqtSignal, pyqtSlot, QUrl
+from qutebrowser.qt.core import QObject, Signal, Slot, QUrl
 
 from qutebrowser.browser import downloads, qtnetworkdownloads
 from qutebrowser.utils import objreg
@@ -36,7 +36,7 @@ class TempDownload(QObject):
 
     """A download of some data into a file object."""
 
-    finished = pyqtSignal()
+    finished = Signal()
 
     def __init__(self, item: qtnetworkdownloads.DownloadItem) -> None:
         super().__init__()
@@ -45,7 +45,7 @@ class TempDownload(QObject):
         self.successful = False
         self.fileobj = item.fileobj
 
-    @pyqtSlot()
+    @Slot()
     def _on_download_finished(self) -> None:
         self.successful = self._item.successful
         self.finished.emit()

@@ -30,7 +30,7 @@ import datetime
 import enum
 from typing import List, Tuple
 
-from qutebrowser.qt.core import pyqtSlot, Qt, QSize
+from qutebrowser.qt.core import Slot, Qt, QSize
 from qutebrowser.qt.widgets import (QDialog, QLabel, QTextEdit, QPushButton,
                              QVBoxLayout, QHBoxLayout, QCheckBox,
                              QDialogButtonBox, QMessageBox)
@@ -326,7 +326,7 @@ class _CrashDialog(QDialog):
             exc_text = '{}: {}'.format(e.__class__.__name__, e)
             self.show_error(exc_text)
 
-    @pyqtSlot()
+    @Slot()
     def on_report_clicked(self):
         """Report and close dialog if report button was clicked."""
         self._btn_report.setEnabled(False)
@@ -334,14 +334,14 @@ class _CrashDialog(QDialog):
         self._btn_report.setText("Reporting...")
         self.report()
 
-    @pyqtSlot()
+    @Slot()
     def on_paste_success(self):
         """Get the newest version from PyPI when the paste is done."""
         self._pypi_client.success.connect(self.on_version_success)
         self._pypi_client.error.connect(self.on_version_error)
         self._pypi_client.get_version()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def show_error(self, text):
         """Show a paste error dialog.
 
@@ -352,7 +352,7 @@ class _CrashDialog(QDialog):
         error_dlg.finished.connect(self.finish)
         error_dlg.show()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_version_success(self, newest):
         """Called when the version was obtained from self._pypi_client.
 
@@ -370,7 +370,7 @@ class _CrashDialog(QDialog):
         msgbox.information(self, "Report successfully sent!", text,
                            on_finished=self.finish, plain_text=False)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_version_error(self, msg):
         """Called when the version was not obtained from self._pypi_client.
 
@@ -386,7 +386,7 @@ class _CrashDialog(QDialog):
         msgbox.information(self, "Report successfully sent!", text,
                            on_finished=self.finish, plain_text=False)
 
-    @pyqtSlot()
+    @Slot()
     def finish(self):
         """Save contact info and close the dialog."""
         self._save_contact_info()
@@ -468,7 +468,7 @@ class ExceptionCrashDialog(_CrashDialog):
             except Exception:
                 self._crash_info.append(("Debug log", traceback.format_exc()))
 
-    @pyqtSlot()
+    @Slot()
     def finish(self):
         self._save_contact_info()
         if self._chk_restore.isChecked():
@@ -544,7 +544,7 @@ class FatalCrashDialog(_CrashDialog):
                 history_data = traceback.format_exc()
             self._crash_info.append(("History", history_data))
 
-    @pyqtSlot()
+    @Slot()
     def on_report_clicked(self):
         """Prevent empty reports."""
         if (not self._info.toPlainText().strip() and

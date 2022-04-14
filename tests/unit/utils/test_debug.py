@@ -25,7 +25,7 @@ import time
 import textwrap
 
 import pytest
-from qutebrowser.qt.core import pyqtSignal, Qt, QEvent, QObject, QTimer
+from qutebrowser.qt.core import Signal, Qt, QEvent, QObject, QTimer
 from qutebrowser.qt.widgets import QStyle, QFrame, QSpinBox
 
 from qutebrowser.utils import debug
@@ -47,8 +47,8 @@ def test_log_events(qapp, caplog):
 
 class SignalObject(QObject):
 
-    signal1 = pyqtSignal()
-    signal2 = pyqtSignal(str, str)
+    signal1 = Signal()
+    signal2 = Signal(str, str)
 
     def __repr__(self):
         """This is not a nice thing to do, but it makes our tests easier."""

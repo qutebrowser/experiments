@@ -24,7 +24,7 @@ import functools
 import xml.etree.ElementTree
 from typing import cast, Iterable, Optional
 
-from qutebrowser.qt.core import pyqtSlot, Qt, QUrl, QPoint, QTimer, QSizeF, QSize
+from qutebrowser.qt.core import Slot, Qt, QUrl, QPoint, QTimer, QSizeF, QSize
 from qutebrowser.qt.gui import QIcon
 from qutebrowser.qt.widgets import QWidget
 from qutebrowser.qt.webkitwidgets import QWebPage, QWebFrame
@@ -206,7 +206,7 @@ class WebKitCaret(browsertab.AbstractCaret):
         super().__init__(tab, mode_manager, parent)
         self._selection_state = browsertab.SelectionState.none
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_mode_entered(self, mode):
         if mode != usertypes.KeyMode.caret:
             return
@@ -234,7 +234,7 @@ class WebKitCaret(browsertab.AbstractCaret):
                 self._widget.page().currentFrame().evaluateJavaScript(
                     resources.read_file('javascript/position_caret.js'))
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_mode_left(self, _mode):
         settings = self._widget.settings()
         if settings.testAttribute(QWebSettings.WebAttribute.CaretBrowsingEnabled):
@@ -899,7 +899,7 @@ class WebKitTab(browsertab.AbstractTab):
     def renderer_process_pid(self) -> Optional[int]:
         return None
 
-    @pyqtSlot()
+    @Slot()
     def _on_history_trigger(self):
         url = self.url()
         requested_url = self.url(requested=True)
@@ -908,7 +908,7 @@ class WebKitTab(browsertab.AbstractTab):
     def set_html(self, html, base_url=QUrl()):
         self._widget.setHtml(html, base_url)
 
-    @pyqtSlot()
+    @Slot()
     def _on_load_started(self):
         super()._on_load_started()
         nam = self._widget.page().networkAccessManager()
@@ -916,12 +916,12 @@ class WebKitTab(browsertab.AbstractTab):
         # Make sure the icon is cleared when navigating to a page without one.
         self.icon_changed.emit(QIcon())
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def _on_load_finished(self, ok: bool) -> None:
         super()._on_load_finished(ok)
         self._update_load_status(ok)
 
-    @pyqtSlot()
+    @Slot()
     def _on_frame_load_finished(self):
         """Make sure we emit an appropriate status when loading finished.
 
@@ -931,7 +931,7 @@ class WebKitTab(browsertab.AbstractTab):
         """
         self._on_load_finished(not self._widget.page().error_occurred)
 
-    @pyqtSlot()
+    @Slot()
     def _on_webkit_icon_changed(self):
         """Emit iconChanged with a QIcon like QWebEngineView does."""
         if sip.isdeleted(self._widget):
@@ -939,7 +939,7 @@ class WebKitTab(browsertab.AbstractTab):
             return
         self.icon_changed.emit(self._widget.icon())
 
-    @pyqtSlot(QWebFrame)
+    @Slot(QWebFrame)
     def _on_frame_created(self, frame):
         """Connect the contentsSizeChanged signal of each frame."""
         # FIXME:qtwebengine those could theoretically regress:
@@ -947,11 +947,11 @@ class WebKitTab(browsertab.AbstractTab):
         # https://github.com/qutebrowser/qutebrowser/issues/263
         frame.contentsSizeChanged.connect(self._on_contents_size_changed)
 
-    @pyqtSlot(QSize)
+    @Slot(QSize)
     def _on_contents_size_changed(self, size):
         self.contents_size_changed.emit(QSizeF(size))
 
-    @pyqtSlot(usertypes.NavigationRequest)
+    @Slot(usertypes.NavigationRequest)
     def _on_navigation_request(self, navigation):
         super()._on_navigation_request(navigation)
         if not navigation.accepted:
@@ -976,7 +976,7 @@ class WebKitTab(browsertab.AbstractTab):
         if navigation.is_main_frame:
             self.settings.update_for_url(navigation.url)
 
-    @pyqtSlot('QNetworkReply*')
+    @Slot('QNetworkReply*')
     def _on_ssl_errors(self, reply):
         self._insecure_hosts.add(reply.url().host())
 

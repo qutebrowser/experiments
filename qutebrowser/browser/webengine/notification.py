@@ -50,8 +50,8 @@ import functools
 import subprocess
 from typing import Any, List, Dict, Optional, Iterator, TYPE_CHECKING
 
-from qutebrowser.qt.core import (Qt, QObject, QVariant, QMetaType, QByteArray, pyqtSlot,
-                          pyqtSignal, QTimer, QProcess, QUrl)
+from qutebrowser.qt.core import (Qt, QObject, QVariant, QMetaType, QByteArray, Slot,
+                          Signal, QTimer, QProcess, QUrl)
 from qutebrowser.qt.gui import QImage, QIcon, QPixmap
 from qutebrowser.qt.dbus import (QDBusConnection, QDBusInterface, QDBus, QDBusServiceWatcher,
                           QDBusArgument, QDBusMessage, QDBusError)
@@ -118,14 +118,14 @@ class AbstractNotificationAdapter(QObject):
 
     # Emitted by the adapter when the notification with the given ID was closed or
     # clicked by the user.
-    close_id = pyqtSignal(int)
-    click_id = pyqtSignal(int)
+    close_id = Signal(int)
+    click_id = Signal(int)
 
     # Emitted by the adapter when an error occurred, which should result in the adapter
     # getting swapped out (potentially initializing the same adapter again, or using a
     # different one if that fails).
-    error = pyqtSignal(str)
-    clear_all = pyqtSignal()
+    error = Signal(str)
+    clear_all = Signal()
 
     def present(
         self,
@@ -154,7 +154,7 @@ class AbstractNotificationAdapter(QObject):
             config.instance.get('content.notifications.show_origin', url=origin),
         )
 
-    @pyqtSlot(int)
+    @Slot(int)
     def on_web_closed(self, notification_id: int) -> None:
         """Called when a notification was closed by the website."""
         raise NotImplementedError
@@ -323,7 +323,7 @@ class NotificationBridgePresenter(QObject):
         log.misc.debug("Did not find match")
         return None
 
-    @pyqtSlot(int)
+    @Slot(int)
     def _on_adapter_closed(self, notification_id: int) -> None:
         """A notification was closed by the adapter (usually due to the user).
 
@@ -347,7 +347,7 @@ class NotificationBridgePresenter(QObject):
             log.misc.debug(f"Ignoring close request for notification {notification_id} "
                            "due to PyQt bug")
 
-    @pyqtSlot(int)
+    @Slot(int)
     def _on_adapter_clicked(self, notification_id: int) -> None:
         """A notification was clicked by the adapter (usually due to the user).
 
@@ -395,7 +395,7 @@ class NotificationBridgePresenter(QObject):
         self._adapter = None
         self._on_adapter_clear_all()
 
-    @pyqtSlot()
+    @Slot()
     def _on_adapter_clear_all(self) -> None:
         """Called when the adapter requests clearing all notifications.
 
@@ -409,7 +409,7 @@ class NotificationBridgePresenter(QObject):
         for notification_id in list(self._active_notifications):
             self._on_adapter_closed(notification_id)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_adapter_error(self, error: str) -> None:
         """A fatal error happened in the adapter.
 
@@ -484,11 +484,11 @@ class SystrayNotificationAdapter(AbstractNotificationAdapter):
             return text
         return origin.toDisplayString() + '\n\n' + text
 
-    @pyqtSlot()
+    @Slot()
     def _on_systray_clicked(self) -> None:
         self.click_id.emit(self.NOTIFICATION_ID)
 
-    @pyqtSlot(int)
+    @Slot(int)
     def on_web_closed(self, notification_id: int) -> None:
         assert notification_id == self.NOTIFICATION_ID, notification_id
         if not sip.isdeleted(self._systray):
@@ -530,7 +530,7 @@ class MessagesNotificationAdapter(AbstractNotificationAdapter):
 
         return new_id
 
-    @pyqtSlot(int)
+    @Slot(int)
     def on_web_closed(self, _notification_id: int) -> None:
         """We can't close messages."""
 
@@ -635,14 +635,14 @@ class HerbeNotificationAdapter(AbstractNotificationAdapter):
             stderr = proc.readAllStandardError()
             raise Error(f'herbe exited with status {code}: {stderr}')
 
-    @pyqtSlot(QProcess.ProcessError)
+    @Slot(QProcess.ProcessError)
     def _on_error(self, error: QProcess.ProcessError) -> None:
         if error == QProcess.ProcessError.Crashed:
             return
         name = debug.qenum_key(QProcess.ProcessError, error)
         raise Error(f'herbe process error: {name}')
 
-    @pyqtSlot(int)
+    @Slot(int)
     def on_web_closed(self, notification_id: int) -> None:
         """Handle closing the notification from JS.
 
@@ -790,7 +790,7 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
         else:
             self._fetch_capabilities()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_service_unregistered(self) -> None:
         """Make sure we know when the notification daemon exits.
 
@@ -1081,14 +1081,14 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
         image_data.endStructure()
         return image_data
 
-    @pyqtSlot(QDBusMessage)
+    @Slot(QDBusMessage)
     def _handle_close(self, msg: QDBusMessage) -> None:
         """Handle NotificationClosed from DBus."""
         self._verify_message(msg, "uu", QDBusMessage.MessageType.SignalMessage)
         notification_id, _close_reason = msg.arguments()
         self.close_id.emit(notification_id)
 
-    @pyqtSlot(QDBusMessage)
+    @Slot(QDBusMessage)
     def _handle_action(self, msg: QDBusMessage) -> None:
         """Handle ActionInvoked from DBus."""
         self._verify_message(msg, "us", QDBusMessage.MessageType.SignalMessage)
@@ -1096,7 +1096,7 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
         if action_key == "default":
             self.click_id.emit(notification_id)
 
-    @pyqtSlot(int)
+    @Slot(int)
     def on_web_closed(self, notification_id: int) -> None:
         """Send CloseNotification if a notification was closed from JS."""
         self.interface.call(

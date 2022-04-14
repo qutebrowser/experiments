@@ -31,7 +31,7 @@ import functools
 import subprocess
 from typing import Iterable, Mapping, MutableSequence, Sequence, cast
 
-from qutebrowser.qt.core import QObject, pyqtSignal, QTimer
+from qutebrowser.qt.core import QObject, Signal, QTimer
 try:
     import hunter
 except ImportError:
@@ -58,7 +58,7 @@ class Quitter(QObject):
         _args: The argparse namespace.
     """
 
-    shutting_down = pyqtSignal()  # Emitted immediately before shut down
+    shutting_down = Signal()  # Emitted immediately before shut down
 
     def __init__(self, *,
                  args: argparse.Namespace,

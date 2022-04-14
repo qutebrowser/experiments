@@ -22,7 +22,7 @@
 import os
 import tempfile
 
-from qutebrowser.qt.core import (pyqtSignal, pyqtSlot, QObject, QProcess,
+from qutebrowser.qt.core import (Signal, Slot, QObject, QProcess,
                           QFileSystemWatcher)
 
 from qutebrowser.config import config
@@ -51,8 +51,8 @@ class ExternalEditor(QObject):
         editing_finished: The editor process was closed.
     """
 
-    file_updated = pyqtSignal(str)
-    editing_finished = pyqtSignal()
+    file_updated = Signal(str)
+    editing_finished = Signal()
 
     def __init__(self, parent=None, watch=False):
         super().__init__(parent)
@@ -94,7 +94,7 @@ class ExternalEditor(QObject):
             message.info(f"Keeping file {self._filename} as the editor process exited "
                          "abnormally")
 
-    @pyqtSlot(int, QProcess.ExitStatus)
+    @Slot(int, QProcess.ExitStatus)
     def _on_proc_closed(self, _exitcode, exitstatus):
         """Write the editor text into the form field and clean up tempfile.
 
@@ -116,7 +116,7 @@ class ExternalEditor(QObject):
         self.editing_finished.emit()
         self._cleanup(successful=self._proc.outcome.was_successful())
 
-    @pyqtSlot(QProcess.ProcessError)
+    @Slot(QProcess.ProcessError)
     def _on_proc_error(self, _err):
         self._cleanup(successful=False)
 
@@ -164,7 +164,7 @@ class ExternalEditor(QObject):
                 fobj.write(text)
             return fobj.name
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_file_changed(self, path):
         try:
             with open(path, 'r', encoding=config.val.editor.encoding) as f:

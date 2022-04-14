@@ -25,7 +25,7 @@ import enum
 from typing import cast, Optional
 
 from qutebrowser.qt.widgets import QWidget
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QEvent
+from qutebrowser.qt.core import Signal, Slot, QObject, QEvent
 from qutebrowser.qt.gui import QCloseEvent
 
 from qutebrowser.browser import eventfilter
@@ -66,7 +66,7 @@ class _EventFilter(QObject):
       the QWebInspector.
     """
 
-    clicked = pyqtSignal()
+    clicked = Signal()
 
     def eventFilter(self, _obj: QObject, event: QEvent) -> bool:
         """Translate mouse presses to a clicked signal."""
@@ -87,7 +87,7 @@ class AbstractWebInspector(QWidget):
         recreate: Emitted when the inspector should be recreated.
     """
 
-    recreate = pyqtSignal()
+    recreate = Signal()
 
     def __init__(self, splitter: 'miscwidgets.InspectorSplitter',
                  win_id: int,
@@ -130,7 +130,7 @@ class AbstractWebInspector(QWidget):
         """
         return False
 
-    @pyqtSlot()
+    @Slot()
     def _on_clicked(self) -> None:
         """Enter insert mode if a docked inspector was clicked."""
         if self._position != Position.window:
@@ -202,7 +202,7 @@ class AbstractWebInspector(QWidget):
         """Inspect the given QWeb(Engine)Page."""
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self) -> None:
         """Clean up the inspector."""
         self.close()

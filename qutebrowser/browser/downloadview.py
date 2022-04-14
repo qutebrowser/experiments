@@ -22,7 +22,7 @@
 import functools
 from typing import Callable, MutableSequence, Tuple, Union
 
-from qutebrowser.qt.core import pyqtSlot, QSize, Qt
+from qutebrowser.qt.core import Slot, QSize, Qt
 from qutebrowser.qt.widgets import QListView, QSizePolicy, QMenu, QStyleFactory
 
 from qutebrowser.browser import downloads
@@ -86,7 +86,7 @@ class DownloadView(QListView):
             count = model.rowCount()
         return utils.get_repr(self, count=count)
 
-    @pyqtSlot()
+    @Slot()
     def _update_geometry(self):
         """Wrapper to call updateGeometry.
 
@@ -95,7 +95,7 @@ class DownloadView(QListView):
         """
         self.updateGeometry()
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def on_fullscreen_requested(self, on):
         """Hide/show the downloadview when entering/leaving fullscreen."""
         if on:
@@ -103,7 +103,7 @@ class DownloadView(QListView):
         else:
             self.show()
 
-    @pyqtSlot('QModelIndex')
+    @Slot('QModelIndex')
     def on_clicked(self, index):
         """Handle clicking of an item.
 
@@ -149,7 +149,7 @@ class DownloadView(QListView):
             actions.append(("Remove all finished", model.download_clear))
         return actions
 
-    @pyqtSlot('QPoint')
+    @Slot('QPoint')
     def show_context_menu(self, point):
         """Show the context menu."""
         index = self.indexAt(point)

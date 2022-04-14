@@ -26,7 +26,7 @@ import getpass
 import binascii
 import hashlib
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, Qt
+from qutebrowser.qt.core import Signal, Slot, QObject, Qt
 from qutebrowser.qt.network import QLocalSocket, QLocalServer, QAbstractSocket
 
 import qutebrowser
@@ -163,9 +163,9 @@ class IPCServer(QObject):
         got_invalid_data: Emitted when there was invalid incoming data.
     """
 
-    got_args = pyqtSignal(list, str, str)
-    got_raw = pyqtSignal(bytes)
-    got_invalid_data = pyqtSignal()
+    got_args = Signal(list, str, str)
+    got_raw = Signal(bytes)
+    got_invalid_data = Signal()
 
     def __init__(self, socketname, parent=None):
         """Start the IPC server and listen to commands.
@@ -238,7 +238,7 @@ class IPCServer(QObject):
                 # True, so report this as an error.
                 raise ListenError(self._server)
 
-    @pyqtSlot('QLocalSocket::LocalSocketError')
+    @Slot('QLocalSocket::LocalSocketError')
     def on_error(self, err):
         """Raise SocketError on fatal errors."""
         if self._socket is None:
@@ -252,7 +252,7 @@ class IPCServer(QObject):
         if err != QLocalSocket.LocalSocketError.PeerClosedError:
             raise SocketError("handling IPC connection", self._socket)
 
-    @pyqtSlot()
+    @Slot()
     def handle_connection(self):
         """Handle a new connection to the server."""
         if self.ignored:
@@ -286,7 +286,7 @@ class IPCServer(QObject):
             log.ipc.debug("Socket was disconnected immediately.")
             self.on_disconnected()
 
-    @pyqtSlot()
+    @Slot()
     def on_disconnected(self):
         """Clean up socket when the client disconnected."""
         log.ipc.debug("Client disconnected from socket 0x{:x}.".format(
@@ -380,7 +380,7 @@ class IPCServer(QObject):
 
         return socket
 
-    @pyqtSlot()
+    @Slot()
     def on_ready_read(self):
         """Read json data from the client."""
         self._timer.stop()
@@ -397,7 +397,7 @@ class IPCServer(QObject):
         if self._socket is not None:
             self._timer.start()
 
-    @pyqtSlot()
+    @Slot()
     def on_timeout(self):
         """Cancel the current connection if it was idle for too long."""
         assert self._socket is not None
@@ -411,7 +411,7 @@ class IPCServer(QObject):
             # on_socket_disconnected sets it to None
             self._socket.abort()
 
-    @pyqtSlot()
+    @Slot()
     def update_atime(self):
         """Update the atime of the socket file all few hours.
 
@@ -436,7 +436,7 @@ class IPCServer(QObject):
             self._server.close()
             self.listen()
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self):
         """Shut down the IPC server cleanly."""
         log.ipc.debug("Shutting down IPC (socket 0x{:x})".format(

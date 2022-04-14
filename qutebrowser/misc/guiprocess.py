@@ -25,7 +25,7 @@ import shlex
 import shutil
 from typing import Mapping, Sequence, Dict, Optional
 
-from qutebrowser.qt.core import (pyqtSlot, pyqtSignal, QObject, QProcess,
+from qutebrowser.qt.core import (Slot, Signal, QObject, QProcess,
                           QProcessEnvironment, QByteArray, QUrl, Qt)
 
 from qutebrowser.utils import message, log, utils, usertypes, version
@@ -150,9 +150,9 @@ class GUIProcess(QObject):
         error/finished/started signals proxied from QProcess.
     """
 
-    error = pyqtSignal(QProcess.ProcessError)
-    finished = pyqtSignal(int, QProcess.ExitStatus)
-    started = pyqtSignal()
+    error = Signal(QProcess.ProcessError)
+    finished = Signal(int, QProcess.ExitStatus)
+    started = Signal()
 
     def __init__(
             self,
@@ -236,7 +236,7 @@ class GUIProcess(QObject):
         else:
             raise utils.Unreachable(attr)
 
-    @pyqtSlot()
+    @Slot()
     def _on_ready_read_stdout(self) -> None:
         if not self._output_messages:
             return
@@ -244,14 +244,14 @@ class GUIProcess(QObject):
         self._process_text(self._proc.readAllStandardOutput(), 'stdout')
         message.info(self._elide_output(self.stdout), replace=f"stdout-{self.pid}")
 
-    @pyqtSlot()
+    @Slot()
     def _on_ready_read_stderr(self) -> None:
         if not self._output_messages:
             return
         self._process_text(self._proc.readAllStandardError(), 'stderr')
         message.error(self._elide_output(self.stderr), replace=f"stderr-{self.pid}")
 
-    @pyqtSlot(QProcess.ProcessError)
+    @Slot(QProcess.ProcessError)
     def _on_error(self, error: QProcess.ProcessError) -> None:
         """Show a message if there was an error while spawning."""
         if error == QProcess.ProcessError.Crashed and not utils.is_windows:
@@ -295,7 +295,7 @@ class GUIProcess(QObject):
 
         return output
 
-    @pyqtSlot(int, QProcess.ExitStatus)
+    @Slot(int, QProcess.ExitStatus)
     def _on_finished(self, code: int, status: QProcess.ExitStatus) -> None:
         """Show a message when the process finished."""
         log.procs.debug("Process finished with code {}, status {}.".format(
@@ -327,7 +327,7 @@ class GUIProcess(QObject):
                 log.procs.error("Process stderr:\n" + self.stderr.strip())
             message.error(str(self.outcome) + " See :process for details.")
 
-    @pyqtSlot()
+    @Slot()
     def _on_started(self) -> None:
         """Called when the process started successfully."""
         log.procs.debug("Process started.")
@@ -394,7 +394,7 @@ class GUIProcess(QObject):
         global last_pid
         last_pid = self.pid
 
-    @pyqtSlot()
+    @Slot()
     def _on_cleanup_timer(self) -> None:
         """Remove the process from all registered processes."""
         log.procs.debug(f"Cleaning up data for {self.pid}")

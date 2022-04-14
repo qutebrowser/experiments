@@ -21,7 +21,7 @@
 
 from typing import List, Iterable
 
-from qutebrowser.qt.core import pyqtSignal, QUrl
+from qutebrowser.qt.core import Signal, QUrl
 from qutebrowser.qt.gui import QPalette
 from qutebrowser.qt.webenginewidgets import QWebEngineView
 from qutebrowser.qt.webenginecore import QWebEnginePage
@@ -154,9 +154,9 @@ class WebEnginePage(QWebEnginePage):
         navigation_request: Emitted on acceptNavigationRequest.
     """
 
-    certificate_error = pyqtSignal(certificateerror.CertificateErrorWrapper)
-    shutting_down = pyqtSignal()
-    navigation_request = pyqtSignal(usertypes.NavigationRequest)
+    certificate_error = Signal(certificateerror.CertificateErrorWrapper)
+    shutting_down = Signal()
+    navigation_request = Signal(usertypes.NavigationRequest)
 
     def __init__(self, *, theme_color, profile, parent=None):
         super().__init__(profile, parent)

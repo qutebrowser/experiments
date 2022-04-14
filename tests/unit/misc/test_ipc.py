@@ -30,7 +30,7 @@ from unittest import mock
 from typing import Optional, List
 
 import pytest
-from qutebrowser.qt.core import pyqtSignal, QObject
+from qutebrowser.qt.core import Signal, QObject
 from qutebrowser.qt.network import QLocalServer, QLocalSocket, QAbstractSocket
 from qutebrowser.qt.test import QSignalSpy
 
@@ -100,8 +100,8 @@ class FakeSocket(QObject):
         _connect_successful: The value returned for waitForConnected().
     """
 
-    readyRead = pyqtSignal()  # noqa: N815
-    disconnected = pyqtSignal()
+    readyRead = Signal()  # noqa: N815
+    disconnected = Signal()
 
     def __init__(self, *, error=QLocalSocket.LocalSocketError.UnknownSocketError, state=None,
                  data=None, connect_successful=True, parent=None):

@@ -20,7 +20,7 @@
 """The commandline in the statusbar."""
 
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, Qt, QSize
+from qutebrowser.qt.core import Signal, Slot, Qt, QSize
 from qutebrowser.qt.gui import QKeyEvent
 from qutebrowser.qt.widgets import QSizePolicy, QWidget
 
@@ -51,13 +51,13 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         hide_cmd: Emitted when command input can be hidden.
     """
 
-    got_cmd = pyqtSignal([str], [str, int])
-    got_search = pyqtSignal(str, bool)  # text, reverse
-    clear_completion_selection = pyqtSignal()
-    hide_completion = pyqtSignal()
-    update_completion = pyqtSignal()
-    show_cmd = pyqtSignal()
-    hide_cmd = pyqtSignal()
+    got_cmd = Signal([str], [str, int])
+    got_search = Signal(str, bool)  # text, reverse
+    clear_completion_selection = Signal()
+    hide_completion = Signal()
+    update_completion = Signal()
+    show_cmd = Signal()
+    hide_cmd = Signal()
 
     def __init__(self, *, win_id: int,
                  private: bool,
@@ -222,7 +222,7 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         ed.file_updated.connect(callback)
         ed.edit(self.text())
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_left(self, mode: usertypes.KeyMode) -> None:
         """Clear up when command mode was left.
 
@@ -279,7 +279,7 @@ class Command(misc.MinimalLineEditMixin, misc.CommandLineEdit):
         width = self.fontMetrics().boundingRect(text).width()
         return QSize(width, height)
 
-    @pyqtSlot()
+    @Slot()
     def _incremental_search(self) -> None:
         if not config.val.search.incremental:
             return

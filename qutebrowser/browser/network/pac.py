@@ -23,7 +23,7 @@ import sys
 import functools
 from typing import Optional
 
-from qutebrowser.qt.core import QObject, pyqtSignal, pyqtSlot, QUrl
+from qutebrowser.qt.core import QObject, Signal, Slot, QUrl
 from qutebrowser.qt.network import (QNetworkProxy, QNetworkRequest, QHostInfo,
                              QNetworkReply, QNetworkAccessManager,
                              QHostAddress)
@@ -66,7 +66,7 @@ def _js_slot(*args):
                 return self._error_con.callAsConstructor([e])
                 # pylint: enable=protected-access
 
-        deco = pyqtSlot(*args, result=QJSValue)
+        deco = Slot(*args, result=QJSValue)
         return deco(new_method)
     return _decorator
 
@@ -235,7 +235,7 @@ class PACFetcher(QObject):
 
     """Asynchronous fetcher of PAC files."""
 
-    finished = pyqtSignal()
+    finished = Signal()
 
     def __init__(self, url, parent=None):
         """Resolve a PAC proxy from URL.
@@ -273,7 +273,7 @@ class PACFetcher(QObject):
         self._reply.finished.connect(  # type: ignore[attr-defined]
             self._finish)
 
-    @pyqtSlot()
+    @Slot()
     def _finish(self):
         assert self._reply is not None
         if self._reply.error() != QNetworkReply.NetworkError.NoError:

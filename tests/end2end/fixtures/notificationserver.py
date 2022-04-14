@@ -21,7 +21,7 @@ import dataclasses
 import itertools
 from typing import Dict, List
 
-from qutebrowser.qt.core import QObject, QByteArray, QUrl, pyqtSlot
+from qutebrowser.qt.core import QObject, QByteArray, QUrl, Slot
 from qutebrowser.qt.gui import QImage
 from qutebrowser.qt.dbus import QDBusConnection, QDBusArgument, QDBusMessage
 import pytest
@@ -193,7 +193,7 @@ class TestNotificationServer(QObject):
     # Everything below is exposed via DBus
     # pylint: disable=invalid-name
 
-    @pyqtSlot(QDBusMessage, result="uint")
+    @Slot(QDBusMessage, result="uint")
     def Notify(self, dbus_message: QDBusMessage) -> QDBusArgument:
         assert dbus_message.signature() == 'susssasa{sv}i'
         assert dbus_message.type() == QDBusMessage.MessageType.MethodCallMessage
@@ -209,7 +209,7 @@ class TestNotificationServer(QObject):
         self.last_id = message_id
         return message_id
 
-    @pyqtSlot(QDBusMessage, result="QStringList")
+    @Slot(QDBusMessage, result="QStringList")
     def GetCapabilities(self, message: QDBusMessage) -> List[str]:
         assert not message.signature()
         assert not message.arguments()
@@ -221,7 +221,7 @@ class TestNotificationServer(QObject):
 
         return capabilities
 
-    @pyqtSlot(QDBusMessage)
+    @Slot(QDBusMessage)
     def CloseNotification(self, dbus_message: QDBusMessage) -> None:
         assert dbus_message.signature() == 'u'
         assert dbus_message.type() == QDBusMessage.MessageType.MethodCallMessage

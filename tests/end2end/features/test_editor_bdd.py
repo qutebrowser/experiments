@@ -26,7 +26,7 @@ import time
 
 import pytest
 import pytest_bdd as bdd
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QFileSystemWatcher
+from qutebrowser.qt.core import Signal, Slot, QObject, QFileSystemWatcher
 bdd.scenarios('editor.feature')
 
 from qutebrowser.utils import utils
@@ -75,7 +75,7 @@ def set_up_editor_empty(quteproc, tmpdir):
 
 class EditorPidWatcher(QObject):
 
-    appeared = pyqtSignal()
+    appeared = Signal()
 
     def __init__(self, directory, parent=None):
         super().__init__(parent)
@@ -86,7 +86,7 @@ class EditorPidWatcher(QObject):
         self.has_pidfile = False
         self._check_update()
 
-    @pyqtSlot()
+    @Slot()
     def _check_update(self):
         if self.has_pidfile:
             return

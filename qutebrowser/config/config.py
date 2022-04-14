@@ -25,7 +25,7 @@ import functools
 from typing import (TYPE_CHECKING, Any, Callable, Dict, Iterator, List, Mapping,
                     MutableMapping, MutableSequence, Optional, Tuple, cast)
 
-from qutebrowser.qt.core import pyqtSignal, QObject, QUrl
+from qutebrowser.qt.core import Signal, QObject, QUrl
 
 from qutebrowser.commands import cmdexc, parser
 from qutebrowser.config import configdata, configexc, configutils
@@ -300,7 +300,7 @@ class Config(QObject):
     """
 
     MUTABLE_TYPES = (dict, list)
-    changed = pyqtSignal(str)
+    changed = Signal(str)
 
     def __init__(self,
                  yaml_config: 'configfiles.YamlConfig',

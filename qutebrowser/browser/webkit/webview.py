@@ -19,7 +19,7 @@
 
 """The main browser widgets."""
 
-from qutebrowser.qt.core import pyqtSignal, Qt, QUrl
+from qutebrowser.qt.core import Signal, Qt, QUrl
 from qutebrowser.qt.webkit import QWebSettings
 from qutebrowser.qt.webkitwidgets import QWebView, QWebPage
 
@@ -56,8 +56,8 @@ class WebView(QWebView):
         }
     """
 
-    scroll_pos_changed = pyqtSignal(int, int)
-    shutting_down = pyqtSignal()
+    scroll_pos_changed = Signal(int, int)
+    shutting_down = Signal()
 
     def __init__(self, *, win_id, tab_id, tab, private, parent=None):
         super().__init__(parent)

@@ -19,7 +19,7 @@
 
 import pytest
 
-from qutebrowser.qt.core import Qt, QObject, pyqtSignal
+from qutebrowser.qt.core import Qt, QObject, Signal
 
 from qutebrowser.utils import usertypes
 from qutebrowser.keyinput import keyutils
@@ -30,8 +30,8 @@ class FakeKeyparser(QObject):
 
     """A fake BaseKeyParser which doesn't handle anything."""
 
-    keystring_updated = pyqtSignal(str)
-    request_leave = pyqtSignal(usertypes.KeyMode, str, bool)
+    keystring_updated = Signal(str)
+    request_leave = Signal(usertypes.KeyMode, str, bool)
 
     def __init__(self):
         super().__init__()

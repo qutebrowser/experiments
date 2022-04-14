@@ -22,7 +22,7 @@
 from typing import Sequence
 
 from qutebrowser.qt.network import QNetworkCookie, QNetworkCookieJar
-from qutebrowser.qt.core import pyqtSignal, QDateTime
+from qutebrowser.qt.core import Signal, QDateTime
 
 from qutebrowser.config import config
 from qutebrowser.utils import utils, standarddir, objreg, log
@@ -41,7 +41,7 @@ class RAMCookieJar(QNetworkCookieJar):
         changed: Emitted when the cookie store was changed.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __repr__(self):
         return utils.get_repr(self, count=len(self.allCookies()))

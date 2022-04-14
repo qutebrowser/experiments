@@ -23,7 +23,7 @@ import logging
 import dataclasses
 
 import pytest
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, QObject
+from qutebrowser.qt.core import Slot, Signal, QObject
 
 from qutebrowser.utils import usertypes, message
 
@@ -47,8 +47,8 @@ class MessageMock(QObject):
         _logger: The logger to use for messages/questions.
     """
 
-    got_message = pyqtSignal(usertypes.MessageLevel, str)
-    got_question = pyqtSignal(usertypes.Question)
+    got_message = Signal(usertypes.MessageLevel, str)
+    got_question = Signal(usertypes.Question)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -56,7 +56,7 @@ class MessageMock(QObject):
         self.questions = []
         self._logger = logging.getLogger('messagemock')
 
-    @pyqtSlot(usertypes.MessageLevel, str)
+    @Slot(usertypes.MessageLevel, str)
     def _record_message(self, level, text):
         self.got_message.emit(level, text)
         log_levels = {
@@ -69,7 +69,7 @@ class MessageMock(QObject):
         self._logger.log(log_level, text)
         self.messages.append(Message(level, text))
 
-    @pyqtSlot(usertypes.Question)
+    @Slot(usertypes.Question)
     def _record_question(self, question):
         self.got_question.emit(question)
         self._logger.debug(question)

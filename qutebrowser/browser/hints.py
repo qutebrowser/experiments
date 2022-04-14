@@ -30,7 +30,7 @@ from string import ascii_lowercase
 from typing import (TYPE_CHECKING, Callable, Dict, Iterable, Iterator, List, Mapping,
                     MutableSequence, Optional, Sequence, Set)
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, Qt, QUrl
+from qutebrowser.qt.core import Signal, Slot, QObject, Qt, QUrl
 from qutebrowser.qt.widgets import QLabel
 
 from qutebrowser.config import config, configexc
@@ -134,7 +134,7 @@ class HintLabel(QLabel):
             self.setText(unmatched)
         self.adjustSize()
 
-    @pyqtSlot()
+    @Slot()
     def _move_to_elem(self) -> None:
         """Reposition the label to its element."""
         if not self.elem.has_frame():
@@ -402,7 +402,7 @@ class HintManager(QObject):
         Target.delete: "Delete an element",
     }
 
-    set_text = pyqtSignal(str)
+    set_text = Signal(str)
 
     def __init__(self, win_id: int, parent: QObject = None) -> None:
         """Constructor."""
@@ -856,7 +856,7 @@ class HintManager(QObject):
             # unpacking gets us the first (and only) key in the dict.
             self._fire(*visible)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def handle_partial_key(self, keystr: str) -> None:
         """Handle a new partial keypress."""
         if self._context is None:
@@ -1029,7 +1029,7 @@ class HintManager(QObject):
         else:
             self._fire(keystring)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_left(self, mode: usertypes.KeyMode) -> None:
         """Stop hinting when hinting mode was left."""
         if mode != usertypes.KeyMode.hint or self._context is None:

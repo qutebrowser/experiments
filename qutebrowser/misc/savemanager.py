@@ -23,7 +23,7 @@ import os.path
 import collections
 from typing import MutableMapping
 
-from qutebrowser.qt.core import pyqtSlot, QObject, QTimer
+from qutebrowser.qt.core import Slot, QObject, QTimer
 
 from qutebrowser.config import config
 from qutebrowser.api import cmdutils
@@ -172,7 +172,7 @@ class SaveManager(QObject):
         for saveable in self.saveables:
             self.save(saveable, *args, **kwargs)
 
-    @pyqtSlot()
+    @Slot()
     def autosave(self):
         """Slot used when the configs are auto-saved."""
         for (key, saveable) in self.saveables.items():
@@ -205,7 +205,7 @@ class SaveManager(QObject):
                     message.error("Could not save {}: {}".format(key, e))
         log.save.debug(":save saved {}".format(', '.join(what)))
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self):
         """Save all saveables when shutting down."""
         for key in self.saveables:

@@ -25,7 +25,7 @@ import dataclasses
 import types
 from typing import Any, Dict, Iterator, List, Mapping, MutableSequence, Optional, Type
 
-from qutebrowser.qt.core import QObject, pyqtSignal
+from qutebrowser.qt.core import QObject, Signal
 from qutebrowser.qt.sql import QSqlDatabase, QSqlError, QSqlQuery
 
 from qutebrowser.qt import sip
@@ -400,7 +400,7 @@ class SqlTable(QObject):
         changed: Emitted when the table is modified.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
     database: Database
 
     def __init__(self, database: Database, name: str, fields: List[str],

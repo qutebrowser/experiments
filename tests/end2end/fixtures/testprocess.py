@@ -26,7 +26,7 @@ import dataclasses
 
 import pytest
 import pytestqt.wait_signal
-from qutebrowser.qt.core import (pyqtSlot, pyqtSignal, QProcess, QObject,
+from qutebrowser.qt.core import (Slot, Signal, QProcess, QObject,
                           QElapsedTimer, QProcessEnvironment)
 from qutebrowser.qt.test import QSignalSpy
 
@@ -139,8 +139,8 @@ class Process(QObject):
         new_data: Emitted when a new line was parsed.
     """
 
-    ready = pyqtSignal()
-    new_data = pyqtSignal(object)
+    ready = Signal()
+    new_data = Signal(object)
     KEYS = ['data']
 
     def __init__(self, request, parent=None):
@@ -202,7 +202,7 @@ class Process(QObject):
         blocker.connect(signal)
         return blocker
 
-    @pyqtSlot()
+    @Slot()
     def read_log(self):
         """Read the log from the process' stdout."""
         if not hasattr(self, 'proc'):

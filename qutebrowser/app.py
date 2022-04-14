@@ -48,7 +48,7 @@ from typing import Iterable, Optional
 
 from qutebrowser.qt.widgets import QApplication, QWidget
 from qutebrowser.qt.gui import QDesktopServices, QPixmap, QIcon
-from qutebrowser.qt.core import pyqtSlot, QUrl, QObject, QEvent, pyqtSignal, Qt
+from qutebrowser.qt.core import Slot, QUrl, QObject, QEvent, Signal, Qt
 
 import qutebrowser
 from qutebrowser.commands import runners
@@ -540,8 +540,8 @@ class Application(QApplication):
         window_closing: A window is being closed.
     """
 
-    new_window = pyqtSignal(mainwindow.MainWindow)
-    window_closing = pyqtSignal(mainwindow.MainWindow)
+    new_window = Signal(mainwindow.MainWindow)
+    window_closing = Signal(mainwindow.MainWindow)
 
     def __init__(self, args):
         """Constructor.
@@ -573,12 +573,12 @@ class Application(QApplication):
 
         self.new_window.connect(self._on_new_window)
 
-    @pyqtSlot(mainwindow.MainWindow)
+    @Slot(mainwindow.MainWindow)
     def _on_new_window(self, window):
         window.tabbed_browser.shutting_down.connect(functools.partial(
             self.window_closing.emit, window))
 
-    @pyqtSlot(QObject)
+    @Slot(QObject)
     def on_focus_object_changed(self, obj):
         """Log when the focus object changed."""
         output = repr(obj)

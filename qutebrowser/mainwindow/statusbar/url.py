@@ -21,7 +21,7 @@
 
 import enum
 
-from qutebrowser.qt.core import (pyqtSlot, pyqtProperty,  # type: ignore[attr-defined]
+from qutebrowser.qt.core import (Slot, pyqtProperty,  # type: ignore[attr-defined]
                           QUrl)
 
 from qutebrowser.mainwindow.statusbar import textbase
@@ -121,7 +121,7 @@ class UrlText(textbase.TextBase):
             # always override the old one.
             self.style().polish(self)
 
-    @pyqtSlot(usertypes.LoadStatus)
+    @Slot(usertypes.LoadStatus)
     def on_load_status_changed(self, status):
         """Slot for load_status_changed. Sets URL color accordingly.
 
@@ -138,7 +138,7 @@ class UrlText(textbase.TextBase):
             self._normal_url_type = UrlType.normal
         self._update_url()
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def set_url(self, url):
         """Setter to be used as a Qt slot.
 
@@ -154,7 +154,7 @@ class UrlText(textbase.TextBase):
         self._normal_url_type = UrlType.normal
         self._update_url()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def set_hover_url(self, link):
         """Setter to be used as a Qt slot.
 

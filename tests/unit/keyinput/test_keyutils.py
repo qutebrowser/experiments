@@ -22,7 +22,7 @@ import operator
 import hypothesis
 from hypothesis import strategies
 import pytest
-from qutebrowser.qt.core import Qt, QEvent, pyqtSignal
+from qutebrowser.qt.core import Qt, QEvent, Signal
 from qutebrowser.qt.gui import QKeyEvent, QKeySequence
 from qutebrowser.qt.widgets import QWidget
 
@@ -87,7 +87,7 @@ class KeyTesterWidget(QWidget):
     call that directly, only via QTest::keyPress.
     """
 
-    got_text = pyqtSignal()
+    got_text = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)

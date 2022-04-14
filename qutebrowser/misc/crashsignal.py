@@ -32,7 +32,7 @@ import faulthandler
 import dataclasses
 from typing import TYPE_CHECKING, Optional, MutableMapping, cast, List
 
-from qutebrowser.qt.core import (pyqtSlot, qInstallMessageHandler, QObject,
+from qutebrowser.qt.core import (Slot, qInstallMessageHandler, QObject,
                           QSocketNotifier, QTimer, QUrl)
 from qutebrowser.qt.widgets import QApplication
 
@@ -178,7 +178,7 @@ class CrashHandler(QObject):
         else:
             self._crash_dialog.report(info=info, contact=contact)
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self):
         self.destroy_crashlogfile()
 
@@ -386,7 +386,7 @@ class SignalHandler(QObject):
         self._timer.stop()
         self._activated = False
 
-    @pyqtSlot()
+    @Slot()
     def handle_signal_wakeup(self):
         """Handle a newly arrived signal.
 

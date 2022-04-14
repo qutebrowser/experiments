@@ -21,7 +21,7 @@
 
 from typing import MutableSequence
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, QObject
+from qutebrowser.qt.core import Slot, Signal, QObject
 
 from qutebrowser.utils import usertypes, log, standarddir, objreg
 from qutebrowser.misc import lineparser
@@ -49,7 +49,7 @@ class History(QObject):
         changed: Emitted when an entry was added to the history.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, *, history=None, parent=None):
         """Constructor.
@@ -92,7 +92,7 @@ class History(QObject):
         self._tmphist = usertypes.NeighborList(items)
         return self._tmphist.lastitem()
 
-    @pyqtSlot()
+    @Slot()
     def stop(self):
         """Stop browsing the history."""
         self._tmphist = None

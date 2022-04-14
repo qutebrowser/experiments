@@ -22,7 +22,7 @@
 import enum
 import dataclasses
 
-from qutebrowser.qt.core import (pyqtSignal, pyqtSlot,  # type: ignore[attr-defined]
+from qutebrowser.qt.core import (Signal, Slot,  # type: ignore[attr-defined]
                           pyqtProperty, Qt, QSize, QTimer)
 from qutebrowser.qt.widgets import QWidget, QHBoxLayout, QStackedLayout, QSizePolicy
 
@@ -157,8 +157,8 @@ class StatusBar(QWidget):
                arg: The new position.
     """
 
-    resized = pyqtSignal('QRect')
-    moved = pyqtSignal('QPoint')
+    resized = Signal('QRect')
+    moved = Signal('QPoint')
 
     STYLESHEET = _generate_stylesheet()
 
@@ -209,7 +209,7 @@ class StatusBar(QWidget):
     def __repr__(self):
         return utils.get_repr(self)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option):
         if option == 'statusbar.show':
             self.maybe_hide()
@@ -272,7 +272,7 @@ class StatusBar(QWidget):
             self._hbox.removeWidget(widget)
         self._text_widgets.clear()
 
-    @pyqtSlot()
+    @Slot()
     def maybe_hide(self):
         """Hide the statusbar if it's configured to do so."""
         strategy = config.val.statusbar.show
@@ -362,13 +362,13 @@ class StatusBar(QWidget):
         self._stack.setCurrentWidget(self.txt)
         self.maybe_hide()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def set_text(self, text):
         """Set a normal (persistent) text in the status bar."""
         log.message.debug(text)
         self.txt.setText(text)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def on_mode_entered(self, mode):
         """Mark certain modes in the commandline."""
         mode_manager = modeman.instance(self._win_id)
@@ -384,7 +384,7 @@ class StatusBar(QWidget):
                     usertypes.KeyMode.passthrough]:
             self.set_mode_active(mode, True)
 
-    @pyqtSlot(usertypes.KeyMode, usertypes.KeyMode)
+    @Slot(usertypes.KeyMode, usertypes.KeyMode)
     def on_mode_left(self, old_mode, new_mode):
         """Clear marked mode."""
         mode_manager = modeman.instance(self._win_id)
@@ -403,7 +403,7 @@ class StatusBar(QWidget):
                         usertypes.KeyMode.passthrough]:
             self.set_mode_active(old_mode, False)
 
-    @pyqtSlot(browsertab.AbstractTab)
+    @Slot(browsertab.AbstractTab)
     def on_tab_changed(self, tab):
         """Notify sub-widgets when the tab has been changed."""
         self.url.on_tab_changed(tab)
@@ -413,7 +413,7 @@ class StatusBar(QWidget):
         self.maybe_hide()
         assert tab.is_private == self._color_flags.private
 
-    @pyqtSlot(browsertab.SelectionState)
+    @Slot(browsertab.SelectionState)
     def on_caret_selection_toggled(self, selection_state):
         """Update the statusbar when entering/leaving caret selection mode."""
         log.statusbar.debug("Setting caret selection {}"

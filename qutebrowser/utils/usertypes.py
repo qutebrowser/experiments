@@ -25,7 +25,7 @@ import enum
 import dataclasses
 from typing import Optional, Sequence, TypeVar, Union
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QTimer
+from qutebrowser.qt.core import Signal, Slot, QObject, QTimer
 from qutebrowser.qt.core import QUrl
 
 from qutebrowser.utils import log, qtutils, utils
@@ -396,12 +396,12 @@ class Question(QObject):
         completed: Emitted when the question was completed in any way.
     """
 
-    answered = pyqtSignal(object)
-    cancelled = pyqtSignal()
-    aborted = pyqtSignal()
-    answered_yes = pyqtSignal()
-    answered_no = pyqtSignal()
-    completed = pyqtSignal()
+    answered = Signal(object)
+    cancelled = Signal()
+    aborted = Signal()
+    answered_yes = Signal()
+    answered_no = Signal()
+    completed = Signal()
 
     def __init__(self, parent: QObject = None) -> None:
         super().__init__(parent)
@@ -420,7 +420,7 @@ class Question(QObject):
                               mode=self.mode, default=self.default,
                               option=self.option)
 
-    @pyqtSlot()
+    @Slot()
     def done(self) -> None:
         """Must be called when the question was answered completely."""
         self.answered.emit(self.answer)
@@ -431,13 +431,13 @@ class Question(QObject):
                 self.answered_no.emit()
         self.completed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def cancel(self) -> None:
         """Cancel the question (resulting from user-input)."""
         self.cancelled.emit()
         self.completed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def abort(self) -> None:
         """Abort the question."""
         if self.is_aborted:

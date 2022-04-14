@@ -33,7 +33,7 @@ from typing import (TYPE_CHECKING, Any, Dict, Iterable, Iterator, List, Mapping,
                     MutableMapping, Optional, Tuple, cast)
 
 import yaml
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QSettings, qVersion
+from qutebrowser.qt.core import Signal, Slot, QObject, QSettings, qVersion
 
 import qutebrowser
 from qutebrowser.config import (configexc, config, configdata, configutils,
@@ -187,7 +187,7 @@ class YamlConfig(QObject):
     """
 
     VERSION = 2
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, parent: QObject = None) -> None:
         super().__init__(parent)
@@ -212,7 +212,7 @@ class YamlConfig(QObject):
         """Iterate over configutils.Values items."""
         yield from self._values.values()
 
-    @pyqtSlot()
+    @Slot()
     def _mark_changed(self) -> None:
         """Mark the YAML config as changed."""
         self._dirty = True
@@ -382,7 +382,7 @@ class YamlMigrations(QObject):
 
     """Automated migrations for autoconfig.yml."""
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     # Note: settings is Any because it's not validated yet.
     def __init__(self, settings: Any, parent: QObject = None) -> None:

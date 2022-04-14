@@ -29,7 +29,7 @@ import textwrap
 import dataclasses
 from typing import cast, List, Sequence
 
-from qutebrowser.qt.core import pyqtSignal, QObject, QUrl
+from qutebrowser.qt.core import Signal, QObject, QUrl
 
 from qutebrowser.utils import (log, standarddir, jinja, objreg, utils,
                                javascript, urlmatch, version, usertypes, message)
@@ -273,7 +273,7 @@ class GreasemonkeyManager(QObject):
             considered obsolete.
     """
 
-    scripts_reloaded = pyqtSignal()
+    scripts_reloaded = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)

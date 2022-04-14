@@ -26,7 +26,7 @@ import re
 import html as html_utils
 from typing import cast, Union, Optional
 
-from qutebrowser.qt.core import (pyqtSignal, pyqtSlot, Qt, QPoint, QPointF, QTimer, QUrl,
+from qutebrowser.qt.core import (Signal, Slot, Qt, QPoint, QPointF, QTimer, QUrl,
                           QObject)
 from qutebrowser.qt.network import QAuthenticator
 from qutebrowser.qt.widgets import QWidget
@@ -307,7 +307,7 @@ class WebEngineCaret(browsertab.AbstractCaret):
             flags.add('windows')
         return list(flags)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_mode_entered(self, mode):
         if mode != usertypes.KeyMode.caret:
             return
@@ -335,7 +335,7 @@ class WebEngineCaret(browsertab.AbstractCaret):
         else:
             self.selection_toggled.emit(browsertab.SelectionState.none)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_mode_left(self, mode):
         if mode != usertypes.KeyMode.caret:
             return
@@ -509,7 +509,7 @@ class WebEngineScroller(browsertab.AbstractScroller):
         for _ in range(min(count, 1000)):
             self._tab.fake_key_press(key, modifier)
 
-    @pyqtSlot(QPointF)
+    @Slot(QPointF)
     def _update_pos(self, pos):
         """Update the scroll position attributes when it changed."""
         self._pos_px = pos.toPoint()
@@ -659,7 +659,7 @@ class WebEngineHistoryPrivate(browsertab.AbstractHistoryPrivate):
         stream, _data, cur_data = tabhistory.serialize(items)
         qtutils.deserialize_stream(stream, self._history)
 
-        @pyqtSlot()
+        @Slot()
         def _on_load_finished():
             self._tab.scroller.to_point(cur_data['scroll-pos'])
             self._tab.load_finished.disconnect(_on_load_finished)
@@ -854,7 +854,7 @@ class WebEngineAudio(browsertab.AbstractAudio):
         page = self._widget.page()
         return page.recentlyAudible()
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def _on_url_changed(self, url):
         if self._overridden or not url.isValid():
             return
@@ -913,7 +913,7 @@ class _WebEnginePermissions(QObject):
         page.registerProtocolHandlerRequested.connect(
             self._on_register_protocol_handler_requested)
 
-    @pyqtSlot('QWebEngineFullScreenRequest')
+    @Slot('QWebEngineFullScreenRequest')
     def _on_fullscreen_requested(self, request):
         request.accept()
         on = request.toggleOn()
@@ -927,7 +927,7 @@ class _WebEnginePermissions(QObject):
                 notif.set_timeout(timeout)
                 notif.show()
 
-    @pyqtSlot(QUrl, 'QWebEnginePage::Feature')
+    @Slot(QUrl, 'QWebEnginePage::Feature')
     def _on_feature_permission_requested(self, url, feature):
         """Ask the user for approval for geolocation/media/etc.."""
         page = self._widget.page()
@@ -1047,13 +1047,13 @@ class _WebEngineScripts(QObject):
             self._update_stylesheet, searching=False))
         self._tab.search.finished.connect(self._update_stylesheet)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option):
         if option in ['scrolling.bar', 'content.user_stylesheets']:
             self._init_stylesheet()
             self._update_stylesheet()
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def _update_stylesheet(self, searching=False):
         """Update the custom stylesheet in existing tabs."""
         css = shared.get_user_stylesheet(searching=searching)
@@ -1118,7 +1118,7 @@ class _WebEngineScripts(QObject):
         )
         self._inject_js('stylesheet', js_code, subframes=True)
 
-    @pyqtSlot()
+    @Slot()
     def _inject_all_greasemonkey_scripts(self):
         scripts = self._greasemonkey.all_scripts()
         self._inject_greasemonkey_scripts(scripts)
@@ -1279,7 +1279,7 @@ class WebEngineTab(browsertab.AbstractTab):
             down.
     """
 
-    abort_questions = pyqtSignal()
+    abort_questions = Signal()
 
     def __init__(self, *, win_id, mode_manager, private, parent=None):
         super().__init__(win_id=win_id,
@@ -1328,7 +1328,7 @@ class WebEngineTab(browsertab.AbstractTab):
             parent=self)
         self._widget.installEventFilter(self._child_event_filter)
 
-    @pyqtSlot()
+    @Slot()
     def _restore_zoom(self):
         if sip.isdeleted(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3498
@@ -1424,7 +1424,7 @@ class WebEngineTab(browsertab.AbstractTab):
             url=url_string, error=error)
         self.set_html(error_page)
 
-    @pyqtSlot()
+    @Slot()
     def _on_history_trigger(self):
         try:
             self._widget.page()
@@ -1454,7 +1454,7 @@ class WebEngineTab(browsertab.AbstractTab):
 
         self.history_item_triggered.emit(url, requested_url, title)
 
-    @pyqtSlot(QUrl, 'QAuthenticator*', 'QString')
+    @Slot(QUrl, 'QAuthenticator*', 'QString')
     def _on_proxy_authentication_required(self, url, authenticator,
                                           proxy_host):
         """Called when a proxy needs authentication."""
@@ -1473,7 +1473,7 @@ class WebEngineTab(browsertab.AbstractTab):
         authenticator.setUser(answer.user)
         authenticator.setPassword(answer.password)
 
-    @pyqtSlot(QUrl, 'QAuthenticator*')
+    @Slot(QUrl, 'QAuthenticator*')
     def _on_authentication_required(self, url, authenticator):
         log.network.debug("Authentication requested for {}, netrc_used {}"
                           .format(url.toDisplayString(), self.data.netrc_used))
@@ -1491,7 +1491,7 @@ class WebEngineTab(browsertab.AbstractTab):
             log.network.debug("Aborting auth")
             sip.assign(authenticator, QAuthenticator())
 
-    @pyqtSlot()
+    @Slot()
     def _on_load_started(self):
         """Clear search when a new load is started if needed."""
         # WORKAROUND for
@@ -1501,12 +1501,12 @@ class WebEngineTab(browsertab.AbstractTab):
         super()._on_load_started()
         self.data.netrc_used = False
 
-    @pyqtSlot('qint64')
+    @Slot('qint64')
     def _on_renderer_process_pid_changed(self, pid):
         log.webview.debug("Renderer process PID for tab {}: {}"
                           .format(self.tab_id, pid))
 
-    @pyqtSlot(QWebEnginePage.RenderProcessTerminationStatus, int)
+    @Slot(QWebEnginePage.RenderProcessTerminationStatus, int)
     def _on_render_process_terminated(self, status, exitcode):
         """Show an error when the renderer process terminated."""
         if (status == QWebEnginePage.RenderProcessTerminationStatus.AbnormalTerminationStatus and
@@ -1549,7 +1549,7 @@ class WebEngineTab(browsertab.AbstractTab):
 
         self._show_error_page(self.url(), error=error)
 
-    @pyqtSlot(int)
+    @Slot(int)
     def _on_load_progress(self, perc: int) -> None:
         """QtWebEngine-specific loadProgress workarounds.
 
@@ -1560,7 +1560,7 @@ class WebEngineTab(browsertab.AbstractTab):
                 self.load_status() != usertypes.LoadStatus.error):
             self._update_load_status(ok=True)
 
-    @pyqtSlot(bool)
+    @Slot(bool)
     def _on_load_finished(self, ok: bool) -> None:
         """QtWebEngine-specific loadFinished workarounds."""
         super()._on_load_finished(ok)
@@ -1573,7 +1573,7 @@ class WebEngineTab(browsertab.AbstractTab):
                 self._error_page_workaround,
                 self.settings.test_attribute('content.javascript.enabled')))
 
-    @pyqtSlot(certificateerror.CertificateErrorWrapper)
+    @Slot(certificateerror.CertificateErrorWrapper)
     def _on_ssl_errors(self, error):
         url = error.url()
         self._insecure_hosts.add(url.host())
@@ -1623,7 +1623,7 @@ class WebEngineTab(browsertab.AbstractTab):
         if show_non_overr_cert_error and is_resource:
             self._show_error_page(url, str(error))
 
-    @pyqtSlot()
+    @Slot()
     def _on_print_requested(self):
         """Slot for window.print() in JS."""
         try:
@@ -1631,7 +1631,7 @@ class WebEngineTab(browsertab.AbstractTab):
         except browsertab.WebTabError as e:
             message.error(str(e))
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def _on_url_changed(self, url: QUrl) -> None:
         """Update settings for the current URL.
 
@@ -1648,7 +1648,7 @@ class WebEngineTab(browsertab.AbstractTab):
                 not qtutils.version_check('5.14')):
             self.settings.update_for_url(url)
 
-    @pyqtSlot(usertypes.NavigationRequest)
+    @Slot(usertypes.NavigationRequest)
     def _on_navigation_request(self, navigation):
         super()._on_navigation_request(navigation)
 

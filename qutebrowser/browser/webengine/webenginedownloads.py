@@ -23,7 +23,7 @@ import re
 import os.path
 import functools
 
-from qutebrowser.qt.core import pyqtSlot, Qt, QUrl, QObject
+from qutebrowser.qt.core import Slot, Qt, QUrl, QObject
 from qutebrowser.qt.webenginecore import QWebEngineDownloadRequest
 
 from qutebrowser.browser import downloads, pdfjs
@@ -58,7 +58,7 @@ class DownloadItem(downloads.AbstractDownloadItem):
         return (self._qt_item.savePageFormat() !=
                 QWebEngineDownloadRequest.SavePageFormat.UnknownSaveFormat)
 
-    @pyqtSlot(QWebEngineDownloadRequest.DownloadState)
+    @Slot(QWebEngineDownloadRequest.DownloadState)
     def _on_state_changed(self, state):
         state_name = debug.qenum_key(QWebEngineDownloadRequest, state)
         log.downloads.debug("State for {!r} changed to {}".format(
@@ -249,7 +249,7 @@ class DownloadManager(downloads.AbstractDownloadManager):
         profile.downloadRequested.connect(self.handle_download,
                                           Qt.ConnectionType.DirectConnection)
 
-    @pyqtSlot(QWebEngineDownloadRequest)
+    @Slot(QWebEngineDownloadRequest)
     def handle_download(self, qt_item):
         """Start a download coming from a QWebEngineProfile."""
         qt_filename = os.path.basename(qt_item.path())   # FIXME use 5.14 API

@@ -23,7 +23,7 @@ import sys
 import code
 from typing import MutableSequence
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, Qt
+from qutebrowser.qt.core import Signal, Slot, Qt
 from qutebrowser.qt.widgets import QTextEdit, QWidget, QVBoxLayout, QApplication
 from qutebrowser.qt.gui import QTextCursor
 
@@ -46,7 +46,7 @@ class ConsoleLineEdit(miscwidgets.CommandLineEdit):
         execute: Emitted when a commandline should be executed.
     """
 
-    execute = pyqtSignal(str)
+    execute = Signal(str)
 
     def __init__(self, _namespace, parent):
         """Constructor.
@@ -58,7 +58,7 @@ class ConsoleLineEdit(miscwidgets.CommandLineEdit):
         self._history = cmdhistory.History(parent=self)
         self.returnPressed.connect(self.on_return_pressed)
 
-    @pyqtSlot()
+    @Slot()
     def on_return_pressed(self):
         """Execute the line of code which was entered."""
         self._history.stop()
@@ -186,7 +186,7 @@ class ConsoleWidget(QWidget):
         """Write a line of text (without added newline) to the output."""
         self._output.append_text(line)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def push(self, line):
         """Push a line to the interpreter."""
         self._buffer.append(line)

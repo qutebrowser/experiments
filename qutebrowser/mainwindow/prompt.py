@@ -26,7 +26,7 @@ import functools
 import dataclasses
 from typing import Deque, MutableSequence, Optional, cast
 
-from qutebrowser.qt.core import (pyqtSlot, pyqtSignal, Qt, QTimer, QDir, QModelIndex,
+from qutebrowser.qt.core import (Slot, Signal, Qt, QTimer, QDir, QModelIndex,
                           QItemSelectionModel, QObject, QEventLoop)
 from qutebrowser.qt.widgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
                              QLabel, QTreeView, QSizePolicy,
@@ -97,7 +97,7 @@ class PromptQueue(QObject):
                       shown.
     """
 
-    show_prompts = pyqtSignal(usertypes.Question)
+    show_prompts = Signal(usertypes.Question)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -146,7 +146,7 @@ class PromptQueue(QObject):
         else:
             return False
 
-    @pyqtSlot(usertypes.Question, bool)
+    @Slot(usertypes.Question, bool)
     def ask_question(self, question, blocking):
         """Display a prompt for a given question.
 
@@ -215,7 +215,7 @@ class PromptQueue(QObject):
             question.completed.connect(self._pop_later)
             return None
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_mode_left(self, mode):
         """Abort question when a prompt mode was left."""
         if mode not in [usertypes.KeyMode.prompt, usertypes.KeyMode.yesno]:
@@ -284,7 +284,7 @@ class PromptContainer(QWidget):
             background-color: {{ conf.colors.prompts.selected.bg }};
         }
     """
-    update_geometry = pyqtSignal()
+    update_geometry = Signal()
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
@@ -304,7 +304,7 @@ class PromptContainer(QWidget):
     def __repr__(self):
         return utils.get_repr(self, win_id=self._win_id)
 
-    @pyqtSlot(usertypes.Question)
+    @Slot(usertypes.Question)
     def _on_show_prompts(self, question):
         """Show a prompt for the given question.
 
@@ -350,7 +350,7 @@ class PromptContainer(QWidget):
         prompt.setFocus()
         self.update_geometry.emit()
 
-    @pyqtSlot()
+    @Slot()
     def _on_aborted(self, key_mode):
         """Leave KEY_MODE whenever a prompt is aborted."""
         try:
@@ -359,12 +359,12 @@ class PromptContainer(QWidget):
             # window was deleted: ignore
             pass
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_prompt_done(self, key_mode):
         """Leave the prompt mode in this window if a question was answered."""
         modeman.leave(self._win_id, key_mode, ':prompt-accept', maybe=True)
 
-    @pyqtSlot(usertypes.KeyMode)
+    @Slot(usertypes.KeyMode)
     def _on_global_mode_left(self, mode):
         """Leave prompt/yesno mode in this window if it was left elsewhere.
 
@@ -656,7 +656,7 @@ class FilenamePrompt(_BasePrompt):
             hidden = self._to_complete not in filename and filename != '..'
             self._file_view.setRowHidden(index.row(), index.parent(), hidden)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _set_fileview_root(self, path, *, tabbed=False):
         """Set the root path for the file display."""
         separators = os.sep
@@ -692,7 +692,7 @@ class FilenamePrompt(_BasePrompt):
 
         self._directories_hide_show_model()
 
-    @pyqtSlot(QModelIndex)
+    @Slot(QModelIndex)
     def _insert_path(self, index, *, clicked=True):
         """Handle an element selection.
 

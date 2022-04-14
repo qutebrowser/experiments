@@ -25,7 +25,7 @@ import contextlib
 import pathlib
 from typing import cast, Mapping, MutableSequence, Optional
 
-from qutebrowser.qt.core import pyqtSlot, QUrl, QObject, pyqtSignal
+from qutebrowser.qt.core import Slot, QUrl, QObject, Signal
 from qutebrowser.qt.widgets import QProgressDialog, QApplication
 
 from qutebrowser.config import config
@@ -161,9 +161,9 @@ class WebHistory(sql.SqlTable):
     """
 
     # All web history cleared
-    history_cleared = pyqtSignal()
+    history_cleared = Signal()
     # one url cleared
-    url_cleared = pyqtSignal(QUrl)
+    url_cleared = Signal(QUrl)
 
     def __init__(self, database: sql.Database, progress: HistoryProgress,
                  parent: Optional[QObject] = None) -> None:
@@ -381,7 +381,7 @@ class WebHistory(sql.SqlTable):
             self._last_url = None
         self.url_cleared.emit(qurl)
 
-    @pyqtSlot(QUrl, QUrl, str)
+    @Slot(QUrl, QUrl, str)
     def add_from_tab(self, url, requested_url, title):
         """Add a new history entry as slot, called from a BrowserTab."""
         if self._is_excluded_entirely(url) or self._is_excluded_entirely(requested_url):

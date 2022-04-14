@@ -30,7 +30,7 @@ import tempfile
 import enum
 from typing import Any, Dict, IO, List, MutableSequence, Optional, Union
 
-from qutebrowser.qt.core import (pyqtSlot, pyqtSignal, Qt, QObject, QModelIndex,
+from qutebrowser.qt.core import (Slot, Signal, Qt, QObject, QModelIndex,
                           QTimer, QAbstractListModel, QUrl)
 
 from qutebrowser.browser import pdfjs
@@ -78,7 +78,7 @@ def init():
     config.instance.changed.connect(_clear_last_used)
 
 
-@pyqtSlot()
+@Slot()
 def shutdown():
     temp_download_manager.cleanup()
 
@@ -398,7 +398,7 @@ class DownloadItemStats(QObject):
         else:
             return remaining_bytes / avg
 
-    @pyqtSlot('qint64', 'qint64')
+    @Slot('qint64', 'qint64')
     def on_download_progress(self, bytes_done, bytes_total):
         """Update local variables when the download progress changed.
 
@@ -441,12 +441,12 @@ class AbstractDownloadItem(QObject):
                          arg 2: The original download URL.
     """
 
-    data_changed = pyqtSignal()
-    finished = pyqtSignal()
-    error = pyqtSignal(str)
-    cancelled = pyqtSignal()
-    remove_requested = pyqtSignal()
-    pdfjs_requested = pyqtSignal(str, QUrl)
+    data_changed = Signal()
+    finished = Signal()
+    error = Signal(str)
+    cancelled = Signal()
+    remove_requested = Signal()
+    pdfjs_requested = Signal(str, QUrl)
 
     def __init__(self, manager, parent=None):
         super().__init__(parent)
@@ -565,7 +565,7 @@ class AbstractDownloadItem(QObject):
         """Actual cancel implementation."""
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def cancel(self, *, remove_data=True):
         """Cancel the download.
 
@@ -581,7 +581,7 @@ class AbstractDownloadItem(QObject):
         self.finished.emit()
         self.data_changed.emit()
 
-    @pyqtSlot()
+    @Slot()
     def remove(self):
         """Remove the download from the model."""
         self.remove_requested.emit()
@@ -597,12 +597,12 @@ class AbstractDownloadItem(QObject):
         except OSError:
             log.downloads.exception("Failed to remove partial file")
 
-    @pyqtSlot()
+    @Slot()
     def retry(self):
         """Retry a failed download."""
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def try_retry(self):
         """Try to retry a download and show an error if it's unsupported."""
         try:
@@ -625,7 +625,7 @@ class AbstractDownloadItem(QObject):
         """
         raise NotImplementedError
 
-    @pyqtSlot()
+    @Slot()
     def open_file(self, cmdline=None, open_dir=False):
         """Open the downloaded file.
 
@@ -901,11 +901,11 @@ class AbstractDownloadManager(QObject):
                       The argument is the index of the changed download
     """
 
-    begin_remove_row = pyqtSignal(int)
-    end_remove_row = pyqtSignal()
-    begin_insert_row = pyqtSignal(int)
-    end_insert_row = pyqtSignal()
-    data_changed = pyqtSignal(int)
+    begin_remove_row = Signal(int)
+    end_remove_row = Signal()
+    begin_insert_row = Signal(int)
+    end_insert_row = Signal()
+    data_changed = Signal(int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -917,7 +917,7 @@ class AbstractDownloadManager(QObject):
     def __repr__(self):
         return utils.get_repr(self, downloads=len(self.downloads))
 
-    @pyqtSlot()
+    @Slot()
     def _update_gui(self):
         """Periodical GUI update of all items."""
         assert self.downloads
@@ -925,7 +925,7 @@ class AbstractDownloadManager(QObject):
             dl.stats.update_speed()
         self.data_changed.emit(-1)
 
-    @pyqtSlot(str, QUrl)
+    @Slot(str, QUrl)
     def _on_pdfjs_requested(self, filename: str, original_url: QUrl) -> None:
         """Open PDF.js when a download requests it."""
         tabbed_browser = objreg.get('tabbed-browser', scope='window',
@@ -961,7 +961,7 @@ class AbstractDownloadManager(QObject):
         if not self._update_timer.isActive():
             self._update_timer.start()
 
-    @pyqtSlot(AbstractDownloadItem)
+    @Slot(AbstractDownloadItem)
     def _on_data_changed(self, download):
         """Emit data_changed signal when download data changed."""
         try:
@@ -971,12 +971,12 @@ class AbstractDownloadManager(QObject):
             return
         self.data_changed.emit(idx)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_error(self, msg):
         """Display error message on download errors."""
         message.error("Download error: {}".format(msg))
 
-    @pyqtSlot(AbstractDownloadItem)
+    @Slot(AbstractDownloadItem)
     def _remove_item(self, download):
         """Remove a given download."""
         if sip.isdeleted(self):
@@ -1009,7 +1009,7 @@ class AbstractDownloadManager(QObject):
         download.cancelled.connect(question.abort)
         download.error.connect(question.abort)
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self):
         """Cancel all downloads when shutting down."""
         for download in self.downloads:

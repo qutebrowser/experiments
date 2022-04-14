@@ -24,7 +24,7 @@ import contextlib
 import dataclasses
 from typing import Optional, cast
 
-from qutebrowser.qt.core import (pyqtSignal, pyqtSlot, Qt, QSize, QRect, QPoint,
+from qutebrowser.qt.core import (Signal, Slot, Qt, QSize, QRect, QPoint,
                           QTimer, QUrl)
 from qutebrowser.qt.widgets import (QTabWidget, QTabBar, QSizePolicy, QCommonStyle,
                              QStyle, QStylePainter, QStyleOptionTab,
@@ -48,8 +48,8 @@ class TabWidget(QTabWidget):
         new_tab_requested: Emitted when a new tab is requested.
     """
 
-    tab_index_changed = pyqtSignal(int, int)
-    new_tab_requested = pyqtSignal('QUrl', bool, bool)
+    tab_index_changed = Signal(int, int)
+    new_tab_requested = Signal('QUrl', bool, bool)
 
     # Strings for controlling the mute/audible text
     MUTE_STRING = '[M] '
@@ -314,14 +314,14 @@ class TabWidget(QTabWidget):
         self.set_page_title(new_idx, text)
         return new_idx
 
-    @pyqtSlot(int)
+    @Slot(int)
     def _on_current_changed(self, index):
         """Emit the tab_index_changed signal if the current tab changed."""
         self.tabBar().on_current_changed()
         self.update_tab_titles()
         self.tab_index_changed.emit(index, self.count())
 
-    @pyqtSlot()
+    @Slot()
     def _on_new_tab_requested(self):
         """Open a new tab."""
         self.new_tab_requested.emit(config.val.url.default_page, False, False)
@@ -392,7 +392,7 @@ class TabBar(QTabBar):
         }
     """
 
-    new_tab_requested = pyqtSignal()
+    new_tab_requested = Signal()
 
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
@@ -427,7 +427,7 @@ class TabBar(QTabBar):
         """Get the current tab object."""
         return self.parent().currentWidget()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def _on_config_changed(self, option: str) -> None:
         if option.startswith('fonts.tabs.'):
             self.ensurePolished()
@@ -464,7 +464,7 @@ class TabBar(QTabBar):
             self.show()
             self._auto_hide_timer.start()
 
-    @pyqtSlot()
+    @Slot()
     def maybe_hide(self):
         """Hide the tab bar if needed."""
         show = config.val.tabs.show

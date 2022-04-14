@@ -21,7 +21,7 @@
 
 import json
 
-from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QUrl
+from qutebrowser.qt.core import Signal, Slot, QObject, QUrl
 
 from qutebrowser.misc import httpclient
 
@@ -46,8 +46,8 @@ class PyPIVersionClient(QObject):
     """
 
     API_URL = 'https://pypi.org/pypi/{}/json'
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
+    success = Signal(str)
+    error = Signal(str)
 
     def __init__(self, parent=None, client=None):
         super().__init__(parent)
@@ -69,7 +69,7 @@ class PyPIVersionClient(QObject):
         url = QUrl(self.API_URL.format(package))
         self._client.get(url)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def on_client_success(self, data):
         """Process the data and finish when the client finished.
 

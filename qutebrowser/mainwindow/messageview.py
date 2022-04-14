@@ -21,7 +21,7 @@
 
 from typing import MutableSequence, Optional
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, QTimer, Qt
+from qutebrowser.qt.core import Slot, Signal, QTimer, Qt
 from qutebrowser.qt.widgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 from qutebrowser.config import config, stylesheet
@@ -79,7 +79,7 @@ class MessageView(QWidget):
 
     """Widget which stacks error/warning/info messages."""
 
-    update_geometry = pyqtSignal()
+    update_geometry = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -109,7 +109,7 @@ class MessageView(QWidget):
         widget.hide()
         widget.deleteLater()
 
-    @pyqtSlot()
+    @Slot()
     def clear_messages(self):
         """Hide and delete all messages."""
         for widget in self._messages:
@@ -119,7 +119,7 @@ class MessageView(QWidget):
         self.hide()
         self._clear_timer.stop()
 
-    @pyqtSlot(usertypes.MessageLevel, str, str)
+    @Slot(usertypes.MessageLevel, str, str)
     def show_message(
             self,
             level: usertypes.MessageLevel,

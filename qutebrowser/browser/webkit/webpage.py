@@ -23,7 +23,7 @@ import html
 import functools
 from typing import cast
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, Qt, QUrl, QPoint
+from qutebrowser.qt.core import Slot, Signal, Qt, QUrl, QPoint
 from qutebrowser.qt.gui import QDesktopServices
 from qutebrowser.qt.network import QNetworkReply, QNetworkRequest
 from qutebrowser.qt.widgets import QFileDialog
@@ -58,9 +58,9 @@ class BrowserPage(QWebPage):
         navigation_request: Emitted on acceptNavigationRequest.
     """
 
-    shutting_down = pyqtSignal()
-    reloading = pyqtSignal(QUrl)
-    navigation_request = pyqtSignal(usertypes.NavigationRequest)
+    shutting_down = Signal()
+    reloading = Signal(QUrl)
+    navigation_request = Signal(usertypes.NavigationRequest)
 
     def __init__(self, win_id, tab_id, tabdata, private, parent=None):
         super().__init__(parent)
@@ -97,7 +97,7 @@ class BrowserPage(QWebPage):
         self.frameCreated.connect(  # type: ignore[attr-defined]
             self._connect_userjs_signals)
 
-    @pyqtSlot('QWebFrame*')
+    @Slot('QWebFrame*')
     def _connect_userjs_signals(self, frame):
         """Connect userjs related signals to `frame`.
 
@@ -266,7 +266,7 @@ class BrowserPage(QWebPage):
         download_manager = objreg.get('qtnetwork-download-manager')
         download_manager.get_request(req, qnam=self.networkAccessManager())
 
-    @pyqtSlot('QNetworkReply*')
+    @Slot('QNetworkReply*')
     def on_unsupported_content(self, reply):
         """Handle an unsupportedContent signal.
 
@@ -303,7 +303,7 @@ class BrowserPage(QWebPage):
             download_manager.fetch(reply,
                                    suggested_filename=suggested_filename)
 
-    @pyqtSlot()
+    @Slot()
     def on_load_started(self):
         """Reset error_occurred when loading of a new page started."""
         if self._ignore_load_started:
@@ -346,7 +346,7 @@ class BrowserPage(QWebPage):
                 log.webview.debug(f'Running GM script: {script}')
                 frame.evaluateJavaScript(script.code())
 
-    @pyqtSlot('QWebFrame*', 'QWebPage::Feature')
+    @Slot('QWebFrame*', 'QWebPage::Feature')
     def _on_feature_permission_requested(self, frame, feature):
         """Ask the user for approval for geolocation/notifications."""
         if not isinstance(frame, QWebFrame):  # pragma: no cover

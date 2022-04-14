@@ -27,7 +27,7 @@ import traceback
 import enum
 from typing import TYPE_CHECKING, Sequence
 
-from qutebrowser.qt.core import pyqtSlot, Qt, QObject
+from qutebrowser.qt.core import Slot, Qt, QObject
 from qutebrowser.qt.gui import QKeySequence, QKeyEvent
 
 from qutebrowser.browser import hints
@@ -131,7 +131,7 @@ class NormalKeyParser(CommandKeyParser):
             self._inhibited_timer.timeout.connect(self._clear_inhibited)
             self._inhibited_timer.start()
 
-    @pyqtSlot()
+    @Slot()
     def _clear_partial_match(self) -> None:
         """Clear a partial keystring after a timeout."""
         self._debug_log("Clearing partial keystring {}".format(
@@ -139,7 +139,7 @@ class NormalKeyParser(CommandKeyParser):
         self._sequence = keyutils.KeySequence()
         self.keystring_updated.emit(str(self._sequence))
 
-    @pyqtSlot()
+    @Slot()
     def _clear_inhibited(self) -> None:
         """Reset inhibition state after a timeout."""
         self._debug_log("Releasing inhibition state of normal mode.")

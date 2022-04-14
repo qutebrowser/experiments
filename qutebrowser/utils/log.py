@@ -215,7 +215,7 @@ def init_log(args: argparse.Namespace) -> None:
     _log_inited = True
 
 
-@QtCore.pyqtSlot()
+@QtCore.Slot()
 def shutdown_log() -> None:
     QtCore.qInstallMessageHandler(None)
 

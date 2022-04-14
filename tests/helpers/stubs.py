@@ -30,7 +30,7 @@ import builtins
 import importlib
 import types
 
-from qutebrowser.qt.core import pyqtSignal, QPoint, QProcess, QObject, QUrl, QByteArray
+from qutebrowser.qt.core import Signal, QPoint, QProcess, QObject, QUrl, QByteArray
 from qutebrowser.qt.gui import QIcon
 from qutebrowser.qt.network import (QNetworkRequest, QAbstractNetworkCache,
                              QNetworkCacheMetaData)
@@ -298,10 +298,10 @@ class FakeWebTab(browsertab.AbstractTab):
 
 class FakeSignal:
 
-    """Fake pyqtSignal stub which does nothing.
+    """Fake Signal stub which does nothing.
 
     Attributes:
-        signal: The name of the signal, like pyqtSignal.
+        signal: The name of the signal, like Signal.
         _func: The function to be invoked when the signal gets called.
     """
 
@@ -356,7 +356,7 @@ class FakeTimer(QObject):
 
     """Stub for a usertypes.Timer."""
 
-    timeout_signal = pyqtSignal()
+    timeout_signal = Signal()
 
     def __init__(self, parent=None, name=None):
         super().__init__(parent)
@@ -409,7 +409,7 @@ class InstaTimer(QObject):
     Useful to test a time-based event without inserting an artificial delay.
     """
 
-    timeout = pyqtSignal()
+    timeout = Signal()
 
     def start(self, interval=None):
         self.timeout.emit()
@@ -429,12 +429,12 @@ class StatusBarCommandStub(QLineEdit):
 
     """Stub for the statusbar command prompt."""
 
-    got_cmd = pyqtSignal(str)
-    clear_completion_selection = pyqtSignal()
-    hide_completion = pyqtSignal()
-    update_completion = pyqtSignal()
-    show_cmd = pyqtSignal()
-    hide_cmd = pyqtSignal()
+    got_cmd = Signal(str)
+    clear_completion_selection = Signal()
+    hide_completion = Signal()
+    update_completion = Signal()
+    show_cmd = Signal()
+    hide_cmd = Signal()
 
     def prefix(self):
         return self.text()[0]
@@ -444,8 +444,8 @@ class UrlMarkManagerStub(QObject):
 
     """Stub for the quickmark-manager or bookmark-manager object."""
 
-    added = pyqtSignal(str, str)
-    removed = pyqtSignal(str)
+    added = Signal(str, str)
+    removed = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -517,7 +517,7 @@ class TabWidgetStub(QObject):
 
     """Stub for the tab-widget object."""
 
-    new_tab = pyqtSignal(browsertab.AbstractTab, int)
+    new_tab = Signal(browsertab.AbstractTab, int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -567,8 +567,8 @@ class HTTPPostStub(QObject):
         data: the last data send by post()
     """
 
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
+    success = Signal(str)
+    error = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -584,7 +584,7 @@ class FakeDownloadItem(QObject):
 
     """Mock browser.downloads.DownloadItem."""
 
-    finished = pyqtSignal()
+    finished = Signal()
 
     def __init__(self, fileobj, name, parent=None):
         super().__init__(parent)

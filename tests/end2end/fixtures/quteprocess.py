@@ -33,7 +33,7 @@ import json
 
 import yaml
 import pytest
-from qutebrowser.qt.core import pyqtSignal, QUrl, QPoint
+from qutebrowser.qt.core import Signal, QUrl, QPoint
 from qutebrowser.qt.gui import QImage, QColor
 
 from qutebrowser.misc import ipc
@@ -462,7 +462,7 @@ class QuteProc(testprocess.Process):
         got_error: Emitted when there was an error log line.
     """
 
-    got_error = pyqtSignal()
+    got_error = Signal()
 
     KEYS = ['timestamp', 'loglevel', 'category', 'module', 'function', 'line',
             'message']

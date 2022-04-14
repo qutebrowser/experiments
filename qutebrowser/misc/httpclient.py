@@ -23,7 +23,7 @@ import functools
 import urllib.parse
 from typing import MutableMapping
 
-from qutebrowser.qt.core import pyqtSignal, QObject, QTimer
+from qutebrowser.qt.core import Signal, QObject, QTimer
 from qutebrowser.qt.network import (QNetworkAccessManager, QNetworkRequest,
                              QNetworkReply)
 
@@ -56,8 +56,8 @@ class HTTPClient(QObject):
                arg: The error message, as string.
     """
 
-    success = pyqtSignal(str)
-    error = pyqtSignal(str)
+    success = Signal(str)
+    error = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)

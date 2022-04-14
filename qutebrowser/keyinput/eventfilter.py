@@ -21,7 +21,7 @@
 
 from typing import cast
 
-from qutebrowser.qt.core import pyqtSlot, QObject, QEvent
+from qutebrowser.qt.core import Slot, QObject, QEvent
 from qutebrowser.qt.gui import QKeyEvent, QWindow
 
 from qutebrowser.keyinput import modeman
@@ -51,7 +51,7 @@ class EventFilter(QObject):
     def install(self) -> None:
         objects.qapp.installEventFilter(self)
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self) -> None:
         objects.qapp.removeEventFilter(self)
 

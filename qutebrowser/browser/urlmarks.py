@@ -32,7 +32,7 @@ import functools
 import collections
 from typing import MutableMapping
 
-from qutebrowser.qt.core import pyqtSignal, QUrl, QObject
+from qutebrowser.qt.core import Signal, QUrl, QObject
 
 from qutebrowser.utils import (message, usertypes, qtutils, urlutils,
                                standarddir, objreg, log)
@@ -72,7 +72,7 @@ class UrlMarkManager(QObject):
         changed: Emitted when anything changed.
     """
 
-    changed = pyqtSignal()
+    changed = Signal()
 
     def __init__(self, parent=None):
         """Initialize and read quickmarks."""

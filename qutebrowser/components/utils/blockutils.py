@@ -24,7 +24,7 @@ import os
 import functools
 from typing import IO, List, Optional
 
-from qutebrowser.qt.core import QUrl, QObject, pyqtSignal
+from qutebrowser.qt.core import QUrl, QObject, Signal
 
 from qutebrowser.api import downloads, message, config
 
@@ -60,8 +60,8 @@ class BlocklistDownloads(QObject):
         _finished: Has `all_downloads_finished` been emitted?
     """
 
-    single_download_finished = pyqtSignal(object)  # arg: the file object
-    all_downloads_finished = pyqtSignal(int)  # arg: download count
+    single_download_finished = Signal(object)  # arg: the file object
+    all_downloads_finished = Signal(int)  # arg: download count
 
     def __init__(self, urls: List[QUrl], parent: Optional[QObject] = None) -> None:
         super().__init__(parent)

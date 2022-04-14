@@ -25,7 +25,7 @@ import functools
 import dataclasses
 from typing import Any, Callable, Dict, Optional, Union
 
-from qutebrowser.qt.core import QUrl, pyqtSlot, qVersion
+from qutebrowser.qt.core import QUrl, Slot, qVersion
 from qutebrowser.qt.gui import QFont
 
 import qutebrowser
@@ -268,7 +268,7 @@ def clear_private_data() -> None:
         raise utils.Unreachable(objects.backend)
 
 
-@pyqtSlot()
+@Slot()
 def shutdown() -> None:
     """Shut down QWeb(Engine)Settings."""
     if objects.backend == usertypes.Backend.QtWebEngine:

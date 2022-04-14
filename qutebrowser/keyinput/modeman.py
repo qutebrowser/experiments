@@ -23,7 +23,7 @@ import functools
 import dataclasses
 from typing import Mapping, Callable, MutableMapping, Union, Set, cast
 
-from qutebrowser.qt.core import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
+from qutebrowser.qt.core import Slot, Signal, Qt, QObject, QEvent
 from qutebrowser.qt.gui import QKeyEvent
 
 from qutebrowser.commands import runners
@@ -253,9 +253,9 @@ class ModeManager(QObject):
                             arg 2: The new key string.
     """
 
-    entered = pyqtSignal(usertypes.KeyMode, int)
-    left = pyqtSignal(usertypes.KeyMode, usertypes.KeyMode, int)
-    keystring_updated = pyqtSignal(usertypes.KeyMode, str)
+    entered = Signal(usertypes.KeyMode, int)
+    left = Signal(usertypes.KeyMode, usertypes.KeyMode, int)
+    keystring_updated = Signal(usertypes.KeyMode, str)
 
     def __init__(self, win_id: int, parent: QObject = None) -> None:
         super().__init__(parent)
@@ -408,7 +408,7 @@ class ModeManager(QObject):
 
         self.enter(m, 'command')
 
-    @pyqtSlot(usertypes.KeyMode, str, bool)
+    @Slot(usertypes.KeyMode, str, bool)
     def leave(self, mode: usertypes.KeyMode,
               reason: str = None,
               maybe: bool = False) -> None:

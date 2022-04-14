@@ -24,7 +24,7 @@ import re
 import contextlib
 from typing import TYPE_CHECKING, Callable, Dict, Iterator, Mapping, MutableMapping
 
-from qutebrowser.qt.core import pyqtSlot, QUrl, QObject
+from qutebrowser.qt.core import Slot, QUrl, QObject
 
 from qutebrowser.api import cmdutils
 from qutebrowser.commands import cmdexc, parser
@@ -123,8 +123,8 @@ class AbstractCommandRunner(QObject):
     def run(self, text, count=None, *, safely=False):
         raise NotImplementedError
 
-    @pyqtSlot(str, int)
-    @pyqtSlot(str)
+    @Slot(str, int)
+    @Slot(str)
     def run_safely(self, text, count=None):
         """Run a command and display exceptions in the statusbar."""
         self.run(text, count, safely=True)
