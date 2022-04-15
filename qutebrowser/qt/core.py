@@ -7,6 +7,8 @@ elif machinery.USE_PYQT6:
     from PyQt6.QtCore import *
 elif machinery.USE_PYSIDE2:
     from PySide2.QtCore import *
+    QVariant = None  # FIXME:qt6 what to do about this?
+    QMetaType = None  # FIXME:qt6 what to do about this?
 elif machinery.USE_PYSIDE6:
     from PySide6.QtCore import *
 else:
@@ -22,5 +24,3 @@ if machinery.IS_PYQT:
     del pyqtSlot
     del pyqtBoundSignal
     del pyqtProperty
-else:
-    QVariant = None  # FIXME:qt6 what to do about this?

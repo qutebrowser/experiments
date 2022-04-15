@@ -339,7 +339,11 @@ class Query:
         if bound_values:
             log.sql.debug(f'    {bound_values}')
 
-        ok = self.query.exec()
+        try:
+            ok = self.query.exec()
+        except AttributeError:
+            # PySide
+            ok = self.query.exec_()
         self._check_ok('exec', ok)
 
         return self

@@ -50,12 +50,17 @@ import functools
 import subprocess
 from typing import Any, List, Dict, Optional, Iterator, TYPE_CHECKING
 
+from qutebrowser.qt import machinery
 from qutebrowser.qt.core import (Qt, QObject, QVariant, QMetaType, QByteArray, Slot,
                           Signal, QTimer, QProcess, QUrl)
 from qutebrowser.qt.gui import QImage, QIcon, QPixmap
-from qutebrowser.qt.dbus import (QDBusConnection, QDBusInterface, QDBus, QDBusServiceWatcher,
-                          QDBusArgument, QDBusMessage, QDBusError)
 from qutebrowser.qt.widgets import QSystemTrayIcon
+try:
+    from qutebrowser.qt.dbus import (QDBusConnection, QDBusInterface, QDBus, QDBusServiceWatcher,
+                              QDBusArgument, QDBusMessage, QDBusError)
+except machinery.Unavailable:
+    # PySide2
+    pass
 
 if TYPE_CHECKING:
     # putting these behind TYPE_CHECKING also means this module is importable
@@ -903,7 +908,7 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
         if spec_version in icon_key_overrides:
             self._quirks.icon_key = icon_key_overrides[spec_version]
 
-    def _dbus_error_str(self, error: QDBusError) -> str:
+    def _dbus_error_str(self, error: "QDBusError") -> str:
         """Get a string for a DBus error."""
         if not error.isValid():
             return "Unknown error"
@@ -911,9 +916,9 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
 
     def _verify_message(
         self,
-        msg: QDBusMessage,
+        msg: "QDBusMessage",
         expected_signature: str,
-        expected_type: QDBusMessage.MessageType,
+        expected_type: "QDBusMessage.MessageType",
     ) -> None:
         """Check the signature/type of a received message.
 
@@ -1016,7 +1021,7 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
 
         return notification_id
 
-    def _convert_image(self, qimage: QImage) -> Optional[QDBusArgument]:
+    def _convert_image(self, qimage: QImage) -> Optional["QDBusArgument"]:
         """Convert a QImage to the structure DBus expects.
 
         https://specifications.freedesktop.org/notification-spec/latest/ar01s05.html#icons-and-images-formats
@@ -1089,15 +1094,15 @@ class DBusNotificationAdapter(AbstractNotificationAdapter):
         image_data.endStructure()
         return image_data
 
-    @Slot(QDBusMessage)
-    def _handle_close(self, msg: QDBusMessage) -> None:
+    @Slot("QDBusMessage")
+    def _handle_close(self, msg: "QDBusMessage") -> None:
         """Handle NotificationClosed from DBus."""
         self._verify_message(msg, "uu", QDBusMessage.MessageType.SignalMessage)
         notification_id, _close_reason = msg.arguments()
         self.close_id.emit(notification_id)
 
-    @Slot(QDBusMessage)
-    def _handle_action(self, msg: QDBusMessage) -> None:
+    @Slot("QDBusMessage")
+    def _handle_action(self, msg: "QDBusMessage") -> None:
         """Handle ActionInvoked from DBus."""
         self._verify_message(msg, "us", QDBusMessage.MessageType.SignalMessage)
         notification_id, action_key = msg.arguments()
