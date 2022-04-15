@@ -27,7 +27,8 @@ import pstats
 import operator
 
 import pytest
-from qutebrowser.qt.core import PYQT_VERSION, QCoreApplication
+from qutebrowser.qt import machinery
+from qutebrowser.qt.core import QCoreApplication
 
 pytest.register_assert_rewrite('end2end.fixtures')
 
@@ -111,7 +112,7 @@ def _get_version_tag(tag):
         return pytest.mark.skipif(
             not _check_version(
                 op_str=match.group('operator'),
-                running_version=PYQT_VERSION,
+                running_version=machinery.VERSIONS.wrapper_hex,
                 version_str=version,
                 as_hex=True,
             ),
@@ -121,7 +122,7 @@ def _get_version_tag(tag):
         try:
             from qutebrowser.qt.webenginecore import PYQT_WEBENGINE_VERSION
         except ImportError:
-            running_version = PYQT_VERSION
+            running_version = machinery.VERSIONS.wrapper_hex
         else:
             running_version = PYQT_WEBENGINE_VERSION
         return pytest.mark.skipif(

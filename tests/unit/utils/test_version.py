@@ -33,7 +33,7 @@ import dataclasses
 import pytest
 import hypothesis
 import hypothesis.strategies
-from qutebrowser.qt.core import PYQT_VERSION_STR
+from qutebrowser.qt import machinery
 
 import qutebrowser
 from qutebrowser.config import config, websettings
@@ -1004,8 +1004,8 @@ class TestWebEngineVersions:
         """Compare the inferred Chromium version with the real one."""
         pyqt_webengine_version = version._get_pyqt_webengine_qt_version()
         if pyqt_webengine_version is None:
-            if '.dev' in PYQT_VERSION_STR:
-                pytest.skip("dev version of PyQt5")
+            if '.dev' in machinery.VERSIONS.wrapper_str:
+                pytest.skip("dev version of Qt wrapper")
 
             try:
                 from qutebrowser.qt.webenginecore import (
@@ -1225,7 +1225,7 @@ def test_version_info(params, stubs, monkeypatch, config_stub):
         'platform.python_implementation': lambda: 'PYTHON IMPLEMENTATION',
         'platform.python_version': lambda: 'PYTHON VERSION',
         'sys.executable': 'EXECUTABLE PATH',
-        'PYQT_VERSION_STR': 'PYQT VERSION',
+        'machinery.VERSIONS.wrapper': 'WRAPPER VERSION',
         'earlyinit.qt_version': lambda: 'QT VERSION',
         '_module_versions': lambda: ['MODULE VERSION 1', 'MODULE VERSION 2'],
         '_pdfjs_version': lambda: 'PDFJS VERSION',
@@ -1309,7 +1309,7 @@ def test_version_info(params, stubs, monkeypatch, config_stub):
         Qt: {qt}
 
         PYTHON IMPLEMENTATION: PYTHON VERSION
-        PyQt: PYQT VERSION
+        PyQt: WRAPPER VERSION
 
         MODULE VERSION 1
         MODULE VERSION 2

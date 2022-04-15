@@ -38,7 +38,8 @@ from typing import (Mapping, Optional, Sequence, Tuple, ClassVar, Dict, cast,
                     TYPE_CHECKING)
 
 
-from qutebrowser.qt.core import PYQT_VERSION_STR, qVersion
+from qutebrowser.qt import machinery
+from qutebrowser.qt.core import qVersion
 from qutebrowser.qt.network import QSslSocket
 from qutebrowser.qt.gui import QOpenGLContext, QOffscreenSurface
 from qutebrowser.qt.opengl import QOpenGLVersionProfile
@@ -813,7 +814,7 @@ def version_info() -> str:
         '',
         '{}: {}'.format(platform.python_implementation(),
                         platform.python_version()),
-        'PyQt: {}'.format(PYQT_VERSION_STR),
+        f'{machinery.PACKAGE}: {machinery.VERSIONS.wrapper}',
         '',
     ]
 

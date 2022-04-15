@@ -37,8 +37,9 @@ from typing import (Any, AnyStr, TYPE_CHECKING, BinaryIO, IO, Iterator,
                     Optional, Union, Tuple, cast)
 
 from qutebrowser.qt.core import (qVersion, QEventLoop, QDataStream, QByteArray,
-                          QIODevice, QFileDevice, QSaveFile, QT_VERSION_STR,
-                          PYQT_VERSION_STR, QObject, QUrl, QLibraryInfo)
+                          QIODevice, QFileDevice, QSaveFile,
+                          QObject, QUrl, QLibraryInfo)
+from qutebrowser.qt import machinery
 from qutebrowser.qt.gui import QColor
 try:
     from qutebrowser.qt.webkit import qWebKitVersion
@@ -106,10 +107,10 @@ def version_check(version: str,
     result = op(utils.VersionNumber.parse(qVersion()), parsed)
     if compiled and result:
         # qVersion() ==/>= parsed, now check if QT_VERSION_STR ==/>= parsed.
-        result = op(utils.VersionNumber.parse(QT_VERSION_STR), parsed)
+        result = op(utils.VersionNumber.parse(machinery.VERSIONS.qt), parsed)
     if compiled and result:
         # Finally, check PYQT_VERSION_STR as well.
-        result = op(utils.VersionNumber.parse(PYQT_VERSION_STR), parsed)
+        result = op(utils.VersionNumber.parse(machinery.VERSIONS.wrapper), parsed)
     return result
 
 

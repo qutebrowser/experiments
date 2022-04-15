@@ -168,8 +168,8 @@ def qt_version(qversion=None, qt_version_str=None):
         from qutebrowser.qt.core import qVersion
         qversion = qVersion()
     if qt_version_str is None:
-        from qutebrowser.qt.core import QT_VERSION_STR
-        qt_version_str = QT_VERSION_STR
+        from qutebrowser.qt.machinery import VERSIONS
+        qt_version_str = VERSIONS.qt
 
     if qversion != qt_version_str:
         return '{} (compiled {})'.format(qversion, qt_version_str)
@@ -179,7 +179,7 @@ def qt_version(qversion=None, qt_version_str=None):
 
 def check_qt_version():
     """Check if the Qt version is recent enough."""
-    from qutebrowser.qt.core import QT_VERSION, PYQT_VERSION, PYQT_VERSION_STR
+    from qutebrowser.qt import machinery
     try:
         from qutebrowser.qt.core import QVersionNumber, QLibraryInfo
         qt_ver = QLibraryInfo.version().normalized()
@@ -188,10 +188,11 @@ def check_qt_version():
         # QVersionNumber was added in Qt 5.6, QLibraryInfo.version() in 5.8
         recent_qt_runtime = False
 
-    if QT_VERSION < 0x050C00 or PYQT_VERSION < 0x050C00 or not recent_qt_runtime:
-        text = ("Fatal error: Qt >= 5.12.0 and PyQt >= 5.12.0 are required, "
-                "but Qt {} / PyQt {} is installed.".format(qt_version(),
-                                                           PYQT_VERSION_STR))
+    if machinery.VERSIONS.qt_hex < 0x050C00 or machinery.VERSIONS.wrapper_hex < 0x050C00 or not recent_qt_runtime:
+        text = (
+            f"Fatal error: Qt >= 5.12.0 and {machinery.PACKAGE} >= 5.12.0 are "
+            f"required, but Qt {qt_version()} / {machinery.PACKAGE} "
+            f"{machinery.VERSIONS.wrapper} is installed.")
         _die(text)
 
     if qt_ver == QVersionNumber(5, 12, 0):

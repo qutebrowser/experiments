@@ -51,7 +51,7 @@ else:
     test_file = None
 
 
-@pytest.mark.parametrize('qversion, compiled, pyqt, version, exact, expected', [
+@pytest.mark.parametrize('qversion, compiled, wrapper, version, exact, expected', [
     # equal versions
     ('5.14.0', None, None, '5.14.0', False, True),
     ('5.14.0', None, None, '5.14.0', True, True),  # exact=True
@@ -73,23 +73,23 @@ else:
     # dev suffix
     ('5.15.1', '5.15.1', '5.15.2.dev2009281246', '5.15.0', False, True),
 ])
-def test_version_check(monkeypatch, qversion, compiled, pyqt, version, exact,
+def test_version_check(monkeypatch, qversion, compiled, wrapper, version, exact,
                        expected):
     """Test for version_check().
 
     Args:
         monkeypatch: The pytest monkeypatch fixture.
         qversion: The version to set as fake qVersion().
-        compiled: The value for QT_VERSION_STR (set compiled=False)
-        pyqt: The value for PYQT_VERSION_STR (set compiled=False)
+        compiled: The value for QT_VERSION_STR/QtCore.__version__ (set compiled=False)
+        wrapper: The value for PYQT_VERSION_STR/PySideX.__version__ (set compiled=False)
         version: The version to compare with.
         exact: Use exact comparing (==)
         expected: The expected result.
     """
     monkeypatch.setattr(qtutils, 'qVersion', lambda: qversion)
     if compiled is not None:
-        monkeypatch.setattr(qtutils, 'QT_VERSION_STR', compiled)
-        monkeypatch.setattr(qtutils, 'PYQT_VERSION_STR', pyqt)
+        monkeypatch.setattr(qtutils.machinery.VERSIONS, 'qt_str', compiled)
+        monkeypatch.setattr(qtutils.machinery.VERSIONS, 'wrapper_str', pyqt)
         compiled_arg = True
     else:
         compiled_arg = False

@@ -1,5 +1,7 @@
 import os
 import importlib
+import dataclasses
+import types
 
 
 _WRAPPERS = ["PyQt6", "PyQt5", "PySide6", "PySide2"]
@@ -15,6 +17,50 @@ class Unavailable(Error, ImportError):
 
 class UnknownWrapper(Error):
     pass
+
+
+@dataclasses.dataclass
+class QtVersionInfo:
+
+    # FIXME:qt6 provide parsed versions here?
+    # FIXME:qt6 what about qVersion()?
+
+    qt: str
+    qt_hex: int
+    wrapper: str
+    wrapper_hex: int
+
+    @classmethod
+    def from_pyside(
+        cls,
+        qtcore_mod: types.ModuleType,
+        pyside_mod: types.ModuleType,
+    ) -> 'QtVersionInfo':
+        qt_major, qt_minor, qt_patch = qtcore_mod.__version_info__
+        (
+            wrapper_major,
+            wrapper_minor,
+            wrapper_patch,
+            _suffix1,
+            _suffix2
+        ) = pyside_mod.__version_info__
+        qt_hex = qt_major << 16 | qt_minor << 8 | qt_patch
+        wrapper_hex = wrapper_major << 16 | wrapper_minor << 8 | wrapper_patch
+        return cls(
+            qt=qtcore_mod.__version__,
+            qt_hex=qt_hex,
+            wrapper=pyside_mod.__version__,
+            wrapper_hex=wrapper_hex,
+        )
+
+    @classmethod
+    def from_pyqt(cls, qtcore_mod: types.ModuleType) -> 'QtVersionInfo':
+        return cls(
+            qt=qtcore_mod.QT_VERSION_STR,
+            qt_hex=qtcore_mod.QT_VERSION,
+            wrapper=qtcore_mod.PYQT_VERSION_STR,
+            wrapper_hex=qtcore_mod.PYQT_VERSION,
+        )
 
 
 def _autoselect_wrapper():
@@ -59,9 +105,19 @@ assert IS_PYQT ^ IS_PYSIDE
 
 if USE_PYQT5:
     PACKAGE = "PyQt5"
+    from PyQt5 import QtCore as _QtCore
+    VERSIONS = QtVersionInfo.from_pyqt(_QtCore)
 elif USE_PYQT6:
     PACKAGE = "PyQt6"
+    from PyQt6 import QtCore as _QtCore
+    VERSIONS = QtVersionInfo.from_pyqt(_QtCore)
 elif USE_PYSIDE2:
     PACKAGE = "PySide2"
+    from PySide2 import QtCore as _QtCore
+    import PySide2 as _PySide2
+    VERSIONS = QtVersionInfo.from_pyside(qtcore_mod=_QtCore, pyside_mod=_PySide2)
 elif USE_PYSIDE6:
     PACKAGE = "PySide6"
+    from PySide6 import QtCore as _QtCore
+    import PySide6 as _PySide6
+    VERSIONS = QtVersionInfo.from_pyside(qtcore_mod=_QtCore, pyside_mod=_PySide6)
