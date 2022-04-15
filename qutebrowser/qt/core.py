@@ -17,8 +17,10 @@ if machinery.IS_PYQT:
     Signal = pyqtSignal
     Slot = pyqtSlot
     SignalInstance = pyqtBoundSignal
+    Property = pyqtProperty
     del pyqtSignal
     del pyqtSlot
     del pyqtBoundSignal
+    del pyqtProperty
 else:
     QVariant = None  # FIXME:qt6 what to do about this?

@@ -240,8 +240,11 @@ class NotificationBridgePresenter(QObject):
         # Fixed in PyQtWebEngine 5.15.0
         # PYQT_WEBENGINE_VERSION was added with PyQtWebEngine 5.13, but if we're here,
         # we already did a version check above.
-        from qutebrowser.qt.webenginecore import PYQT_WEBENGINE_VERSION
-        if PYQT_WEBENGINE_VERSION < 0x050F00:
+        try:
+            from qutebrowser.qt.webenginecore import PYQT_WEBENGINE_VERSION
+        except ImportError:
+            PYQT_WEBENGINE_VERSION = None
+        if PYQT_WEBENGINE_VERSION and PYQT_WEBENGINE_VERSION < 0x050F00:
             # PyQtWebEngine unrefs the callback after it's called, for some
             # reason.  So we call setNotificationPresenter again to *increase*
             # its refcount to prevent it from getting GC'd. Otherwise, random
@@ -252,7 +255,11 @@ class NotificationBridgePresenter(QObject):
                 self.present(qt_notification)
             profile.setNotificationPresenter(_present_and_reset)
         else:
-            profile.setNotificationPresenter(self.present)
+            try:
+                profile.setNotificationPresenter(self.present)
+            except AttributeError:
+                # FIXME:qt6 missing on pyside...
+                log.misc.warning("Could not set notification presenter")
 
     def present(self, qt_notification: "QWebEngineNotification") -> None:
         """Show a notification using the configured adapter.

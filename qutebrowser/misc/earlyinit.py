@@ -241,7 +241,9 @@ def check_libraries():
         'jinja2': _missing_str("jinja2"),
         'yaml': _missing_str("PyYAML"),
     }
-    for subpkg in ['QtQml', 'QtOpenGL', 'QtDBus']:
+    # FIXME:qt6 QtDBus optional with PySide2
+    # for subpkg in ['QtQml', 'QtOpenGL', 'QtDBus']:
+    for subpkg in ['QtQml', 'QtOpenGL']:
         package = f'{machinery.PACKAGE}.{subpkg}'
         modules[package] = _missing_str(package)
     if sys.version_info < (3, 9):

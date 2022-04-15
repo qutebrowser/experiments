@@ -37,7 +37,7 @@ class PyQtInternals(AbstractInternals):
             pass
 
     def is_deleted(self, obj):
-        return self.sip.is_deleted(obj)
+        return self.sip.isdeleted(obj)
 
     def delete(self, obj):
         return self.sip.delete(obj)

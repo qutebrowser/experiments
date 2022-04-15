@@ -23,7 +23,7 @@ import enum
 import dataclasses
 
 from qutebrowser.qt.core import (Signal, Slot,  # type: ignore[attr-defined]
-                          pyqtProperty, Qt, QSize, QTimer)
+                          Property, Qt, QSize, QTimer)
 from qutebrowser.qt.widgets import QWidget, QHBoxLayout, QStackedLayout, QSizePolicy
 
 from qutebrowser.browser import browsertab
@@ -300,7 +300,7 @@ class StatusBar(QWidget):
         padding = config.val.statusbar.padding
         self._hbox.setContentsMargins(padding.left, 0, padding.right, 0)
 
-    @pyqtProperty('QStringList')
+    @Property('QStringList')
     def color_flags(self):
         """Getter for self.color_flags, so it can be used as Qt property."""
         return self._color_flags.to_stringlist()

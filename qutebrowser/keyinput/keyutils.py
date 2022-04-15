@@ -521,7 +521,11 @@ class KeySequence:
         return self._sequences != other._sequences
 
     def __hash__(self) -> int:
-        return hash(tuple(self._sequences))
+        try:
+            return hash(tuple(self._sequences))
+        except TypeError:
+            # FIXME:qt6 unhashable in PySide
+            return hash(tuple(tuple(seq) for seq in self._sequences))
 
     def __len__(self) -> int:
         return sum(len(seq) for seq in self._sequences)

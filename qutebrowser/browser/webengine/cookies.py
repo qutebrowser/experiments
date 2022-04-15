@@ -56,4 +56,8 @@ def _accept_cookie(request):
 
 def install_filter(profile):
     """Install the cookie filter on the given profile."""
-    profile.cookieStore().setCookieFilter(_accept_cookie)
+    try:
+        profile.cookieStore().setCookieFilter(_accept_cookie)
+    except AttributeError:
+        # FIXME:qt6 missing on pyside...
+        log.network.debug("Could not install cookie filter")
