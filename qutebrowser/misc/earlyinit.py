@@ -250,27 +250,9 @@ def check_libraries():
     _check_modules(modules)
 
 
-def configure_pyqt():
-    """Remove the PyQt input hook and enable overflow checking.
-
-    Doing this means we can't use the interactive shell anymore (which we don't
-    anyways), but we can use pdb instead.
-    """
-    from qutebrowser.qt import core as QtCore
-    QtCore.pyqtRemoveInputHook()
-    try:
-        QtCore.pyqt5_enable_new_onexit_scheme(True)  # type: ignore[attr-defined]
-    except AttributeError:
-        # Added in PyQt 5.13 somewhere, going to be the default in 5.14
-        pass
-
-    from qutebrowser.qt import sip
-    try:
-        sip.enableoverflowchecking(True)
-    except AttributeError:
-        # default in PyQt6
-        # FIXME:qt6 solve this in qutebrowser/qt/sip.py equivalent
-        pass
+def init_backend():
+    from qutebrowser.qt import machinery
+    machinery.INTERNALS.init_backend()
 
 
 def init_log(args):
@@ -328,7 +310,7 @@ def early_init(args):
     # errors, so people only using the GUI notice them as well.
     check_libraries()
     check_qt_version()
-    configure_pyqt()
+    init_backend()
     check_ssl_support()
     check_optimize_flag()
     webengine_early_import()

@@ -4,6 +4,9 @@ import dataclasses
 import types
 
 
+from qutebrowser.qt import internals
+
+
 _WRAPPERS = ["PyQt6", "PyQt5", "PySide6", "PySide2"]
 
 
@@ -107,17 +110,21 @@ if USE_PYQT5:
     PACKAGE = "PyQt5"
     from PyQt5 import QtCore as _QtCore
     VERSIONS = QtVersionInfo.from_pyqt(_QtCore)
+    INTERNALS = internals.PyQt5Internals()
 elif USE_PYQT6:
     PACKAGE = "PyQt6"
     from PyQt6 import QtCore as _QtCore
     VERSIONS = QtVersionInfo.from_pyqt(_QtCore)
+    INTERNALS = internals.PyQt6Internals()
 elif USE_PYSIDE2:
     PACKAGE = "PySide2"
     from PySide2 import QtCore as _QtCore
     import PySide2 as _PySide2
     VERSIONS = QtVersionInfo.from_pyside(qtcore_mod=_QtCore, pyside_mod=_PySide2)
+    INTERNALS = internals.PySide2Internals()
 elif USE_PYSIDE6:
     PACKAGE = "PySide6"
     from PySide6 import QtCore as _QtCore
     import PySide6 as _PySide6
     VERSIONS = QtVersionInfo.from_pyside(qtcore_mod=_QtCore, pyside_mod=_PySide6)
+    INTERNALS = internals.PySide6Internals()
