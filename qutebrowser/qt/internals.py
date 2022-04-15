@@ -92,7 +92,7 @@ class PySide2Internals(PySideInternals):
     def __init__(self):
         import shiboken2
         self.shiboken = shiboken2
-        self.object = shiboken2.Object
+        self.object = None  # FIXME:qt6
         self.voidptr = shiboken2.VoidPtr
 
 

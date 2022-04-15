@@ -691,6 +691,7 @@ class _ServerCapabilities:
 
 def _as_uint32(x: int) -> QVariant:
     """Convert the given int to an uint32 for DBus."""
+    # FIXME:qt6 won't work with PySide
     variant = QVariant(x)
     successful = variant.convert(QVariant.Type.UInt)
     assert successful

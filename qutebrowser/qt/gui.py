@@ -13,5 +13,6 @@ elif machinery.USE_PYSIDE2:
     del QOpenGLVersionProfile  # moved to QtOpenGL in Qt 6
 elif machinery.USE_PYSIDE6:
     from PySide6.QtGui import *
+    from PySide6.QtWidgets import QFileSystemModel  # FIXME:qt6 why?
 else:
     raise machinery.UnknownWrapper()

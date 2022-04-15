@@ -47,6 +47,7 @@ except ImportError:  # pragma: no cover
 from qutebrowser.qt.core import QUrl, QVersionNumber, QRect
 from qutebrowser.qt.gui import QClipboard, QDesktopServices
 from qutebrowser.qt.widgets import QApplication
+from qutebrowser.qt import machinery
 
 import yaml
 try:
@@ -116,8 +117,11 @@ class VersionNumber:
     @classmethod
     def parse(cls, s: str) -> 'VersionNumber':
         """Parse a version number from a string."""
-        ver, _suffix = QVersionNumber.fromString(s)
-        # FIXME: Should we support a suffix?
+        if machinery.IS_PYQT:
+            ver, _suffix = QVersionNumber.fromString(s)
+            # FIXME: Should we support a suffix?
+        else:
+            ver = QVersionNumber.fromString(s)
 
         if ver.isNull():
             raise ValueError(f"Failed to parse {s}")
@@ -125,7 +129,11 @@ class VersionNumber:
         return cls(*ver.normalized().segments())
 
     def __hash__(self) -> int:
-        return hash(self._ver)
+        try:
+            return hash(self._ver)
+        except TypeError:
+            # FIXME:qt6 unhashable with PySide
+            return hash(tuple(self.segments))
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, VersionNumber):

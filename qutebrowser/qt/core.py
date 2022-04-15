@@ -20,3 +20,5 @@ if machinery.IS_PYQT:
     del pyqtSignal
     del pyqtSlot
     del pyqtBoundSignal
+else:
+    QVariant = None  # FIXME:qt6 what to do about this?

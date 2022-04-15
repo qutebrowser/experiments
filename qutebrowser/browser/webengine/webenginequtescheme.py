@@ -135,7 +135,8 @@ def init():
     classes.
     """
     if QWebEngineUrlScheme is not None:
-        assert not QWebEngineUrlScheme.schemeByName(b'qute').name()
+        # FIXME:qt6 An empty QByteArray is falsey on PySide
+        assert not QWebEngineUrlScheme.schemeByName(b'qute').name().data()
         scheme = QWebEngineUrlScheme(b'qute')
         scheme.setFlags(
             QWebEngineUrlScheme.Flag.LocalScheme |  # type: ignore[arg-type]
