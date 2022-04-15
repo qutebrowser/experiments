@@ -51,10 +51,15 @@ import subprocess
 from typing import Any, List, Dict, Optional, Iterator, TYPE_CHECKING
 
 from qutebrowser.qt import machinery
-from qutebrowser.qt.core import (Qt, QObject, QVariant, QMetaType, QByteArray, Slot,
+from qutebrowser.qt.core import (Qt, QObject, QMetaType, QByteArray, Slot,
                           Signal, QTimer, QProcess, QUrl)
 from qutebrowser.qt.gui import QImage, QIcon, QPixmap
 from qutebrowser.qt.widgets import QSystemTrayIcon
+try:
+    from qutebrowser.qt.core import QVariant
+except ImportError:
+    # PySide6
+    pass
 try:
     from qutebrowser.qt.dbus import (QDBusConnection, QDBusInterface, QDBus, QDBusServiceWatcher,
                               QDBusArgument, QDBusMessage, QDBusError)
@@ -701,7 +706,7 @@ class _ServerCapabilities:
         )
 
 
-def _as_uint32(x: int) -> QVariant:
+def _as_uint32(x: int) -> "QVariant":
     """Convert the given int to an uint32 for DBus."""
     # FIXME:qt6 won't work with PySide
     variant = QVariant(x)

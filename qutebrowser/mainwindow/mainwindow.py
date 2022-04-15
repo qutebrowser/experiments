@@ -529,8 +529,10 @@ class MainWindow(QWidget):
 
         self.tabbed_browser.cur_url_changed.connect(
             self.status.url.set_url)
-        self.tabbed_browser.cur_url_changed.connect(functools.partial(
-            self.status.backforward.on_tab_cur_url_changed,
+        self.tabbed_browser.cur_url_changed.connect(
+            # FIXME:qt6 functools.partial doesn't work with PySide
+            lambda:
+            self.status.backforward.on_tab_cur_url_changed(
             tabs=self.tabbed_browser))
         self.tabbed_browser.cur_link_hovered.connect(
             self.status.url.set_hover_url)

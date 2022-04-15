@@ -206,6 +206,9 @@ def signal_name(sig: SignalInstance) -> str:
     Return:
         The cleaned up signal name.
     """
+    if machinery.IS_PYSIDE:
+        # FIXME:qt6
+        return '<unknown>'
     if hasattr(sig, 'signal'):
         # Bound signal
         # Examples:

@@ -136,7 +136,11 @@ def qt_mainloop():
     WARNING: misc/crashdialog.py checks the stacktrace for this function
     name, so if this is changed, it should be changed there as well!
     """
-    return objects.qapp.exec()
+    try:
+        return objects.qapp.exec()
+    except AttributeError:
+        # PySide
+        return objects.qapp.exec_()
 
 
 def init(*, args: argparse.Namespace) -> None:
@@ -169,9 +173,13 @@ def init(*, args: argparse.Namespace) -> None:
 
     _process_args(args)
 
-    for scheme in ['http', 'https', 'qute']:
-        QDesktopServices.setUrlHandler(
-            scheme, open_desktopservices_url)
+    try:
+        for scheme in ['http', 'https', 'qute']:
+            QDesktopServices.setUrlHandler(
+                scheme, open_desktopservices_url)
+    except TypeError:
+        # FIXME:qt6
+        log.init.warning("Could not set URL handler")
 
     log.init.debug("Init done!")
     crashsignal.crash_handler.raise_crashdlg()

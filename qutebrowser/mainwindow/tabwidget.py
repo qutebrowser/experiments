@@ -24,6 +24,7 @@ import contextlib
 import dataclasses
 from typing import Optional, cast
 
+from qutebrowser.qt import machinery
 from qutebrowser.qt.core import (Signal, Slot, Qt, QSize, QRect, QPoint,
                           QTimer, QUrl)
 from qutebrowser.qt.widgets import (QTabWidget, QTabBar, QSizePolicy, QCommonStyle,
@@ -58,7 +59,10 @@ class TabWidget(QTabWidget):
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
         bar = TabBar(win_id, self)
-        self.setStyle(TabBarStyle())
+        if machinery.IS_PYSIDE:
+            log.misc.warning("Could not set tabbar style")
+        else:
+            self.setStyle(TabBarStyle())
         self.setTabBar(bar)
         bar.tabCloseRequested.connect(self.tabCloseRequested)
         bar.tabMoved.connect(functools.partial(
@@ -397,7 +401,11 @@ class TabBar(QTabBar):
     def __init__(self, win_id, parent=None):
         super().__init__(parent)
         self._win_id = win_id
-        self.setStyle(TabBarStyle())
+        if machinery.IS_PYSIDE:
+            # FIXME:qt6 figure out why styleoption doesn't work
+            log.misc.warning("Could not set tabbar style")
+        else:
+            self.setStyle(TabBarStyle())
         self.vertical = False
         self._auto_hide_timer = QTimer()
         self._auto_hide_timer.setSingleShot(True)

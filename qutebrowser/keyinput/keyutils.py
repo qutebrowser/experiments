@@ -35,6 +35,7 @@ import itertools
 import dataclasses
 from typing import cast, overload, Iterable, Iterator, List, Mapping, Optional, Union
 
+from qutebrowser.qt import machinery
 from qutebrowser.qt.core import Qt, QEvent
 from qutebrowser.qt.gui import QKeySequence, QKeyEvent
 try:
@@ -448,6 +449,11 @@ class KeyInfo:
     def to_int(self) -> int:
         """Get the key as an integer (with key/modifiers)."""
         return int(self.key) | int(self.modifiers)
+
+    if machinery.IS_PYSIDE:
+        # FIXME:qt6 modifiers not hashable...
+        def __hash__(self):
+            return hash((int(self.key), int(self.modifiers)))
 
 
 class KeySequence:

@@ -359,7 +359,8 @@ class TabbedBrowser(QWidget):
         tab.load_started.connect(
             functools.partial(self._on_load_started, tab))
         tab.load_status_changed.connect(
-            functools.partial(self._on_load_status_changed, tab))
+                # FIXME:qt6 functools.partial doesn't work with PySide
+                lambda: self._on_load_status_changed(tab))
         tab.window_close_requested.connect(
             functools.partial(self._on_window_close_requested, tab))
         tab.renderer_process_terminated.connect(
