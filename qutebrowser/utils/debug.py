@@ -28,7 +28,7 @@ import types
 from typing import (
     Any, Callable, List, Mapping, MutableSequence, Optional, Sequence, Type, Union)
 
-from qutebrowser.qt.core import Qt, QEvent, QMetaMethod, QObject, pyqtBoundSignal
+from qutebrowser.qt.core import Qt, QEvent, QMetaMethod, QObject, SignalInstance
 
 from qutebrowser.utils import log, utils, qtutils, objreg
 from qutebrowser.misc import objects
@@ -55,7 +55,7 @@ def log_signals(obj: QObject) -> QObject:
 
     Can be used as class decorator.
     """
-    def log_slot(obj: QObject, signal: pyqtBoundSignal, *args: Any) -> None:
+    def log_slot(obj: QObject, signal: SignalInstance, *args: Any) -> None:
         """Slot connected to a signal to log it."""
         dbg = dbg_signal(signal, args)
         try:
@@ -191,7 +191,7 @@ def qflags_key(base: Type[_EnumValueType],
     return '|'.join(names)
 
 
-def signal_name(sig: pyqtBoundSignal) -> str:
+def signal_name(sig: SignalInstance) -> str:
     """Get a cleaned up name of a signal.
 
     Unfortunately, the way to get the name of a signal differs based on
@@ -236,7 +236,7 @@ def format_args(args: Sequence[Any] = None, kwargs: Mapping[str, Any] = None) ->
     return ', '.join(arglist)
 
 
-def dbg_signal(sig: pyqtBoundSignal, args: Any) -> str:
+def dbg_signal(sig: SignalInstance, args: Any) -> str:
     """Get a string representation of a signal for debugging.
 
     Args:

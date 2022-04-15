@@ -25,7 +25,7 @@ import itertools
 import functools
 from typing import List, MutableSequence, Optional, Tuple, cast
 
-from qutebrowser.qt.core import (pyqtBoundSignal, Slot, QRect, QPoint, QTimer, Qt,
+from qutebrowser.qt.core import (SignalInstance, Slot, QRect, QPoint, QTimer, Qt,
                           QCoreApplication, QEventLoop, QByteArray)
 from qutebrowser.qt.widgets import QWidget, QVBoxLayout, QSizePolicy
 from qutebrowser.qt.gui import QPalette
@@ -118,7 +118,7 @@ def get_target_window():
         return None
 
 
-_OverlayInfoType = Tuple[QWidget, pyqtBoundSignal, bool, str]
+_OverlayInfoType = Tuple[QWidget, SignalInstance, bool, str]
 
 
 class MainWindow(QWidget):

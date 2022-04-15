@@ -27,7 +27,7 @@ import netrc
 import tempfile
 from typing import Callable, Mapping, List, Optional, Iterable, Iterator
 
-from qutebrowser.qt.core import QUrl, pyqtBoundSignal
+from qutebrowser.qt.core import QUrl, SignalInstance
 
 from qutebrowser.config import config
 from qutebrowser.utils import (usertypes, message, log, objreg, jinja, utils,
@@ -163,7 +163,7 @@ def ignore_certificate_error(
         request_url: QUrl,
         first_party_url: QUrl,
         error: usertypes.AbstractCertificateErrorWrapper,
-        abort_on: Iterable[pyqtBoundSignal],
+        abort_on: Iterable[SignalInstance],
 ) -> bool:
     """Display a certificate error question.
 

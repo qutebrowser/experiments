@@ -16,5 +16,7 @@ else:
 if machinery.IS_PYQT:
     Signal = pyqtSignal
     Slot = pyqtSlot
+    SignalInstance = pyqtBoundSignal
     del pyqtSignal
     del pyqtSlot
+    del pyqtBoundSignal
