@@ -28,7 +28,7 @@ from qutebrowser.qt.core import QProcess, QUrl
 from qutebrowser.misc import guiprocess
 from qutebrowser.utils import usertypes, utils, version
 from qutebrowser.api import cmdutils
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def proc(qtbot, caplog):
     """A fixture providing a GUIProcess and cleaning it up after the test."""
     p = guiprocess.GUIProcess('testprocess')
     yield p
-    if not sip.isdeleted(p._proc) and p._proc.state() != QProcess.ProcessState.NotRunning:
+    if not machinery.is_deleted(p._proc) and p._proc.state() != QProcess.ProcessState.NotRunning:
         with caplog.at_level(logging.ERROR):
             with qtbot.wait_signal(p.finished, timeout=10000,
                                   raising=False) as blocker:

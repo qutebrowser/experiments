@@ -31,7 +31,7 @@ from qutebrowser.qt.network import QLocalSocket, QLocalServer, QAbstractSocket
 
 import qutebrowser
 from qutebrowser.utils import log, usertypes, error, standarddir, utils
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 CONNECT_TIMEOUT = 100  # timeout for connecting/disconnecting
@@ -374,7 +374,7 @@ class IPCServer(QObject):
         else:
             socket = self._socket
 
-        if sip.isdeleted(socket):  # pragma: no cover
+        if machinery.is_deleted(socket):  # pragma: no cover
             log.ipc.warning("Ignoring deleted IPC socket")
             return None
 

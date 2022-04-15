@@ -36,7 +36,7 @@ from qutebrowser.api import cmdutils
 from qutebrowser.config import config, configfiles
 from qutebrowser.completion.models import miscmodels
 from qutebrowser.mainwindow import mainwindow
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 from qutebrowser.misc import objects, throttle
 
 
@@ -279,7 +279,7 @@ class SessionManager(QObject):
                                      window=win_id)
 
             # We could be in the middle of destroying a window here
-            if sip.isdeleted(main_window):
+            if machinery.is_deleted(main_window):
                 continue
 
             if tabbed_browser.is_private and not with_private:

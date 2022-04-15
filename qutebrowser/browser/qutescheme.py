@@ -42,7 +42,7 @@ from qutebrowser.config import config, configdata, configexc
 from qutebrowser.utils import (version, utils, jinja, log, message, docutils,
                                resources, objreg, standarddir)
 from qutebrowser.misc import guiprocess, quitter
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 pyeval_output = ":pyeval was never called"
@@ -196,7 +196,7 @@ def qute_tabs(_url: QUrl) -> _HandlerRet:
     """Handler for qute://tabs. Display information about all open tabs."""
     tabs: Dict[str, List[Tuple[str, str]]] = collections.defaultdict(list)
     for win_id, window in objreg.window_registry.items():
-        if sip.isdeleted(window):
+        if machinery.is_deleted(window):
             continue
         tabbed_browser = objreg.get('tabbed-browser',
                                     scope='window',

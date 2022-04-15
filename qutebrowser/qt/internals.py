@@ -3,6 +3,15 @@ class AbstractInternals:
     def init_backend(self):
         raise NotImplementedError
 
+    def is_deleted(self, obj):
+        raise NotImplementedError
+
+    def delete(self, obj):
+        raise NotImplementedError
+
+    def assign(self, target, value):
+        raise NotImplementedError
+
 
 class PyQtInternals(AbstractInternals):
 
@@ -27,11 +36,26 @@ class PyQtInternals(AbstractInternals):
             # FIXME:qt6 solve this in qutebrowser/qt/sip.py equivalent
             pass
 
+    def is_deleted(self, obj):
+        return self.sip.is_deleted(obj)
+
+    def delete(self, obj):
+        return self.sip.delete(obj)
+
+    def assign(self, target, value):
+        self.sip.assign(target, value)
+
 
 class PySideInternals(AbstractInternals):
 
     def init_backend(self):
         pass
+
+    def is_deleted(self, obj):
+        return not self.shiboken.isValid(obj)
+
+    def delete(self, obj):
+        return self.shiboken.delete(obj)
 
 
 class PyQt5Internals(PyQtInternals):
@@ -48,6 +72,9 @@ class PyQt5Internals(PyQtInternals):
 
         self.sip = sip
         self.qtcore = QtCore
+        self.object = sip.simplewrapper
+        self.voidptr = sip.voidptr
+
 
 
 class PyQt6Internals(PyQtInternals):
@@ -56,13 +83,23 @@ class PyQt6Internals(PyQtInternals):
         from PyQt6 import sip, QtCore
         self.sip = sip
         self.qtcore = QtCore
+        self.object = sip.simplewrapper
+        self.voidptr = sip.voidptr
 
 
 class PySide2Internals(PySideInternals):
 
-    pass
+    def __init__(self):
+        import shiboken2
+        self.shiboken = shiboken2
+        self.object = shiboken2.Object
+        self.voidptr = shiboken2.VoidPtr
 
 
 class PySide6Internals(PySideInternals):
 
-    pass
+    def __init__(self):
+        import shiboken6
+        self.shiboken = shiboken6
+        self.object = shiboken6.Object
+        self.voidptr = shiboken6.VoidPtr

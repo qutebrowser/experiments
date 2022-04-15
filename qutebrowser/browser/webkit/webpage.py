@@ -35,7 +35,7 @@ from qutebrowser.browser import pdfjs, shared, downloads, greasemonkey
 from qutebrowser.browser.webkit import http
 from qutebrowser.browser.webkit.network import networkmanager
 from qutebrowser.utils import message, usertypes, log, jinja, objreg
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 class BrowserPage(QWebPage):
@@ -317,7 +317,7 @@ class BrowserPage(QWebPage):
         Args:
             frame: The QWebFrame to inject the user scripts into.
         """
-        if sip.isdeleted(frame):
+        if machinery.is_deleted(frame):
             log.greasemonkey.debug("_inject_userjs called for deleted frame!")
             return
 

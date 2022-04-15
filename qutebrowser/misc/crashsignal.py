@@ -39,7 +39,7 @@ from qutebrowser.qt.widgets import QApplication
 from qutebrowser.api import cmdutils
 from qutebrowser.misc import earlyinit, crashdialog, ipc, objects
 from qutebrowser.utils import usertypes, standarddir, log, objreg, debug, utils
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 if TYPE_CHECKING:
     from qutebrowser.misc import quitter
 
@@ -358,7 +358,7 @@ class SignalHandler(QObject):
             for fd in [read_fd, write_fd]:
                 flags = fcntl.fcntl(fd, fcntl.F_GETFL)
                 fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
-            self._notifier = QSocketNotifier(cast(sip.voidptr, read_fd),
+            self._notifier = QSocketNotifier(cast(machinery.INTERNALS.voidptr, read_fd),
                                              QSocketNotifier.Type.Read,
                                              self)
             self._notifier.activated.connect(  # type: ignore[attr-defined]

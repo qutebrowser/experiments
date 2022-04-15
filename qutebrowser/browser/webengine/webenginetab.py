@@ -40,7 +40,7 @@ from qutebrowser.browser.webengine import (webview, webengineelem, tabhistory,
 
 from qutebrowser.utils import (usertypes, qtutils, log, javascript, utils,
                                resources, message, jinja, debug, version)
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 from qutebrowser.misc import objects, miscwidgets
 
 
@@ -228,7 +228,7 @@ class WebEngineSearch(browsertab.AbstractSearch):
                                       self._pending_searches))
                 return
 
-            if sip.isdeleted(self._widget):
+            if machinery.is_deleted(self._widget):
                 # This happens when starting a search, and closing the tab
                 # before results arrive.
                 log.webview.debug("Ignoring finished search for deleted "
@@ -407,7 +407,7 @@ class WebEngineCaret(browsertab.AbstractCaret):
         self._js_call('reverseSelection')
 
     def _follow_selected_cb_wrapped(self, js_elem, tab):
-        if sip.isdeleted(self):
+        if machinery.is_deleted(self):
             # Sometimes, QtWebEngine JS callbacks seem to be stuck, and will
             # later get executed when the tab is closed. However, at this point,
             # the WebEngineCaret is already gone.
@@ -1138,7 +1138,7 @@ class _WebEngineScripts(QObject):
         Args:
             scripts: A list of GreasemonkeyScripts.
         """
-        if sip.isdeleted(self._widget):
+        if machinery.is_deleted(self._widget):
             return
 
         # Since we are inserting scripts into a per-tab collection,
@@ -1330,7 +1330,7 @@ class WebEngineTab(browsertab.AbstractTab):
 
     @Slot()
     def _restore_zoom(self):
-        if sip.isdeleted(self._widget):
+        if machinery.is_deleted(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3498
             return
         if self._saved_zoom is None:
@@ -1344,7 +1344,7 @@ class WebEngineTab(browsertab.AbstractTab):
         Arguments:
             url: The QUrl to load.
         """
-        if sip.isdeleted(self._widget):
+        if machinery.is_deleted(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3896
             return
         self._saved_zoom = self.zoom.factor()
@@ -1454,6 +1454,14 @@ class WebEngineTab(browsertab.AbstractTab):
 
         self.history_item_triggered.emit(url, requested_url, title)
 
+    def _abort_auth(self, authenticator, *, proxy=False):
+        text = "proxy authentication" if proxy else "authentication"
+        log.network.debug(f"Aborting {text}")
+        try:
+            machinery.INTERNALS.assign(authenticator, QAuthenticator())
+        except NotImplementedError:
+            self._show_error_page(url, f"{text.capitalize()} required")
+
     @Slot(QUrl, 'QAuthenticator*', 'QString')
     def _on_proxy_authentication_required(self, url, authenticator,
                                           proxy_host):
@@ -1467,7 +1475,7 @@ class WebEngineTab(browsertab.AbstractTab):
             abort_on=[self.abort_questions], url=urlstr)
 
         if answer is None:
-            sip.assign(authenticator, QAuthenticator())
+            self._abort_auth(authenticator, proxy=True)
             return
 
         authenticator.setUser(answer.user)
@@ -1488,8 +1496,7 @@ class WebEngineTab(browsertab.AbstractTab):
             answer = shared.authentication_required(
                 url, authenticator, abort_on=[self.abort_questions])
         if not netrc_success and answer is None:
-            log.network.debug("Aborting auth")
-            sip.assign(authenticator, QAuthenticator())
+            self._abort_auth(authenticator)
 
     @Slot()
     def _on_load_started(self):

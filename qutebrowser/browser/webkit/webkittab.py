@@ -36,7 +36,7 @@ from qutebrowser.browser.webkit import (webview, tabhistory, webkitelem,
                                         webkitsettings, webkitinspector)
 from qutebrowser.utils import qtutils, usertypes, utils, log, debug, resources
 from qutebrowser.keyinput import modeman
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 class WebKitAction(browsertab.AbstractAction):
@@ -934,7 +934,7 @@ class WebKitTab(browsertab.AbstractTab):
     @Slot()
     def _on_webkit_icon_changed(self):
         """Emit iconChanged with a QIcon like QWebEngineView does."""
-        if sip.isdeleted(self._widget):
+        if machinery.is_deleted(self._widget):
             log.webview.debug("Got _on_webkit_icon_changed for deleted view!")
             return
         self.icon_changed.emit(self._widget.icon())

@@ -28,7 +28,7 @@ from qutebrowser.qt.core import (Signal, Slot, QObject, QProcess,
 from qutebrowser.config import config
 from qutebrowser.utils import message, log
 from qutebrowser.misc import guiprocess
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 class ExternalEditor(QObject):
@@ -71,7 +71,7 @@ class ExternalEditor(QObject):
         """
         assert self._remove_file is not None
         if (self._watcher is not None and
-                not sip.isdeleted(self._watcher) and
+                not machinery.is_deleted(self._watcher) and
                 self._watcher.files()):
             failed = self._watcher.removePaths(self._watcher.files())
             if failed:
@@ -100,7 +100,7 @@ class ExternalEditor(QObject):
 
         Callback for QProcess when the editor was closed.
         """
-        if sip.isdeleted(self):  # pragma: no cover
+        if machinery.is_deleted(self):  # pragma: no cover
             log.procs.debug("Ignoring _on_proc_closed for deleted editor")
             return
 

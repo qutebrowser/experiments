@@ -38,7 +38,7 @@ from qutebrowser.api import cmdutils
 from qutebrowser.misc import (  # pylint: disable=unused-import
     consolewidget, debugcachestats, objects, miscwidgets)
 from qutebrowser.utils.version import pastebin_version
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 @cmdutils.register(maxsplit=1, no_cmd_split=True, no_replace_variables=True)
@@ -256,7 +256,7 @@ def window_only(current_win_id: int) -> None:
     for win_id, window in objreg.window_registry.items():
 
         # We could be in the middle of destroying a window here
-        if sip.isdeleted(window):
+        if machinery.is_deleted(window):
             continue
 
         if win_id != current_win_id:
@@ -287,7 +287,7 @@ def debug_keytester() -> None:
     """Show a keytester widget."""
     global _keytester_widget
     if (_keytester_widget and
-            not sip.isdeleted(_keytester_widget) and
+            not machinery.is_deleted(_keytester_widget) and
             _keytester_widget.isVisible()):
         _keytester_widget.close()
     else:

@@ -128,3 +128,7 @@ elif USE_PYSIDE6:
     import PySide6 as _PySide6
     VERSIONS = QtVersionInfo.from_pyside(qtcore_mod=_QtCore, pyside_mod=_PySide6)
     INTERNALS = internals.PySide6Internals()
+
+
+def is_deleted(obj: _QtCore.QObject) -> bool:
+    return INTERNALS.is_deleted(obj)

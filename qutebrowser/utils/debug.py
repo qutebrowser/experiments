@@ -32,7 +32,7 @@ from qutebrowser.qt.core import Qt, QEvent, QMetaMethod, QObject, SignalInstance
 
 from qutebrowser.utils import log, utils, qtutils, objreg
 from qutebrowser.misc import objects
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 def log_events(klass: Type[QObject]) -> Type[QObject]:
@@ -96,7 +96,7 @@ def log_signals(obj: QObject) -> QObject:
     return obj
 
 
-_EnumValueType = Union[sip.simplewrapper, int]
+_EnumValueType = Union[machinery.INTERNALS.object, int]
 
 
 def qenum_key(base: Type[_EnumValueType],

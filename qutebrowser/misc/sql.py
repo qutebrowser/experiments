@@ -28,7 +28,7 @@ from typing import Any, Dict, Iterator, List, Mapping, MutableSequence, Optional
 from qutebrowser.qt.core import QObject, Signal
 from qutebrowser.qt.sql import QSqlDatabase, QSqlError, QSqlQuery
 
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 from qutebrowser.utils import debug, log
 
 
@@ -237,7 +237,7 @@ class Database:
         """Close the SQL connection."""
         database = self.qt_database()
         database.close()
-        sip.delete(database)
+        machinery.INTERNALS.delete(database)
         QSqlDatabase.removeDatabase(self._path)
 
     def transaction(self) -> 'Transaction':

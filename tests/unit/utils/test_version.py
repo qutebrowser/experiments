@@ -771,7 +771,7 @@ class TestModuleVersions:
         The aim of this test is to fail if that gets missing in some future
         version of sip.
         """
-        from qutebrowser.qt import sip
+        from qutebrowser.qt import machinery
         assert isinstance(sip.SIP_VERSION_STR, str)
 
 

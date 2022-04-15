@@ -51,7 +51,7 @@ from qutebrowser.browser import greasemonkey, history, qutescheme
 from qutebrowser.browser.webkit import cookies, cache
 from qutebrowser.misc import savemanager, sql, objects, sessions
 from qutebrowser.keyinput import modeman
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 _qute_scheme_handler = None
@@ -259,7 +259,7 @@ def webengine_tab(web_tab_setup, qtbot, redirect_webengine_data,
     # If we wait for the GC to clean things up, there's a segfault inside
     # QtWebEngine sometimes (e.g. if we only run
     # tests/unit/browser/test_caret.py).
-    sip.delete(tab._widget)
+    machinery.INTERNALS.delete(tab._widget)
 
 
 @pytest.fixture(params=['webkit', 'webengine'])

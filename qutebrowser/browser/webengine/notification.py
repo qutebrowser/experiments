@@ -68,7 +68,7 @@ from qutebrowser.misc import objects
 from qutebrowser.utils import (
     qtutils, log, utils, debug, message, version, objreg, resources,
 )
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 bridge: Optional['NotificationBridgePresenter'] = None
@@ -491,7 +491,7 @@ class SystrayNotificationAdapter(AbstractNotificationAdapter):
     @Slot(int)
     def on_web_closed(self, notification_id: int) -> None:
         assert notification_id == self.NOTIFICATION_ID, notification_id
-        if not sip.isdeleted(self._systray):
+        if not machinery.is_deleted(self._systray):
             # This can get called during shutdown
             self._systray.hide()
 

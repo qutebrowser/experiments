@@ -38,7 +38,7 @@ from qutebrowser.api import cmdutils
 from qutebrowser.config import config
 from qutebrowser.utils import (usertypes, standarddir, utils, message, log,
                                qtutils, objreg)
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 class ModelRole(enum.IntEnum):
@@ -979,7 +979,7 @@ class AbstractDownloadManager(QObject):
     @Slot(AbstractDownloadItem)
     def _remove_item(self, download):
         """Remove a given download."""
-        if sip.isdeleted(self):
+        if machinery.is_deleted(self):
             # https://github.com/qutebrowser/qutebrowser/issues/1242
             return
         try:

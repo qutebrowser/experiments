@@ -21,8 +21,9 @@
 
 from unittest import mock
 
-import sip
+import machinery
 import pytest
+from qutebrowser.qt import machinery
 from qutebrowser.qt.core import QObject
 
 from helpers import testutils
@@ -156,6 +157,6 @@ def test_deleted_object(qtbot):
     throttled()
     throttled()
 
-    sip.delete(obj)
+    machinery.INTERNALS.delete(obj)
 
     qtbot.wait(int(1.5 * DELAY))

@@ -40,7 +40,7 @@ from qutebrowser.completion import completionwidget, completer
 from qutebrowser.keyinput import modeman
 from qutebrowser.browser import downloadview, hints, downloads
 from qutebrowser.misc import crashsignal, keyhintwidget, sessions, objects
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 
 win_id_gen = itertools.count(0)
@@ -95,7 +95,7 @@ def raise_window(window, alert=True):
     QCoreApplication.processEvents(  # type: ignore[call-overload]
         QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents | QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers)
 
-    if not sip.isdeleted(window):
+    if not machinery.is_deleted(window):
         # Could be deleted by the events run above
         window.activateWindow()
 

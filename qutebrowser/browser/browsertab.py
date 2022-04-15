@@ -45,7 +45,7 @@ from qutebrowser.utils import (utils, objreg, usertypes, log, qtutils,
                                urlutils, message, jinja)
 from qutebrowser.misc import miscwidgets, objects, sessions
 from qutebrowser.browser import eventfilter, inspector
-from qutebrowser.qt import sip
+from qutebrowser.qt import machinery
 
 if TYPE_CHECKING:
     from qutebrowser.browser import webelem
@@ -1087,7 +1087,7 @@ class AbstractTab(QWidget):
     @Slot(bool)
     def _on_load_finished(self, ok: bool) -> None:
         assert self._widget is not None
-        if sip.isdeleted(self._widget):
+        if machinery.is_deleted(self._widget):
             # https://github.com/qutebrowser/qutebrowser/issues/3498
             return
 
@@ -1242,4 +1242,4 @@ class AbstractTab(QWidget):
 
     def is_deleted(self) -> bool:
         assert self._widget is not None
-        return sip.isdeleted(self._widget)
+        return machinery.is_deleted(self._widget)
