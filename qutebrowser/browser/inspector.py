@@ -24,9 +24,9 @@ import binascii
 import enum
 from typing import cast, Optional
 
-from PyQt6.QtWidgets import QWidget
-from PyQt6.QtCore import pyqtSignal, pyqtSlot, QObject, QEvent
-from PyQt6.QtGui import QCloseEvent
+from qutebrowser.qt.widgets import QWidget
+from qutebrowser.qt.core import pyqtSignal, pyqtSlot, QObject, QEvent
+from qutebrowser.qt.gui import QCloseEvent
 
 from qutebrowser.browser import eventfilter
 from qutebrowser.config import configfiles

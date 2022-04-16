@@ -21,7 +21,7 @@ import os
 import re
 import inspect
 
-from PyQt6.QtWidgets import QLineEdit, QApplication
+from qutebrowser.qt.widgets import QLineEdit, QApplication
 import pytest
 
 from qutebrowser.components import readlinecommands

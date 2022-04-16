@@ -21,9 +21,9 @@
 
 from typing import cast, TYPE_CHECKING, Iterator, List, Optional, Set
 
-from PyQt6.QtCore import QRect, Qt
-from PyQt6.QtWebKit import QWebElement, QWebSettings
-from PyQt6.QtWebKitWidgets import QWebFrame
+from qutebrowser.qt.core import QRect, Qt
+from qutebrowser.qt.webkit import QWebElement, QWebSettings
+from qutebrowser.qt.webkitwidgets import QWebFrame
 
 from qutebrowser.config import config
 from qutebrowser.utils import log, utils, javascript, usertypes

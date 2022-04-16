@@ -25,7 +25,7 @@
 import dataclasses
 from typing import Optional
 
-from PyQt6.QtCore import Qt
+from qutebrowser.qt.core import Qt
 
 
 @dataclasses.dataclass(order=True)

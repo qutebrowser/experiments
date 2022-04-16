@@ -25,7 +25,7 @@ import contextlib
 import datetime
 
 import pytest
-from PyQt6.QtCore import QProcess
+from qutebrowser.qt.core import QProcess
 
 from end2end.fixtures import testprocess
 

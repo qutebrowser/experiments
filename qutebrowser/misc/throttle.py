@@ -23,7 +23,7 @@ import dataclasses
 import time
 from typing import Any, Callable, Mapping, Optional, Sequence
 
-from PyQt6.QtCore import QObject
+from qutebrowser.qt.core import QObject
 
 from qutebrowser.utils import usertypes
 

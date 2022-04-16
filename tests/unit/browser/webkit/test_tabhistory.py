@@ -24,8 +24,8 @@ from typing import Any
 
 import pytest
 pytest.importorskip('PyQt6.QtWebKit')
-from PyQt6.QtCore import QUrl, QPoint
-from PyQt6.QtWebKit import QWebHistory
+from qutebrowser.qt.core import QUrl, QPoint
+from qutebrowser.qt.webkit import QWebHistory
 
 from qutebrowser.browser.webkit import tabhistory
 from qutebrowser.misc.sessions import TabHistoryItem as Item

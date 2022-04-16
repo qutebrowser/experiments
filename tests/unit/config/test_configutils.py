@@ -20,8 +20,8 @@
 import hypothesis
 from hypothesis import strategies
 import pytest
-from PyQt6.QtCore import QUrl
-from PyQt6.QtWidgets import QLabel
+from qutebrowser.qt.core import QUrl
+from qutebrowser.qt.widgets import QLabel
 
 from qutebrowser.config import configutils, configdata, configtypes, configexc
 from qutebrowser.utils import urlmatch, usertypes, qtutils

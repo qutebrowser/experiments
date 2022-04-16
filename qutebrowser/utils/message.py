@@ -26,7 +26,7 @@
 import traceback
 from typing import Any, Callable, Iterable, List, Tuple, Union, Optional
 
-from PyQt6.QtCore import pyqtSignal, pyqtBoundSignal, QObject
+from qutebrowser.qt.core import pyqtSignal, pyqtBoundSignal, QObject
 
 from qutebrowser.utils import usertypes, log
 

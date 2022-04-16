@@ -23,7 +23,7 @@ import sys
 import logging
 
 import pytest
-from PyQt6.QtCore import QProcess, QUrl
+from qutebrowser.qt.core import QProcess, QUrl
 
 from qutebrowser.misc import guiprocess
 from qutebrowser.utils import usertypes, utils, version

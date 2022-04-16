@@ -19,8 +19,8 @@
 
 """QtWebEngine specific qute://* handlers and glue code."""
 
-from PyQt6.QtCore import QBuffer, QIODevice, QUrl
-from PyQt6.QtWebEngineCore import (QWebEngineUrlSchemeHandler,
+from qutebrowser.qt.core import QBuffer, QIODevice, QUrl
+from qutebrowser.qt.webenginecore import (QWebEngineUrlSchemeHandler,
                                    QWebEngineUrlRequestJob,
                                    QWebEngineUrlScheme)
 

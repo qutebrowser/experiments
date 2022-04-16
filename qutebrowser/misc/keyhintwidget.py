@@ -28,9 +28,9 @@ import html
 import fnmatch
 import re
 
-from PyQt6.QtWidgets import QLabel, QSizePolicy
-from PyQt6.QtCore import pyqtSlot, pyqtSignal, Qt
-from PyQt6.QtGui import QKeySequence
+from qutebrowser.qt.widgets import QLabel, QSizePolicy
+from qutebrowser.qt.core import pyqtSlot, pyqtSignal, Qt
+from qutebrowser.qt.gui import QKeySequence
 
 from qutebrowser.config import config, stylesheet
 from qutebrowser.utils import utils, usertypes

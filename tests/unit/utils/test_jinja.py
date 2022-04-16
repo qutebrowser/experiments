@@ -24,7 +24,7 @@ import logging
 
 import jinja2.exceptions
 import pytest
-from PyQt6.QtCore import QUrl
+from qutebrowser.qt.core import QUrl
 
 from qutebrowser.utils import jinja
 from qutebrowser.config import configexc

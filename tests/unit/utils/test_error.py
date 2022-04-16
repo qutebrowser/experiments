@@ -21,8 +21,8 @@
 import logging
 
 import pytest
-from PyQt6.QtCore import QTimer
-from PyQt6.QtWidgets import QMessageBox
+from qutebrowser.qt.core import QTimer
+from qutebrowser.qt.widgets import QMessageBox
 
 from qutebrowser.utils import error, utils
 from qutebrowser.misc import ipc

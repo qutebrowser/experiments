@@ -23,7 +23,7 @@
 import functools
 
 import pytest
-from PyQt6.QtGui import QIcon, QPixmap
+from qutebrowser.qt.gui import QIcon, QPixmap
 
 from qutebrowser.mainwindow import tabwidget
 from qutebrowser.utils import usertypes

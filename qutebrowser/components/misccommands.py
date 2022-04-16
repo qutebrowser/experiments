@@ -34,8 +34,8 @@ try:
 except ImportError:
     hunter = None
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtPrintSupport import QPrintPreviewDialog
+from qutebrowser.qt.core import Qt
+from qutebrowser.qt.printsupport import QPrintPreviewDialog
 
 from qutebrowser.api import cmdutils, apitypes, message, config
 

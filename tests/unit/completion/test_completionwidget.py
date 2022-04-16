@@ -22,7 +22,7 @@
 from unittest import mock
 
 import pytest
-from PyQt6.QtCore import QRect
+from qutebrowser.qt.core import QRect
 
 from qutebrowser.completion import completionwidget
 from qutebrowser.completion.models import completionmodel, listcategory

@@ -23,8 +23,8 @@ import functools
 import dataclasses
 from typing import Mapping, Callable, MutableMapping, Union, Set, cast
 
-from PyQt6.QtCore import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
-from PyQt6.QtGui import QKeySequence, QKeyEvent
+from qutebrowser.qt.core import pyqtSlot, pyqtSignal, Qt, QObject, QEvent
+from qutebrowser.qt.gui import QKeySequence, QKeyEvent
 
 from qutebrowser.commands import runners
 from qutebrowser.keyinput import modeparsers, basekeyparser

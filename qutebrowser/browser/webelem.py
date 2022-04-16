@@ -22,8 +22,8 @@
 from typing import cast, TYPE_CHECKING, Iterator, Optional, Set, Union
 import collections.abc
 
-from PyQt6.QtCore import QUrl, Qt, QEvent, QTimer, QRect, QPoint, QPointF
-from PyQt6.QtGui import QMouseEvent
+from qutebrowser.qt.core import QUrl, Qt, QEvent, QTimer, QRect, QPoint, QPointF
+from qutebrowser.qt.gui import QMouseEvent
 
 from qutebrowser.config import config
 from qutebrowser.keyinput import modeman

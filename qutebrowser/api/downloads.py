@@ -23,7 +23,7 @@
 
 import io
 
-from PyQt6.QtCore import QObject, pyqtSignal, pyqtSlot, QUrl
+from qutebrowser.qt.core import QObject, pyqtSignal, pyqtSlot, QUrl
 
 from qutebrowser.browser import downloads, qtnetworkdownloads
 from qutebrowser.utils import objreg

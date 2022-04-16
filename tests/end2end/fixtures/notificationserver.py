@@ -21,9 +21,9 @@ import dataclasses
 import itertools
 from typing import Dict, List
 
-from PyQt6.QtCore import QObject, QByteArray, QUrl, pyqtSlot
-from PyQt6.QtGui import QImage
-from PyQt6.QtDBus import QDBusConnection, QDBusArgument, QDBusMessage
+from qutebrowser.qt.core import QObject, QByteArray, QUrl, pyqtSlot
+from qutebrowser.qt.gui import QImage
+from qutebrowser.qt.dbus import QDBusConnection, QDBusArgument, QDBusMessage
 import pytest
 
 from qutebrowser.browser.webengine import notification

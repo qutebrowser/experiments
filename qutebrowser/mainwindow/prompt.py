@@ -26,12 +26,12 @@ import functools
 import dataclasses
 from typing import Deque, MutableSequence, Optional, cast
 
-from PyQt6.QtCore import (pyqtSlot, pyqtSignal, Qt, QTimer, QDir, QModelIndex,
+from qutebrowser.qt.core import (pyqtSlot, pyqtSignal, Qt, QTimer, QDir, QModelIndex,
                           QItemSelectionModel, QObject, QEventLoop)
-from PyQt6.QtWidgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
+from qutebrowser.qt.widgets import (QWidget, QGridLayout, QVBoxLayout, QLineEdit,
                              QLabel, QTreeView, QSizePolicy,
                              QSpacerItem)
-from PyQt6.QtGui import QFileSystemModel
+from qutebrowser.qt.gui import QFileSystemModel
 
 from qutebrowser.browser import downloads
 from qutebrowser.config import config, configtypes, configexc, stylesheet

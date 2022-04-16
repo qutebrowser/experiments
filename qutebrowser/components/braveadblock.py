@@ -27,7 +27,7 @@ import contextlib
 import subprocess
 from typing import Optional, IO, Iterator
 
-from PyQt6.QtCore import QUrl
+from qutebrowser.qt.core import QUrl
 
 from qutebrowser.api import (
     hook,
