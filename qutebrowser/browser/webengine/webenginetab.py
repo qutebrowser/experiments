@@ -1443,6 +1443,7 @@ class WebEngineTab(browsertab.AbstractTab):
         title_url = QUrl(url)
         title_url.setScheme('')
         title_url_str = title_url.toDisplayString(
+            QUrl.ComponentFormattingOption.PrettyDecoded |
             QUrl.UrlFormattingOption.RemoveScheme)  # type: ignore[arg-type]
         if title == title_url_str.strip('/'):
             title = ""

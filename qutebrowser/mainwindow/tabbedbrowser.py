@@ -349,7 +349,7 @@ class TabbedBrowser(QWidget):
         tab.title_changed.connect(
             functools.partial(self._on_title_changed, tab))
         tab.icon_changed.connect(
-            functools.partial(self._on_icon_changed, tab))
+                lambda: self._on_icon_changed(tab))
         tab.pinned_changed.connect(
             functools.partial(self._on_pinned_changed, tab))
         tab.load_progress.connect(

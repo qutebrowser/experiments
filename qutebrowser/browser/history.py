@@ -391,11 +391,11 @@ class WebHistory(sql.SqlTable):
             return
 
         no_formatting = QUrl.UrlFormattingOption(0)
-        if (requested_url.isValid() and
-                not requested_url.matches(url, no_formatting)):
-            # If the url of the page is different than the url of the link
-            # originally clicked, save them both.
-            self.add_url(requested_url, title, redirect=True)
+        #if (requested_url.isValid() and
+        #        not requested_url.matches(url, no_formatting)):
+        #    # If the url of the page is different than the url of the link
+        #    # originally clicked, save them both.
+        #    self.add_url(requested_url, title, redirect=True)
         if url != self._last_url:
             self.add_url(url, title)
             self._last_url = url
@@ -435,10 +435,10 @@ class WebHistory(sql.SqlTable):
             }, replace=True)
 
     def _format_url(self, url):
-        return url.toString(QUrl.UrlFormattingOption.RemovePassword | QUrl.ComponentFormattingOption.FullyEncoded)
+        return url.toString(QUrl.ComponentFormattingOption.PrettyDecoded | QUrl.UrlFormattingOption.RemovePassword | QUrl.ComponentFormattingOption.FullyEncoded)
 
     def _format_completion_url(self, url):
-        return url.toString(QUrl.UrlFormattingOption.RemovePassword)
+        return url.toString(QUrl.ComponentFormattingOption.PrettyDecoded | QUrl.UrlFormattingOption.RemovePassword)
 
 
 @cmdutils.register()
