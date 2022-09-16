@@ -21,7 +21,7 @@ iniconfig==1.1.1
 itsdangerous==1.1.0
 jaraco.functools==3.3.0
 # Jinja2==2.11.3
-Mako==1.1.4
+Mako==1.2.2
 manhole==1.7.0
 # MarkupSafe==1.1.1
 more-itertools==8.7.0
