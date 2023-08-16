@@ -111,8 +111,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-11
-          - os: windows-2019
+          #- os: macos-11
+          #- os: windows-2019
           - os: ubuntu-20.04
     runs-on: "${{ matrix.os }}"
     timeout-minutes: 45
