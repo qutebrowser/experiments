@@ -14,7 +14,7 @@ all: man
 
 man: doc/qutebrowser.1
 doc/qutebrowser.1: doc/qutebrowser.1.asciidoc
-	a2x -f manpage $<
+	a2x -v -v -f manpage $<
 
 install: man
 	$(PYTHON) setup.py install --prefix="$(PREFIX)" --optimize=1 $(SETUPTOOLSOPTS)
