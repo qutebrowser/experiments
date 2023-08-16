@@ -167,10 +167,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const tag = "v${{ needs.prepare.outputs.version }}";
             const release = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag: "v" + context.payload.needs.prepare.outputs.version,
+              tag: tag,
             })
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
