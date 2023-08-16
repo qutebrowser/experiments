@@ -29,6 +29,8 @@ jobs:
     timeout-minutes: 5
     outputs:
       version: ${{ steps.bump.outputs.version }}
+    permissions:
+      contents: write  # To push release commit/tag
     steps:
       - name: Find release branch
         uses: actions/github-script@v6
