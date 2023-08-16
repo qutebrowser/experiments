@@ -44,11 +44,11 @@ jobs:
             });
             console.log(`branches: ${branches.data}`);
             const release_branches = branches.data.filter(branch => branch.name.match(/^v\d+\.\d+\.x$/));
-            console.log(`release_branches: ${release_branches}`)
+            console.log(`release_branches: ${release_branches}`);
             // Get newest release branch (biggest version number)
             const sorted = release_branches.sort(
               function (a, b) {
-                return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' };
+                return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
               }
             );
             console.log(`sorted: ${sorted}`);
