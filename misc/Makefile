@@ -15,6 +15,7 @@ all: man
 
 man: doc/qutebrowser.1
 doc/qutebrowser.1: doc/qutebrowser.1.asciidoc
+	$(A2X) --version
 	$(A2X) -v -v -f manpage $<
 
 install: man
