@@ -164,13 +164,21 @@ jobs:
       contents: write  # To change release
     steps:
       - name: Publish final release
-        uses: softprops/action-gh-release@v1
+        uses: actions/github-script@v6
         with:
-          tag_name: v${{ needs.prepare.outputs.version }}
-          draft: false
-          # FIXME automatically cut relevant changes from changelog and add them here?
-          body: |
-            Check the [changelog](https://github.com/qutebrowser/qutebrowser/blob/master/doc/changelog.asciidoc) for changes in this release.
+          script: |
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: "v" + context.payload.needs.prepare.outputs.version,
+            })
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+              draft: false,
+              body: "Check the [changelog](https://github.com/qutebrowser/qutebrowser/blob/master/doc/changelog.asciidoc) for changes in this release."
+            })
   irc:
     timeout-minutes: 2
     continue-on-error: true
