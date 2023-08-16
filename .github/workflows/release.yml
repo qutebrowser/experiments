@@ -124,6 +124,7 @@ jobs:
         with:
           python-version: ${{ github.event.inputs.python_version }}
       - name: Import GPG Key
+        if: ${{ startsWith(matrix.os, 'ubuntu-') }}
         run: |
           gpg --import <<< "${{ secrets.QUTEBROWSER_BOT_GPGKEY }}"
       - name: Install dependencies
