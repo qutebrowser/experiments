@@ -59,8 +59,6 @@ jobs:
             return sorted.at(-1);
           result-encoding: string
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ steps.find-branch.outputs.result }}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -75,6 +73,10 @@ jobs:
         run: |
             git config --global user.name "qutebrowser bot"
             git config --global user.email "bot@qutebrowser.org"
+      - name: Switch to release branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.find-branch.outputs.result }}
       # FIXME set up GPG for signed tag
       - name: Bump version
         id: bump
