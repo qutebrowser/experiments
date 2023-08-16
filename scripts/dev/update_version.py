@@ -71,14 +71,14 @@ if __name__ == "__main__":
 
     import qutebrowser
     version = qutebrowser.__version__
-    x_version = '.'.join([str(p) for p in qutebrowser.__version_info__[:-1]] +
+    version_x = '.'.join([str(p) for p in qutebrowser.__version_info__[:-1]] +
                          ['x'])
 
     if utils.ON_CI:
         output_file = os.environ["GITHUB_OUTPUT"]
         with open(output_file, "w", encoding="ascii") as f:
             f.write(f"version={version}\n")
-            f.write(f"x_version={x_version}\n")
+            f.write(f"version_x={version_x}\n")
 
         print(f"Outputs for {version} written to GitHub Actions output file")
     else:
@@ -89,7 +89,7 @@ if __name__ == "__main__":
                 "git push origin".format(v=version))
         else:
             print("* git branch v{x} v{v} && git push --set-upstream origin v{x}"
-                .format(v=version, x=x_version))
+                .format(v=version, x=version_x))
         print("* Create new release via GitHub (required to upload release "
             "artifacts)")
         print("* Linux: git fetch && git checkout v{v} && "
