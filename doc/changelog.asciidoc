@@ -15,14 +15,16 @@ breaking changes (such as renamed commands) can happen in minor releases.
 // `Fixed` for any bug fixes.
 // `Security` to invite users to upgrade in case of vulnerabilities.
 
-dummy (2023-08-16)
-------------------
+[[v2.9.1]]
+v2.9.1 (unreleased)
+-------------------
 
-dummy (2023-08-16)
-------------------
+[[v2.9.0]]
+v2.9.0 (unreleased)
+-------------------
 
 [[v3.0.0]]
-v3.0.0 (2023-08-16)
+v3.0.0 (unreleased)
 -------------------
 
 Major changes
