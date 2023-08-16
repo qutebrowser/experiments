@@ -89,7 +89,7 @@ jobs:
         run: "tox -e update-version -- ${{ github.event.inputs.release_type }}"
       - name: Push release commit/tag
         run: |
-            git push origin main
+            git push origin ${{ steps.find-branch.outputs.result }}
             git push origin v${{ steps.bump.outputs.version }}
       - name: Cherry-pick release commit
         if: ${{ github.event.inputs.release_type == 'patch' }}
