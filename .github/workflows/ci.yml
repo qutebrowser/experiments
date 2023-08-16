@@ -1,9 +1,9 @@
 name: CI
 on:
-  push:
-    branches-ignore:
-      - 'update-dependencies'
-      - 'dependabot/*'
+  #push:
+  #  branches-ignore:
+  #    - 'update-dependencies'
+  #    - 'dependabot/*'
   pull_request:
 env:
   FORCE_COLOR: "1"
