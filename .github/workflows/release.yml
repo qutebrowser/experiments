@@ -160,6 +160,8 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
     needs: [prepare, release]
+    permissions:
+      contents: write  # To change release
     steps:
       - name: Publish final release
         uses: softprops/action-gh-release@v1
