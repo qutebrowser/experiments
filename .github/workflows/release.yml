@@ -52,6 +52,9 @@ jobs:
               }
             );
             console.log(`sorted: ${sorted}`);
+            if (sorted.length === 0) {
+              core.setFailed('No release branch found!');
+            }
             return sorted.at(-1);
           result-encoding: string
       - uses: actions/checkout@v3
