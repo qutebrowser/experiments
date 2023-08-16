@@ -41,13 +41,17 @@ jobs:
             if (context.payload.inputs.release_type != 'patch') {
               return 'main';
             }
-            const branches = await github.rest.repos.listBranches({
+            const branches = await github.paginate(github.rest.repos.listBranches, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-            })
-            const branch_names = branches.data.map(branch => branch.name);
+            });
+            const branch_names = branches.map(branch => branch.name);
             console.log(`branches: ${branch_names}`);
             const release_branches = branch_names.filter(branch => branch.match(/^v\d+\.\d+\.x$/));
+            if (release_branches.length === 0) {
+              core.setFailed('No release branch found!');
+              return '';
+            }
             console.log(`release_branches: ${release_branches}`);
             // Get newest release branch (biggest version number)
             const sorted = release_branches.sort(
@@ -56,9 +60,6 @@ jobs:
               }
             );
             console.log(`sorted: ${sorted}`);
-            if (sorted.length === 0) {
-              core.setFailed('No release branch found!');
-            }
             return sorted.at(-1);
           result-encoding: string
       - uses: actions/checkout@v3
