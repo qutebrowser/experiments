@@ -42,13 +42,17 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
+            console.log(`branches: ${branches.data}`);
             const release_branches = branches.data.filter(branch => branch.name.match(/^v\d+\.\d+\.x$/));
+            console.log(`release_branches: ${release_branches}`)
             // Get newest release branch (biggest version number)
-            return release_branches.sort(
+            const sorted = release_branches.sort(
               function (a, b) {
-                return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }
+                return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' };
               );
-            }).at(-1);
+            });
+            console.log(`sorted: ${sorted}`);
+            return sorted.at(-1);
           result-encoding: string
       - uses: actions/checkout@v3
         with:
