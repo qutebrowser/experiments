@@ -90,14 +90,14 @@ jobs:
             git push origin main
             git push origin v${{ steps.bump.outputs.version }}
       - name: Cherry-pick release commit
-        if: "${{ github.event.inputs.release_type }} == 'patch'"
+        if: ${{ github.event.inputs.release_type == 'patch' }}
         run: |
             git checkout main
             git cherry-pick v${{ steps.bump.outputs.version }}
             git push origin main
             git checkout v${{ steps.bump.outputs.version_x }}
       - name: Create release branch
-        if: "${{ github.event.inputs.release_type }} != 'patch'"
+        if: ${{ github.event.inputs.release_type != 'patch' }}
         run: |
             git checkout -b v${{ steps.bump.outputs.version_x }}
             git push --set-upstream origin v${{ steps.bump.outputs.version_x }}
