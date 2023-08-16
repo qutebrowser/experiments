@@ -4,6 +4,7 @@ ICONSIZES = 16 24 32 48 64 128 256 512
 DATAROOTDIR = $(PREFIX)/share
 DATADIR ?= $(DATAROOTDIR)
 MANDIR ?= $(DATAROOTDIR)/man
+A2X ?= a2x
 
 ifdef DESTDIR
 SETUPTOOLSOPTS = --root="$(DESTDIR)"
@@ -14,7 +15,8 @@ all: man
 
 man: doc/qutebrowser.1
 doc/qutebrowser.1: doc/qutebrowser.1.asciidoc
-	a2x -f manpage $<
+	$(A2X) --version
+	$(A2X) -v -v -f manpage $<
 
 install: man
 	$(PYTHON) setup.py install --prefix="$(PREFIX)" --optimize=1 $(SETUPTOOLSOPTS)
