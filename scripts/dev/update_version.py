@@ -50,7 +50,10 @@ def bump_version(version_leap="patch"):
 
 
 def show_commit():
-    subprocess.run(['git', 'show'], check=True)
+    args = ['git', 'show']
+    if utils.ON_CI:
+        args.append("--color")
+    subprocess.run(args, check=True)
 
 
 if __name__ == "__main__":
