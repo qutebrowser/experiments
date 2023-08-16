@@ -32,7 +32,7 @@ def verify_branch(version_leap):
     branch = proc.stdout.strip()
 
     if (
-        version_leap == 'patch' and not re.fullmatch(r'v\d+\.\d+\.\*', branch) or
+        version_leap == 'patch' and not re.fullmatch(r'v\d+\.\d+\.x', branch) or
         version_leap != 'patch' and branch != 'main'
     ):
         raise Error(f"Invalid branch for {version_leap} release: {branch}")
