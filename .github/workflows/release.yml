@@ -49,8 +49,8 @@ jobs:
             const sorted = release_branches.sort(
               function (a, b) {
                 return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' };
-              );
-            });
+              }
+            );
             console.log(`sorted: ${sorted}`);
             return sorted.at(-1);
           result-encoding: string
