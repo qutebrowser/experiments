@@ -42,7 +42,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            console.log(`branches: ${branches.data}`);
+            console.log(`branches: ${branches.data.map(branch => branch.name)}`);
             const release_branches = branches.data.filter(branch => branch.name.match(/^v\d+\.\d+\.x$/));
             console.log(`release_branches: ${release_branches}`);
             // Get newest release branch (biggest version number)
