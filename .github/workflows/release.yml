@@ -31,6 +31,8 @@ jobs:
       version: ${{ steps.bump.outputs.version }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # required to see all branches
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
