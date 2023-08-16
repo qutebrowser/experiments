@@ -41,7 +41,7 @@ jobs:
             const branches = await github.rest.repos.listBranches({
               owner: context.repo.owner,
               repo: context.repo.repo,
-            }).data.map(branch => branch.name));
+            }).data.map(branch => branch.name);
             console.log(`branches: ${branches}`);
             const release_branches = branches.filter(branch => branch.match(/^v\d+\.\d+\.x$/));
             console.log(`release_branches: ${release_branches}`);
