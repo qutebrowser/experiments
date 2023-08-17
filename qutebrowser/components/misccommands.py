@@ -344,6 +344,7 @@ def tab_mute(tab: Optional[apitypes.Tab]) -> None:
 @cmdutils.register()
 def nop() -> None:
     """Do nothing."""
+    message.info("v4.1.x release branch!")
 
 
 @cmdutils.register()
