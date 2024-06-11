@@ -724,7 +724,7 @@ def main() -> None:
         test_makefile()
         artifacts = build_sdist()
         twine_check(artifacts)
-        upload_to_pypi = True
+        # upload_to_pypi = True
 
     if args.upload:
         version_tag = f"v{qutebrowser.__version__}"
