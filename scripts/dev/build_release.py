@@ -16,6 +16,7 @@ import subprocess
 import argparse
 import tarfile
 import tempfile
+import platform
 import collections
 import dataclasses
 import re
@@ -322,11 +323,14 @@ def build_mac(
     except PermissionError as e:
         print(f"Failed to remove tempdir: {e}")
 
+    arch_to_desc = {"x86_64": "Intel", "arm64": "Apple Silicon"}
+    desc_arch = arch_to_desc[platform.machine()]
+
     return [
         Artifact(
             path=dmg_path,
             mimetype='application/x-apple-diskimage',
-            description='macOS .dmg'
+            description=f'macOS .dmg ({desc_arch})'
         )
     ]
 
