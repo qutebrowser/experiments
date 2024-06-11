@@ -9,7 +9,6 @@ on:
 
 jobs:
   pyinstaller:
-    if: "github.repository == 'qutebrowser/qutebrowser'"
     strategy:
       fail-fast: false
       matrix:
